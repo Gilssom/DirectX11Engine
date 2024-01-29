@@ -1,7 +1,7 @@
 #pragma once
 
 
-void TempInit();
+int TempInit();
 
 void TempRelease();
 

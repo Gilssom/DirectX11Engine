@@ -17,6 +17,15 @@
     <Filter Include="03. Device">
       <UniqueIdentifier>{7413de07-7ee2-4b91-b350-05ec7b97cb3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module">
+      <UniqueIdentifier>{18b08dec-dd16-4c3c-8aa5-b605a0a16957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{40d0fb03-b5bf-424e-83a4-17552361f664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\2D">
+      <UniqueIdentifier>{dae20311-4493-44e8-b062-b9d6be0a7aa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -35,6 +44,12 @@
       <Filter>03. Device</Filter>
     </ClInclude>
     <ClInclude Include="Temp.h" />
+    <ClInclude Include="define.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -50,5 +65,10 @@
       <Filter>03. Device</Filter>
     </ClCompile>
     <ClCompile Include="Temp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <Filter>HLSL\2D</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

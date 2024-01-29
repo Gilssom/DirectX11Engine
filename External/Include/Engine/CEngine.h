@@ -62,4 +62,5 @@ private:
 	CEngine();
 	// 복사 생성자 삭제로 싱글톤 객체가 추가적으로 생성되는 것을 방지
 	CEngine(const CEngine& _origin) = delete;
+	~CEngine();
 };
