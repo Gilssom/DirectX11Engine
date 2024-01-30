@@ -76,14 +76,14 @@ int TempInit()
 	// Normalized Device Codination = NDC 좌표계
 	// 해상도가 어떻든 정규화를 통해 좌표계를 설정할 수 있음
 
-	/*g_arrVtx[0].vPos = Vec3(0.f, 1.f, 0.f);
+	g_arrVtx[0].vPos = Vec3(0.f, 1.f, 0.f);
 	g_arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 
 	g_arrVtx[1].vPos = Vec3(1.f, -1.f, 0.f);
 	g_arrVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
 
 	g_arrVtx[2].vPos = Vec3(-1.f, -1.f, 0.f);
-	g_arrVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);*/
+	g_arrVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
 
 	// 정점 Buffer 생성
 	D3D11_BUFFER_DESC VBdesc = {};
@@ -103,12 +103,7 @@ int TempInit()
 	Subdesc.pSysMem = g_arrVtx;
 
 	// define.h -> #define
-	/*if (FAILED(DEVICE->CreateBuffer(&VBdesc, &Subdesc, g_VB.GetAddressOf())))
-	{
-		return E_FAIL;
-	}*/
-
-	if (FAILED(CDevice::GetInst()->GetDevice()->CreateBuffer(&VBdesc, &Subdesc, g_VB.GetAddressOf())))
+	if (FAILED(DEVICE->CreateBuffer(&VBdesc, &Subdesc, g_VB.GetAddressOf())))
 	{
 		return E_FAIL;
 	}

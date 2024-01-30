@@ -159,6 +159,7 @@ call Copy.bat</Command>
     <ClInclude Include="framework.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="Temp.h" />
   </ItemGroup>
@@ -181,6 +182,9 @@ call Copy.bat</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

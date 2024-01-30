@@ -50,6 +50,9 @@
     <ClInclude Include="struct.h">
       <Filter>01. Header</Filter>
     </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -70,5 +73,10 @@
     <FxCompile Include="std2d.fx">
       <Filter>HLSL\2D</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>Module</Filter>
+    </None>
   </ItemGroup>
 </Project>

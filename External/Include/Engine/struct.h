@@ -8,6 +8,6 @@ struct Vtx
 {
 	// 원래라면 32Byte 구조체인데
 	// DX 시스템으로 인해 28Byte 구조체로 정렬된다.
-	//Vec3 vPos; // 좌표
-	//Vec4 vColor; // 색상 및 투명도
+	Vec3 vPos; // 좌표
+	Vec4 vColor; // 색상 및 투명도
 };
