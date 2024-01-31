@@ -14,8 +14,15 @@ private:
     float m_AccTime;                // 1초를 체크하기 위한 시간 누적 변수
 
     UINT m_FrameCount;
+
 public:
     void Init();
     void Tick();
+
+public:
+    float GetDeltaTime()
+    {
+        return m_DT;
+    }
 };
 

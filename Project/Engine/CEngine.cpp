@@ -38,6 +38,8 @@ int CEngine::Init(HWND hwnd, POINT resolution)
 
 	// Manager Init
 	CTimeManager::GetInst()->Init();
+	CKeyManager::GetInst()->Init();
+	CPathManager::GetInst()->Init();
 
 	if (FAILED(TempInit()))
 	{
@@ -54,6 +56,7 @@ void CEngine::Progress()
 	// Manager Tick
 	// ====================
 	CTimeManager::GetInst()->Tick();
+	CKeyManager::GetInst()->Tick();
 
 	// Object Tick
 	TempTick();

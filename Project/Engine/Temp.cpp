@@ -2,6 +2,9 @@
 #include "Temp.h"
 
 #include "CDevice.h"
+#include "CTimeManager.h"
+#include "CKeyManager.h"
+#include "CPathManager.h"
 
 // Graphics Pipeline
 
@@ -48,16 +51,21 @@
 // RenderTarget Texture
 // DepthStencil Texture
 
-
 // 정점 정보를 저장하는 Buffer
 ComPtr<ID3D11Buffer> g_VB;
+
+// Vertex Buffer 내에서 사용할 정점을 가르키는 인덱스 정보를 저장하는 Buffer
+ComPtr<ID3D11Buffer> g_IB;
+
+// 상수 버퍼 ( Constant Buffer ) 물체의 위치, 크기, 회전 정보를 전달하는 용도의 Buffer
+ComPtr<ID3D11Buffer> g_CB;
 
 // 정점 하나를 구성하는 Layout 정보가 필요함
 ComPtr<ID3D11InputLayout> g_Layout;
 
 
 // System Memory 정점 정보
-Vtx g_arrVtx[3] = {};
+Vtx g_arrVtx[4] = {};
 
 
 // HLSL ( Shader 버전의 C++ )
@@ -78,19 +86,28 @@ int TempInit()
 	// Normalized Device Codination = NDC 좌표계
 	// 해상도가 어떻든 정규화를 통해 좌표계를 설정할 수 있음
 
-	g_arrVtx[0].vPos = Vec3(0.f, 1.f, 0.f);
+	// 사각형 정점
+	// 0 -- 1
+	// |    |
+	// 3 -- 2
+	g_arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	g_arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 
-	g_arrVtx[1].vPos = Vec3(1.f, -1.f, 0.f);
+	g_arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
 	g_arrVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
 
-	g_arrVtx[2].vPos = Vec3(-1.f, -1.f, 0.f);
+	g_arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
 	g_arrVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+
+	g_arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
+	g_arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+
+	// = 사각형 완성
 
 	// 정점 Buffer 생성
 	D3D11_BUFFER_DESC VBdesc = {};
 
-	VBdesc.ByteWidth = sizeof(Vtx) * 3;
+	VBdesc.ByteWidth = sizeof(Vtx) * 4;
 	VBdesc.MiscFlags = 0;
 
 	// Buffer 의 용도를 지정
@@ -110,24 +127,41 @@ int TempInit()
 		return E_FAIL;
 	}
 
-	// Vertex Shader 생성
-	wchar_t szBuffer[255] = {}; // 경로 찾아오기
-	GetCurrentDirectory(255, szBuffer);
 
-	size_t len = wcslen(szBuffer);
+	// Index Buffer 생성
+	UINT arrIdx[6] = {0, 2, 3, 0, 1, 2};
 
-	for (int i = len - 1; i > 0; i--)
+	D3D11_BUFFER_DESC IBdesc = {};
+
+	IBdesc.ByteWidth = sizeof(Vtx) * 6;
+	IBdesc.MiscFlags = 0;
+
+	// 버퍼 용도 설정
+	IBdesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+
+	// 한번 생성한 이후에 읽기, 쓰기 불가능
+	IBdesc.CPUAccessFlags = 0;
+	IBdesc.Usage = D3D11_USAGE_DEFAULT;
+
+	Subdesc = {};
+	Subdesc.pSysMem = arrIdx;
+
+	if (FAILED(DEVICE->CreateBuffer(&IBdesc, &Subdesc, g_IB.GetAddressOf())))
 	{
-		if (szBuffer[i] == '\\')
-		{
-			szBuffer[i] = '\0';
-			break;
-		}
+		return E_FAIL;
 	}
 
-	wcscat_s(szBuffer, L"\\content\\shader\\std2d.fx");
 
-	if (FAILED(D3DCompileFromFile(szBuffer, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+	// Constant Buffer 생성
+
+
+
+	// Vertex Shader 생성
+	// 경로 찾기 Manager 구현
+	wstring strPath = CPathManager::GetInst()->GetComtentPath();
+	strPath += L"shader\\std2d.fx";
+
+	if (FAILED(D3DCompileFromFile(strPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 		, "VS_Std2D", "vs_5_0", D3DCOMPILE_DEBUG, 0
 		, g_VSBlob.GetAddressOf()
 		, g_ErrBlob.GetAddressOf())))
@@ -156,7 +190,7 @@ int TempInit()
 	}
 
 
-	// 정점 Layout 정보 생성
+	// Vertex Layout 정보 생성
 	D3D11_INPUT_ELEMENT_DESC Layoutdesc[2] = {};
 
 	Layoutdesc[0].AlignedByteOffset = 0; // 정점 정보의 시작 위치
@@ -184,7 +218,7 @@ int TempInit()
 
 
 	// Pixel Shader
-	if (FAILED(D3DCompileFromFile(szBuffer, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+	if (FAILED(D3DCompileFromFile(strPath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 		, "PS_Std2D", "ps_5_0", D3DCOMPILE_DEBUG, 0
 		, g_PSBlob.GetAddressOf()
 		, g_ErrBlob.GetAddressOf())))
@@ -222,35 +256,38 @@ void TempRelease()
 
 void TempTick()
 {
-	if (GetAsyncKeyState('W') & 0x8001)
+	// 시간 동기화 처리
+	float DT = CTimeManager::GetInst()->GetDeltaTime();
+
+	if (KEY_PRESSED(KEY::W))
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
-			g_arrVtx[i].vPos.y += 0.0001f;
+			g_arrVtx[i].vPos.y += DT;
 		}
 	}
 
-	if (GetAsyncKeyState('S') & 0x8001)
+	if (KEY_PRESSED(KEY::S))
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
-			g_arrVtx[i].vPos.y -= 0.0001f;
+			g_arrVtx[i].vPos.y -= DT;
 		}
 	}
 
-	if (GetAsyncKeyState('A') & 0x8001)
+	if (KEY_PRESSED(KEY::A))
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
-			g_arrVtx[i].vPos.x -= 0.0001f;
+			g_arrVtx[i].vPos.x -= DT;
 		}
 	}
 
-	if (GetAsyncKeyState('D') & 0x8001)
+	if (KEY_PRESSED(KEY::D))
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
-			g_arrVtx[i].vPos.x += 0.0001f;
+			g_arrVtx[i].vPos.x += DT;
 		}
 	}
 
@@ -260,7 +297,7 @@ void TempTick()
 	CONTEXT->Map(g_VB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
 
 	// 데이터 넣기
-	memcpy(tSub.pData, g_arrVtx, sizeof(Vtx) * 3);
+	memcpy(tSub.pData, g_arrVtx, sizeof(Vtx) * 4);
 
 	// 데이터 수정 완료
 	CONTEXT->Unmap(g_VB.Get(), 0);
@@ -273,11 +310,29 @@ void TempRender()
 	UINT stride = sizeof(Vtx); // 각 정점 당 간격
 	UINT offset = 0; // 여러개의 정점 중 시작 위치
 	CONTEXT->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &stride, &offset);
+
+	// 사각형을 그릴 때 똑같은 정점의 정보를 갖고 있을 수 밖에 없는데
+	// 이 부분은 메모리를 잡아 먹을 수 있다.
+	// 이걸 해결하기 위해선 Index Buffer 를 사용하면 된다.
+	// Vertex Buffer 는 총 4개의 정보를 갖게 되고,
+	// Index Buffer 는 총 6개의 Vertex Buffer 를 가르키는 값만 가지게 된다.
+	CONTEXT->IASetIndexBuffer(g_IB.Get(), DXGI_FORMAT_R32_UINT, 0);
+
 	CONTEXT->IASetInputLayout(g_Layout.Get());
 	CONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 도형의 구조를 알려주는 함수
 
 	CONTEXT->VSSetShader(g_VS.Get(), nullptr, 0);
 	CONTEXT->PSSetShader(g_PS.Get(), nullptr, 0);
 
-	CONTEXT->Draw(3, 0);
+	// 사각형은 정점이 6개 ( 삼각형 각 정점 3개 )
+	//CONTEXT->Draw(6, 0);
+	// Index Buffer 의 갯수만큼 렌더링을 해야 한다. ( Vertex Buffer X )
+	CONTEXT->DrawIndexed(6, 0, 0);
 }
+
+// 좌표계
+/*
+상수 버퍼
+아무리 정점이 만개, 십만개가 넘어가도
+원본 정점의 변화 필요 없이 좌표 변화량만 전달하면 된다.
+*/
