@@ -2,6 +2,9 @@
 #include "CEngine.h"
 
 #include "CDevice.h"
+#include "CTimeManager.h"
+#include "CPathManager.h"
+#include "CKeyManager.h"
 
 #include "Temp.h"
 
@@ -33,6 +36,9 @@ int CEngine::Init(HWND hwnd, POINT resolution)
 		return E_FAIL;
 	}
 
+	// Manager Init
+	CTimeManager::GetInst()->Init();
+
 	if (FAILED(TempInit()))
 	{
 		MessageBox(m_hMainHwnd, L"Device 초기화 실패", L"Temp Init 초기화 실패", MB_OK);
@@ -44,14 +50,25 @@ int CEngine::Init(HWND hwnd, POINT resolution)
 
 void CEngine::Progress()
 {
-	// Level->tick();
+	// ====================
+	// Manager Tick
+	// ====================
+	CTimeManager::GetInst()->Tick();
+
+	// Object Tick
 	TempTick();
 
+
+	// ====================
+	// Rendering
+	// ====================
+	// Target Clear
 	float clearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
 	CDevice::GetInst()->ClearTarget(clearColor);
 
-	// Level->Render();
+	// Object Render
 	TempRender();
 
+	// Present
 	CDevice::GetInst()->Present();
 }

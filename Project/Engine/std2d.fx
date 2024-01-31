@@ -11,10 +11,12 @@ struct VS_IN // 입력 타입
     //float4 vColor : COLOR;
 };
 
+
 struct VS_OUT // 반환 타입
 {
     float4 vPosition : SV_Position;
 };
+
 
 VS_OUT VS_Std2D(VS_IN _in)
 {
@@ -23,6 +25,12 @@ VS_OUT VS_Std2D(VS_IN _in)
     output.vPosition = float4(_in.vPos, 1.f);
     
     return output;
+}
+
+
+float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
+{
+    return float4(1.f, 0.f, 0.f, 1.f);
 }
 
 

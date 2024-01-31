@@ -26,6 +26,18 @@
     <Filter Include="HLSL\2D">
       <UniqueIdentifier>{dae20311-4493-44e8-b062-b9d6be0a7aa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager">
+      <UniqueIdentifier>{d4ac8618-b20c-4fc7-b755-118b8a2230ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\01. TimeMgr">
+      <UniqueIdentifier>{4190e6a9-826a-4f1c-8fdc-27f780d5fccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\02. PathMgr">
+      <UniqueIdentifier>{65cb9b48-2967-443a-be15-5f7f5af30e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\03. KeyMgr">
+      <UniqueIdentifier>{a025acce-d478-46a9-aba7-b4fb85a465b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -53,6 +65,18 @@
     <ClInclude Include="SimpleMath.h">
       <Filter>Module</Filter>
     </ClInclude>
+    <ClInclude Include="Singletone.h">
+      <Filter>Module</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeManager.h">
+      <Filter>04. Manager\01. TimeMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathManager.h">
+      <Filter>04. Manager\02. PathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyManager.h">
+      <Filter>04. Manager\03. KeyMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -68,6 +92,15 @@
       <Filter>03. Device</Filter>
     </ClCompile>
     <ClCompile Include="Temp.cpp" />
+    <ClCompile Include="CTimeManager.cpp">
+      <Filter>04. Manager\01. TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathManager.cpp">
+      <Filter>04. Manager\02. PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyManager.cpp">
+      <Filter>04. Manager\03. KeyMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

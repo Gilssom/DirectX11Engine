@@ -70,6 +70,8 @@ ComPtr<ID3D11VertexShader> g_VS;	 // Vertex Shader
 ComPtr<ID3DBlob>		   g_PSBlob;
 ComPtr<ID3D11PixelShader>  g_PS;
 
+// Error Blob
+ComPtr<ID3DBlob>		   g_ErrBlob;
 
 int TempInit()
 {
@@ -109,6 +111,49 @@ int TempInit()
 	}
 
 	// Vertex Shader 생성
+	wchar_t szBuffer[255] = {}; // 경로 찾아오기
+	GetCurrentDirectory(255, szBuffer);
+
+	size_t len = wcslen(szBuffer);
+
+	for (int i = len - 1; i > 0; i--)
+	{
+		if (szBuffer[i] == '\\')
+		{
+			szBuffer[i] = '\0';
+			break;
+		}
+	}
+
+	wcscat_s(szBuffer, L"\\content\\shader\\std2d.fx");
+
+	if (FAILED(D3DCompileFromFile(szBuffer, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		, "VS_Std2D", "vs_5_0", D3DCOMPILE_DEBUG, 0
+		, g_VSBlob.GetAddressOf()
+		, g_ErrBlob.GetAddressOf())))
+	{
+		if (g_ErrBlob != nullptr)
+		{
+			MessageBoxA(nullptr
+				, (char*)g_ErrBlob->GetBufferPointer()
+				, "Vertex Shader Compile 오류", MB_OK);
+		}
+		else
+		{
+			MessageBox(nullptr
+				, L"파일을 찾을 수 없습니다."
+				, L"Vertex Shader Compile 오류", MB_OK);
+		}
+
+		return E_FAIL;
+	}
+
+	if (FAILED(DEVICE->CreateVertexShader(g_VSBlob->GetBufferPointer()
+		, g_VSBlob->GetBufferSize()
+		, nullptr, g_VS.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
 
 
 	// 정점 Layout 정보 생성
@@ -130,10 +175,42 @@ int TempInit()
 	Layoutdesc[1].SemanticName = "COLOR";
 	Layoutdesc[1].SemanticIndex = 0;
 
-	//CDevice::GetInst()->GetDevice()->CreateInputLayout(Layoutdesc, 2, );
+	if (FAILED(DEVICE->CreateInputLayout(Layoutdesc, 2, g_VSBlob->GetBufferPointer()
+		, g_VSBlob->GetBufferSize()
+		, g_Layout.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
 
 
 	// Pixel Shader
+	if (FAILED(D3DCompileFromFile(szBuffer, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		, "PS_Std2D", "ps_5_0", D3DCOMPILE_DEBUG, 0
+		, g_PSBlob.GetAddressOf()
+		, g_ErrBlob.GetAddressOf())))
+	{
+		if (g_ErrBlob != nullptr)
+		{
+			MessageBoxA(nullptr
+				, (char*)g_ErrBlob->GetBufferPointer()
+				, "Pixel Shader Compile 오류", MB_OK);
+		}
+		else
+		{
+			MessageBox(nullptr
+				, L"파일을 찾을 수 없습니다."
+				, L"Pixel Shader Compile 오류", MB_OK);
+		}
+
+		return E_FAIL;
+	}
+
+	if (FAILED(DEVICE->CreatePixelShader(g_PSBlob->GetBufferPointer()
+		, g_PSBlob->GetBufferSize()
+		, nullptr, g_PS.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
 
 	return S_OK;
 }
@@ -145,10 +222,62 @@ void TempRelease()
 
 void TempTick()
 {
+	if (GetAsyncKeyState('W') & 0x8001)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			g_arrVtx[i].vPos.y += 0.0001f;
+		}
+	}
 
+	if (GetAsyncKeyState('S') & 0x8001)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			g_arrVtx[i].vPos.y -= 0.0001f;
+		}
+	}
+
+	if (GetAsyncKeyState('A') & 0x8001)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			g_arrVtx[i].vPos.x -= 0.0001f;
+		}
+	}
+
+	if (GetAsyncKeyState('D') & 0x8001)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			g_arrVtx[i].vPos.x += 0.0001f;
+		}
+	}
+
+	// System Memory -> GPU
+	D3D11_MAPPED_SUBRESOURCE tSub = {};
+	// 데이터 수정
+	CONTEXT->Map(g_VB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
+
+	// 데이터 넣기
+	memcpy(tSub.pData, g_arrVtx, sizeof(Vtx) * 3);
+
+	// 데이터 수정 완료
+	CONTEXT->Unmap(g_VB.Get(), 0);
 }
 
 void TempRender()
 {
+	// 세팅은 파이프 라인 단계에 따라서 맞춰 줄 필요는 없다.
 
+	UINT stride = sizeof(Vtx); // 각 정점 당 간격
+	UINT offset = 0; // 여러개의 정점 중 시작 위치
+	CONTEXT->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &stride, &offset);
+	CONTEXT->IASetInputLayout(g_Layout.Get());
+	CONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 도형의 구조를 알려주는 함수
+
+	CONTEXT->VSSetShader(g_VS.Get(), nullptr, 0);
+	CONTEXT->PSSetShader(g_PS.Get(), nullptr, 0);
+
+	CONTEXT->Draw(3, 0);
 }

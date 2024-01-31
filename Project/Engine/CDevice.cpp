@@ -64,6 +64,10 @@ int CDevice::Init(HWND hwnd, POINT resolution)
 void CDevice::ClearTarget(float(&ArrColor)[4])
 {
 	m_Context->ClearRenderTargetView(m_RTV.Get(), ArrColor);
+
+	// Depth Stencil 에서 자신의 깊이 값보다 작은 값들의 물체들만 그려줌
+	// 그래서 Depth Stencil View 의 초기값은 1로 초기화 해야 함
+	m_Context->ClearDepthStencilView(m_DSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_DEPTH, 1.f, 0);
 }
 
 int CDevice::CreateSwapChain()

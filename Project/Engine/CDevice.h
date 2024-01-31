@@ -1,7 +1,9 @@
 #pragma once
 
-class CDevice
+class CDevice : public CSingleton<CDevice>
 {
+	SINGLE(CDevice)
+
 private:
 	HWND					m_hMainHwnd;		// 출력 대상 윈도우
 	POINT					m_RenderResolution; // 렌더링 타겟 해상도
@@ -26,24 +28,10 @@ private:
 	int CreateView();
 
 public:
-	static CDevice* GetInst()
-	{
-		static CDevice mgr;
-		return &mgr;
-	}
-
-public:
 	int Init(HWND hwnd, POINT resolution);
 	void ClearTarget(float(&ArrColor)[4]);
 	void Present() { m_SwapChain->Present(0, 0); }
 
 	ID3D11Device* GetDevice() { return m_Device.Get(); }
 	ID3D11DeviceContext* GetContext() { return m_Context.Get(); }
-
-private:
-	CDevice();
-	CDevice(const CDevice& _other) = delete;
-
-public:
-	~CDevice();
 };
