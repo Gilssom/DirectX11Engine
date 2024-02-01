@@ -1,18 +1,46 @@
-﻿  .\Project\Engine\CDevice.h
+﻿  .\Project\Engine\CAsset.h
+  .\Project\Engine\CComponent.h
+  .\Project\Engine\CDevice.h
   .\Project\Engine\CEngine.h
+  .\Project\Engine\CEntity.h
+  .\Project\Engine\CGameObject.h
   .\Project\Engine\CKeyManager.h
+  .\Project\Engine\CMesh.h
   .\Project\Engine\CPathManager.h
   .\Project\Engine\CTimeManager.h
   .\Project\Engine\define.h
+  .\Project\Engine\enum.h
   .\Project\Engine\global.h
   .\Project\Engine\SimpleMath.h
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  11개 파일이 복사되었습니다.
+  17개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\std2d.fx
   1개 파일이 복사되었습니다.
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
+  pch.cpp
+  CAsset.cpp
+  CComponent.cpp
+  CDevice.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(51,37): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(52,38): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CEngine.cpp
+  CEntity.cpp
+  CGameObject.cpp
+  CKeyManager.cpp
+  CMesh.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMesh.cpp(29,15): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMesh.cpp(30,15): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMesh.cpp(55,35): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CPathManager.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CPathManager.cpp(21,13): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CTimeManager.cpp
+  Engine.cpp
   Temp.cpp
+  코드를 생성하고 있습니다...
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

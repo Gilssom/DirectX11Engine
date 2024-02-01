@@ -5,6 +5,7 @@
 #include "CTimeManager.h"
 #include "CKeyManager.h"
 #include "CPathManager.h"
+#include "CMesh.h"
 
 // Graphics Pipeline
 
@@ -51,11 +52,9 @@
 // RenderTarget Texture
 // DepthStencil Texture
 
-// 정점 정보를 저장하는 Buffer
-ComPtr<ID3D11Buffer> g_VB;
-
-// Vertex Buffer 내에서 사용할 정점을 가르키는 인덱스 정보를 저장하는 Buffer
-ComPtr<ID3D11Buffer> g_IB;
+// Mesh = Vertex + Index
+CMesh* g_RectMesh = nullptr;
+CMesh* g_CircleMesh = nullptr;
 
 // 상수 버퍼 ( Constant Buffer ) 물체의 위치, 크기, 회전 정보를 전달하는 용도의 Buffer
 ComPtr<ID3D11Buffer> g_CB;
@@ -66,6 +65,10 @@ ComPtr<ID3D11InputLayout> g_Layout;
 
 // System Memory 정점 정보
 Vtx g_arrVtx[4] = {};
+
+
+// 물체의 위치값
+Vec3 g_ObjectPos;
 
 
 // HLSL ( Shader 버전의 C++ )
@@ -87,6 +90,9 @@ int TempInit()
 	// 해상도가 어떻든 정규화를 통해 좌표계를 설정할 수 있음
 
 	// 사각형 정점
+	// ===============
+	// Rect Mesh
+	// ===============
 	// 0 -- 1
 	// |    |
 	// 3 -- 2
@@ -102,57 +108,74 @@ int TempInit()
 	g_arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
 	g_arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 
+	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
 	// = 사각형 완성
 
-	// 정점 Buffer 생성
-	D3D11_BUFFER_DESC VBdesc = {};
+	// Rect Mesh 생성
+	g_RectMesh = new CMesh;
+	g_RectMesh->Create(g_arrVtx, 4, arrIdx, 6);
 
-	VBdesc.ByteWidth = sizeof(Vtx) * 4;
-	VBdesc.MiscFlags = 0;
+	// ===============
+	// Circle Mesh
+	// ===============
+	vector<Vtx> vecVtx;
+	vector<UINT> vecIdx;
+	Vtx v;
 
-	// Buffer 의 용도를 지정
-	VBdesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	// 원점을 vector 에 넣는다.
+	v.vPos = Vec3(0.f, 0.f, 0.f);
+	v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+	vecVtx.push_back(v);
 
-	// 버퍼가 생성된 이후에 CPU 에서 접근해서 GPU 에 있는 데이터를
-	// 덮어쓰기가 가능하게 설정
-	VBdesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	VBdesc.Usage = D3D11_USAGE_DYNAMIC;
+	float radius = 0.5f;
+	UINT slice = 10;
+	float angleStep = (2 * XM_PI) / slice; // 한 조각의 각도
 
-	D3D11_SUBRESOURCE_DATA Subdesc = {};
-	Subdesc.pSysMem = g_arrVtx;
-
-	// define.h -> #define
-	if (FAILED(DEVICE->CreateBuffer(&VBdesc, &Subdesc, g_VB.GetAddressOf())))
+	float angle = 0.f;
+	for (UINT i = 0; i <= slice; ++i)
 	{
-		return E_FAIL;
+		v.vPos = Vec3(cosf(angle) * radius, sinf(angle) * radius, 0.f);
+		v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+		vecVtx.push_back(v);
+
+		angle += angleStep;
 	}
 
-
-	// Index Buffer 생성
-	UINT arrIdx[6] = {0, 2, 3, 0, 1, 2};
-
-	D3D11_BUFFER_DESC IBdesc = {};
-
-	IBdesc.ByteWidth = sizeof(Vtx) * 6;
-	IBdesc.MiscFlags = 0;
-
-	// 버퍼 용도 설정
-	IBdesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-
-	// 한번 생성한 이후에 읽기, 쓰기 불가능
-	IBdesc.CPUAccessFlags = 0;
-	IBdesc.Usage = D3D11_USAGE_DEFAULT;
-
-	Subdesc = {};
-	Subdesc.pSysMem = arrIdx;
-
-	if (FAILED(DEVICE->CreateBuffer(&IBdesc, &Subdesc, g_IB.GetAddressOf())))
+	for (UINT i = 0; i < slice; ++i)
 	{
-		return E_FAIL;
+		vecIdx.push_back(0);
+		vecIdx.push_back(i + 2);
+		vecIdx.push_back(i + 1);
 	}
 
+	g_CircleMesh = new CMesh;
+	g_CircleMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), vecIdx.size());
+
+
+	// 좌표계
+	/*
+	상수 버퍼
+	아무리 정점이 만개, 십만개가 넘어가도
+	원본 정점의 변화 필요 없이 좌표 변화량만 전달하면 된다.
+	*/
 
 	// Constant Buffer 생성
+	D3D11_BUFFER_DESC CBdesc = {};
+
+	CBdesc.ByteWidth = sizeof(tTransform);
+	CBdesc.MiscFlags = 0;
+
+	// 버퍼 용도 설정
+	CBdesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+
+	// 한번 생성한 이후에 읽기, 쓰기 가능 ( 물체의 위치값 전달 위해 )
+	CBdesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	CBdesc.Usage = D3D11_USAGE_DYNAMIC;
+
+	if (FAILED(DEVICE->CreateBuffer(&CBdesc, nullptr, g_CB.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
 
 
 
@@ -246,12 +269,19 @@ int TempInit()
 		return E_FAIL;
 	}
 
+
+	g_ObjectPos = Vec3(0.f, 0.f, 0.f);
+
 	return S_OK;
 }
 
 void TempRelease()
 {
+	if (g_RectMesh != nullptr)
+		delete g_RectMesh;
 
+	if (g_CircleMesh != nullptr)
+		delete g_CircleMesh;
 }
 
 void TempTick()
@@ -261,78 +291,51 @@ void TempTick()
 
 	if (KEY_PRESSED(KEY::W))
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			g_arrVtx[i].vPos.y += DT;
-		}
+		g_ObjectPos.y += DT;
 	}
 
 	if (KEY_PRESSED(KEY::S))
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			g_arrVtx[i].vPos.y -= DT;
-		}
+		g_ObjectPos.y -= DT;
 	}
 
 	if (KEY_PRESSED(KEY::A))
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			g_arrVtx[i].vPos.x -= DT;
-		}
+		g_ObjectPos.x -= DT;
 	}
 
 	if (KEY_PRESSED(KEY::D))
 	{
-		for (int i = 0; i < 4; i++)
-		{
-			g_arrVtx[i].vPos.x += DT;
-		}
+		g_ObjectPos.x += DT;
 	}
 
 	// System Memory -> GPU
 	D3D11_MAPPED_SUBRESOURCE tSub = {};
 	// 데이터 수정
-	CONTEXT->Map(g_VB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
+	CONTEXT->Map(g_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
+
+	tTransform trans = {};
+	trans.Position = g_ObjectPos;
 
 	// 데이터 넣기
-	memcpy(tSub.pData, g_arrVtx, sizeof(Vtx) * 4);
+	memcpy(tSub.pData, &trans, sizeof(tTransform));
 
 	// 데이터 수정 완료
-	CONTEXT->Unmap(g_VB.Get(), 0);
+	CONTEXT->Unmap(g_CB.Get(), 0);
+
+	// 상수 -> std2d.fx - b0 에 데이터 복사
+	CONTEXT->VSGetConstantBuffers(/* register 번호 = */ 0, 1, g_CB.GetAddressOf());
 }
 
 void TempRender()
 {
 	// 세팅은 파이프 라인 단계에 따라서 맞춰 줄 필요는 없다.
-
-	UINT stride = sizeof(Vtx); // 각 정점 당 간격
-	UINT offset = 0; // 여러개의 정점 중 시작 위치
-	CONTEXT->IASetVertexBuffers(0, 1, g_VB.GetAddressOf(), &stride, &offset);
-
-	// 사각형을 그릴 때 똑같은 정점의 정보를 갖고 있을 수 밖에 없는데
-	// 이 부분은 메모리를 잡아 먹을 수 있다.
-	// 이걸 해결하기 위해선 Index Buffer 를 사용하면 된다.
-	// Vertex Buffer 는 총 4개의 정보를 갖게 되고,
-	// Index Buffer 는 총 6개의 Vertex Buffer 를 가르키는 값만 가지게 된다.
-	CONTEXT->IASetIndexBuffer(g_IB.Get(), DXGI_FORMAT_R32_UINT, 0);
-
 	CONTEXT->IASetInputLayout(g_Layout.Get());
 	CONTEXT->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST); // 도형의 구조를 알려주는 함수
 
 	CONTEXT->VSSetShader(g_VS.Get(), nullptr, 0);
 	CONTEXT->PSSetShader(g_PS.Get(), nullptr, 0);
 
-	// 사각형은 정점이 6개 ( 삼각형 각 정점 3개 )
-	//CONTEXT->Draw(6, 0);
-	// Index Buffer 의 갯수만큼 렌더링을 해야 한다. ( Vertex Buffer X )
-	CONTEXT->DrawIndexed(6, 0, 0);
+	//g_RectMesh->Render();
+	g_CircleMesh->Render();
 }
-
-// 좌표계
-/*
-상수 버퍼
-아무리 정점이 만개, 십만개가 넘어가도
-원본 정점의 변화 필요 없이 좌표 변화량만 전달하면 된다.
-*/

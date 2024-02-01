@@ -11,3 +11,11 @@ struct Vtx
 	Vec3 vPos; // 좌표
 	Vec4 vColor; // 색상 및 투명도
 };
+
+
+// 상수버퍼 관련 구조체
+struct tTransform
+{
+	// 상수 버퍼는 16 Byte 로 메모리 크기를 지정해줘야 한다.
+	Vec4 Position;
+};

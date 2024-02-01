@@ -153,12 +153,18 @@ call Copy.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAsset.h" />
+    <ClInclude Include="CComponent.h" />
     <ClInclude Include="CDevice.h" />
     <ClInclude Include="CEngine.h" />
+    <ClInclude Include="CEntity.h" />
+    <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CKeyManager.h" />
+    <ClInclude Include="CMesh.h" />
     <ClInclude Include="CPathManager.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="enum.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="pch.h" />
@@ -168,9 +174,14 @@ call Copy.bat</Command>
     <ClInclude Include="Temp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAsset.cpp" />
+    <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CDevice.cpp" />
     <ClCompile Include="CEngine.cpp" />
+    <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
+    <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CPathManager.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="Engine.cpp" />
