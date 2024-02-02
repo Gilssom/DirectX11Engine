@@ -16,9 +16,13 @@ public:
 	void SetName(const wstring& name) { m_Name = name; }
 	UINT GetID() { return m_ID; }
 
+
+	// 자기 자신을 복제한 객체를 반환
+	//virtual CEntity* Clone() = 0;
+
 public:
 	CEntity();
 	CEntity(const CEntity& _Origin); // 복사 생성자 직접 구현
-	~CEntity();
+	virtual ~CEntity();
 };
 

@@ -154,20 +154,27 @@ call Copy.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAsset.h" />
+    <ClInclude Include="CAssetManager.h" />
     <ClInclude Include="CComponent.h" />
+    <ClInclude Include="CComputeShader.h" />
+    <ClInclude Include="CConstBuffer.h" />
     <ClInclude Include="CDevice.h" />
     <ClInclude Include="CEngine.h" />
     <ClInclude Include="CEntity.h" />
     <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CGraphicShader.h" />
     <ClInclude Include="CKeyManager.h" />
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CPathManager.h" />
+    <ClInclude Include="CShader.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="func.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ptr.h" />
     <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="Singletone.h" />
     <ClInclude Include="struct.h" />
@@ -175,14 +182,20 @@ call Copy.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAsset.cpp" />
+    <ClCompile Include="CAssetManager.cpp" />
+    <ClCompile Include="CAssetMgr_Init.cpp" />
     <ClCompile Include="CComponent.cpp" />
+    <ClCompile Include="CComputeShader.cpp" />
+    <ClCompile Include="CConstBuffer.cpp" />
     <ClCompile Include="CDevice.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CGraphicShader.cpp" />
     <ClCompile Include="CKeyManager.cpp" />
     <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CPathManager.cpp" />
+    <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="pch.cpp">

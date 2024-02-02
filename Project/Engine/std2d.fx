@@ -9,6 +9,7 @@
 cbuffer TRANSFORM : register(b0)
 {
     float4 g_Position;
+    float g_Scale;
 };
 
 // 정점의 모든 정보가 필요 없다.

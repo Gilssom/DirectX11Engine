@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CDevice.h"
 
+#include "CConstBuffer.h"
+
 CDevice::CDevice()
 	: m_hMainHwnd(nullptr)
 	, m_RenderResolution{}
@@ -10,6 +12,7 @@ CDevice::CDevice()
 
 CDevice::~CDevice()
 {
+	Safe_Del_Array(m_CB);
 }
 
 int CDevice::Init(HWND hwnd, POINT resolution)
@@ -57,6 +60,12 @@ int CDevice::Init(HWND hwnd, POINT resolution)
 
 	// ViewPort 정보 세팅
 	m_Context->RSSetViewports(1, &viewPort);
+
+	// 필요한 상수버퍼 생성
+	if (FAILED(CreateConstBuffer()))
+	{
+		return E_FAIL;
+	}
 
 	return S_OK;
 }
@@ -163,4 +172,12 @@ int CDevice::CreateView()
 	// UnorderedAccess View
 
 	return S_OK;
+}
+
+int CDevice::CreateConstBuffer()
+{
+	m_CB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
+	m_CB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), CB_TYPE::TRANSFORM);
+
+	return 0;
 }

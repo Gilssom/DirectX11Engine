@@ -14,3 +14,17 @@ enum class ASSET_TYPE
 
 	END,
 };
+
+// 상수 버퍼 갯수는 거의 고정적임
+enum class CB_TYPE
+{
+	TRANSFORM,
+
+	MATERIAL,
+
+	ANIMATION,
+
+	GLOBAL,
+
+	END,
+};

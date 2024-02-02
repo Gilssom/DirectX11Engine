@@ -68,6 +68,18 @@
     <Filter Include="07. Asset\Shader">
       <UniqueIdentifier>{f064b3fe-f673-4e8d-bec2-c0ca8b922644}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Device\ConstBuffer">
+      <UniqueIdentifier>{b37c980f-956c-42f8-9dce-7fd4b9a2e4fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Asset\Shader\GraphicShader">
+      <UniqueIdentifier>{04498d9d-3974-4a14-b8ae-821c0fd80971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Asset\Shader\ComputeShader">
+      <UniqueIdentifier>{a64232d4-5ffd-4236-87b5-d2d965526066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\04. AssetMgr">
+      <UniqueIdentifier>{3386bf87-16fe-4b03-9101-adf07f71c5a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -125,6 +137,27 @@
     <ClInclude Include="enum.h">
       <Filter>01. Header</Filter>
     </ClInclude>
+    <ClInclude Include="CConstBuffer.h">
+      <Filter>03. Device\ConstBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CShader.h">
+      <Filter>07. Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicShader.h">
+      <Filter>07. Asset\Shader\GraphicShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CComputeShader.h">
+      <Filter>07. Asset\Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetManager.h">
+      <Filter>04. Manager\04. AssetMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="ptr.h">
+      <Filter>07. Asset</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -163,6 +196,24 @@
     </ClCompile>
     <ClCompile Include="CMesh.cpp">
       <Filter>07. Asset\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CConstBuffer.cpp">
+      <Filter>03. Device\ConstBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CShader.cpp">
+      <Filter>07. Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicShader.cpp">
+      <Filter>07. Asset\Shader\GraphicShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CComputeShader.cpp">
+      <Filter>07. Asset\Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetManager.cpp">
+      <Filter>04. Manager\04. AssetMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr_Init.cpp">
+      <Filter>04. Manager\04. AssetMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

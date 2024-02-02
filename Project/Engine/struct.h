@@ -18,4 +18,5 @@ struct tTransform
 {
 	// 상수 버퍼는 16 Byte 로 메모리 크기를 지정해줘야 한다.
 	Vec4 Position;
+	Vec4 Scale;
 };

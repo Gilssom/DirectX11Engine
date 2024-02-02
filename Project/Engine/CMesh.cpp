@@ -52,7 +52,7 @@ int CMesh::Create(Vtx* VtxSysMem, size_t VtxCount, UINT* IdxSysMem, size_t IdxCo
 
 
 	// Index Buffer 생성
-	m_IBdesc.ByteWidth = sizeof(Vtx) * IdxCount;
+	m_IBdesc.ByteWidth = sizeof(UINT) * m_IdxCount;
 	m_IBdesc.MiscFlags = 0;
 
 	// 버퍼 용도 설정
@@ -76,7 +76,7 @@ int CMesh::Create(Vtx* VtxSysMem, size_t VtxCount, UINT* IdxSysMem, size_t IdxCo
 	memcpy(m_VtxSysMem, VtxSysMem, sizeof(Vtx) * m_VtxCount);
 
 	m_IdxSysMem = new UINT[m_IdxCount];
-	memcpy(m_IdxSysMem, IdxSysMem, sizeof(Vtx) * m_IdxCount);
+	memcpy(m_IdxSysMem, IdxSysMem, sizeof(UINT) * m_IdxCount);
 
 
 	return S_OK;

@@ -31,7 +31,9 @@ using std::string;
 using std::wstring;
 
 #include "define.h"
-#include "struct.h"
 #include "enum.h"
-
+#include "struct.h"
+#include "func.h"
 #include "Singletone.h"
+
+#include "ptr.h"
