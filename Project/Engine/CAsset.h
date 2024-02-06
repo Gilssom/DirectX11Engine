@@ -35,5 +35,7 @@ public:
 	// Ptr 에서 가르키는 T 의 Private 에 접근 가능하게 한다.
 	template<typename T>
 	friend class Ptr;
+
+	friend class CAssetManager;
 };
 

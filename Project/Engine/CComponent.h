@@ -3,6 +3,15 @@
 
 class CComponent : public CEntity
 {
+private:
+	const COMPONENT_TYPE m_Type;
 
+
+public:
+
+
+public:
+	CComponent(COMPONENT_TYPE type);
+	~CComponent();
 };
 

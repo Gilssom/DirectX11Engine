@@ -1,35 +1,12 @@
 #include "pch.h"
 #include "CAssetManager.h"
 
-void CAssetManager::Init()
+CAssetManager::CAssetManager()
 {
-	CreateDefaultMesh();
 
-	CreateDefaultTexture();
-
-	CreateDefaultMaterial();
-
-	CreateDefaultGraphicShader();
-
-	CreateDefaultComputeShader();
 }
 
-void CAssetManager::CreateDefaultMesh()
+CAssetManager::~CAssetManager()
 {
-}
 
-void CAssetManager::CreateDefaultTexture()
-{
-}
-
-void CAssetManager::CreateDefaultMaterial()
-{
-}
-
-void CAssetManager::CreateDefaultGraphicShader()
-{
-}
-
-void CAssetManager::CreateDefaultComputeShader()
-{
 }

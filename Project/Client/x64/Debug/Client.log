@@ -1,3 +1,1 @@
-﻿  Client.cpp
-Engine_d.lib(CEngine.obj) : error LNK2019: "private: __cdecl CAssetManager::CAssetManager(void)" (??0CAssetManager@@AEAA@XZ)"public: static class CAssetManager * __cdecl CSingleton<class CAssetManager>::GetInst(void)" (?GetInst@?$CSingleton@VCAssetManager@@@@SAPEAVCAssetManager@@XZ) 함수에서 참조되는 확인할 수 없는 외부 기호
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\OutputFile\bin\Client.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
+﻿  Client.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\OutputFile\bin\Client.exe

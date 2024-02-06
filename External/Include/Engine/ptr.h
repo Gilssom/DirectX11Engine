@@ -9,6 +9,11 @@ private:
 
 
 public:
+	T* Get() { return m_Asset; }
+	T** GetAdressOf() { return &m_Asset; }
+
+
+public:
 	// 복사 생성자로 대체를 하면 안되는 이유
 	// 그 이전에 무언가를 가르키고 있을 수도 있다.
 	void operator = (T* asset)
