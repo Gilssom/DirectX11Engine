@@ -6,6 +6,7 @@
 #include "CPathManager.h"
 #include "CKeyManager.h"
 #include "CAssetManager.h"
+#include "CLevelManager.h"
 
 #include "Temp.h"
 
@@ -42,6 +43,7 @@ int CEngine::Init(HWND hwnd, POINT resolution)
 	CTimeManager::GetInst()->Init();
 	CKeyManager::GetInst()->Init();
 	CAssetManager::GetInst()->Init();
+	CLevelManager::GetInst()->Init();
 
 	if (FAILED(TempInit()))
 	{
@@ -61,6 +63,7 @@ void CEngine::Progress()
 	CKeyManager::GetInst()->Tick();
 
 	// Object Tick
+	CLevelManager::GetInst()->Tick();
 	TempTick();
 
 

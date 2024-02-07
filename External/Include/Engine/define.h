@@ -17,6 +17,10 @@
 #define KEY_RELEASED(Key) KEY_CHECK(Key, KEY_STATE::RELEASED)
 #define KEY_NONE(Key) KEY_CHECK(Key, KEY_STATE::NONE)
 
+#define DT CTimeManager::GetInst()->GetDeltaTime()
+
+#define MAX_LAYER 32
+
 typedef Vector2 Vec2;
 typedef Vector3 Vec3;
 typedef Vector4 Vec4;

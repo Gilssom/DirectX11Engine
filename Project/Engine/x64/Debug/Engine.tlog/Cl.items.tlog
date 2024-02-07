@@ -10,10 +10,17 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEntity.cpp
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CGameObject.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CGameObject.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CGraphicShader.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CGraphicShader.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CKeyManager.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CKeyManager.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CLayer.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CLayer.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CLevel.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CLevel.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMesh.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CMesh.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMeshRender.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CMeshRender.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CPathManager.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CPathManager.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CPlayerScript.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CPlayerScript.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CRenderComponent.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CRenderComponent.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CScript.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CScript.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CShader.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CShader.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTimeManager.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTimeManager.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTransform.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTransform.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\Engine.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\Engine.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\pch.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\pch.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\Temp.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\Temp.obj
