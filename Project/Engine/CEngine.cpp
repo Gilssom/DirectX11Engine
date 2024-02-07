@@ -18,7 +18,7 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
-	TempRelease();
+
 }
 
 int CEngine::Init(HWND hwnd, POINT resolution)
@@ -64,7 +64,6 @@ void CEngine::Progress()
 
 	// Object Tick
 	CLevelManager::GetInst()->Tick();
-	TempTick();
 
 
 	// ====================
@@ -75,7 +74,7 @@ void CEngine::Progress()
 	CDevice::GetInst()->ClearTarget(clearColor);
 
 	// Object Render
-	TempRender();
+	CLevelManager::GetInst()->Render();
 
 	// Present
 	CDevice::GetInst()->Present();

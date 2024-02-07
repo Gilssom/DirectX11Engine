@@ -20,7 +20,7 @@ int CConstBuffer::Create(size_t bufferSize, CB_TYPE type)
 	m_Type = type;
 
 	// Constant Buffer 생성
-	m_Desc.ByteWidth = bufferSize;
+	m_Desc.ByteWidth = (UINT)bufferSize;
 	m_Desc.MiscFlags = 0;
 
 	// 버퍼 용도 설정

@@ -11,13 +11,15 @@ private:
 
 
 public:
-	void AddObject(UINT layerIdx, CGameObject* object);
-
-public:
-	void Init();
+	void Begin();
 	void Tick();
 	void FinalTick();
 	void Render();
+
+
+public:
+	void AddObject(UINT layerIdx, CGameObject* object);
+
 
 public:
 	CLevel();

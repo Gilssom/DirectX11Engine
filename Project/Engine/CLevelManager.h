@@ -1,6 +1,8 @@
 #pragma once
 #include "Singletone.h"
 
+class CLevel;
+
 class CLevelManager : public CSingleton<CLevelManager>
 {
 	SINGLE(CLevelManager)

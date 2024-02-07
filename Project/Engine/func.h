@@ -13,3 +13,15 @@ void Safe_Del_Array(T* (&Array)[size])
 		}
 	}
 }
+
+template<typename T>
+void Safe_Del_Vector(vector<T*> vector)
+{
+	for (size_t i = 0; i < vector.size(); ++i)
+	{
+		delete vector[i];
+		vector[i] = nullptr;
+	}
+
+	vector.clear();
+}

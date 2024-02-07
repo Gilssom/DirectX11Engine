@@ -242,7 +242,9 @@
     <ClInclude Include="CLayer.h">
       <Filter>05. Level</Filter>
     </ClInclude>
-    <ClInclude Include="CLevelManager.h" />
+    <ClInclude Include="CLevelManager.h">
+      <Filter>04. Manager\05. LevelMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -321,7 +323,9 @@
     <ClCompile Include="CLayer.cpp">
       <Filter>05. Level</Filter>
     </ClCompile>
-    <ClCompile Include="CLevelManager.cpp" />
+    <ClCompile Include="CLevelManager.cpp">
+      <Filter>04. Manager\05. LevelMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

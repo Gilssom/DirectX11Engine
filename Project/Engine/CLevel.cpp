@@ -17,27 +17,40 @@ CLevel::~CLevel()
 	Safe_Del_Array(m_arrLayer);
 }
 
-void CLevel::AddObject(UINT layerIdx, CGameObject* object)
+void CLevel::Begin()
 {
-	m_arrLayer[layerIdx]->AddObject(object);
-}
-
-void CLevel::Init()
-{
-
+	for (UINT i = 0; i < MAX_LAYER; i++)
+	{
+		m_arrLayer[i]->Begin();
+	}
 }
 
 void CLevel::Tick()
 {
+	for (UINT i = 0; i < MAX_LAYER; i++)
+	{
+		m_arrLayer[i]->Tick();
+	}
 
 }
 
 void CLevel::FinalTick()
 {
-
+	for (UINT i = 0; i < MAX_LAYER; i++)
+	{
+		m_arrLayer[i]->FinalTick();
+	}
 }
 
 void CLevel::Render()
 {
+	for (UINT i = 0; i < MAX_LAYER; i++)
+	{
+		m_arrLayer[i]->Render();
+	}
+}
 
+void CLevel::AddObject(UINT layerIdx, CGameObject* object)
+{
+	m_arrLayer[layerIdx]->AddObject(object);
 }

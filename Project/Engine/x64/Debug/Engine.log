@@ -12,6 +12,7 @@
   .\Project\Engine\CKeyManager.h
   .\Project\Engine\CLayer.h
   .\Project\Engine\CLevel.h
+  .\Project\Engine\CLevelManager.h
   .\Project\Engine\CMesh.h
   .\Project\Engine\CMeshRender.h
   .\Project\Engine\components.h
@@ -31,119 +32,13 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  33개 파일이 복사되었습니다.
+  34개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\std2d.fx
   1개 파일이 복사되었습니다.
-  pch.cpp
-  CAsset.cpp
-  CAssetManager.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CAssetManager.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CAssetManager.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CAssetManager.cpp'을(를) 컴파일하는 중)
-  
-  CAssetMgr_Init.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
-  
-  CComponent.cpp
-  CComputeShader.cpp
   CConstBuffer.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CConstBuffer.cpp(23,21): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/CConstBuffer.cpp'을(를) 컴파일하는 중)
-  
-  CDevice.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(54,37): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/CDevice.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(55,38): warning C4244: '=': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/CDevice.cpp'을(를) 컴파일하는 중)
-  
-  CEngine.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
-  
-  CEntity.cpp
-  CGameObject.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
-  
-  CGraphicShader.cpp
-  CKeyManager.cpp
-  CLayer.cpp
-  CLevel.cpp
   CMesh.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMesh.cpp(29,15): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/CMesh.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMesh.cpp(30,15): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/CMesh.cpp'을(를) 컴파일하는 중)
-  
-  CMeshRender.cpp
   CPathManager.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CPathManager.cpp(21,13): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/CPathManager.cpp'을(를) 컴파일하는 중)
-  
-  CPlayerScript.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CPlayerScript.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CPlayerScript.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CPlayerScript.cpp'을(를) 컴파일하는 중)
-  
-  CRenderComponent.cpp
-  CScript.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CScript.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CScript.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CScript.cpp'을(를) 컴파일하는 중)
-  
   코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  CShader.cpp
-  CTimeManager.cpp
-  CTransform.cpp
-  Engine.cpp
-  Temp.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(54,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
-  
-  코드를 생성하고 있습니다...
-  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+  Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

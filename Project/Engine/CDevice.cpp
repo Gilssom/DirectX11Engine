@@ -6,6 +6,7 @@
 CDevice::CDevice()
 	: m_hMainHwnd(nullptr)
 	, m_RenderResolution{}
+	, m_CB{}
 {
 	
 }
@@ -51,8 +52,8 @@ int CDevice::Init(HWND hwnd, POINT resolution)
 	D3D11_VIEWPORT viewPort = {};
 	viewPort.TopLeftX = 0;
 	viewPort.TopLeftY = 0;
-	viewPort.Width = m_RenderResolution.x;
-	viewPort.Height = m_RenderResolution.y;
+	viewPort.Width = (float)m_RenderResolution.x;
+	viewPort.Height = (float)m_RenderResolution.y;
 
 	// 깊이 텍스처에 저장되는 깊이 Min ~ Max 지정 ( 0.f ~ 1.f )
 	viewPort.MinDepth = 0;
