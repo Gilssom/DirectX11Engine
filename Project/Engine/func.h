@@ -15,6 +15,20 @@ void Safe_Del_Array(T* (&Array)[size])
 }
 
 template<typename T>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+void Safe_Del_Vector(vector<T*>& vec)
+{
+	for (size_t i = 0; i < vec.size(); ++i)
+	{
+		if (nullptr != vec[i])
+			delete vec[i];
+	}
+
+	vec.clear();
+=======
+>>>>>>> Stashed changes
 void Safe_Del_Vector(vector<T*> vector)
 {
 	for (size_t i = 0; i < vector.size(); ++i)
@@ -24,4 +38,8 @@ void Safe_Del_Vector(vector<T*> vector)
 	}
 
 	vector.clear();
+<<<<<<< Updated upstream
+=======
+>>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
+>>>>>>> Stashed changes
 }

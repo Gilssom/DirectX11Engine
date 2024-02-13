@@ -47,7 +47,7 @@ int CGraphicShader::CreateVertexShader(const wstring& strFilePath, const string&
 	}
 
 	// Vertex Layout 정보 생성
-	D3D11_INPUT_ELEMENT_DESC Layoutdesc[2] = {};
+	D3D11_INPUT_ELEMENT_DESC Layoutdesc[3] = {};
 
 	Layoutdesc[0].AlignedByteOffset = 0; // 정점 정보의 시작 위치
 	Layoutdesc[0].Format = DXGI_FORMAT_R32G32B32_FLOAT; // 그에 맞는 픽셀 크기
@@ -65,7 +65,15 @@ int CGraphicShader::CreateVertexShader(const wstring& strFilePath, const string&
 	Layoutdesc[1].SemanticName = "COLOR";
 	Layoutdesc[1].SemanticIndex = 0;
 
-	if (FAILED(DEVICE->CreateInputLayout(Layoutdesc, 2
+	Layoutdesc[2].AlignedByteOffset = 28;
+	Layoutdesc[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+	Layoutdesc[2].InputSlot = 0;
+	Layoutdesc[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+	Layoutdesc[2].InstanceDataStepRate = 0;
+	Layoutdesc[2].SemanticName = "TEXCOORD";
+	Layoutdesc[2].SemanticIndex = 0;
+
+	if (FAILED(DEVICE->CreateInputLayout(Layoutdesc, 3
 		, m_VSBlob->GetBufferPointer()
 		, m_VSBlob->GetBufferSize()
 		, m_Layout.GetAddressOf())))

@@ -6,7 +6,15 @@
 CDevice::CDevice()
 	: m_hMainHwnd(nullptr)
 	, m_RenderResolution{}
+<<<<<<< Updated upstream
 	, m_CB{}
+=======
+<<<<<<< HEAD
+	, m_Sampler{}
+=======
+	, m_CB{}
+>>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
+>>>>>>> Stashed changes
 {
 	
 }
@@ -64,6 +72,12 @@ int CDevice::Init(HWND hwnd, POINT resolution)
 
 	// 필요한 상수버퍼 생성
 	if (FAILED(CreateConstBuffer()))
+	{
+		return E_FAIL;
+	}
+
+	// 필요한 샘플러 생성
+	if (FAILED(CreateSamplerState()))
 	{
 		return E_FAIL;
 	}
@@ -179,6 +193,28 @@ int CDevice::CreateConstBuffer()
 {
 	m_CB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
 	m_CB[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), CB_TYPE::TRANSFORM);
+
+	return 0;
+}
+
+int CDevice::CreateSamplerState()
+{
+	D3D11_SAMPLER_DESC desc[2] = {};
+
+	desc[0].AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc[0].AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc[0].AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc[0].Filter = D3D11_FILTER_ANISOTROPIC;
+	DEVICE->CreateSamplerState(desc, m_Sampler[0].GetAddressOf());
+	CONTEXT->PSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
+
+	// 저해상도 > 고해상도로 출력할 수 있게 해주는 옵션
+	desc[1].AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc[1].AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc[1].AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc[1].Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+	DEVICE->CreateSamplerState(desc + 1, m_Sampler[1].GetAddressOf());
+	CONTEXT->PSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
 
 	return 0;
 }

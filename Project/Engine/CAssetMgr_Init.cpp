@@ -27,18 +27,22 @@ void CAssetManager::CreateDefaultMesh()
 	// ===============
 	v.vPos = Vec3(-0.5f, 0.5f, 0.f);
 	v.vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	v.vUv = Vec2(0.f, 0.f);
 	vecVtx.push_back(v);
 
 	v.vPos = Vec3(0.5f, 0.5f, 0.f);
 	v.vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	v.vUv = Vec2(1.f, 0.f);
 	vecVtx.push_back(v);
 
 	v.vPos = Vec3(0.5f, -0.5f, 0.f);
 	v.vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	v.vUv = Vec2(1.f, 1.f);
 	vecVtx.push_back(v);
 
 	v.vPos = Vec3(-0.5f, -0.5f, 0.f);
 	v.vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	v.vUv = Vec2(0.f, 1.f);
 	vecVtx.push_back(v);
 
 	vecIdx.push_back(0);
@@ -99,7 +103,7 @@ void CAssetManager::CreateDefaultMesh()
 
 void CAssetManager::CreateDefaultTexture()
 {
-
+	Load<CTexture>(L"texture\\Character.png", L"texture\\Character.png");
 }
 
 void CAssetManager::CreateDefaultMaterial()
@@ -112,7 +116,7 @@ void CAssetManager::CreateDefaultGraphicShader()
 	Ptr<CGraphicShader> pShader = nullptr;
 
 	// 경로 찾기 Manager 구현
-	wstring strPath = CPathManager::GetInst()->GetComtentPath();
+	wstring strPath = CPathManager::GetInst()->GetContentPath();
 
 	// Create Shader
 	pShader = new CGraphicShader;

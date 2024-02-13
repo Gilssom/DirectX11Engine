@@ -1,8 +1,8 @@
 #pragma once
 #include "Singletone.h"
 
-#include "assets.h"
 #include "CPathManager.h"
+#include "assets.h"
 
 class CAssetManager : public CSingleton<CAssetManager>
 {
@@ -23,6 +23,10 @@ public:
 
 
 public:
+    // Asset 불러오기
+    template<typename T>
+    Ptr<T> Load(const wstring& strKey, const wstring& strRelativePath);
+
     // Asset 검색
     template<typename T>
     Ptr<T> FindAsset(const wstring& strKey); // 무조건 스마트 포인터로 받을 수 있게
@@ -63,8 +67,37 @@ ASSET_TYPE GetAssetType()
     {
         return ASSET_TYPE::COMPUTE_SHADER;
     }
+    if constexpr (std::is_same_v<T, CTexture>)
+    {
+        return ASSET_TYPE::TEXTURE;
+    }
 }
 
+template<typename T>
+inline Ptr<T> CAssetManager::Load(const wstring& strKey, const wstring& strRelativePath)
+{
+    Ptr<CAsset> pAsset = FindAsset<T>(strKey).Get();
+    
+    if (pAsset.Get() != nullptr)
+    {
+        return (T*)pAsset.Get();
+    }
+
+    wstring strFullPath = CPathManager::GetInst()->GetContentPath();
+    strFullPath += strRelativePath;
+
+    pAsset = new T;
+
+    if (FAILED(pAsset->Load(strFullPath)))
+    {
+        MessageBox(nullptr, strFullPath.c_str(), L"에셋 로딩 실패", MB_OK);
+        return nullptr;
+    }
+
+    AddAsset<T>(strKey, (T*)pAsset.Get());
+
+    return (T*)pAsset.Get();
+}
 
 template<typename T>
 inline Ptr<T> CAssetManager::FindAsset(const wstring& strKey)

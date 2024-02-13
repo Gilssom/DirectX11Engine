@@ -27,6 +27,9 @@ void CMeshRender::Render()
 	// 사용할 쉐이더 바인딩
 	GetShader()->Binding();
 
+	// 사용할 텍스처 바인딩
+	GetTexture()->Binding(0); // 레지스터 0번에 등록
+
 	// Mesh , Shader Render
 	GetMesh()->Render();
 }

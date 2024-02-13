@@ -1,12 +1,25 @@
 #pragma once
 #include "CEntity.h"
 
-#include "CGameObject.h"
+class CGameObject;
 
 class CLayer : public CEntity
 {
 private:
 	vector<CGameObject*> m_vecObjects;
+
+public:
+	void Init();
+	void Tick();
+	void FinalTick();
+	void Render();
+
+
+public:
+	void Begin();
+	void Tick();
+	void FinalTick();
+	void Render();
 
 
 public:

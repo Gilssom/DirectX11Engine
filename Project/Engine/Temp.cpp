@@ -18,9 +18,6 @@
 #include "CMeshRender.h"
 #include "CPlayerScript.h"
 
-CGameObject* pObject1 = nullptr;
-CGameObject* pObject2 = nullptr;
-
 #pragma region Graphics Pipeline
 // Graphics Pipeline
 
@@ -70,36 +67,17 @@ CGameObject* pObject2 = nullptr;
 
 int TempInit()
 {
-	pObject2 = new CGameObject;
-	pObject2->AddComponent(new CTransform);
-	pObject2->AddComponent(new CMeshRender);
-	//pObject2->AddComponent(new CPlayerScript);
-
-	pObject2->Transform()->SetRelativeScale(0.2f, 0.2f, 0.2f);
-
-	pObject2->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObject2->MeshRender()->SetShader(CAssetManager::GetInst()->FindAsset<CGraphicShader>(L"Std2DShader"));
-
 	return S_OK;
 }
 
 void TempRelease()
 {
-	delete pObject1;
-	delete pObject2;
 }
 
 void TempTick()
 {
-	pObject1->Tick();
-	pObject2->Tick();
-
-	pObject1->FinalTick();
-	pObject2->FinalTick();
 }
 
 void TempRender()
 {
-	pObject1->Render();
-	pObject2->Render();
 }

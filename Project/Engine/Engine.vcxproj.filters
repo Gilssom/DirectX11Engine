@@ -242,6 +242,15 @@
     <ClInclude Include="CLayer.h">
       <Filter>05. Level</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    <ClInclude Include="CTexture.h">
+      <Filter>08. Asset\Texture</Filter>
+    </ClInclude>
+=======
+>>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
+>>>>>>> Stashed changes
     <ClInclude Include="CLevelManager.h">
       <Filter>04. Manager\05. LevelMgr</Filter>
     </ClInclude>
@@ -323,6 +332,15 @@
     <ClCompile Include="CLayer.cpp">
       <Filter>05. Level</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    <ClCompile Include="CTexture.cpp">
+      <Filter>08. Asset\Texture</Filter>
+    </ClCompile>
+=======
+>>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
+>>>>>>> Stashed changes
     <ClCompile Include="CLevelManager.cpp">
       <Filter>04. Manager\05. LevelMgr</Filter>
     </ClCompile>

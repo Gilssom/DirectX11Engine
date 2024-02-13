@@ -8,11 +8,18 @@ using namespace Microsoft::WRL;
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
+#include <DirectXTex/DirectXTex.h>
 
 #include "SimpleMath.h"
 
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
+
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex/DirectXTex_debug")
+#else
+#pragma comment(lib, "DirectXTex/DirectXTex")
+#endif
 
 using namespace DirectX;
 using namespace DirectX::PackedVector;

@@ -18,7 +18,15 @@ CLevelManager::CLevelManager()
 
 CLevelManager::~CLevelManager()
 {
+<<<<<<< Updated upstream
 	if (m_CurLevel != nullptr)
+=======
+<<<<<<< HEAD
+	if (nullptr != m_CurLevel)
+=======
+	if (m_CurLevel != nullptr)
+>>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
+>>>>>>> Stashed changes
 	{
 		delete m_CurLevel;
 	}
@@ -34,11 +42,27 @@ void CLevelManager::Init()
 	pObject->AddComponent(new CMeshRender);
 	pObject->AddComponent(new CPlayerScript);
 
+<<<<<<< Updated upstream
 	pObject->Transform()->SetRelativeScale(0.2f, 0.2f, 0.2f);
 
 	pObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObject->MeshRender()->SetShader(CAssetManager::GetInst()->FindAsset<CGraphicShader>(L"Std2DShader"));
 
+=======
+<<<<<<< HEAD
+	pObject->Transform()->SetRelativeScale(0.66f, 1.f, 0.2f);
+
+	pObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObject->MeshRender()->SetShader(CAssetManager::GetInst()->FindAsset<CGraphicShader>(L"Std2DShader"));
+	pObject->MeshRender()->SetTexture(CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
+=======
+	pObject->Transform()->SetRelativeScale(0.2f, 0.2f, 0.2f);
+
+	pObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pObject->MeshRender()->SetShader(CAssetManager::GetInst()->FindAsset<CGraphicShader>(L"Std2DShader"));
+>>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
+
+>>>>>>> Stashed changes
 	m_CurLevel->AddObject(0, pObject);
 }
 

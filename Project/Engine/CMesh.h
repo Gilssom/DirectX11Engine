@@ -18,6 +18,8 @@ private:
 
 private:
 	void Binding();
+	virtual int Load(const wstring& _FilePath) override { return S_OK; }
+	virtual int Save(const wstring& _FilePath) override { return S_OK; }
 
 public:
 	int Create(Vtx* VtxSysMem, size_t VtxCount, UINT* IdxSysMem, size_t IdxCount);

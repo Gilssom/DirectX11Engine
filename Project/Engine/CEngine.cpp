@@ -8,8 +8,6 @@
 #include "CAssetManager.h"
 #include "CLevelManager.h"
 
-#include "Temp.h"
-
 CEngine::CEngine()
 	: m_hMainHwnd(nullptr)
 	, m_Resolution{}
@@ -44,12 +42,6 @@ int CEngine::Init(HWND hwnd, POINT resolution)
 	CKeyManager::GetInst()->Init();
 	CAssetManager::GetInst()->Init();
 	CLevelManager::GetInst()->Init();
-
-	if (FAILED(TempInit()))
-	{
-		MessageBox(m_hMainHwnd, L"Device 초기화 실패", L"Temp Init 초기화 실패", MB_OK);
-		return E_FAIL;
-	}
 
 	return S_OK;
 }

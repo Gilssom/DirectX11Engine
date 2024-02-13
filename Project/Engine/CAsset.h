@@ -15,6 +15,10 @@ public:
 	ASSET_TYPE GetAssetType() { return m_Type; }
 
 private:
+	virtual int Load(const wstring& FilePath) = 0;
+	virtual int Save(const wstring& FilePath) = 0;
+
+private:
 	void AddRef() { m_RefCount++; }
 	void Release() 
 	{ 
