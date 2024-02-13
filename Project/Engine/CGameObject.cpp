@@ -13,6 +13,7 @@ CGameObject::CGameObject()
 CGameObject::~CGameObject()
 {
 	Safe_Del_Array(m_arrCom);
+	Safe_Del_Vector(m_vecScripts);
 }
 
 void CGameObject::Begin()

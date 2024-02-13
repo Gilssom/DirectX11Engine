@@ -162,6 +162,7 @@ call Copy.bat</Command>
     <ClInclude Include="assets.h" />
     <ClInclude Include="CAsset.h" />
     <ClInclude Include="CAssetManager.h" />
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="CComponent.h" />
     <ClInclude Include="CComputeShader.h" />
     <ClInclude Include="CConstBuffer.h" />
@@ -201,6 +202,7 @@ call Copy.bat</Command>
     <ClCompile Include="CAsset.cpp" />
     <ClCompile Include="CAssetManager.cpp" />
     <ClCompile Include="CAssetMgr_Init.cpp" />
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CComponent.cpp" />
     <ClCompile Include="CComputeShader.cpp" />
     <ClCompile Include="CConstBuffer.cpp" />

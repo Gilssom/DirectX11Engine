@@ -16,20 +16,6 @@ public:
 
 
 public:
-	void Begin();
-	void Tick();
-	void FinalTick();
-	void Render();
-
-
-public:
-	void Begin();
-	void Tick();
-	void FinalTick();
-	void Render();
-
-
-public:
 	void AddObject(CGameObject* object) { m_vecObjects.push_back(object); }
 
 

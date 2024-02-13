@@ -1,6 +1,7 @@
 ﻿  .\Project\Engine\assets.h
   .\Project\Engine\CAsset.h
   .\Project\Engine\CAssetManager.h
+  .\Project\Engine\CCamera.h
   .\Project\Engine\CComponent.h
   .\Project\Engine\CComputeShader.h
   .\Project\Engine\CConstBuffer.h
@@ -21,6 +22,7 @@
   .\Project\Engine\CRenderComponent.h
   .\Project\Engine\CScript.h
   .\Project\Engine\CShader.h
+  .\Project\Engine\CTexture.h
   .\Project\Engine\CTimeManager.h
   .\Project\Engine\CTransform.h
   .\Project\Engine\define.h
@@ -32,13 +34,76 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  34개 파일이 복사되었습니다.
+  36개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\std2d.fx
   1개 파일이 복사되었습니다.
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
+  pch.cpp
+  CAsset.cpp
+  CAssetManager.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  CAssetMgr_Init.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  CCamera.cpp
+  CComponent.cpp
+  CComputeShader.cpp
   CConstBuffer.cpp
+  CDevice.cpp
+  CEngine.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  CEntity.cpp
+  CGameObject.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  CGraphicShader.cpp
+  CKeyManager.cpp
+  CLayer.cpp
+  CLevel.cpp
+  CLevelManager.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
   CMesh.cpp
+  CMeshRender.cpp
   CPathManager.cpp
+  CPlayerScript.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  CRenderComponent.cpp
+  CScript.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  CShader.cpp
+  CTexture.cpp
+  CTimeManager.cpp
+  CTransform.cpp
+  Engine.cpp
+  Temp.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
   코드를 생성하고 있습니다...
   Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

@@ -8,8 +8,9 @@
 
 cbuffer TRANSFORM : register(b0)
 {
-    float4 g_Position;
-    float4 g_Scale;
+    // 행으로 읽을 수 있게
+    row_major matrix g_matWorld;
+    row_major matrix g_matView;
 };
 
 SamplerState g_sam_0 : register(s0);
@@ -40,7 +41,8 @@ VS_OUT VS_Std2D(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
     
-    output.vPosition = float4((_in.vPos * g_Scale.xyz) + g_Position.xyz, 1.f);
+    // 행렬을 곱할때 3차원 좌표를 4차원으로 확장 (동차좌표)
+    output.vPosition = mul(float4(_in.vPos, 1.f), g_matWorld);
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
     

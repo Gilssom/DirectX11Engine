@@ -22,17 +22,23 @@ void CPlayerScript::Tick()
 	{
 		vCurPos.y += DT * m_Speed;
 	}
-	else if (KEY_PRESSED(KEY::S))
+	if (KEY_PRESSED(KEY::S))
 	{
 		vCurPos.y -= DT * m_Speed;
 	}
-	else if (KEY_PRESSED(KEY::A))
+	if (KEY_PRESSED(KEY::A))
 	{
 		vCurPos.x -= DT * m_Speed;
 	}
-	else if (KEY_PRESSED(KEY::D))
+	if (KEY_PRESSED(KEY::D))
 	{
 		vCurPos.x += DT * m_Speed;
+	}
+	if (KEY_PRESSED(KEY::Z))
+	{
+		Vec3 vRot = GetOwner()->Transform()->GetRelativeRotation();
+		vRot.z += DT * XM_PI; // 1초에 180만큼 회전
+		GetOwner()->Transform()->SetRelativeRotation(vRot);
 	}
 
 	GetOwner()->Transform()->SetRelativePos(vCurPos);

@@ -6,6 +6,7 @@
 CGraphicShader::CGraphicShader()
 	: CShader(ASSET_TYPE::GRAPHICS_SHADER)
 	, m_Topology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	, m_RSType(RS_TYPE::CULL_BACK)
 {
 
 }
@@ -124,5 +125,8 @@ void CGraphicShader::Binding()
 	CONTEXT->IASetPrimitiveTopology(m_Topology); // 도형의 구조를 알려주는 함수
 
 	CONTEXT->VSSetShader(m_VS.Get(), nullptr, 0);
+
+	CONTEXT->RSSetState(CDevice::GetInst()->GetRS(m_RSType).Get());
+
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
 }

@@ -15,11 +15,14 @@ private:
 
     D3D11_PRIMITIVE_TOPOLOGY    m_Topology;
 
+    RS_TYPE                     m_RSType;
+
 public:
     int CreateVertexShader(const wstring& strFilePath, const string& vsFuncName);
     int CreatePixelShader(const wstring& strFilePath, const string& psFuncName);
 
     void SetTopology(D3D11_PRIMITIVE_TOPOLOGY topology) { m_Topology = topology; }
+    void SetRSType(RS_TYPE type) { m_RSType = type; }
 
     virtual void Binding() override;
 

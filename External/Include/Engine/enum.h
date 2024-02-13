@@ -40,12 +40,20 @@ enum class ASSET_TYPE
 enum class CB_TYPE
 {
 	TRANSFORM,
-
 	MATERIAL,
-
 	ANIMATION,
-
 	GLOBAL,
+
+	END,
+};
+
+// Rasterizer State
+enum class RS_TYPE
+{
+	CULL_BACK,		// 반시계 방향으로 그려지는 것을 제외한다.
+	CULL_FRONT,		// 시계	  방향으로 그려지는 것을 제외한다.
+	CULL_NONE,
+	WIRE_FRAME,
 
 	END,
 };

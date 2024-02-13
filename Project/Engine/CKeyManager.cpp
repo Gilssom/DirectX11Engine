@@ -4,10 +4,8 @@
 UINT g_KeyValue[(UINT)KEY::KEY_END]
 =
 {
-    'W',
-    'S',
-    'A',
-    'D',
+    'W', 'S', 'A', 'D',
+    'Z', 'X', 'C', 'V',
 
     '0',
     '1',

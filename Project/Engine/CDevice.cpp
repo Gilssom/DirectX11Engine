@@ -6,15 +6,8 @@
 CDevice::CDevice()
 	: m_hMainHwnd(nullptr)
 	, m_RenderResolution{}
-<<<<<<< Updated upstream
 	, m_CB{}
-=======
-<<<<<<< HEAD
 	, m_Sampler{}
-=======
-	, m_CB{}
->>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
->>>>>>> Stashed changes
 {
 	
 }
@@ -78,6 +71,12 @@ int CDevice::Init(HWND hwnd, POINT resolution)
 
 	// 필요한 샘플러 생성
 	if (FAILED(CreateSamplerState()))
+	{
+		return E_FAIL;
+	}
+
+	// Rasterizer State 생성
+	if (FAILED(CreateRasterizerState()))
 	{
 		return E_FAIL;
 	}
@@ -217,4 +216,28 @@ int CDevice::CreateSamplerState()
 	CONTEXT->PSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
 
 	return 0;
+}
+
+int CDevice::CreateRasterizerState()
+{
+	// CULL_BACK 기능은 Default 옵션이기 때문에, nullptr 로 둔다.
+	m_RS[(UINT)RS_TYPE::CULL_BACK] = nullptr;
+
+	// CULL_FRONT
+	D3D11_RASTERIZER_DESC Desc = {};
+	Desc.CullMode = D3D11_CULL_FRONT;
+	Desc.FillMode = D3D11_FILL_SOLID;
+	DEVICE->CreateRasterizerState(&Desc, m_RS[(UINT)RS_TYPE::CULL_FRONT].GetAddressOf());
+
+	// CULL_NONE
+	Desc.CullMode = D3D11_CULL_NONE;
+	Desc.FillMode = D3D11_FILL_SOLID;
+	DEVICE->CreateRasterizerState(&Desc, m_RS[(UINT)RS_TYPE::CULL_NONE].GetAddressOf());
+
+	// WIRE_FRAME
+	Desc.CullMode = D3D11_CULL_NONE;
+	Desc.FillMode = D3D11_FILL_WIREFRAME;
+	DEVICE->CreateRasterizerState(&Desc, m_RS[(UINT)RS_TYPE::WIRE_FRAME].GetAddressOf());
+
+	return S_OK;
 }

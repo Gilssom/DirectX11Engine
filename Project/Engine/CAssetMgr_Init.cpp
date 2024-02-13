@@ -122,6 +122,7 @@ void CAssetManager::CreateDefaultGraphicShader()
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(strPath + L"shader\\std2d.fx", "VS_Std2D");
 	pShader->CreatePixelShader(strPath + L"shader\\std2d.fx", "PS_Std2D");
+	pShader->SetRSType(RS_TYPE::CULL_NONE); // 2D 에서는 전면 후면 개념이 딱히 필요 없기 때문에 None
 
 	AddAsset<CGraphicShader>(L"Std2DShader", pShader);
 }

@@ -11,15 +11,7 @@ private:
 
 
 public:
-<<<<<<< Updated upstream
-	void Begin();
-=======
-<<<<<<< HEAD
 	void Init();
-=======
-	void Begin();
->>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
->>>>>>> Stashed changes
 	void Tick();
 	void FinalTick();
 	void Render();
@@ -28,14 +20,6 @@ public:
 public:
 	void AddObject(UINT layerIdx, CGameObject* object);
 
-<<<<<<< Updated upstream
-
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> a41b0ec58dbec60568cd283e74472e1a6b6b4fa3
->>>>>>> Stashed changes
 public:
 	CLevel();
 	~CLevel();

@@ -4,10 +4,8 @@
 
 enum class KEY
 {
-    W,
-    S,
-    A,
-    D,
+    W, S, A, D,
+    Z, X, C, V,
 
     _0,
     _1,
