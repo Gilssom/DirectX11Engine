@@ -19,6 +19,7 @@ public:
 
 public:
 	void AddObject(UINT layerIdx, CGameObject* object);
+	CLayer* GetLayer(int layerIdx) { return m_arrLayer[layerIdx]; }
 
 public:
 	CLevel();

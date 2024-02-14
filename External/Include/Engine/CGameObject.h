@@ -5,6 +5,8 @@ class CComponent;
 class CRenderComponent;
 class CTransform;
 class CMeshRender;
+class CCamera;
+
 class CScript;
 
 class CGameObject : public CEntity
@@ -29,6 +31,7 @@ public:
 
 	CTransform* Transform() { return (CTransform*)m_arrCom[(UINT)COMPONENT_TYPE::TRANSFORM]; }
 	CMeshRender* MeshRender() { return (CMeshRender*)m_arrCom[(UINT)COMPONENT_TYPE::MESHRENDER]; }
+	CCamera* Camera() { return (CCamera*)m_arrCom[(UINT)COMPONENT_TYPE::CAMERA]; }
 
 
 public:

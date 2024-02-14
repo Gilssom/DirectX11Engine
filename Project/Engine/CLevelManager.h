@@ -10,6 +10,8 @@ class CLevelManager : public CSingleton<CLevelManager>
 private:
 	CLevel* m_CurLevel;
 
+public:
+	CLevel* GetCurrentLevel() { return m_CurLevel; }
 
 public:
 	void Init();

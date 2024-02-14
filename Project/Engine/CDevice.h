@@ -8,7 +8,7 @@ class CDevice : public CSingleton<CDevice>
 
 private:
 	HWND					m_hMainHwnd;		// 출력 대상 윈도우
-	POINT					m_RenderResolution; // 렌더링 타겟 해상도
+	Vec2					m_RenderResolution; // 렌더링 타겟 해상도
 	
 	// ComPtr : 스마트포인터 ( 레퍼런스 관리 )
 	// 직접 초기화를 할 필요가 없다. 클래스라서 생성자에서 직접 해주기 때문
@@ -40,9 +40,11 @@ private:
 	int CreateRasterizerState();
 
 public:
-	int Init(HWND hwnd, POINT resolution);
+	int Init(HWND hwnd, Vec2 resolution);
 	void ClearTarget(float(&ArrColor)[4]);
 	void Present() { m_SwapChain->Present(0, 0); }
+
+	Vec2 GetRenderResolution() { return m_RenderResolution; }
 
 	ID3D11Device* GetDevice() { return m_Device.Get(); }
 	ID3D11DeviceContext* GetContext() { return m_Context.Get(); }

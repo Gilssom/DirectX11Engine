@@ -5,7 +5,6 @@
 
 CDevice::CDevice()
 	: m_hMainHwnd(nullptr)
-	, m_RenderResolution{}
 	, m_CB{}
 	, m_Sampler{}
 {
@@ -17,7 +16,7 @@ CDevice::~CDevice()
 	Safe_Del_Array(m_CB);
 }
 
-int CDevice::Init(HWND hwnd, POINT resolution)
+int CDevice::Init(HWND hwnd, Vec2 resolution)
 {
 	m_hMainHwnd = hwnd;
 	m_RenderResolution = resolution;

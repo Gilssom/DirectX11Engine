@@ -21,4 +21,8 @@ struct tTransform
 	// 행렬 형태 사용
 	Matrix matWorld;
 	Matrix matView; // 카메라 전용
+	Matrix matProj; // 투영 행렬
 };
+
+// 전역 변수 - extern.cpp 에서 선언해줘서 사용 가능하게
+extern tTransform g_Trans;

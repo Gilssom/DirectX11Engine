@@ -86,6 +86,15 @@
     <ClCompile Include="CCamera.cpp">
       <Filter>07. Component\02. Camera</Filter>
     </ClCompile>
+    <ClCompile Include="CRenderManager.cpp">
+      <Filter>04. Manager\06. RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="extern.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMoveScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -199,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="CCamera.h">
       <Filter>07. Component\02. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderManager.h">
+      <Filter>04. Manager\06. RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraMoveScript.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -336,6 +351,9 @@
     </Filter>
     <Filter Include="08. Asset\Shader\GraphicShader">
       <UniqueIdentifier>{15ac1fdc-c2db-460f-bd7f-5b0f6dc6aed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\06. RenderManager">
+      <UniqueIdentifier>{758a5213-1dde-4572-aa83-e78f8aa369bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

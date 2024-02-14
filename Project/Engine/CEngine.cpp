@@ -7,6 +7,7 @@
 #include "CKeyManager.h"
 #include "CAssetManager.h"
 #include "CLevelManager.h"
+#include "CRenderManager.h"
 
 CEngine::CEngine()
 	: m_hMainHwnd(nullptr)
@@ -19,7 +20,7 @@ CEngine::~CEngine()
 
 }
 
-int CEngine::Init(HWND hwnd, POINT resolution)
+int CEngine::Init(HWND hwnd, Vec2 resolution)
 {
 	m_hMainHwnd = hwnd;
 	m_Resolution = resolution;
@@ -42,6 +43,7 @@ int CEngine::Init(HWND hwnd, POINT resolution)
 	CKeyManager::GetInst()->Init();
 	CAssetManager::GetInst()->Init();
 	CLevelManager::GetInst()->Init();
+	CRenderManager::GetInst()->Init();
 
 	return S_OK;
 }
@@ -61,13 +63,5 @@ void CEngine::Progress()
 	// ====================
 	// Rendering
 	// ====================
-	// Target Clear
-	float clearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
-	CDevice::GetInst()->ClearTarget(clearColor);
-
-	// Object Render
-	CLevelManager::GetInst()->Render();
-
-	// Present
-	CDevice::GetInst()->Present();
+	CRenderManager::GetInst()->Render();
 }

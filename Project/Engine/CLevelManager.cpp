@@ -3,10 +3,9 @@
 
 #include "CLevel.h"
 #include "CGameObject.h"
-
-#include "CTransform.h"
-#include "CMeshRender.h"
+#include "components.h"
 #include "CPlayerScript.h"
+#include "CCameraMoveScript.h"
 
 #include "CAssetManager.h"
 
@@ -29,12 +28,27 @@ void CLevelManager::Init()
 	m_CurLevel = new CLevel;
 
 	// 오브젝트에 컴포넌트 등록 후, 컴포넌트의 함수에 접근 후 세팅
+	
+	// Camera
+	CGameObject* pCamObject = new CGameObject;
+	pCamObject->SetName(L"Camera");
+	pCamObject->AddComponent(new CTransform);
+	pCamObject->AddComponent(new CCamera);
+	pCamObject->AddComponent(new CCameraMoveScript);
+
+	pCamObject->Camera()->SetCameraPriority(0); // Main Camera Setting
+
+	m_CurLevel->AddObject(0, pCamObject);
+
+	// Player
 	CGameObject* pObject = new CGameObject;
+	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 	pObject->AddComponent(new CPlayerScript);
 
-	pObject->Transform()->SetRelativeScale(0.66f, 1.f, 0.2f);
+	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	pObject->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
 
 	pObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pObject->MeshRender()->SetShader(CAssetManager::GetInst()->FindAsset<CGraphicShader>(L"Std2DShader"));
