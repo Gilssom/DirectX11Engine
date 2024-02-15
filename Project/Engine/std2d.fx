@@ -48,6 +48,7 @@ VS_OUT VS_Std2D(VS_IN _in)
     float4 vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
     
     // 2. 카메라 위치를 기준으로 View Space 좌표 재배치
+    //   모든 물체가 카메라가 기준이 되는 좌표계로 다 넘어온다.
     float4 vViewPos = mul(vWorldPos, g_matView);
     
     // 3. 투영 좌표도 곱해준다. ( 최종 좌표 X )

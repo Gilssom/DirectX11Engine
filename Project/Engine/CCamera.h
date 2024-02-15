@@ -8,6 +8,9 @@ private:
 
 	float m_Far; // 카메라가 볼 수 있는 최대 거리
 
+	// View Space 의 특징
+	// 1. Camera 가 원점이다
+	// 2. Camera 는 Z 축을 바라보고 있다.
 	Matrix m_matView;
 	Matrix m_matProj; // 투영
 

@@ -57,3 +57,15 @@ enum class RS_TYPE
 
 	END,
 };
+
+// Direction Type
+enum class DIR_TYPE
+{
+	RIGHT,
+	UP,
+	FRONT,
+};
+
+extern Vec3	XAxis;
+extern Vec3	YAxis;
+extern Vec3	ZAxis;

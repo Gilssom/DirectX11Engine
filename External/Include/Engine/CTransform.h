@@ -6,7 +6,11 @@ private:
 	Vec3	m_RelativePos;
 	Vec3	m_RelativeScale;
 	Vec3	m_RelativeRotation;
+
+	Vec3	m_RelativeDir[3]; // πÊ«‚ ∫§≈Õ
+
 	Matrix	m_matWorld;
+
 
 public:
 	virtual void FinalTick() override;
@@ -25,6 +29,8 @@ public:
 	void SetRelativePos(float x, float y, float z) { m_RelativePos = Vec3(x, y, z); }
 	void SetRelativeScale(float x, float y, float z) { m_RelativeScale = Vec3(x, y, z); }
 	void SetRelativeRotation(float x, float y, float z) { m_RelativeRotation = Vec3(x, y, z); }
+
+	Vec3 GetRelativeDir(DIR_TYPE type) { return m_RelativeDir[(UINT)type]; }
 
 public:
 	CTransform();
