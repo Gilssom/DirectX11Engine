@@ -7,8 +7,10 @@ class CRenderComponent : public CComponent
 {
 private:
 	Ptr<CMesh>			m_Mesh;		// 모양
-	Ptr<CGraphicShader> m_Shader;	// 쉐이더
-	Ptr<CTexture>		m_Tex;		// 텍스쳐
+
+	// 앞으로 Shader, Texture 는 Material 이 관리함 ( Unity Material 과 비슷한 개념 )
+	// 사용하고자 하는 Shader 의 종류에 따라 요구하는 Texture 의 갯수가 달라질 수 있음
+	Ptr<CMaterial>		m_Material;	// 재질
 
 public:
 	virtual void Render() = 0;
@@ -16,12 +18,10 @@ public:
 
 public:
 	void SetMesh(Ptr<CMesh> mesh) { m_Mesh = mesh; }
-	void SetShader(Ptr<CGraphicShader> shader) { m_Shader = shader; }
-	void SetTexture(Ptr<CTexture> tex) { m_Tex = tex; }
+	void SetMaterial(Ptr<CMaterial> material) { m_Material = material; }
 
 	Ptr<CMesh> GetMesh() { return m_Mesh; }
-	Ptr<CGraphicShader> GetShader() { return m_Shader; }
-	Ptr<CTexture> GetTexture() { return m_Tex; }
+	Ptr<CMaterial> GetMaterial() { return m_Material; }
 
 public:
 	CRenderComponent(COMPONENT_TYPE type);

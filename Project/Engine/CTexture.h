@@ -10,6 +10,7 @@ private:
 
 public:
 	void Binding(int registerNum);
+	static void Clear(int registerNum);
 
 private:
 	virtual int Load(const wstring& FilePath) override;

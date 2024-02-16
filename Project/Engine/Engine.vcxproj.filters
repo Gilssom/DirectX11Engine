@@ -95,6 +95,9 @@
     <ClCompile Include="CCameraMoveScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>08. Asset\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="CCameraMoveScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>08. Asset\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +364,9 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
+      <Filter>HLSL\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
       <Filter>HLSL\2D</Filter>
     </FxCompile>
   </ItemGroup>

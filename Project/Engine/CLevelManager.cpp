@@ -51,8 +51,9 @@ void CLevelManager::Init()
 	pObject->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
 
 	pObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pObject->MeshRender()->SetShader(CAssetManager::GetInst()->FindAsset<CGraphicShader>(L"Std2DShader"));
-	pObject->MeshRender()->SetTexture(CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
+	pObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	pObject->MeshRender()->GetMaterial()->SetScalarParam(INT_0, 2);
+	pObject->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
 
 	m_CurLevel->AddObject(0, pObject);
 }

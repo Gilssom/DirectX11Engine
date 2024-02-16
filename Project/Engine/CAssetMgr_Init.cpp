@@ -7,11 +7,11 @@ void CAssetManager::Init()
 
 	CreateDefaultTexture();
 
-	CreateDefaultMaterial();
-
 	CreateDefaultGraphicShader();
 
 	CreateDefaultComputeShader();
+
+	CreateDefaultMaterial();
 }
 
 void CAssetManager::CreateDefaultMesh()
@@ -106,11 +106,6 @@ void CAssetManager::CreateDefaultTexture()
 	Load<CTexture>(L"texture\\Character.png", L"texture\\Character.png");
 }
 
-void CAssetManager::CreateDefaultMaterial()
-{
-
-}
-
 void CAssetManager::CreateDefaultGraphicShader()
 {
 	Ptr<CGraphicShader> pShader = nullptr;
@@ -130,4 +125,16 @@ void CAssetManager::CreateDefaultGraphicShader()
 void CAssetManager::CreateDefaultComputeShader()
 {
 
+}
+
+void CAssetManager::CreateDefaultMaterial()
+{
+	Ptr<CMaterial> pMaterial = nullptr;
+
+	// Std 2D Material
+	pMaterial = new CMaterial;
+	pMaterial->SetName(L"Std2DMaterial");
+	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DShader"));
+
+	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 }

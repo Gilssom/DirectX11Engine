@@ -17,6 +17,12 @@ void CTexture::Binding(int registerNum)
     CONTEXT->PSSetShaderResources(registerNum, 1, m_SRV.GetAddressOf());
 }
 
+void CTexture::Clear(int registerNum)
+{
+    ID3D11ShaderResourceView* pSRV = nullptr;
+    CONTEXT->PSSetShaderResources(registerNum, 1, &pSRV);
+}
+
 int CTexture::Load(const wstring& FilePath)
 {
     // 아래 함수 모두 DirectXTex 라이브러리에 있는 기능들

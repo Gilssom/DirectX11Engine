@@ -71,6 +71,10 @@ ASSET_TYPE GetAssetType()
     {
         return ASSET_TYPE::TEXTURE;
     }
+    if constexpr (std::is_same_v<T, CMaterial>)
+    {
+        return ASSET_TYPE::MATERIAL;
+    }
 }
 
 template<typename T>
@@ -132,4 +136,3 @@ inline void CAssetManager::AddAsset(const wstring& strKey, Ptr<T> pAsset)
     m_mapAsset[(UINT)type].insert(make_pair(strKey, pAsset.Get()));
     pAsset->m_Key = strKey;
 }
-

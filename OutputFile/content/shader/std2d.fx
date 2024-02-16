@@ -2,22 +2,10 @@
 #ifndef _STD2D
 #define _STD2D
 
+#include "value.fx"
 
 // 정점 버퍼의 정보 변화는 필요 없다.
 // 물체의 좌표만 가져오면 된다.
-
-cbuffer TRANSFORM : register(b0)
-{
-    // 행으로 읽을 수 있게
-    row_major matrix g_matWorld;
-    row_major matrix g_matView;
-    row_major matrix g_matProj;
-};
-
-SamplerState g_sam_0 : register(s0);
-SamplerState g_sam_1 : register(s1);
-
-Texture2D g_tex : register(t0);
 
 // 정점의 모든 정보가 필요 없다.
 // 전달 받은 정점의 필요한 정보들만 가져오면 된다. = Input Layout
@@ -48,6 +36,7 @@ VS_OUT VS_Std2D(VS_IN _in)
     float4 vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
     
     // 2. 카메라 위치를 기준으로 View Space 좌표 재배치
+    //   모든 물체가 카메라가 기준이 되는 좌표계로 다 넘어온다.
     float4 vViewPos = mul(vWorldPos, g_matView);
     
     // 3. 투영 좌표도 곱해준다. ( 최종 좌표 X )
@@ -68,8 +57,22 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
 {
-    // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
-    float4 vColor = g_tex.Sample(g_sam_0, _in.vUV);
+    float4 vColor = (float4) 0.f;
+    
+    // Material 에서 넘겨받은 상수에 따라 분기가 나뉨
+    if(g_int_0 == 0)
+    {
+        // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
+        vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    }
+    else if(g_vec4_3.y == 3.14f)
+    {
+        vColor = float4(1.f, 1.f, 0.f, 1.f);
+    }
+    else if (g_mat_1[3][3] == 2.1f)
+    {
+        vColor = float4(0.f, 1.f, 0.f, 1.f);
+    }
     
     // 보간 개념이 들어간 Color
     // 각 정점이 Color 값을 들고 있기 때문에

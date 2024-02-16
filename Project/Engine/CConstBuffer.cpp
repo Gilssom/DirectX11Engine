@@ -55,4 +55,8 @@ void CConstBuffer::Binding()
 {
 	// 상수 -> std2d.fx - b0 에 데이터 복사
 	CONTEXT->VSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->DSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->HSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->GSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
+	CONTEXT->PSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
 }

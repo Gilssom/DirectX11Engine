@@ -9,11 +9,35 @@ private:
 
 
 public:
-	T* Get() { return m_Asset; }
-	T** GetAdressOf() { return &m_Asset; }
+	T* Get() const { return m_Asset; }
+	T** GetAdressOf() const { return &m_Asset; }
 
 
 public:
+	bool operator == (T* asset) const
+	{
+		if (m_Asset == asset)
+			return true;
+		return false;
+	}
+
+	bool operator != (T* asset) const
+	{
+		return !((*this) == asset);
+	}
+
+	bool operator == (const Ptr<T>& asset) const
+	{
+		if (m_Asset == asset.m_Asset)
+			return true;
+		return false;
+	}
+
+	bool operator != (const Ptr<T>& asset) const
+	{
+		return !((*this) == asset.m_Asset);
+	}
+
 	// 복사 생성자로 대체를 하면 안되는 이유
 	// 그 이전에 무언가를 가르키고 있을 수도 있다.
 	void operator = (T* asset)
@@ -71,3 +95,17 @@ public:
 			m_Asset->Release();
 	}
 };
+
+template<typename T>
+bool operator == (void* asset, const Ptr<T>& ptr)
+{
+	if (asset == ptr.Get())
+		return true;
+	return false;
+}
+
+template<typename T>
+bool operator != (void* asset, const Ptr<T>& ptr)
+{
+	return !(asset == ptr);
+}

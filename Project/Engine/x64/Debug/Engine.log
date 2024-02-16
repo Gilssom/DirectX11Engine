@@ -15,6 +15,7 @@
   .\Project\Engine\CLayer.h
   .\Project\Engine\CLevel.h
   .\Project\Engine\CLevelManager.h
+  .\Project\Engine\CMaterial.h
   .\Project\Engine\CMesh.h
   .\Project\Engine\CMeshRender.h
   .\Project\Engine\components.h
@@ -36,22 +37,137 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  38개 파일이 복사되었습니다.
+  39개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\std2d.fx
-  1개 파일이 복사되었습니다.
-  CCameraMoveScript.cpp
+  .\Project\Engine\value.fx
+  2개 파일이 복사되었습니다.
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\value.cso
+  CLevelManager.cpp
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CCameraMoveScript.cpp'을(를) 컴파일하는 중)
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
   
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CCameraMoveScript.cpp'을(를) 컴파일하는 중)
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
   
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CCameraMoveScript.cpp'을(를) 컴파일하는 중)
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
   
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-  (소스 파일 '/CCameraMoveScript.cpp'을(를) 컴파일하는 중)
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
   
-  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(74,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(44,22): error C2059: 구문 오류: ')'
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(44,22):
+  the template instantiation context (the oldest one first) is
+  	C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CLevelManager.cpp(55,38):
+  	컴파일되는 함수 템플릿 인스턴스화 'void CMaterial::SetScalarParam<int>(SCALAR_PARAM,const T &)'에 대한 참조를 확인하세요.
+          with
+          [
+              T=int
+          ]
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(45,2): error C2143: 구문 오류: ';'이(가) '{' 앞에 없습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(46,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(47,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(48,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(49,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(53,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(54,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(55,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(56,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(60,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(61,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(62,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(63,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(67,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(68,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(69,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(70,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(74,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(75,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(76,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(77,2): error C2046: 대/소문자가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(51,3): error C2043: break가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(58,3): error C2043: break가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(65,3): error C2043: break가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(72,3): error C2043: break가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.h(79,3): error C2043: break가 잘못되었습니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+  Temp.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(74,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/Temp.cpp'을(를) 컴파일하는 중)
+  
+  코드를 생성하고 있습니다...
