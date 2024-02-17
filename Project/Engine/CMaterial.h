@@ -41,7 +41,7 @@ inline void CMaterial::SetScalarParam(SCALAR_PARAM param, const T& value)
 	// 어떤 타입이던 간에 무조건 주소를 받는다.
 	void* pValue = (void*)&value;
 
-	switch (SCALAR_PARAM)
+	switch (param)
 	{
 	case INT_0:
 	case INT_1:
