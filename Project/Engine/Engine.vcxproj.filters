@@ -98,6 +98,10 @@
     <ClCompile Include="CMaterial.cpp">
       <Filter>08. Asset\Material</Filter>
     </ClCompile>
+    <ClCompile Include="CDbgRenderManager.cpp">
+      <Filter>04. Manager\07. DebugRenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -220,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="CMaterial.h">
       <Filter>08. Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="CDbgRenderManager.h">
+      <Filter>04. Manager\07. DebugRenderManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -361,12 +368,18 @@
     <Filter Include="04. Manager\06. RenderManager">
       <UniqueIdentifier>{758a5213-1dde-4572-aa83-e78f8aa369bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\07. DebugRenderManager">
+      <UniqueIdentifier>{f82c2204-041c-49f1-be84-e1120419ee7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
       <Filter>HLSL\2D</Filter>
     </FxCompile>
     <FxCompile Include="value.fx">
+      <Filter>HLSL\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="debug_shape.fx">
       <Filter>HLSL\2D</Filter>
     </FxCompile>
   </ItemGroup>

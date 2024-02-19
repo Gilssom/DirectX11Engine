@@ -1,6 +1,14 @@
 #pragma once
 
 
+void DrawDebugRect(Vec3 worldPos, Vec3 worldScale, Vec3 worldRotation, Vec4 vColor, float duration);
+void DrawDebugRect(Matrix matWorld, Vec4 vColor, float duration);
+
+void DrawDebugCircle();
+
+void DrawDebugLine();
+
+
 template<typename T, int size>
 void Safe_Del_Array(T* (&Array)[size])
 {

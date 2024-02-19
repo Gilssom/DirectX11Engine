@@ -13,6 +13,19 @@ struct Vtx
 	Vec2 vUv;		// UV 좌표
 };
 
+// Debug Render 요청 정보
+struct tDebugShapeInfo
+{
+	DEBUG_SHAPE		Shape;
+	Vec3			Position;
+	Vec3			Scale;
+	Vec3			Rotation;
+	Matrix			matWorld; // 모든 위치 회전 크기를 가진 월드 행렬
+	Vec4			Color;
+	float			Duration; // 유지 시간
+	float			Age;	  // 존재 시간
+};
+
 
 // 상수버퍼 관련 구조체
 struct tTransform

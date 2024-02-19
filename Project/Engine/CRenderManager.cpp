@@ -33,9 +33,6 @@ void CRenderManager::Render()
 	{
 		m_vecCam[i]->Render();
 	}
-
-	// Present
-	CDevice::GetInst()->Present();
 }
 
 void CRenderManager::RegisterCamera(CCamera* newCamera, int priority)

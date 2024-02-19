@@ -30,6 +30,8 @@ public:
 	void SetRelativeScale(float x, float y, float z) { m_RelativeScale = Vec3(x, y, z); }
 	void SetRelativeRotation(float x, float y, float z) { m_RelativeRotation = Vec3(x, y, z); }
 
+	void SetWorldMat(const Matrix& mat) { m_matWorld = mat; }
+
 	Vec3 GetRelativeDir(DIR_TYPE type) { return m_RelativeDir[(UINT)type]; }
 
 public:

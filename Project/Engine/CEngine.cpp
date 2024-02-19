@@ -8,6 +8,7 @@
 #include "CAssetManager.h"
 #include "CLevelManager.h"
 #include "CRenderManager.h"
+#include "CDbgRenderManager.h"
 
 CEngine::CEngine()
 	: m_hMainHwnd(nullptr)
@@ -64,4 +65,8 @@ void CEngine::Progress()
 	// Rendering
 	// ====================
 	CRenderManager::GetInst()->Render();
+	CDbgRenderManager::GetInst()->Render();
+
+	// Present (모든 Render 가 끝나고 Present 가 진행되어야 함)
+	CDevice::GetInst()->Present();
 }

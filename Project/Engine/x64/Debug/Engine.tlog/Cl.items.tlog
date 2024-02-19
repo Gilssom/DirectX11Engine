@@ -6,6 +6,7 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CCameraMove
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CComponent.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CComponent.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CComputeShader.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CComputeShader.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CConstBuffer.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CConstBuffer.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDbgRenderManager.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CDbgRenderManager.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CDevice.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CEngine.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEntity.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CEntity.obj
@@ -29,5 +30,6 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTimeManage
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTransform.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTransform.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\Engine.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\Engine.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\extern.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\extern.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\func.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\func.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\pch.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\pch.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\Temp.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\Temp.obj

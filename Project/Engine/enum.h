@@ -119,3 +119,15 @@ enum TEX_PARAM
 
 	END,
 };
+
+enum class DEBUG_SHAPE
+{
+	// 2D
+	RECT,
+	CIRCLE,
+	LINE,
+
+	// 3D
+	CUBE,
+	SPHERE,
+};
