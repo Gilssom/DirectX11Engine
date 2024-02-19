@@ -9,7 +9,7 @@
 CMaterial::CMaterial()
 	:CAsset(ASSET_TYPE::MATERIAL)
 {
-	m_Const.iArr[0] = 1;
+
 }
 
 CMaterial::~CMaterial()

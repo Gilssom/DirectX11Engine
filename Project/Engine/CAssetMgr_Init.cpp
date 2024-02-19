@@ -120,12 +120,14 @@ void CAssetManager::CreateDefaultTexture()
 
 void CAssetManager::CreateDefaultGraphicShader()
 {
-	Ptr<CGraphicShader> pShader = nullptr;
-
 	// 경로 찾기 Manager 구현
 	wstring strPath = CPathManager::GetInst()->GetContentPath();
 
-	// Std 2D Shader
+	Ptr<CGraphicShader> pShader = nullptr;
+
+	// ================
+	//	Std 2D Shader
+	// ================
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(strPath + L"shader\\std2d.fx", "VS_Std2D");
 	pShader->CreatePixelShader(strPath + L"shader\\std2d.fx", "PS_Std2D");
@@ -133,7 +135,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	AddAsset<CGraphicShader>(L"Std2DShader", pShader);
 
-	// Debug Shape Shader
+	// ====================
+	//	Debug Shape Shader
+	// ====================
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(strPath + L"shader\\debug_shape.fx", "VS_DebugShape");
 	pShader->CreatePixelShader(strPath + L"shader\\debug_shape.fx", "PS_DebugShape");
