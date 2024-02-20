@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CAssetManager.h"
 
+#include "CPathManager.h"
+
 void CAssetManager::Init()
 {
 	CreateDefaultMesh();
@@ -61,6 +63,7 @@ void CAssetManager::CreateDefaultMesh()
 	AddAsset<CMesh>(L"RectMesh", pMesh);
 	vecIdx.clear();
 
+	// Debug Mesh Rect
 	vecIdx.push_back(0);
 	vecIdx.push_back(1);
 	vecIdx.push_back(2);
@@ -109,6 +112,17 @@ void CAssetManager::CreateDefaultMesh()
 	pMesh = new CMesh;
 	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset<CMesh>(L"CircleMesh", pMesh);
+	vecIdx.clear();
+
+	// Debug Circle Mesh
+	for (int i = 0; i <= slice; ++i)
+	{
+		vecIdx.push_back(i + 1);
+	}
+
+	pMesh = new CMesh;
+	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
+	AddAsset<CMesh>(L"CircleMesh_Debug", pMesh);
 	vecVtx.clear();
 	vecIdx.clear();
 }

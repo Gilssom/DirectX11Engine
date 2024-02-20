@@ -131,3 +131,9 @@ enum class DEBUG_SHAPE
 	CUBE,
 	SPHERE,
 };
+
+enum class PROJ_TYPE
+{
+	ORTHOGRAPHIC,
+	PERSPECTIVE,
+};

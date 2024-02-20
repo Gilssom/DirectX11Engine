@@ -14,10 +14,16 @@
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
+	, m_ProjType(PROJ_TYPE::PERSPECTIVE)
 	, m_CamPriority(-1)
-	, m_Far(1000.f)
+	, m_FOV((XM_PI) / 3.f)
+	, m_Far(10000.f)
+	, m_Width(0.f)
+	, m_Scale(1.f)
 {
-
+	Vec2 vRenderResol = CDevice::GetInst()->GetRenderResolution();
+	m_Width = vRenderResol.x;
+	m_AspectRatio = vRenderResol.x / vRenderResol.y;
 }
 
 CCamera::~CCamera()
@@ -72,9 +78,16 @@ void CCamera::FinalTick()
 
 
 	// 3. Proj 행렬 계산 (투영) = 원근투영 | 직교투영
-	Vec2 vRenderResol = CDevice::GetInst()->GetRenderResolution();
-	float AspectRatio = vRenderResol.x / vRenderResol.y;
-	m_matProj = XMMatrixPerspectiveFovLH((XM_PI / 3.f), AspectRatio, 1.f, m_Far);
+	if (m_ProjType == PROJ_TYPE::PERSPECTIVE)
+	{
+		m_matProj = XMMatrixPerspectiveFovLH(m_FOV, m_AspectRatio, 1.f, m_Far);
+	}
+	else
+	{
+		// 직교 투영은 카메라의 시야각이 필요없음
+		// 일직선으로 투영을 할 것이기 때문에 투영할 가로 세로 길이만 필요함
+		m_matProj = XMMatrixOrthographicLH(m_Width * m_Scale, (m_Width / m_AspectRatio) * m_Scale, 1.f, m_Far);
+	}
 }
 
 void CCamera::Render()

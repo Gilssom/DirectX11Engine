@@ -7,6 +7,8 @@ enum class KEY
     W, S, A, D,
     Z, X, C, V,
 
+    R, T, Y, U, I, O, P,
+
     _0,
     _1,
     _2,
@@ -17,6 +19,8 @@ enum class KEY
     _7,
     _8,
     _9,
+
+    NUM0, NUM1, NUM2, NUM3, NUM4, NUM5, NUM6, NUM7, NUM8, NUM9,
 
     LEFT,
     RIGHT,

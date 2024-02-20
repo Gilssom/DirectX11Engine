@@ -9,6 +9,8 @@ class CCamera;
 
 class CScript;
 
+#define GET_COMPONENT(Type, TYPE) C##Type* Type() { return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::TYPE]; }
+
 class CGameObject : public CEntity
 {
 private:
@@ -29,10 +31,9 @@ public:
 	void AddComponent(CComponent* component);
 	CComponent* GetComonent(COMPONENT_TYPE type) { return m_arrCom[(UINT)type]; }
 
-	CTransform* Transform() { return (CTransform*)m_arrCom[(UINT)COMPONENT_TYPE::TRANSFORM]; }
-	CMeshRender* MeshRender() { return (CMeshRender*)m_arrCom[(UINT)COMPONENT_TYPE::MESHRENDER]; }
-	CCamera* Camera() { return (CCamera*)m_arrCom[(UINT)COMPONENT_TYPE::CAMERA]; }
-
+	GET_COMPONENT(Transform, TRANSFORM);
+	GET_COMPONENT(MeshRender, MESHRENDER);
+	GET_COMPONENT(Camera, CAMERA);
 
 public:
 	CGameObject();

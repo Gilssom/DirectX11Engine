@@ -37,6 +37,7 @@ void CLevelManager::Init()
 	pCamObject->AddComponent(new CCameraMoveScript);
 
 	pCamObject->Camera()->SetCameraPriority(0); // Main Camera Setting
+	pCamObject->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
 
 	m_CurLevel->AddObject(0, pCamObject);
 
@@ -56,9 +57,8 @@ void CLevelManager::Init()
 
 	m_CurLevel->AddObject(0, pObject);
 
-	DrawDebugRect(Vec3(0.f, 0.f, 500.f), Vec3(100.f, 100.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec4(0.f, 1.f, 0.f, 1.f), 100.f);
-	//DrawDebugCircle(Vec3(0.f, 0.f, 500.f), Vec3(100.f, 100.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec4(0.f, 1.f, 0.f, 1.f), 10.f);
-	//DrawDebugLine(Vec3(0.f, 0.f, 500.f), Vec3(100.f, 100.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec4(0.f, 1.f, 0.f, 1.f), 10.f);
+	//DrawDebugRect(Vec3(0.f, 0.f, 500.f), Vec3(100.f, 100.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec4(0.f, 1.f, 0.f, 1.f), 100.f);
+	DrawDebugCircle(Vec3(0.f, 0.f, 500.f), 100.f, Vec4(0.f, 1.f, 0.f, 1.f), 100.f);
 }
 
 void CLevelManager::Tick()

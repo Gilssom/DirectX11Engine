@@ -1,5 +1,6 @@
 #pragma once
 #include "CScript.h"
+
 class CCameraMoveScript : public CScript
 {
 private:
@@ -8,6 +9,10 @@ private:
 
 public:
 	virtual void Tick() override;
+
+private:
+	void MoveByPerspective();
+	void MoveByOrthographic();
 
 public:
 	CCameraMoveScript();

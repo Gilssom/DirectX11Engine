@@ -102,6 +102,9 @@
       <Filter>04. Manager\07. DebugRenderManager</Filter>
     </ClCompile>
     <ClCompile Include="func.cpp" />
+    <ClCompile Include="CCollider2D.cpp">
+      <Filter>07. Component\03. Collider2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -227,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="CDbgRenderManager.h">
       <Filter>04. Manager\07. DebugRenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider2D.h">
+      <Filter>07. Component\03. Collider2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

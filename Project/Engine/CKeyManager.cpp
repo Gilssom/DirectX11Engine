@@ -9,6 +9,8 @@ UINT g_KeyValue[(UINT)KEY::KEY_END]
     'W', 'S', 'A', 'D',
     'Z', 'X', 'C', 'V',
 
+    'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+
     '0',
     '1',
     '2',
@@ -19,6 +21,17 @@ UINT g_KeyValue[(UINT)KEY::KEY_END]
     '7',
     '8',
     '9',
+
+    VK_NUMPAD0,
+    VK_NUMPAD1, 
+    VK_NUMPAD2,
+    VK_NUMPAD3,
+    VK_NUMPAD4,
+    VK_NUMPAD5,
+    VK_NUMPAD6,
+    VK_NUMPAD7,
+    VK_NUMPAD8,
+    VK_NUMPAD9,
 
     VK_LEFT,
     VK_RIGHT,

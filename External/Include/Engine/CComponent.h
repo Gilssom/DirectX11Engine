@@ -3,6 +3,8 @@
 
 #include "CGameObject.h"
 
+#define GET_OTHER_COMPONENT(Type) C##Type* Type() { return m_Owner->Type(); }
+
 // 추상 클래스 정의
 class CComponent : public CEntity
 {
@@ -21,9 +23,9 @@ public:
 	COMPONENT_TYPE GetComponentType() { return m_Type; }
 	CGameObject* GetOwner() { return m_Owner; }
 
-	CTransform* Transform() { return m_Owner->Transform(); }
-	CMeshRender* MeshRender() { return m_Owner->MeshRender(); }
-	CCamera* Camera() { return m_Owner->Camera(); }
+	GET_OTHER_COMPONENT(Transform);
+	GET_OTHER_COMPONENT(MeshRender);
+	GET_OTHER_COMPONENT(Camera);
 
 public:
 	CComponent(COMPONENT_TYPE type);
