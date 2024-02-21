@@ -36,11 +36,11 @@ void CPlayerScript::Tick()
 	}
 	if (KEY_PRESSED(KEY::Z))
 	{
-		//Vec3 vRot = GetOwner()->Transform()->GetRelativeRotation();
-		//vRot.z += DT * XM_PI; // 1초에 90만큼 회전
-		//GetOwner()->Transform()->SetRelativeRotation(vRot);
+		Vec3 vRot = GetOwner()->Transform()->GetRelativeRotation();
+		vRot.z += DT * XM_PI; // 1초에 90만큼 회전
+		GetOwner()->Transform()->SetRelativeRotation(vRot);
 
-		vCurPos.z += DT * m_Speed;
+		//vCurPos.z += DT * m_Speed;
 	}
 
 	GetOwner()->Transform()->SetRelativePos(vCurPos);

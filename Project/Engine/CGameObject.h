@@ -3,13 +3,10 @@
 
 class CComponent;
 class CRenderComponent;
-class CTransform;
-class CMeshRender;
-class CCamera;
 
 class CScript;
 
-#define GET_COMPONENT(Type, TYPE) C##Type* Type() { return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::TYPE]; }
+#define GET_COMPONENT(Type, TYPE) class C##Type* Type() { return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::TYPE]; }
 
 class CGameObject : public CEntity
 {
@@ -34,6 +31,7 @@ public:
 	GET_COMPONENT(Transform, TRANSFORM);
 	GET_COMPONENT(MeshRender, MESHRENDER);
 	GET_COMPONENT(Camera, CAMERA);
+	GET_COMPONENT(Collider2D, COLLIDER2D);
 
 public:
 	CGameObject();

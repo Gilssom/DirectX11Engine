@@ -10,7 +10,7 @@ class CMaterial : public CAsset
 {
 private:
 	Ptr<CGraphicShader>	m_Shader;
-	
+
 	tMtrlConst			m_Const;
 
 	Ptr<CTexture>		m_arrTex[TEX_PARAM::END];

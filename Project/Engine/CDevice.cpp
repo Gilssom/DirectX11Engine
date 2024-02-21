@@ -80,6 +80,18 @@ int CDevice::Init(HWND hwnd, Vec2 resolution)
 		return E_FAIL;
 	}
 
+	// Depth Stencil State 생성
+	if (FAILED(CreateDepthStencilState()))
+	{
+		return E_FAIL;
+	}
+
+	// Blend State 생성
+	if (FAILED(CreateBlendState()))
+	{
+		return E_FAIL;
+	}
+
 	return S_OK;
 }
 
@@ -226,20 +238,112 @@ int CDevice::CreateRasterizerState()
 	m_RS[(UINT)RS_TYPE::CULL_BACK] = nullptr;
 
 	// CULL_FRONT
-	D3D11_RASTERIZER_DESC Desc = {};
-	Desc.CullMode = D3D11_CULL_FRONT;
-	Desc.FillMode = D3D11_FILL_SOLID;
-	DEVICE->CreateRasterizerState(&Desc, m_RS[(UINT)RS_TYPE::CULL_FRONT].GetAddressOf());
+	D3D11_RASTERIZER_DESC desc = {};
+	desc.CullMode = D3D11_CULL_FRONT;
+	desc.FillMode = D3D11_FILL_SOLID;
+	DEVICE->CreateRasterizerState(&desc, m_RS[(UINT)RS_TYPE::CULL_FRONT].GetAddressOf());
 
 	// CULL_NONE
-	Desc.CullMode = D3D11_CULL_NONE;
-	Desc.FillMode = D3D11_FILL_SOLID;
-	DEVICE->CreateRasterizerState(&Desc, m_RS[(UINT)RS_TYPE::CULL_NONE].GetAddressOf());
+	desc.CullMode = D3D11_CULL_NONE;
+	desc.FillMode = D3D11_FILL_SOLID;
+	DEVICE->CreateRasterizerState(&desc, m_RS[(UINT)RS_TYPE::CULL_NONE].GetAddressOf());
 
 	// WIRE_FRAME
-	Desc.CullMode = D3D11_CULL_NONE;
-	Desc.FillMode = D3D11_FILL_WIREFRAME;
-	DEVICE->CreateRasterizerState(&Desc, m_RS[(UINT)RS_TYPE::WIRE_FRAME].GetAddressOf());
+	desc.CullMode = D3D11_CULL_NONE;
+	desc.FillMode = D3D11_FILL_WIREFRAME;
+	DEVICE->CreateRasterizerState(&desc, m_RS[(UINT)RS_TYPE::WIRE_FRAME].GetAddressOf());
+
+	return S_OK;
+}
+
+int CDevice::CreateDepthStencilState()
+{
+	m_DS[(UINT)DS_TYPE::LESS] = nullptr; // 기본 옵션 설정
+
+	D3D11_DEPTH_STENCIL_DESC desc = {};
+
+
+	// LESS EQUAL
+	desc.DepthEnable = true;							// 1. 깊이 비교 기능 사용
+	desc.StencilEnable = false;							// 2. Stencil 기능 비활성화
+	desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;		// 3. 작거나 같은 경우 통과
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;	// 4. 깊이 테스트 성공 시, 깊이 기록
+	DEVICE->CreateDepthStencilState(&desc, m_DS[(UINT)DS_TYPE::LESS_EQUAL].GetAddressOf());
+
+
+	// GREATER
+	desc.DepthEnable = true;							// 1. 깊이 비교 기능 사용
+	desc.StencilEnable = false;							// 2. Stencil 기능 비활성화
+	desc.DepthFunc = D3D11_COMPARISON_GREATER;			// 3. 큰 같은 경우 통과
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;	// 4. 깊이 테스트 성공 시, 깊이 기록
+	DEVICE->CreateDepthStencilState(&desc, m_DS[(UINT)DS_TYPE::GREATER].GetAddressOf());
+
+
+	// NO_TEST
+	desc.DepthEnable = true;							// 1. 깊이 비교 기능 사용
+	desc.StencilEnable = false;							// 2. Stencil 기능 비활성화
+	desc.DepthFunc = D3D11_COMPARISON_ALWAYS;			// 3. 항상 통과
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;	// 4. 깊이 테스트 성공 시, 깊이 기록
+	DEVICE->CreateDepthStencilState(&desc, m_DS[(UINT)DS_TYPE::NO_TEST].GetAddressOf());
+
+
+	// NO_TEST_NO_WRITE
+	desc.DepthEnable = false;							// 1. 깊이 비교 기능 미사용
+	desc.StencilEnable = false;							// 2. Stencil 기능 비활성화
+	desc.DepthFunc = D3D11_COMPARISON_ALWAYS;			// 3. 항상 통과
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;	// 4. 깊이 기록 X
+	DEVICE->CreateDepthStencilState(&desc, m_DS[(UINT)DS_TYPE::NO_TEST_NO_WRITE].GetAddressOf());
+
+
+	return S_OK;
+}
+
+int CDevice::CreateBlendState()
+{
+	m_BS[(UINT)BS_TYPE::DEFAULT] = nullptr;
+
+	D3D11_BLEND_DESC desc = {};
+
+	// ALPHA_BLEND
+	desc.AlphaToCoverageEnable = false; // 풀, 나뭇잎 같은 경우에 사용할 때
+
+	// 독립적인 기능 ( 렌더 타겟이 여러개 일 상황이 있을 수 있어서 ) ( 최대 8장 )
+	// 꺼놓으면 모든 Render Target 은 0번 옵션으로 출력이 된다.
+	desc.IndependentBlendEnable = false; 
+
+	desc.RenderTarget[0].BlendEnable = true; // 블렌딩 기능 사용
+
+	// 블렌딩 방식
+	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+
+	// 블렌딩 계수
+	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;						// 본인의 Alpha 값을 사용하겠다.
+	desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;					// Source 의 Alpha 의 역수를 사용하겠다.
+	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;	// 최종 출력
+
+	// 알파 끼리의 혼합식
+	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+
+	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND].GetAddressOf());
+
+	// ONE_ONE
+	desc.AlphaToCoverageEnable = false; 
+	desc.IndependentBlendEnable = false;
+
+	desc.RenderTarget[0].BlendEnable = true;
+	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+
+	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;							// 비율 = 1.
+	desc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;							// 비율 = 1.
+	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;	// 최종 출력
+
+	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+
+	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ONE_ONE].GetAddressOf());
 
 	return S_OK;
 }

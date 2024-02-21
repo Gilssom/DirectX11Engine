@@ -46,11 +46,17 @@
   .\Project\Engine\std2d.fx
   .\Project\Engine\value.fx
   3개 파일이 복사되었습니다.
-  CAssetMgr_Init.cpp
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(74,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetMgr_Init.cpp(118,20): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-  Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+  CDevice.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(117,44): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CDevice.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(118,45): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CDevice.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(165,33): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CDevice.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(166,34): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CDevice.cpp'을(를) 컴파일하는 중)
+  
+  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

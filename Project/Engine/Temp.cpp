@@ -59,6 +59,9 @@
 // DepthStencil State Check
 // BlendState State Check
 
+//    UV pos        Render Target Color
+// ( R,G,B * A ) + ( R',G',B' * (1 - A))
+
 
 // 최종 출력
 // RenderTarget Texture

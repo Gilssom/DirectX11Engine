@@ -7,6 +7,8 @@ CGraphicShader::CGraphicShader()
 	: CShader(ASSET_TYPE::GRAPHICS_SHADER)
 	, m_Topology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	, m_RSType(RS_TYPE::CULL_BACK)
+	, m_DSType(DS_TYPE::LESS)
+	, m_BSType(BS_TYPE::DEFAULT)
 {
 
 }
@@ -129,4 +131,8 @@ void CGraphicShader::Binding()
 	CONTEXT->RSSetState(CDevice::GetInst()->GetRS(m_RSType).Get());
 
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
+
+	CONTEXT->OMSetDepthStencilState(CDevice::GetInst()->GetDS(m_DSType).Get(), 0);
+
+	CONTEXT->OMSetBlendState(CDevice::GetInst()->GetBS(m_BSType).Get(), Vec4(0.f, 0.f, 0.f, 0.f), 0xffffffff); // 0xffffffff 모든 마스킹 비트가 출력 될 수 있게
 }

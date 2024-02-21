@@ -16,6 +16,8 @@ private:
     D3D11_PRIMITIVE_TOPOLOGY    m_Topology;
 
     RS_TYPE                     m_RSType;
+    DS_TYPE                     m_DSType;
+    BS_TYPE                     m_BSType;
 
 public:
     int CreateVertexShader(const wstring& strFilePath, const string& vsFuncName);
@@ -23,6 +25,8 @@ public:
 
     void SetTopology(D3D11_PRIMITIVE_TOPOLOGY topology) { m_Topology = topology; }
     void SetRSType(RS_TYPE type) { m_RSType = type; }
+    void SetDSType(DS_TYPE type) { m_DSType = type; }
+    void SetBSType(BS_TYPE type) { m_BSType = type; }
 
     virtual void Binding() override;
 

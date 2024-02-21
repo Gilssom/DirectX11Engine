@@ -36,8 +36,22 @@ void CCollider2D::FinalTick()
 	}
 	else
 	{
+		// Collider 의 절대적인 크기 회전 위치를 정해주기
+		Matrix matScale = XMMatrixScaling(m_Scale.x, m_Scale.y, m_Scale.z);
+		Matrix matRot = XMMatrixRotationZ(m_Rotation.z);
+		Matrix matTrans = XMMatrixTranslation(m_Offset.x, m_Offset.y, m_Offset.z);
 
+		// Collider 만의 상대적인 크기, 회전, 위치
+		m_matColWorld = matScale * matRot * matTrans;
+
+		Matrix matObjScaleInv = XMMatrixIdentity();
+		Vec3 vObjScale = Transform()->GetRelativeScale();
+		matObjScaleInv = XMMatrixScaling(vObjectPos.x, vObjectPos.y, vObjectPos.z);
+		matObjScaleInv = XMMatrixInverse(nullptr, matObjScaleInv);
+
+		// 오브젝트의 월드 행렬을 최종적으로 곱함 ( 상대적인 것은 유지하면서 같이 움직임 )
+		m_matColWorld = m_matColWorld * matObjScaleInv * Transform()->GetWorldMat();
 	}
 
-
+	DrawDebugRect(m_matColWorld, Vec4(0.f, 1.f, 0.f, 1.f), 0.f);
 }

@@ -24,12 +24,6 @@ VS_OUT VS_DebugShape(float3 vLocalPos : POSITIONT, float2 vUV : TEXCOORD)
 
 float4 PS_DebugShape(VS_OUT _in) : SV_Target
 {
-    //if (0.05f <= _in.vUV.x && _in.vUV.x <= 0.95f
-    //    && 0.05f <= _in.vUV.y && _in.vUV.y <= 0.95f)
-    //{
-    //    discard;
-    //}
-    
     // Object Material Setting 에서 Color 값을 받아옴
     return g_vec4_0;
 }

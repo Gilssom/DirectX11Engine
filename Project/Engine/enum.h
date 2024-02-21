@@ -58,6 +58,30 @@ enum class RS_TYPE
 	END,
 };
 
+// Depth Stencil State
+enum class DS_TYPE
+{
+	LESS,		// 작은 경우
+	LESS_EQUAL, // 작거나 같은 경우
+	
+	GREATER,	// 더 큰 경우
+
+	NO_TEST,	// 깊이 테스트 상관 없이 바로 통과
+	NO_TEST_NO_WRITE, // 깊이 테스트도 상관 없고, 그리지도 않을 것
+
+	END,
+};
+
+// Blend State
+enum class BS_TYPE
+{					//  TEX     BACK
+	DEFAULT,		// Src(1), Dest(0)
+	ALPHA_BLEND,	// Src(A), Dest(1-A)
+	ONE_ONE,		// Src(1), Dest(1) : 검은색 배경을 뺄 상황, Light 혼합 기능 사용할 때
+
+	END,
+};
+
 // Direction Type
 enum class DIR_TYPE
 {

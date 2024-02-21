@@ -1,13 +1,13 @@
 #include "pch.h"
 #include "CLevelManager.h"
+#include "CAssetManager.h"
 
 #include "CLevel.h"
 #include "CGameObject.h"
 #include "components.h"
+
 #include "CPlayerScript.h"
 #include "CCameraMoveScript.h"
-
-#include "CAssetManager.h"
 
 CLevelManager::CLevelManager()
 	: m_CurLevel(nullptr)
@@ -46,6 +46,7 @@ void CLevelManager::Init()
 	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
+	pObject->AddComponent(new CCollider2D);
 	pObject->AddComponent(new CPlayerScript);
 
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
@@ -55,9 +56,17 @@ void CLevelManager::Init()
 	pObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
 	pObject->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
 
+	pObject->Collider2D()->SetAbsolute(false);
+	pObject->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
+	pObject->Collider2D()->SetScale(Vec3(0.2f, 0.6f, 1.f));
+
+	//pObject->Collider2D()->SetAbsolute(true);
+	//pObject->Collider2D()->SetOffset(Vec3(100.f, 0.f, 0.f));
+	//pObject->Collider2D()->SetScale(Vec3(100.f, 100.f, 1.5f));
+
 	m_CurLevel->AddObject(0, pObject);
 
-	DrawDebugRect(Vec3(0.f, 0.f, 500.f), Vec3(100.f, 100.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec4(0.f, 1.f, 0.f, 1.f), 100.f);
+	//DrawDebugRect(Vec3(0.f, 0.f, 500.f), Vec3(100.f, 100.f, 1.f), Vec3(0.f, 0.f, 0.f), Vec4(0.f, 1.f, 0.f, 1.f), 100.f);
 	//DrawDebugCircle(Vec3(0.f, 0.f, 500.f), 100.f, Vec4(0.f, 1.f, 0.f, 1.f), 100.f);
 }
 
