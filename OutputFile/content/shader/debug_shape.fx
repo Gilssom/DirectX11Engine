@@ -11,7 +11,7 @@ struct VS_OUT
 };
 
 
-VS_OUT VS_DebugShape(float3 vLocalPos : POSITIONT, float2 vUV : TEXCOORD)
+VS_OUT VS_DebugShape(float3 vLocalPos : POSITION, float2 vUV : TEXCOORD)
 {
     VS_OUT output = (VS_OUT) 0.f;
     

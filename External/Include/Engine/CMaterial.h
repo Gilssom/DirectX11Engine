@@ -1,9 +1,6 @@
 #pragma once
 #include "CAsset.h"
 
-#include "CGraphicShader.h"
-#include "CTexture.h"
-
 #include "assets.h"
 
 class CMaterial : public CAsset

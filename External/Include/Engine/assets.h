@@ -1,4 +1,3 @@
-#pragma once
 
 #include "CMesh.h"
 //#include "CMeshData.h"

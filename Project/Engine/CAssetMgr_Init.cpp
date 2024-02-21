@@ -162,7 +162,8 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetBSType(BS_TYPE::DEFAULT);
-	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
+	//pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
+	pShader->SetDSType(DS_TYPE::NO_TEST);
 
 	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
