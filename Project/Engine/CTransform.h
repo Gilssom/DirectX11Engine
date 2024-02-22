@@ -3,11 +3,14 @@
 class CTransform : public CComponent
 {
 private:
+	// Relative : 부모로부터 상대적인 좌표의 개념
+	//			  부모가 없으면 월드에 상대적인 좌표의 개념
 	Vec3	m_RelativePos;
 	Vec3	m_RelativeScale;
 	Vec3	m_RelativeRotation;
-
 	Vec3	m_RelativeDir[3]; // 방향 벡터
+
+	Vec3	m_WorldDir[3];
 
 	Matrix	m_matWorld;
 

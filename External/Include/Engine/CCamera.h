@@ -22,6 +22,10 @@ private:
 	Matrix m_matView;
 	Matrix m_matProj; // 투영
 
+	// Check 한 Layer 만 볼 수 있게 (필터 처리)
+	// 오브젝츠 계층 관계에서 부모 Layer 를 본다고 해도
+	// 자식 오브젝트는 Layer 가 다를 수 있다.
+	UINT	m_LayerCheck;
 
 public:
 	void SetCameraPriority(int priority);
@@ -40,6 +44,9 @@ public:
 	float GetWidth() { return m_Width; }
 	float GetAspectRatio() { return m_AspectRatio; }
 	float GetScale() { return m_Scale; }
+
+	void LayerCheck(int layerIdx);
+	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 모든 숫자에 1 을 넣는
 
 public:
 	virtual	void FinalTick() override; // 반드시 구현

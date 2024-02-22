@@ -305,7 +305,8 @@ int CDevice::CreateBlendState()
 	D3D11_BLEND_DESC desc = {};
 
 	// ALPHA_BLEND
-	desc.AlphaToCoverageEnable = false; // 풀, 나뭇잎 같은 경우에 사용할 때
+	desc.AlphaToCoverageEnable = true; // 풀, 나뭇잎 같은 경우에 사용할 때
+	// Direct 내부에서 Alpha 값의 깊이를 모두 보정을 해줌
 
 	// 독립적인 기능 ( 렌더 타겟이 여러개 일 상황이 있을 수 있어서 ) ( 최대 8장 )
 	// 꺼놓으면 모든 Render Target 은 0번 옵션으로 출력이 된다.

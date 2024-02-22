@@ -34,11 +34,10 @@ void CTransform::FinalTick()
 
 	m_matWorld = matScale * matRot * matTranslation;
 
-	
 	// 오브젝트의 방향 정보 계산
-	m_RelativeDir[(UINT)DIR_TYPE::RIGHT]	= XAxis;
-	m_RelativeDir[(UINT)DIR_TYPE::UP]		= YAxis;
-	m_RelativeDir[(UINT)DIR_TYPE::FRONT]	= ZAxis;
+	m_WorldDir[(UINT)DIR_TYPE::RIGHT]	= m_RelativeDir[(UINT)DIR_TYPE::RIGHT]	= XAxis;
+	m_WorldDir[(UINT)DIR_TYPE::UP]		= m_RelativeDir[(UINT)DIR_TYPE::UP]		= YAxis;
+	m_WorldDir[(UINT)DIR_TYPE::FRONT]	= m_RelativeDir[(UINT)DIR_TYPE::FRONT]	= ZAxis;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -46,6 +45,28 @@ void CTransform::FinalTick()
 		// 월드 행렬은 모든 좌표를 가지고 있기 때문에 0으로 해주어야 한다.	( Normal )
 		m_RelativeDir[i] = XMVector3TransformNormal(m_RelativeDir[i], matRot);
 		m_RelativeDir[i].Normalize();
+	}
+
+	// 부모가 있기 때문에 부모와의 상대적인 좌표로 계산을 해주어야함
+	if (GetOwner()->GetParent())
+	{
+		const Matrix& matParentWorldMat = GetOwner()->GetParent()->Transform()->GetWorldMat();
+
+		m_matWorld *= matParentWorldMat;
+
+		for (int i = 0; i < 3; i++)
+		{
+			m_WorldDir[i] = XMVector3TransformNormal(m_WorldDir[i], m_matWorld);
+			m_WorldDir[i].Normalize();
+		}
+	}
+	// 부모 오브젝트가 없는 경우, 본인이 최상위 부모 오브젝트
+	else
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			m_WorldDir[i] = m_RelativeDir[i];
+		}
 	}
 }
 

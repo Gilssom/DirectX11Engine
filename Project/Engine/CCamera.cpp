@@ -20,6 +20,7 @@ CCamera::CCamera()
 	, m_Far(10000.f)
 	, m_Width(0.f)
 	, m_Scale(1.f)
+	, m_LayerCheck(0)
 {
 	Vec2 vRenderResol = CDevice::GetInst()->GetRenderResolution();
 	m_Width = vRenderResol.x;
@@ -100,8 +101,17 @@ void CCamera::Render()
 
 	for (UINT i = 0; i < MAX_LAYER; i++)
 	{
-		CLayer* pLayer = pCurLevel->GetLayer(i);
-		pLayer->Render();
+		// 해당 i번째 Layer 에 비트 체크가 되어 있는지 확인
+		if (m_LayerCheck & (1 << i))
+		{
+			CLayer* pLayer = pCurLevel->GetLayer(i);
+			const vector<CGameObject*>& vecObjects = pLayer->GetObjects();
+
+			for (size_t i = 0; i < vecObjects.size(); i++)
+			{
+				vecObjects[i]->Render();
+			}
+		}
 	}
 }
 
@@ -113,5 +123,17 @@ void CCamera::SetCameraPriority(int priority)
 	if (0 <= m_CamPriority)
 	{
 		CRenderManager::GetInst()->RegisterCamera(this, m_CamPriority);
+	}
+}
+
+void CCamera::LayerCheck(int layerIdx)
+{
+	if (m_LayerCheck & (1 << layerIdx))
+	{
+		m_LayerCheck &= ~(1 << layerIdx);
+	}
+	else
+	{
+		m_LayerCheck |= (1 << layerIdx);
 	}
 }

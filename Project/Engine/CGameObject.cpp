@@ -1,5 +1,10 @@
 #include "pch.h"
 #include "CGameObject.h"
+
+#include "CLevelManager.h"
+#include "CLevel.h"
+#include "CLayer.h"
+
 #include "CComponent.h"
 #include "CRenderComponent.h"
 #include "CScript.h"
@@ -7,6 +12,8 @@
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
+	, m_Parent(nullptr)
+	, m_LayerIdx(-1)
 {
 }
 
@@ -28,6 +35,12 @@ void CGameObject::Begin()
 	{
 		m_vecScripts[i]->Begin();
 	}
+
+	// 자식 오브젝트 Begin 호출
+	for (size_t i = 0; i < m_vecChild.size(); i++)
+	{
+		m_vecChild[i]->Begin();
+	}
 }
 
 void CGameObject::Tick()
@@ -42,14 +55,32 @@ void CGameObject::Tick()
 	{
 		m_vecScripts[i]->Tick();
 	}
+
+	// 자식 오브젝트 Tick 호출
+	for (size_t i = 0; i < m_vecChild.size(); i++)
+	{
+		m_vecChild[i]->Tick();
+	}
 }
 
 void CGameObject::FinalTick()
 {
+	// Component Final Tick 호출
 	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
 		if (m_arrCom[i] != nullptr)
 			m_arrCom[i]->FinalTick();
+	}
+
+	// 소속되어 있는 Layer에 자기 자신을 등록
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+	CLayer* pLayer = pCurLevel->GetLayer(m_LayerIdx);
+	pLayer->RegisterObject(this);
+
+	// 자식 오브젝트 Final Tick 호출
+	for (size_t i = 0; i < m_vecChild.size(); i++)
+	{
+		m_vecChild[i]->FinalTick();
 	}
 }
 
@@ -59,6 +90,8 @@ void CGameObject::Render()
 	{
 		m_RenderCom->Render();
 	}
+
+	// 자식 오브젝트 Render 는 일단 생략, 카메라 개념이 있기 때문
 }
 
 void CGameObject::AddComponent(CComponent* component)
@@ -93,4 +126,11 @@ void CGameObject::AddComponent(CComponent* component)
 
 	// 컴포넌트의 소유자를 자신으로 지정
 	component->m_Owner = this;
+}
+
+void CGameObject::AddChild(CGameObject* object)
+{
+	// 받은 오브젝트를 "자식" 으로 설정 , 자식의 부모 오브젝트를 "자신" 으로 설정
+	object->m_Parent = this;
+	m_vecChild.push_back(object);
 }

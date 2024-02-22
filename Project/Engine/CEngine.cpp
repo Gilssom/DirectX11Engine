@@ -9,6 +9,7 @@
 #include "CLevelManager.h"
 #include "CRenderManager.h"
 #include "CDbgRenderManager.h"
+#include "CCollisionManager.h"
 
 CEngine::CEngine()
 	: m_hMainHwnd(nullptr)
@@ -59,6 +60,7 @@ void CEngine::Progress()
 
 	// Object Tick
 	CLevelManager::GetInst()->Tick();
+	CCollisionManager::GetInst()->Tick();
 
 
 	// ====================

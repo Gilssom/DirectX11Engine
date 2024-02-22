@@ -9,6 +9,7 @@ CLevel::CLevel()
 	for (UINT i = 0; i < MAX_LAYER; i++)
 	{
 		m_arrLayer[i] = new CLayer;
+		m_arrLayer[i]->m_LayerIdx = i;
 	}
 }
 
@@ -27,6 +28,12 @@ void CLevel::Init()
 
 void CLevel::Tick()
 {
+	// 이전 프레임에 등록된 Object 들을 모두 제거
+	for (UINT i = 0; i < MAX_LAYER; ++i)
+	{
+		m_arrLayer[i]->Clear();
+	}
+
 	for (UINT i = 0; i < MAX_LAYER; ++i)
 	{
 		m_arrLayer[i]->Tick();
@@ -38,14 +45,6 @@ void CLevel::FinalTick()
 	for (UINT i = 0; i < MAX_LAYER; i++)
 	{
 		m_arrLayer[i]->FinalTick();
-	}
-}
-
-void CLevel::Render()
-{
-	for (UINT i = 0; i < MAX_LAYER; i++)
-	{
-		m_arrLayer[i]->Render();
 	}
 }
 

@@ -3,7 +3,6 @@
 
 class CComponent;
 class CRenderComponent;
-
 class CScript;
 
 #define GET_COMPONENT(Type, TYPE) class C##Type* Type() { return (C##Type*)m_arrCom[(UINT)COMPONENT_TYPE::TYPE]; }
@@ -11,10 +10,16 @@ class CScript;
 class CGameObject : public CEntity
 {
 private:
-	CComponent*			m_arrCom[(UINT)COMPONENT_TYPE::END];
-	CRenderComponent*	m_RenderCom;
+	CComponent*				m_arrCom[(UINT)COMPONENT_TYPE::END];
+	CRenderComponent*		m_RenderCom;
+	vector<CScript*>		m_vecScripts;
 
-	vector<CScript*>	m_vecScripts;
+
+	// 오브젝트의 계층 구조 관계 필요
+	CGameObject*			m_Parent;		// 부모 오브젝트 포인터
+	vector<CGameObject*>	m_vecChild;		// 자식 오브젝트들 포인터 vector
+
+	int						m_LayerIdx;		// GameObject 가 소속되어 있는 Layer
 
 
 public:
@@ -33,8 +38,17 @@ public:
 	GET_COMPONENT(Camera, CAMERA);
 	GET_COMPONENT(Collider2D, COLLIDER2D);
 
+	void AddChild(CGameObject* object);
+	const vector<CGameObject*>& GetChildren() { return m_vecChild; }
+	CGameObject* GetParent() { return m_Parent; }
+
+private:
+	void SetLayerIdx(int idx) { m_LayerIdx = idx; }
+
 public:
 	CGameObject();
 	~CGameObject();
 
+	// Layer 에서만 Layer Index 를 건들일 수 있게
+	friend class CLayer;
 };

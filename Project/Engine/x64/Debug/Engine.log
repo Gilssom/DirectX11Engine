@@ -4,6 +4,7 @@
   .\Project\Engine\CCamera.h
   .\Project\Engine\CCameraMoveScript.h
   .\Project\Engine\CCollider2D.h
+  .\Project\Engine\CCollisionManager.h
   .\Project\Engine\CComponent.h
   .\Project\Engine\CComputeShader.h
   .\Project\Engine\CConstBuffer.h
@@ -39,14 +40,47 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  41개 파일이 복사되었습니다.
+  42개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\debug_shape.fx
   .\Project\Engine\std2d.fx
   .\Project\Engine\value.fx
   3개 파일이 복사되었습니다.
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  CCamera.cpp
+  CGameObject.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
   
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\debug_shape.cso
-  Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(74,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CGameObject.cpp'을(를) 컴파일하는 중)
+  
+  CLayer.cpp
+  CLevel.cpp
+  CLevelManager.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(58,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(62,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(66,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(70,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetManager.h(74,5): warning C4984: 'if constexpr'은 C++17 언어 확장입니다.
+  (소스 파일 '/CLevelManager.cpp'을(를) 컴파일하는 중)
+  
+  코드를 생성하고 있습니다...
+  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
