@@ -45,3 +45,20 @@ void CPlayerScript::Tick()
 
 	GetOwner()->Transform()->SetRelativePos(vCurPos);
 }
+
+#pragma region Collision Contents Script
+void CPlayerScript::BeginOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
+{
+
+}
+
+void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
+{
+
+}
+
+void CPlayerScript::EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
+{
+
+}
+#pragma endregion

@@ -31,6 +31,10 @@ public:
 public:
 	virtual void FinalTick() override;
 
+public:
+	void BeginOverlap(CCollider2D* otherCollider);
+	void Overlap(CCollider2D* otherCollider);
+	void EndOverlap(CCollider2D* otherCollider);
 
 public:
 	CCollider2D();

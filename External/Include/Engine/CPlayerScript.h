@@ -10,6 +10,10 @@ private:
 public:
 	virtual void Tick() override;
 
+	virtual void BeginOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider) override;
+	virtual void Overlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider) override;
+	virtual void EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider) override;
+
 public:
 	CPlayerScript();
 	~CPlayerScript();

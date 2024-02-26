@@ -17,7 +17,9 @@ public:
 
 
 public:
-	void AddObject(CGameObject* object);
+	// childMove = object 의 자식들도 해당 Layer 로 같이 옮길 것인지, 옮기지 않을 것인지
+	void AddObject(CGameObject* object, bool childMove = false);
+
 	void RegisterObject(CGameObject* object) { m_vecObjects.push_back(object); }
 	void Clear() { m_vecObjects.clear(); }
 

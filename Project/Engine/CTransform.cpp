@@ -7,6 +7,7 @@
 CTransform::CTransform()
 	: CComponent(COMPONENT_TYPE::TRANSFORM)
 	, m_RelativeScale(Vec3(1.f, 1.f, 1.f))
+	, m_Absolute(false)
 {
 
 }
@@ -52,7 +53,20 @@ void CTransform::FinalTick()
 	{
 		const Matrix& matParentWorldMat = GetOwner()->GetParent()->Transform()->GetWorldMat();
 
-		m_matWorld *= matParentWorldMat;
+		// 절대적은 크기를 사용할 경우
+		if (m_Absolute)
+		{
+			Vec3 vParentScale = GetOwner()->GetParent()->Transform()->GetWorldScale();
+
+			// 부모 크기의 역행렬
+			Matrix matScaleInv = XMMatrixInverse(nullptr, XMMatrixScaling(vParentScale.x, vParentScale.y, vParentScale.z));
+
+			m_matWorld = m_matWorld * matScaleInv * matParentWorldMat;
+		}
+		else
+		{
+			m_matWorld *= matParentWorldMat;
+		}
 
 		for (int i = 0; i < 3; i++)
 		{
@@ -80,4 +94,38 @@ void CTransform::Binding()
 
 	pCB->SetData(&g_Trans);
 	pCB->Binding();
+}
+
+Vec3 CTransform::GetWorldPos()
+{
+	// 이동 좌표는 행렬의 4행 고정
+	return m_matWorld.Translation();
+}
+
+Vec3 CTransform::GetWorldScale()
+{
+	// 크기와 회전은 3 x 3 행렬을 공유해서 사용함
+	CGameObject* pObject = GetOwner();
+	Vec3 vWorldScale = Vec3(1.f, 1.f, 1.f);
+
+	while (pObject)
+	{
+		// 부모의 Scale 정보 받아오기
+		vWorldScale *= pObject->Transform()->GetRelativeScale();
+
+		// 부모의 Absulute 가 켜져 있으면 연산 중지
+		if (pObject->Transform()->IsAbsolute())
+			break;
+
+		// 부모의 부모로 접근, 부모의 부모가 없을 경우 while문 자동 중지
+		pObject = pObject->GetParent();
+	}
+
+	// 최종 연산된 World Scale 반환
+	return vWorldScale;
+}
+
+Vec3 CTransform::GetWorldRotation()
+{
+	return Vec3();
 }

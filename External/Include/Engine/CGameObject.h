@@ -42,6 +42,8 @@ public:
 	const vector<CGameObject*>& GetChildren() { return m_vecChild; }
 	CGameObject* GetParent() { return m_Parent; }
 
+	const vector<CScript*>& GetScripts() { return m_vecScripts; }
+
 private:
 	void SetLayerIdx(int idx) { m_LayerIdx = idx; }
 

@@ -2,6 +2,7 @@
 #include "CCollider2D.h"
 
 #include "CTransform.h"
+#include "CScript.h"
 
 CCollider2D::CCollider2D()
 	: CComponent(COMPONENT_TYPE::COLLIDER2D)
@@ -54,4 +55,34 @@ void CCollider2D::FinalTick()
 	}
 
 	DrawDebugRect(m_matColWorld, Vec4(0.f, 1.f, 0.f, 1.f), 0.f);
+}
+
+void CCollider2D::BeginOverlap(CCollider2D* otherCollider)
+{
+	const vector<CScript*>& vecScripts = GetOwner()->GetScripts();
+
+	for (size_t i = 0; i < vecScripts.size(); i++)
+	{
+		vecScripts[i]->BeginOverlap(this, otherCollider->GetOwner(), otherCollider);
+	}
+}
+
+void CCollider2D::Overlap(CCollider2D* otherCollider)
+{
+	const vector<CScript*>& vecScripts = GetOwner()->GetScripts();
+
+	for (size_t i = 0; i < vecScripts.size(); i++)
+	{
+		vecScripts[i]->Overlap(this, otherCollider->GetOwner(), otherCollider);
+	}
+}
+
+void CCollider2D::EndOverlap(CCollider2D* otherCollider)
+{
+	const vector<CScript*>& vecScripts = GetOwner()->GetScripts();
+
+	for (size_t i = 0; i < vecScripts.size(); i++)
+	{
+		vecScripts[i]->EndOverlap(this, otherCollider->GetOwner(), otherCollider);
+	}
 }

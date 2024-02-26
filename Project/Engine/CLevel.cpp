@@ -48,7 +48,7 @@ void CLevel::FinalTick()
 	}
 }
 
-void CLevel::AddObject(UINT layerIdx, CGameObject* object)
+void CLevel::AddObject(UINT layerIdx, CGameObject* object, bool childMove)
 {
-	m_arrLayer[layerIdx]->AddObject(object);
+	m_arrLayer[layerIdx]->AddObject(object, childMove);
 }

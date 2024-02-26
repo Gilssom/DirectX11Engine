@@ -77,8 +77,9 @@ void CLevelManager::Init()
 	pMonster->AddComponent(new CMeshRender);
 	pMonster->AddComponent(new CCollider2D);
 
-	pMonster->Transform()->SetRelativePos(Vec3(100.f, 0.f, 300.f));
-	pMonster->Transform()->SetRelativeScale(200.f, 200.f, 0.2f);
+	pMonster->Transform()->SetRelativePos(Vec3(200.f, 0.f, 0.f));
+	pMonster->Transform()->SetRelativeScale(100.f, 100.f, 0.f);
+	pMonster->Transform()->SetAbsolute(true);
 
 	pMonster->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pMonster->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
@@ -89,8 +90,8 @@ void CLevelManager::Init()
 
 
 	// Player 와 Monster 를 부모-자식 관계로 연결 (일단 보류)
-	m_CurLevel->AddObject(0, pPlayer);
-	m_CurLevel->AddObject(0, pMonster);
+	pPlayer->AddChild(pMonster);
+	m_CurLevel->AddObject(0, pPlayer, false);
 
 
 	// Level 의 Collision Setting

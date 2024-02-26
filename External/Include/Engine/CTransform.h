@@ -11,8 +11,10 @@ private:
 	Vec3	m_RelativeDir[3]; // 방향 벡터
 
 	Vec3	m_WorldDir[3];
-
 	Matrix	m_matWorld;
+
+	// 부모와의 절대적인 좌표 값을 가질 것인지
+	bool	m_Absolute;
 
 
 public:
@@ -24,6 +26,10 @@ public:
 	Vec3 GetRelativePos() { return m_RelativePos; }
 	Vec3 GetRelativeScale() { return m_RelativeScale; }
 	Vec3 GetRelativeRotation() { return m_RelativeRotation; }
+
+	Vec3 GetWorldPos();
+	Vec3 GetWorldScale();
+	Vec3 GetWorldRotation();
 
 	void SetRelativePos(const Vec3& vPos) { m_RelativePos = vPos; }
 	void SetRelativeScale(const Vec3& vScale) { m_RelativeScale = vScale; }
@@ -37,6 +43,9 @@ public:
 
 	Vec3 GetRelativeDir(DIR_TYPE type) { return m_RelativeDir[(UINT)type]; }
 	const Matrix& GetWorldMat() { return m_matWorld; }
+
+	void SetAbsolute(bool absolute) { m_Absolute = absolute; }
+	bool IsAbsolute() { return m_Absolute; }
 
 public:
 	CTransform();

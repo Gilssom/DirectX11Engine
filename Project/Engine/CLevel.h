@@ -17,7 +17,7 @@ public:
 
 
 public:
-	void AddObject(UINT layerIdx, CGameObject* object);
+	void AddObject(UINT layerIdx, CGameObject* object, bool childMove = false);
 	CLayer* GetLayer(int layerIdx) { return m_arrLayer[layerIdx]; }
 
 public:

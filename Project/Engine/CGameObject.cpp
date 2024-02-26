@@ -21,6 +21,7 @@ CGameObject::~CGameObject()
 {
 	Safe_Del_Array(m_arrCom);
 	Safe_Del_Vector(m_vecScripts);
+	Safe_Del_Vector(m_vecChild);
 }
 
 void CGameObject::Begin()
