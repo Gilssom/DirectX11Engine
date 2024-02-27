@@ -54,11 +54,18 @@ void CCollider2D::FinalTick()
 		m_matColWorld = m_matColWorld * matObjScaleInv * Transform()->GetWorldMat();
 	}
 
-	DrawDebugRect(m_matColWorld, Vec4(0.f, 1.f, 0.f, 1.f), 0.f);
+	if (m_OverlapCount == 0)
+		DrawDebugRect(m_matColWorld, Vec4(0.f, 1.f, 0.f, 1.f), 0.f);
+	else if (m_OverlapCount >= 1)
+		DrawDebugRect(m_matColWorld, Vec4(1.f, 0.2f, 0.2f, 1.f), 0.f);
+	else
+		assert(nullptr);
 }
 
 void CCollider2D::BeginOverlap(CCollider2D* otherCollider)
 {
+	++m_OverlapCount;
+
 	const vector<CScript*>& vecScripts = GetOwner()->GetScripts();
 
 	for (size_t i = 0; i < vecScripts.size(); i++)
@@ -79,6 +86,8 @@ void CCollider2D::Overlap(CCollider2D* otherCollider)
 
 void CCollider2D::EndOverlap(CCollider2D* otherCollider)
 {
+	--m_OverlapCount;
+
 	const vector<CScript*>& vecScripts = GetOwner()->GetScripts();
 
 	for (size_t i = 0; i < vecScripts.size(); i++)

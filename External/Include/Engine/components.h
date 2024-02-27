@@ -5,3 +5,4 @@
 #include "CMeshRender.h"
 #include "CCamera.h"
 #include "CCollider2D.h"
+#include "CAnimator2D.h"

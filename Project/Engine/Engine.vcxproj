@@ -160,6 +160,8 @@ call Copy.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="assets.h" />
+    <ClInclude Include="CAnim2D.h" />
+    <ClInclude Include="CAnimator2D.h" />
     <ClInclude Include="CAsset.h" />
     <ClInclude Include="CAssetManager.h" />
     <ClInclude Include="CCamera.h" />
@@ -205,6 +207,8 @@ call Copy.bat</Command>
     <ClInclude Include="Temp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAnim2D.cpp" />
+    <ClCompile Include="CAnimator2D.cpp" />
     <ClCompile Include="CAsset.cpp" />
     <ClCompile Include="CAssetManager.cpp" />
     <ClCompile Include="CAssetMgr_Init.cpp" />

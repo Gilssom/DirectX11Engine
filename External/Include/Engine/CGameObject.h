@@ -37,6 +37,7 @@ public:
 	GET_COMPONENT(MeshRender, MESHRENDER);
 	GET_COMPONENT(Camera, CAMERA);
 	GET_COMPONENT(Collider2D, COLLIDER2D);
+	GET_COMPONENT(Animator2D, ANIMATOR2D);
 
 	void AddChild(CGameObject* object);
 	const vector<CGameObject*>& GetChildren() { return m_vecChild; }

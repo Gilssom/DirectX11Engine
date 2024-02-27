@@ -71,19 +71,39 @@ void CCollisionManager::CollisionBtwLayer(UINT left, UINT right)
 	const vector<CGameObject*>& vecLeft = pLeftLayer->GetObjects();
 	const vector<CGameObject*>& vecRight = pRightLayer->GetObjects();
 
-	// 현재 같은 Layer 인 경우에 대한 처리가 하나도 안되어 있음 (24. 02. 26)
-	// 중복 충돌 상황 발생
-	for (size_t i = 0; i < vecLeft.size(); i++)
+	// 서로 다른 레이어간의 충돌 검사
+	if (left != right)
 	{
-		if (vecLeft[i]->Collider2D() == nullptr)
-			continue;
-
-		for (size_t j = 0; j < vecRight.size(); j++)
+		for (size_t i = 0; i < vecLeft.size(); i++)
 		{
-			if (vecRight[j]->Collider2D() == nullptr)
+			if (vecLeft[i]->Collider2D() == nullptr)
 				continue;
 
-			CollisionBtwCollider2D(vecLeft[i]->Collider2D(), vecRight[j]->Collider2D());
+			for (size_t j = 0; j < vecRight.size(); j++)
+			{
+				if (vecRight[j]->Collider2D() == nullptr)
+					continue;
+
+				CollisionBtwCollider2D(vecLeft[i]->Collider2D(), vecRight[j]->Collider2D());
+			}
+		}
+	}
+	// 동일한 레이어 내에서 충돌 검사
+	else
+	{
+		for (size_t i = 0; i < vecLeft.size(); i++)
+		{
+			if (vecLeft[i]->Collider2D() == nullptr)
+				continue;
+
+			// 동일한 벡터이므로 동일한 번호끼리나 이미 했던 번호끼리의 검사는 필요 없음
+			for (size_t j = i + 1; j < vecRight.size(); j++)
+			{
+				if (vecRight[j]->Collider2D() == nullptr)
+					continue;
+
+				CollisionBtwCollider2D(vecLeft[i]->Collider2D(), vecRight[j]->Collider2D());
+			}
 		}
 	}
 }
@@ -100,6 +120,7 @@ void CCollisionManager::CollisionBtwCollider2D(CCollider2D* leftCol, CCollider2D
 	if (iter == m_ColInfo.end())
 	{
 		m_ColInfo.insert(make_pair(id.ID, false));
+		iter = m_ColInfo.find(id.ID);
 	}
 
 	// 두 객체가 겹쳐있다. 
@@ -137,6 +158,74 @@ void CCollisionManager::CollisionBtwCollider2D(CCollider2D* leftCol, CCollider2D
 bool CCollisionManager::IsCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 {
 	// OBB : 사각형 물리 충돌
+	// 각 충돌체로부터 투영 시킬 축을 구한다. (방향 벡터)
+	// 4개의 축으로 투영을 각각 시켜서
+	// 하나라도 겹쳐있지 않는 각도가 나오면 그건 겹쳐있지 않는거다.
+	
+	// 0 -- 1
+	// |    |
+	//   -- 2
+	static Vec3 vLocal[4] =
+	{
+		Vec3(-0.5, 0.5, 0.f),
+		Vec3(0.5, 0.5, 0.f),
+		Vec3(0.5, -0.5, 0.f),
+		Vec3(-0.5, -0.5, 0.f),
+	};
 
-	return false;
+	Vec3 vLeftCol[3] = {};
+	Vec3 vRightCol[3] = {};
+
+	for (int i = 0; i < 3; i++)
+	{
+		// XMVector3TransformCoord - Normal 차이
+		// Coord = 점 변환
+		// Normal = 벡터 변환
+		vLeftCol[i] = XMVector3TransformCoord(vLocal[i], leftCol->GetWorldMat());
+		vRightCol[i] = XMVector3TransformCoord(vLocal[i], rightCol->GetWorldMat());
+	}
+
+	// 방향 벡터 구하기 1정점에서 2정점을 빼면 1번을 향한 방향이 나옴 (투영 축)
+	// 동시에 투영이 될 곳 이기도 하다.
+	Vec3 arrProj[4] =
+	{
+		vLeftCol[1] - vLeftCol[0],
+		vLeftCol[2] - vLeftCol[1],
+		vRightCol[1] - vRightCol[0],
+		vRightCol[2] - vRightCol[1],
+	};
+
+	Vec3 vLeftCenter = XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), leftCol->GetWorldMat());
+	Vec3 vRightCenter = XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), rightCol->GetWorldMat());
+	Vec3 vCenter = vRightCenter - vLeftCenter;
+
+	// 각 투영 축으로 4번의 투영작업을 진행
+	for (int i = 0; i < 4; i++)
+	{
+		// 단위 벡터로 바로 만들어버리면 안됨. 투영할 길이를 손실해버림.
+		Vec3 vProj = arrProj[i];
+		// 투영 축 (단위 벡터)
+		vProj.Normalize();
+
+		float fProjLen = 0.f;
+		for (int j = 0; j < 4; j++)
+		{
+			// 두 벡터의 내적
+			// arrProj[j] --> vProj 으로 투영
+			fProjLen += fabs(arrProj[j].Dot(vProj));
+			// 한쪽 벡터만 길이를 1로 만든 다음 내적을 진행하면 다른쪽 벡터의 길이가 나온다.
+			// 두 벡터를 단위 벡터로 만든 다음 내적을 진행하면 두 벡터 사이 cos세타가 나오니 각도가 나온다.
+			// 바로 밑변의 길이가 나온다,
+		}
+
+		// fProjLen : 투영 벡터 4개를 투영 축으로 투영한 길이의 합의 절반
+		fProjLen *= 0.5f;
+		float fCenter = fabs(vCenter.Dot(vProj));
+
+		// 단 한 곳이라도 fProjLen이 크다면 겹치지 않는다.
+		if (fProjLen < fCenter)
+			return false;
+	}
+
+	return true;
 }

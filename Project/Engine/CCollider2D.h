@@ -14,6 +14,8 @@ private:
 
 	Matrix	m_matColWorld;
 
+	int		m_OverlapCount;
+
 public:
 	void SetOffset(Vec3 offset) { m_Offset = offset; }
 	void SetScale(Vec3 scale) { m_Scale = scale; }
@@ -23,6 +25,8 @@ public:
 	Vec3 GetScale() { return m_Scale; }
 	Vec3 GetFinalPos() { return m_FinalPos; }
 	float GetRotationZ() { return m_Rotation.z; }
+
+	const Matrix& GetWorldMat() { return m_matColWorld; }
 
 	void SetAbsolute(bool abs) { m_Absolute = abs; }
 	bool IsAbsolute() { return m_Absolute; }

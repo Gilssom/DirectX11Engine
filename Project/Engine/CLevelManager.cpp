@@ -56,6 +56,7 @@ void CLevelManager::Init()
 	pPlayer->AddComponent(new CTransform);
 	pPlayer->AddComponent(new CMeshRender);
 	pPlayer->AddComponent(new CCollider2D);
+	pPlayer->AddComponent(new CAnimator2D);
 	pPlayer->AddComponent(new CPlayerScript);
 
 	pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
@@ -67,8 +68,12 @@ void CLevelManager::Init()
 
 	pPlayer->Collider2D()->SetAbsolute(false);
 	pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
-	pPlayer->Collider2D()->SetScale(Vec3(0.2f, 0.6f, 1.f));
+	pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
+	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
+	pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), 10, 12);
+
+	m_CurLevel->AddObject(1, pPlayer, false);
 
 	// Monster
 	CGameObject* pMonster = new CGameObject;
@@ -86,15 +91,16 @@ void CLevelManager::Init()
 
 	pMonster->Collider2D()->SetAbsolute(false);
 	pMonster->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
-	pMonster->Collider2D()->SetScale(Vec3(0.2f, 0.6f, 1.f));
+	pMonster->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
 
-	// Player 와 Monster 를 부모-자식 관계로 연결 (일단 보류)
-	pPlayer->AddChild(pMonster);
-	m_CurLevel->AddObject(0, pPlayer, false);
+	// Player 와 Monster 를 부모-자식 관계로 연결
+	//pPlayer->AddChild(pMonster);
+	m_CurLevel->AddObject(1, pMonster, false);
 
 
 	// Level 의 Collision Setting
+	CCollisionManager::GetInst()->LayerCheck(1, 1);
 	CCollisionManager::GetInst()->LayerCheck(1, 2);
 }
 
