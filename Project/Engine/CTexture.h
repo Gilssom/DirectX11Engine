@@ -8,7 +8,7 @@ private:
 	ComPtr<ID3D11Texture2D>				m_Tex2D; // GPU 메모리
 	ComPtr<ID3D11ShaderResourceView>	m_SRV;	 // GPU 메모리에 전달시키기 위해 필요한 View
 
-	D3D11_TEXTURE2D_DESC				m_Desc;
+	D3D11_TEXTURE2D_DESC				m_Desc;  // Animation 을 제작하기 위해 Texture 정보를 전달시키기 위함
 
 public:
 	float GetWidth() { return (float)m_Desc.Width; }

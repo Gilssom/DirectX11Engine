@@ -80,6 +80,7 @@ int CTexture::Load(const wstring& FilePath)
 
     // Texture 2D 로 넘겨주기 ( 한번에 구현을 해버렸기 때문에 꺼내서 다시 넣어줘야함 )
     m_SRV->GetResource((ID3D11Resource**)m_Tex2D.GetAddressOf());
+    m_Tex2D->GetDesc(&m_Desc);
 
     return hr;
 }
