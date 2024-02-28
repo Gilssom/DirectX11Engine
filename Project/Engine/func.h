@@ -33,3 +33,15 @@ void Safe_Del_Vector(vector<T*> vector)
 
 	vector.clear();
 }
+
+template<typename T1, typename T2>
+void Safe_Del_Map(map<T1, T2>& map)
+{
+	for (const auto& pair : map)
+	{
+		if (pair.second != nullptr)
+			delete pair.second;
+	}
+
+	map.clear();
+}

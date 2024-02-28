@@ -59,19 +59,25 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
 {
     float4 vColor = (float4) 0.f;
     
-    // Material 에서 넘겨받은 상수에 따라 분기가 나뉨
-    if(g_int_0 == 0)
+    if (UseAnim2D)
+    {
+        float2 vBackGroundLeftTop = vLeftTop - ((vBackGround - vSliceSize) * 0.5f);
+        float2 vUV = (vBackGroundLeftTop + _in.vUV * vBackGround) - vOffset;
+        
+        if(vUV.x < vLeftTop.x || vUV.x > vSliceSize.x + vLeftTop.x
+            || vUV.y < vLeftTop.y || vUV.y > vSliceSize.y + vLeftTop.y)
+        {
+            vColor = float4(1.f, 1.f, 0.f, 1.f);
+        }
+        else
+        {
+            vColor = g_Atlas.Sample(g_sam_0, vUV);
+        }
+    }
+    else
     {
         // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
         vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
-    }
-    else if(g_vec4_3.y == 3.14f)
-    {
-        vColor = float4(1.f, 1.f, 0.f, 1.f);
-    }
-    else if (g_mat_1[3][3] == 2.1f)
-    {
-        vColor = float4(0.f, 1.f, 0.f, 1.f);
     }
     
     // 보간 개념이 들어간 Color

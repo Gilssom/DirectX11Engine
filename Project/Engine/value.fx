@@ -38,6 +38,18 @@ cbuffer MATERIAL_CONST : register(b1)
     row_major Matrix g_mat_3;
 };
 
+
+cbuffer ANIMATION2D : register(b2)
+{
+    float2  vLeftTop;
+    float2  vSliceSize;
+    float2  vOffset;
+    float2  vBackGround;
+    int     UseAnim2D;
+    int3    padding;
+};
+
+
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);
 
@@ -57,5 +69,8 @@ Texture2DArray  g_texarr_0  : register(t10);
 Texture2DArray  g_texarr_1  : register(t11);
 Texture2DArray  g_texarr_2  : register(t12);
 Texture2DArray  g_texarr_3  : register(t13);
+
+// Animation Atlas ¹ÙÀÎµù
+Texture2D       g_Atlas     : register(t14);
 
 #endif

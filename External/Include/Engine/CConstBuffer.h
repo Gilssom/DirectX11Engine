@@ -14,6 +14,7 @@ public:
 	int Create(size_t bufferSize, CB_TYPE type);
 	void SetData(void* data);
 	void Binding();
+	void Clear();
 
 public:
 	CConstBuffer();

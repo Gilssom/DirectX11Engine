@@ -199,6 +199,8 @@ int CDevice::CreateView()
 	return S_OK;
 }
 
+#include "CAnim2D.h"
+
 int CDevice::CreateConstBuffer()
 {
 	m_CB[(UINT)CB_TYPE::TRANSFORM] = new CConstBuffer;
@@ -206,6 +208,9 @@ int CDevice::CreateConstBuffer()
 
 	m_CB[(UINT)CB_TYPE::MATERIAL] = new CConstBuffer;
 	m_CB[(UINT)CB_TYPE::MATERIAL]->Create(sizeof(tMtrlConst), CB_TYPE::MATERIAL);
+
+	m_CB[(UINT)CB_TYPE::ANIMATION] = new CConstBuffer;
+	m_CB[(UINT)CB_TYPE::ANIMATION]->Create(sizeof(tAnim2DInfo), CB_TYPE::ANIMATION);
 
 	return 0;
 }

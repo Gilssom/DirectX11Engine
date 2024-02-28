@@ -71,7 +71,10 @@ void CLevelManager::Init()
 	pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
 	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
-	pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), 10, 12);
+	pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
+	pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
+
+	pPlayer->Animator2D()->Play(L"IDLE_RIGHT", true);
 
 	m_CurLevel->AddObject(1, pPlayer, false);
 

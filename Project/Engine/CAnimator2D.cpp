@@ -13,7 +13,7 @@ CAnimator2D::CAnimator2D()
 
 CAnimator2D::~CAnimator2D()
 {
-
+	Safe_Del_Map(m_mapAnim);
 }
 
 void CAnimator2D::FinalTick()
@@ -21,18 +21,29 @@ void CAnimator2D::FinalTick()
 	if (m_CurAnim == nullptr)
 		return;
 
+	if (m_Repeat && m_CurAnim->IsFinish())
+	{
+		m_CurAnim->Reset();
+	}
+
 	m_CurAnim->FinalTick();
 }
 
+void CAnimator2D::Binding()
+{
+	if(m_CurAnim != nullptr)
+		m_CurAnim->Binding();
+}
+
 void CAnimator2D::CreateAnimation(const wstring& animName, Ptr<CTexture> atlasTex
-								, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, int frameCount, UINT fps)
+								, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps)
 {
 	// 동일한 Anim 이 등록되어 있다면
 	assert(!FindAnimation(animName));
 
 	CAnim2D* pAnim = new CAnim2D;
 	pAnim->SetName(animName);
-	pAnim->Create(atlasTex, leftTopPixelPos, vSlicePixelSize, frameCount, fps);
+	pAnim->Create(atlasTex, leftTopPixelPos, vSlicePixelSize, backGroundSize, frameCount, fps);
 
 	// Animation 에 소유자 등록
 	pAnim->m_Animator = this;
@@ -47,4 +58,10 @@ CAnim2D* CAnimator2D::FindAnimation(const wstring& animName)
 		return nullptr;
 
 	return iter->second;
+}
+
+void CAnimator2D::Play(const wstring& strAnimName, bool repeat)
+{
+	m_CurAnim = FindAnimation(strAnimName);
+	m_Repeat = repeat;
 }

@@ -49,3 +49,15 @@ struct tMtrlConst
 	Vec4	v4Arr[4];
 	Matrix	matArr[4];
 };
+
+struct tAnim2DInfo
+{
+	Vec2	vLeftTop;
+	Vec2	vSliceSize;
+
+	Vec2	vOffset;
+	Vec2	vBackGround;
+
+	int		UseAnim2D;
+	int		padding[3];
+};
