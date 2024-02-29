@@ -52,3 +52,22 @@ void DrawDebugCircle(Vec3 worldPos, float radius, Vec4 vColor, float duration)
 
 	CDbgRenderManager::GetInst()->AddDebugShapeInfo(info);
 }
+
+void SaveWString(const wstring& str, FILE* file)
+{
+	size_t len = str.length();
+	fwrite(&len, sizeof(size_t), 1, file);
+	fwrite(str.c_str(), sizeof(wchar_t), len, file);
+}
+
+void LoadWString(wstring& str, FILE* file)
+{
+	//wchar_t szBuffer[256] = {};
+
+	size_t len = 0;
+	fread(&len, sizeof(size_t), 1, file);
+
+	str.resize(len);
+
+	fread((wchar_t*)str.c_str(), sizeof(wchar_t), len, file);
+}

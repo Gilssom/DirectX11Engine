@@ -60,6 +60,14 @@ CAnim2D* CAnimator2D::FindAnimation(const wstring& animName)
 	return iter->second;
 }
 
+void CAnimator2D::LoadAnimation(const wstring& strRelativePath)
+{
+	CAnim2D* pAnim = new CAnim2D;
+	pAnim->Load(strRelativePath);
+
+	m_mapAnim.insert(make_pair(pAnim->GetName(), pAnim));
+}
+
 void CAnimator2D::Play(const wstring& strAnimName, bool repeat)
 {
 	m_CurAnim = FindAnimation(strAnimName);

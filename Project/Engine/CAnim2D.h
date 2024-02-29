@@ -34,8 +34,10 @@ public:
 	void Reset() { m_CurIdx = 0; m_Time = 0.f; m_Finish = false; }
 
 public:
-	void Create(Ptr<CTexture> atlasTex
-		, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps);
+	void Create(Ptr<CTexture> atlasTex, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps);
+
+	void Save(const wstring& relativeFolderPath);
+	void Load(const wstring& relativeFolderPath);
 
 public:
 	void FinalTick();

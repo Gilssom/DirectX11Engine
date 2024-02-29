@@ -49,5 +49,5 @@
   .\Project\Engine\std2d.fx
   .\Project\Engine\value.fx
   3개 파일이 복사되었습니다.
-  CMeshRender.cpp
+  CLevelManager.cpp
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

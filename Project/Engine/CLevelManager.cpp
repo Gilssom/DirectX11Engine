@@ -6,6 +6,7 @@
 #include "CLayer.h"
 #include "CGameObject.h"
 #include "components.h"
+#include "CAnim2D.h"
 
 #include "CPlayerScript.h"
 #include "CCameraMoveScript.h"
@@ -71,10 +72,12 @@ void CLevelManager::Init()
 	pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
 	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
-	pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
-	pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
+	//pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
+	//pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
+	//pPlayer->Animator2D()->FindAnimation(L"MOVE_DOWN")->Save(L"Animation\\");
 
-	pPlayer->Animator2D()->Play(L"IDLE_RIGHT", true);
+	pPlayer->Animator2D()->LoadAnimation(L"Animation\\MOVE_DOWN.anim");
+	pPlayer->Animator2D()->Play(L"MOVE_DOWN", true);
 
 	m_CurLevel->AddObject(1, pPlayer, false);
 

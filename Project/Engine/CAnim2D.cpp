@@ -6,6 +6,8 @@
 
 #include "CTexture.h"
 #include "CTimeManager.h"
+#include "CPathManager.h"
+#include "CAssetManager.h"
 
 CAnim2D::CAnim2D()
 	: m_Animator(nullptr)
@@ -91,4 +93,74 @@ void CAnim2D::Clear()
 {
 	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::ANIMATION);
 	pCB->Clear();
+}
+
+void CAnim2D::Save(const wstring& relativeFolderPath)
+{
+	wstring strFilePath = CPathManager::GetInst()->GetContentPath() + relativeFolderPath + GetName() + L".anim";
+
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, strFilePath.c_str(), L"wb");
+
+	if (pFile == nullptr)
+	{
+		MessageBox(nullptr, L"애니메이션 저장 실패", L"애니메이션 저장 오류", MB_OK);
+		return;
+	}
+
+	// 애니메이션 이름 저장
+	SaveWString(GetName(), pFile);
+
+	// 프레임 개수 저장
+	size_t i = m_vecFrame.size();
+	fwrite(&i, sizeof(size_t), 1, pFile);
+
+	// 프레임 정보 저장
+	// vector 가 동적 배열이기 때문에 가능함
+	fwrite(m_vecFrame.data(), sizeof(tAnim2DFrame), i, pFile);
+
+	// Back Ground Size 정보 저장 
+	fwrite(&m_BackGroundSize, sizeof(Vec2), 1, pFile);
+
+	// 아틀라스 텍스처 저장
+	SaveAssetRef(m_AtlasTex, pFile);
+
+	fclose(pFile);
+}
+
+void CAnim2D::Load(const wstring& relativeFolderPath)
+{
+	wstring strFilePath = CPathManager::GetInst()->GetContentPath() + relativeFolderPath;
+
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");
+
+	if (pFile == nullptr)
+	{
+		MessageBox(nullptr, L"애니메이션 Load 실패", L"애니메이션 Load 오류", MB_OK);
+		return;
+	}
+
+	// 애니메이션 이름 로드
+	wstring strName;
+	LoadWString(strName, pFile);
+	SetName(strName);
+
+	// 프레임 개수 로드
+	size_t i = 0;
+	fread(&i, sizeof(size_t), 1, pFile);
+
+	// 프레임 정보 로드
+	// reserve : 확정적 크기를 알 때 최적화를 위한 (공간은 있는데 텅텅 비어 있어서 접근 X)
+	// resize : 크기를 늘리고 공간을 특정한 값으로 채운다. (접근 가능)
+	m_vecFrame.resize(i);
+	fread(m_vecFrame.data(), sizeof(tAnim2DFrame), i, pFile);
+
+	// Back Ground Size 정보 로드
+	fread(&m_BackGroundSize, sizeof(Vec2), 1, pFile);
+
+	// 아틀라스 텍스처 로드
+	LoadAssetRef(m_AtlasTex, pFile);
+
+	fclose(pFile);
 }

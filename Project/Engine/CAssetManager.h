@@ -98,6 +98,9 @@ inline Ptr<T> CAssetManager::Load(const wstring& strKey, const wstring& strRelat
         return nullptr;
     }
 
+    // 본인 상대경로 세팅
+    pAsset->m_RelativePath = strRelativePath;
+
     AddAsset<T>(strKey, (T*)pAsset.Get());
 
     return (T*)pAsset.Get();

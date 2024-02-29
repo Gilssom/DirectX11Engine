@@ -98,7 +98,6 @@
     <ClCompile Include="CDbgRenderManager.cpp">
       <Filter>04. Manager\08. DebugRenderManager</Filter>
     </ClCompile>
-    <ClCompile Include="func.cpp" />
     <ClCompile Include="CCollider2D.cpp">
       <Filter>07. Component\03. Collider2D</Filter>
     </ClCompile>
@@ -113,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="CAnim2D.cpp">
       <Filter>07. Component\05. Animator2D\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>01. Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

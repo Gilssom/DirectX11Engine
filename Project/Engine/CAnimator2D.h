@@ -16,6 +16,7 @@ private:
 public:
 	void CreateAnimation(const wstring& animName, Ptr<CTexture> atlasTex, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps);
 	CAnim2D* FindAnimation(const wstring& animName);
+	void LoadAnimation(const wstring& strRelativePath);
 
 	void Play(const wstring& strAnimName, bool repeat);
 

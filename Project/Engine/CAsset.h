@@ -1,6 +1,8 @@
 #pragma once
 #include "CEntity.h"
 
+#include "ptr.h"
+
 class CAsset : public CEntity
 {
 private:

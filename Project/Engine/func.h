@@ -8,6 +8,44 @@ void DrawDebugCircle(Vec3 worldPos, float radius, Vec4 vColor, float duration);
 
 void DrawDebugLine();
 
+void SaveWString(const wstring& str, FILE* file);
+void LoadWString(wstring& str, FILE* file);
+
+template<typename T>
+class Ptr;
+
+template<typename T>
+inline void SaveAssetRef(_In_ Ptr<T> asset, FILE* file)
+{
+	bool bUse = asset.Get();
+	fwrite(&bUse, sizeof(bool), 1, file);
+
+	if (bUse)
+	{
+		SaveWString(asset->GetKey(), file);
+		SaveWString(asset->GetRelativePath(), file);
+	}
+}
+
+#include "CAssetManager.h"
+
+template<typename T>
+inline void LoadAssetRef(_Out_ Ptr<T>& asset, FILE* file)
+{
+	bool bUse = 0;
+	fread(&bUse, sizeof(bool), 1, file);
+
+	if (bUse)
+	{
+		wstring strKey, strRelativePath;
+
+		LoadWString(strKey, file);
+		LoadWString(strRelativePath, file);
+
+		asset = CAssetManager::GetInst()->Load<T>(strKey, strRelativePath);
+	}
+}
+
 
 template<typename T, int size>
 void Safe_Del_Array(T* (&Array)[size])
