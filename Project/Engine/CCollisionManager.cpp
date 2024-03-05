@@ -179,8 +179,8 @@ bool CCollisionManager::IsCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 	for (int i = 0; i < 3; i++)
 	{
 		// XMVector3TransformCoord - Normal 차이
-		// Coord = 점 변환
-		// Normal = 벡터 변환
+		// Coord = 벡터와 행렬의 곱 연산 후 동차 좌표(w)에 1 적용
+		// Normal = 벡터와 행렬의 곱 연산 후 동차 좌표(w)에 0 적용
 		vLeftCol[i] = XMVector3TransformCoord(vLocal[i], leftCol->GetWorldMat());
 		vRightCol[i] = XMVector3TransformCoord(vLocal[i], rightCol->GetWorldMat());
 	}

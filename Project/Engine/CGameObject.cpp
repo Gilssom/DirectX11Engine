@@ -91,8 +91,6 @@ void CGameObject::Render()
 	{
 		m_RenderCom->Render();
 	}
-
-	// 자식 오브젝트 Render 는 일단 생략, 카메라 개념이 있기 때문
 }
 
 void CGameObject::AddComponent(CComponent* component)
