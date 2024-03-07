@@ -1,5 +1,9 @@
 #pragma once
 
+class CGameObject;
+void SpawnObject(int layerIdx, CGameObject* object);
+
+bool IsValid(CGameObject*& object);
 
 void DrawDebugRect(Vec3 worldPos, Vec3 worldScale, Vec3 worldRotation, Vec4 vColor, float duration);
 void DrawDebugRect(Matrix matWorld, Vec4 vColor, float duration);

@@ -24,6 +24,12 @@ void CMeshRender::FinalTick()
 
 void CMeshRender::Render()
 {
+	// 만약 Mesh 나 Material 이 없다면
+	if (GetMesh() == nullptr || GetMaterial() == nullptr)
+	{
+		return;
+	}
+
 	// 오브젝트의 위치값을 상수버퍼를 통해서 바인딩
 	Transform()->Binding();
 

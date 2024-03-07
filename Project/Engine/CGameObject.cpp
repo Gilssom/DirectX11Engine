@@ -9,6 +9,8 @@
 #include "CRenderComponent.h"
 #include "CScript.h"
 
+#include "CTaskManager.h"
+
 CGameObject::CGameObject()
 	: m_arrCom{}
 	, m_RenderCom(nullptr)
@@ -132,4 +134,14 @@ void CGameObject::AddChild(CGameObject* object)
 	// 받은 오브젝트를 "자식" 으로 설정 , 자식의 부모 오브젝트를 "자신" 으로 설정
 	object->m_Parent = this;
 	m_vecChild.push_back(object);
+}
+
+void CGameObject::Destroy()
+{
+	tTask task = {};
+
+	task.Type = TASK_TYPE::DESTROY_OBJECT;
+	task.dwParam_0 = (DWORD_PTR)this;
+
+	CTaskManager::GetInst()->AddTask(task);
 }

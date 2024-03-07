@@ -161,3 +161,16 @@ enum class PROJ_TYPE
 	ORTHOGRAPHIC,
 	PERSPECTIVE,
 };
+
+enum class TASK_TYPE
+{
+	// Param_0 : LayerIndex
+	// Param_1 : Object Adress
+	SPAWN_OBJECT,
+
+	// Param_0 : Obejct Adress
+	DESTROY_OBJECT,
+
+	//
+	CHANGE_LEVEL,
+};

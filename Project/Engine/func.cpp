@@ -1,6 +1,41 @@
 #include "pch.h"
 
 #include "CDbgRenderManager.h"
+#include "CTaskManager.h"
+
+#include "CGameObject.h"
+
+// 오브젝트 생성 함수
+void SpawnObject(int layerIdx, CGameObject* object)
+{
+	tTask task = {};
+	task.Type = TASK_TYPE::SPAWN_OBJECT;
+	task.dwParam_0 = layerIdx;
+	task.dwParam_1 = (DWORD_PTR)object;
+
+	CTaskManager::GetInst()->AddTask(task);
+}
+
+// 오브젝트 유효성 체크
+bool IsValid(CGameObject*& object)
+{
+	// 혹시 해당 오브젝트 주소가 null 인지
+	if (object == nullptr)
+	{
+		return false;
+	}
+	// 아니면 해당 오브젝트가 삭제 예정인지
+	else if (object->IsDead())
+	{
+		object = nullptr;
+		return false;
+	}
+	// 그것도 아니라면 해당 오브젝트는 아직 존재한다.
+	else
+	{
+		return true;
+	}
+}
 
 // 각 포지션 정보 함수
 void DrawDebugRect(Vec3 worldPos, Vec3 worldScale, Vec3 worldRotation, Vec4 vColor, float duration)

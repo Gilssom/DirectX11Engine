@@ -116,6 +116,12 @@
     <ClCompile Include="func.cpp">
       <Filter>01. Header</Filter>
     </ClCompile>
+    <ClCompile Include="CTaskManager.cpp">
+      <Filter>04. Manager\09. TaskManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissileScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -253,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="CAnim2D.h">
       <Filter>07. Component\05. Animator2D\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="CTaskManager.h">
+      <Filter>04. Manager\09. TaskManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissileScript.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +414,9 @@
     </Filter>
     <Filter Include="07. Component\05. Animator2D\Animation">
       <UniqueIdentifier>{ff15e14a-326b-45ce-b80d-097a9161e7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\09. TaskManager">
+      <UniqueIdentifier>{f3ab8486-6da4-4f37-b120-a6b67a25a1b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -104,6 +104,7 @@ void CLevelManager::Init()
 	//pPlayer->AddChild(pMonster);
 	m_CurLevel->AddObject(1, pMonster, false);
 
+	pPlayer->GetScript<CPlayerScript>()->SetTarget(pMonster);
 
 	// Level ÀÇ Collision Setting
 	CCollisionManager::GetInst()->LayerCheck(1, 1);

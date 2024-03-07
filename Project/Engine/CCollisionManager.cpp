@@ -123,20 +123,36 @@ void CCollisionManager::CollisionBtwCollider2D(CCollider2D* leftCol, CCollider2D
 		iter = m_ColInfo.find(id.ID);
 	}
 
+	// 두 객체 중 하나라도 삭제 예정일 경우
+	bool IsDead = leftCol->GetOwner()->IsDead() || rightCol->GetOwner()->IsDead();
+
 	// 두 객체가 겹쳐있다. 
 	if (IsCollision(leftCol, rightCol))
 	{
 		if (iter->second)
 		{
-			// Overlap (Stay)
-			leftCol->Overlap(rightCol);
-			rightCol->Overlap(leftCol);
+			if (IsDead)
+			{
+				// 둘 중 하나라도 삭제 예정이면 EndOverLap
+				leftCol->EndOverlap(rightCol);
+				rightCol->EndOverlap(leftCol);
+			}
+			else
+			{
+				// Overlap (Stay)
+				leftCol->Overlap(rightCol);
+				rightCol->Overlap(leftCol);
+			}
 		}
 		else
 		{
-			// Begin Overlap (Enter)
-			leftCol->BeginOverlap(rightCol);
-			rightCol->BeginOverlap(leftCol);
+			// 둘 중 하나라도 삭제 예정이 아니라면 그대로 진행
+			if (!IsDead)
+			{
+				// Begin Overlap (Enter)
+				leftCol->BeginOverlap(rightCol);
+				rightCol->BeginOverlap(leftCol);
+			}
 		}
 
 		iter->second = true;

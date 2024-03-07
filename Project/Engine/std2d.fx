@@ -67,7 +67,8 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
         if(vUV.x < vLeftTop.x || vUV.x > vSliceSize.x + vLeftTop.x
             || vUV.y < vLeftTop.y || vUV.y > vSliceSize.y + vLeftTop.y)
         {
-            vColor = float4(1.f, 1.f, 0.f, 1.f);
+            // 해당 영역은 무시
+            discard;
         }
         else
         {

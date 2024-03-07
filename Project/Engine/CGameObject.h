@@ -20,6 +20,7 @@ private:
 	vector<CGameObject*>	m_vecChild;		// 자식 오브젝트들 포인터 vector
 
 	int						m_LayerIdx;		// GameObject 가 소속되어 있는 Layer
+	bool					m_Dead;			// 오브젝트 Life 체크
 
 
 public:
@@ -42,8 +43,13 @@ public:
 	void AddChild(CGameObject* object);
 	const vector<CGameObject*>& GetChildren() { return m_vecChild; }
 	CGameObject* GetParent() { return m_Parent; }
-
 	const vector<CScript*>& GetScripts() { return m_vecScripts; }
+
+	template<typename T>
+	T* GetScript();
+
+	bool IsDead() { return m_Dead; }
+	void Destroy();
 
 private:
 	void SetLayerIdx(int idx) { m_LayerIdx = idx; }
@@ -54,4 +60,19 @@ public:
 
 	// Layer 에서만 Layer Index 를 건들일 수 있게
 	friend class CLayer;
+
+	// Task Manager 에서만 Dead 를 건들일 수 있게
+	friend class CTaskManager;
 };
+
+template<typename T>
+inline T* CGameObject::GetScript()
+{
+	for (size_t i = 0; i < m_vecScripts.size(); i++)
+	{
+		if (dynamic_cast<T*>(m_vecScripts[i]))
+			return (T*)m_vecScripts[i];
+	}
+
+	return nullptr;
+}

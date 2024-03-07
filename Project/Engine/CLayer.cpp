@@ -31,6 +31,24 @@ void CLayer::Tick()
 
 void CLayer::FinalTick()
 {
+	// 최상위 오브젝트들은 바로 처리를 해주어야 한다.
+	// ( 자식 오브젝트도 덩달아서 삭제 처리를 진행해야 하기 때문에 )
+	vector<CGameObject*>::iterator iter = m_vecParent.begin();
+
+	for (; iter != m_vecParent.end();)
+	{
+		(*iter)->FinalTick();
+
+		if ((*iter)->IsDead())
+		{
+			iter = m_vecParent.erase(iter);
+		}
+		else
+		{
+			iter++;
+		}
+	}
+
 	for (size_t i = 0; i < m_vecParent.size(); i++)
 	{
 		m_vecParent[i]->FinalTick();

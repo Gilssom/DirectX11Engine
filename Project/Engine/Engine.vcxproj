@@ -183,6 +183,7 @@ call Copy.bat</Command>
     <ClInclude Include="CLevelManager.h" />
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CMeshRender.h" />
+    <ClInclude Include="CMissileScript.h" />
     <ClInclude Include="components.h" />
     <ClInclude Include="CPathManager.h" />
     <ClInclude Include="CPlayerScript.h" />
@@ -191,6 +192,7 @@ call Copy.bat</Command>
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CMaterial.h" />
+    <ClInclude Include="CTaskManager.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimeManager.h" />
     <ClInclude Include="CTransform.h" />
@@ -231,6 +233,7 @@ call Copy.bat</Command>
     <ClCompile Include="CLevelManager.cpp" />
     <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
+    <ClCompile Include="CMissileScript.cpp" />
     <ClCompile Include="CPathManager.cpp" />
     <ClCompile Include="CPlayerScript.cpp" />
     <ClCompile Include="CRenderComponent.cpp" />
@@ -238,6 +241,7 @@ call Copy.bat</Command>
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CMaterial.cpp" />
+    <ClCompile Include="CTaskManager.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
     <ClCompile Include="CTransform.cpp" />

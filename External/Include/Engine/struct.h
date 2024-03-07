@@ -26,6 +26,16 @@ struct tDebugShapeInfo
 	float			Age;	  // 존재 시간
 };
 
+// Task 관련 구조체
+struct tTask
+{
+	TASK_TYPE	Type;
+
+	DWORD_PTR	dwParam_0;
+	DWORD_PTR	dwParam_1;
+	DWORD_PTR	dwParam_2;
+};
+
 
 // 상수버퍼 관련 구조체
 struct tTransform

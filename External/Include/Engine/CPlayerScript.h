@@ -4,8 +4,11 @@
 class CPlayerScript : public CScript
 {
 private:
-	float m_Speed;
+	float		 m_Speed;
+	CGameObject* m_TargetMonster;
 
+public:
+	void SetTarget(CGameObject* target) { m_TargetMonster = target; }
 
 public:
 	virtual void Tick() override;
