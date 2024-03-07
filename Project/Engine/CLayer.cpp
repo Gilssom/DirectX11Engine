@@ -48,11 +48,6 @@ void CLayer::FinalTick()
 			iter++;
 		}
 	}
-
-	for (size_t i = 0; i < m_vecParent.size(); i++)
-	{
-		m_vecParent[i]->FinalTick();
-	}
 }
 
 void CLayer::AddObject(CGameObject* object, bool childMove)

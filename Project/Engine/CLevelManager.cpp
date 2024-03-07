@@ -99,7 +99,6 @@ void CLevelManager::Init()
 	pMonster->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
 	pMonster->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
-
 	// Player 와 Monster 를 부모-자식 관계로 연결
 	//pPlayer->AddChild(pMonster);
 	m_CurLevel->AddObject(1, pMonster, false);
