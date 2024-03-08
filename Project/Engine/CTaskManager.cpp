@@ -6,6 +6,7 @@
 #include "CLayer.h"
 
 #include "CGameObject.h"
+#include "CCollider2D.h"
 
 CTaskManager::CTaskManager()
 {
@@ -52,8 +53,12 @@ void CTaskManager::ExecuteTask(tTask& task)
 		CGameObject* pSpawnObj = (CGameObject*)task.dwParam_1;
 		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
 		pCurLevel->AddObject(LayerIdx, pSpawnObj);
+
+		// 레벨에 합류하는 오브젝트는 Begin 호출을 받는다.
+		pSpawnObj->Begin();
 	}
 		break;
+
 	case TASK_TYPE::DESTROY_OBJECT:
 		// Param_0 : Object Adress ( Dead )
 	{
@@ -66,9 +71,27 @@ void CTaskManager::ExecuteTask(tTask& task)
 		}
 	}
 		break;
+
 	case TASK_TYPE::CHANGE_LEVEL:
 	{
 
+	}
+		break;
+
+	case TASK_TYPE::COLLIDER2D_SEMI_DEACTIVE:
+		// Param_0 : Collider2D Adress ( Deactive )
+	{
+		CCollider2D* pCollider = (CCollider2D*)task.dwParam_0;
+		pCollider->m_SemiDeactive = true;
+	}
+		break;
+
+	case TASK_TYPE::COLLIDER2D_DEACTIVE:
+		// Param_0 : Collider2D Adress ( Deactive )
+	{
+		CCollider2D* pCollider = (CCollider2D*)task.dwParam_0;
+		pCollider->m_SemiDeactive = false;
+		pCollider->m_Active = false;
 	}
 		break;
 	}

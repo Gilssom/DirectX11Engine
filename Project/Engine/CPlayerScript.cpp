@@ -5,15 +5,26 @@
 #include "CLevelManager.h"
 #include "CLevel.h"
 
+#include "CCollider2D.h"
+#include "CStructuredBuffer.h"
+
 CPlayerScript::CPlayerScript()
 	: m_Speed(300.f)
 {
-
+	m_StructBuffer = new CStructuredBuffer;
 }
 
 CPlayerScript::~CPlayerScript()
 {
+	if (m_StructBuffer != nullptr)
+		delete m_StructBuffer;
+}
 
+void CPlayerScript::Begin()
+{
+	Vec4 vData = Vec4(1.f, 2.f, 3.f, 4.f);
+	m_StructBuffer->Create(sizeof(Vec4), 1, &vData);
+	m_StructBuffer->Binding(20);
 }
 
 void CPlayerScript::Tick()
@@ -47,6 +58,17 @@ void CPlayerScript::Tick()
 	//}
 	if (KEY_TAP(KEY::SPACE))
 	{
+		// Collider 활성화 - 비활성화 구현 완료
+		if (Collider2D()->IsActive())
+		{
+			Collider2D()->Deactivate();
+			m_Speed = 10.f;
+		}
+		else
+		{
+			Collider2D()->Activate();
+		}
+
  		CGameObject* pNewObj = new CGameObject;
 
 		pNewObj->AddComponent(new CTransform);
@@ -81,7 +103,7 @@ void CPlayerScript::Tick()
 #pragma region Collision Contents Script
 void CPlayerScript::BeginOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
 {
-	otherObject->Destroy();
+	//otherObject->Destroy();
 }
 
 void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
@@ -91,6 +113,6 @@ void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject
 
 void CPlayerScript::EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
 {
-
+	int a = 0;
 }
 #pragma endregion

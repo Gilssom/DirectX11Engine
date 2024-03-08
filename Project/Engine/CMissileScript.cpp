@@ -12,6 +12,11 @@ CMissileScript::~CMissileScript()
 
 }
 
+void CMissileScript::Begin()
+{
+
+}
+
 void CMissileScript::Tick()
 {
 	Vec3 vPos = Transform()->GetRelativePos();

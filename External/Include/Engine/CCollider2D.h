@@ -16,6 +16,9 @@ private:
 
 	int		m_OverlapCount;
 
+	bool	m_Active;		// 충돌체의 활성화 여부
+	bool	m_SemiDeactive; // 비활성화 예정 상태
+
 public:
 	void SetOffset(Vec3 offset) { m_Offset = offset; }
 	void SetScale(Vec3 scale) { m_Scale = scale; }
@@ -31,6 +34,11 @@ public:
 	void SetAbsolute(bool abs) { m_Absolute = abs; }
 	bool IsAbsolute() { return m_Absolute; }
 
+	void Activate();
+	void Deactivate();
+
+	bool IsActive() { return m_Active; }
+	bool IsSemiDeactive() { return m_SemiDeactive; }
 
 public:
 	virtual void FinalTick() override;
@@ -43,5 +51,7 @@ public:
 public:
 	CCollider2D();
 	~CCollider2D();
+
+	friend class CTaskManager;
 };
 

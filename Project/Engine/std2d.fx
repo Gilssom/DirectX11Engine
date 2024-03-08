@@ -4,6 +4,8 @@
 
 #include "value.fx"
 
+StructuredBuffer<float4> g_TestBuffer : register(t20);
+
 // 정점 버퍼의 정보 변화는 필요 없다.
 // 물체의 좌표만 가져오면 된다.
 
@@ -58,6 +60,9 @@ VS_OUT VS_Std2D(VS_IN _in)
 float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
 {
     float4 vColor = (float4) 0.f;
+    
+    if (g_TestBuffer[0].x == 1.f)
+        return float4(1.f, 0.f, 0.f, 0.f);
     
     if (UseAnim2D)
     {

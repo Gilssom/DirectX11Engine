@@ -122,6 +122,9 @@
     <ClCompile Include="CMissileScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="CStructuredBuffer.cpp">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="CMissileScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructuredBuffer.h">
+      <Filter>03. Device\StructuredBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -417,6 +423,9 @@
     </Filter>
     <Filter Include="04. Manager\09. TaskManager">
       <UniqueIdentifier>{f3ab8486-6da4-4f37-b120-a6b67a25a1b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\StructuredBuffer">
+      <UniqueIdentifier>{a2e14fa5-e79f-4350-8789-6f1c6e940c18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -108,6 +108,9 @@ void CLevelManager::Init()
 	// Level 의 Collision Setting
 	CCollisionManager::GetInst()->LayerCheck(1, 1);
 	CCollisionManager::GetInst()->LayerCheck(1, 2);
+
+	// 레벨 시작
+	m_CurLevel->Init();
 }
 
 void CLevelManager::Tick()

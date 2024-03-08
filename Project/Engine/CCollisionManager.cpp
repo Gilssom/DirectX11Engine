@@ -125,17 +125,29 @@ void CCollisionManager::CollisionBtwCollider2D(CCollider2D* leftCol, CCollider2D
 
 	// 두 객체 중 하나라도 삭제 예정일 경우
 	bool IsDead = leftCol->GetOwner()->IsDead() || rightCol->GetOwner()->IsDead();
+	
+	// 두 객체 중 하나라도 비활성화일 경우
+	bool IsActive = leftCol->IsActive() && rightCol->IsActive();
+
+	// 두 객체 중 하나라도 비활성화 예정일 경우
+	bool IsSemiDeactive = leftCol->IsSemiDeactive() || rightCol->IsSemiDeactive();
+
+	// 두 객체 중 하나라도 비활성화가 되어 있다면, 충돌을 검사조차 하지 않는다.
+	if (!IsActive)
+		return;
 
 	// 두 객체가 겹쳐있다. 
 	if (IsCollision(leftCol, rightCol))
 	{
 		if (iter->second)
 		{
-			if (IsDead)
+			// 둘 중 하나라도 삭제 예정이거나,
+			// 둘 중 하나라도 비활성화 예정이라면 EndOverLap 
+			if (IsDead || IsSemiDeactive)
 			{
-				// 둘 중 하나라도 삭제 예정이면 EndOverLap
 				leftCol->EndOverlap(rightCol);
 				rightCol->EndOverlap(leftCol);
+				iter->second = false;
 			}
 			else
 			{
@@ -146,16 +158,16 @@ void CCollisionManager::CollisionBtwCollider2D(CCollider2D* leftCol, CCollider2D
 		}
 		else
 		{
-			// 둘 중 하나라도 삭제 예정이 아니라면 그대로 진행
-			if (!IsDead)
+			// 둘 중 하나라도 삭제 예정이 아니고, (and)
+			// 둘 중 하나라도 비활성화 예정이 아닐 때만 충돌 진행
+			if (!IsDead && !IsSemiDeactive)
 			{
 				// Begin Overlap (Enter)
 				leftCol->BeginOverlap(rightCol);
 				rightCol->BeginOverlap(leftCol);
+				iter->second = true;
 			}
 		}
-
-		iter->second = true;
 	}
 	// 두 객체가 겹쳐있지 않다.
 	else

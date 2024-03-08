@@ -4,10 +4,14 @@
 #include "CTransform.h"
 #include "CScript.h"
 
+#include "CTaskManager.h"
+
 CCollider2D::CCollider2D()
 	: CComponent(COMPONENT_TYPE::COLLIDER2D)
 	, m_Scale(Vec3(1.f, 1.f, 1.f))
 	, m_Absolute(false)
+	, m_Active(true)
+	, m_SemiDeactive(false)
 {
 
 }
@@ -17,8 +21,47 @@ CCollider2D::~CCollider2D()
 
 }
 
+void CCollider2D::Activate()
+{
+	m_Active = true;
+}
+
+// First Frame
+// Collider -> Final Tick Deactive() -> AddTask
+// Collision :: Semi = false, Active = true
+// Task Manager :: Semi = true, Active = true
+
+// Second Frame
+// Collider :: Semi true -> AddTask
+// Collision :: Semi = true -> End Overlap
+// Task Manager :: Semi = false, Active = false
+
+// Third Frame
+// Collider :: Active = false -> Collider Deactive
+// Collision :: Collision Deactive
+
+void CCollider2D::Deactivate()
+{
+	// 2단계로 나뉘어 비활성화 진행
+	// 1. COLLIDER2D_SEMI_DEACTIVE
+	// 2. COLLIDER2D_DEACTIVE
+	tTask task = {};
+	task.Type = TASK_TYPE::COLLIDER2D_SEMI_DEACTIVE;
+	task.dwParam_0 = (DWORD_PTR)this;
+	CTaskManager::GetInst()->AddTask(task);
+}
+
 void CCollider2D::FinalTick()
 {
+	// 비활성화 예정 상태면, 비활성화 시킨다.
+	if (m_SemiDeactive)
+	{
+		CTaskManager::GetInst()->AddTask(tTask{ TASK_TYPE::COLLIDER2D_DEACTIVE, (DWORD_PTR)this });
+	}
+	// 비활성화 상태라면 충돌체 계산 진행 X
+	if (!m_Active)
+		return;
+
 	// 최종 위치 값을 계산
 	Vec3 vObjectPos = Transform()->GetRelativePos();
 	m_FinalPos = vObjectPos + m_Offset;

@@ -171,6 +171,10 @@ enum class TASK_TYPE
 	// Param_0 : Obejct Adress
 	DESTROY_OBJECT,
 
+	// Param_0 : Collider2D Adress
+	COLLIDER2D_SEMI_DEACTIVE,
+	COLLIDER2D_DEACTIVE,
+
 	//
 	CHANGE_LEVEL,
 };

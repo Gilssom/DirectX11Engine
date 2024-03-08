@@ -16,6 +16,7 @@ CGameObject::CGameObject()
 	, m_RenderCom(nullptr)
 	, m_Parent(nullptr)
 	, m_LayerIdx(-1)
+	, m_Dead(false)
 {
 }
 

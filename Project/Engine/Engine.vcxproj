@@ -192,6 +192,7 @@ call Copy.bat</Command>
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CMaterial.h" />
+    <ClInclude Include="CStructuredBuffer.h" />
     <ClInclude Include="CTaskManager.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimeManager.h" />
@@ -241,6 +242,7 @@ call Copy.bat</Command>
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CMaterial.cpp" />
+    <ClCompile Include="CStructuredBuffer.cpp" />
     <ClCompile Include="CTaskManager.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimeManager.cpp" />
