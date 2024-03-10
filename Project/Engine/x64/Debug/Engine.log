@@ -52,13 +52,5 @@
   .\Project\Engine\std2d.fx
   .\Project\Engine\value.fx
   3개 파일이 복사되었습니다.
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
-  CPlayerScript.cpp
   CStructuredBuffer.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CStructuredBuffer.cpp(22,2): warning C4804: '%': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.
-  (소스 파일 '/CStructuredBuffer.cpp'을(를) 컴파일하는 중)
-  
-  코드를 생성하고 있습니다...
-  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+  Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

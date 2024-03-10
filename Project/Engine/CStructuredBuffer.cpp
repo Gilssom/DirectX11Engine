@@ -41,7 +41,7 @@ int CStructuredBuffer::Create(UINT elementSize, UINT elementCount, void* initial
 	{
 		D3D11_SUBRESOURCE_DATA tSub = {};
 		tSub.pSysMem = initialData;
-		hr =DEVICE->CreateBuffer(&m_Desc, &tSub, m_SB.GetAddressOf());
+		hr = DEVICE->CreateBuffer(&m_Desc, &tSub, m_SB.GetAddressOf());
 	}
 	else
 	{
