@@ -51,6 +51,24 @@ void CLevelManager::Init()
 	m_CurLevel->AddObject(0, pCamObject);
 
 
+	// Light Object
+	CGameObject* pLightObject = new CGameObject;
+	pLightObject->SetName(L"Light");
+	pLightObject->AddComponent(new CTransform);
+	pLightObject->AddComponent(new CLight2D);
+
+	//pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	//pLightObject->Light2D()->SetDiffuse(Vec3(0.2f, 0.2f, 0.2f));
+	//pLightObject->Light2D()->SetAmbient(Vec3(0.15f, 0.15f, 0.15f));
+
+	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
+	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
+	pLightObject->Light2D()->SetRange(500.f);
+
+	m_CurLevel->AddObject(0, pLightObject);
+
+
 	// Player
 	CGameObject* pPlayer = new CGameObject;
 	pPlayer->SetName(L"Player");

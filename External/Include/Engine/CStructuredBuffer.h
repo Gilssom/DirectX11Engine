@@ -25,7 +25,7 @@ public:
 	UINT GetElementCount() { return m_ElementCount; }
 
 	int Create(UINT elementSize, UINT elementCount, void* initialData = nullptr);
-
+	void SetData(void* data, UINT elementCount = 0);
 	void Binding(UINT registerNum);
 
 public:

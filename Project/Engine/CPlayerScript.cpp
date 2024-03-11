@@ -11,20 +11,17 @@
 CPlayerScript::CPlayerScript()
 	: m_Speed(300.f)
 {
-	m_StructBuffer = new CStructuredBuffer;
+
 }
 
 CPlayerScript::~CPlayerScript()
 {
-	if (m_StructBuffer != nullptr)
-		delete m_StructBuffer;
+
 }
 
 void CPlayerScript::Begin()
 {
-	Vec4 vData = Vec4(1.f, 2.f, 3.f, 4.f);
-	m_StructBuffer->Create(sizeof(Vec4), 1, &vData);
-	m_StructBuffer->Binding(20);
+
 }
 
 void CPlayerScript::Tick()
@@ -89,13 +86,13 @@ void CPlayerScript::Tick()
 		//pCurLevel->AddObject(0, pNewObj);
 	}
 
-	if (IsValid(m_TargetMonster))
+	/*if (IsValid(m_TargetMonster))
 	{
 		Vec3 vDir = m_TargetMonster->Transform()->GetWorldPos() - Transform()->GetWorldPos();
 		vDir.Normalize();
 
 		vCurPos += vDir * m_Speed * DT;
-	}
+	}*/
 
 	Transform()->SetRelativePos(vCurPos);
 }
@@ -113,6 +110,6 @@ void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject
 
 void CPlayerScript::EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
 {
-	int a = 0;
+
 }
 #pragma endregion

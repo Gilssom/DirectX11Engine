@@ -94,6 +94,14 @@ extern Vec3	XAxis;
 extern Vec3	YAxis;
 extern Vec3	ZAxis;
 
+// Light Type
+enum class LIGHT_TYPE
+{
+	DIRECTIONAL,	// 방향성		- 태양광(전역 광원 = Global Light)
+	POINT,			// 점광원		- 전구, 횃불
+	SPOT,			// 스폿라이트	- 조명
+};
+
 enum SCALAR_PARAM
 {
 	INT_0,

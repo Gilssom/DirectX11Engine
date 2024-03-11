@@ -2,16 +2,20 @@
 #include "CRenderManager.h"
 
 #include "CDevice.h"
+#include "CStructuredBuffer.h"
+
 #include "CCamera.h"
+#include "CLight2D.h"
 
 CRenderManager::CRenderManager()
+	: m_Light2DBuffer(nullptr)
 {
-
+	m_Light2DBuffer = new CStructuredBuffer;
 }
 
 CRenderManager::~CRenderManager()
 {
-
+	delete m_Light2DBuffer;
 }
 
 void CRenderManager::Init()
@@ -24,6 +28,9 @@ void CRenderManager::Tick()
 
 void CRenderManager::Render()
 {
+	// 렌더링에 필요한 데이터 바인딩
+	DataBinding();
+
 	// Target Clear
 	float clearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
 	CDevice::GetInst()->ClearTarget(clearColor);
@@ -33,6 +40,36 @@ void CRenderManager::Render()
 	{
 		m_vecCam[i]->Render();
 	}
+
+	// 데이터 클리어
+	DataClear();
+}
+
+void CRenderManager::DataBinding()
+{
+	// Light 구조화 버퍼로 Binding
+	// 크기가 더 커지면 새롭게 Create ( 공간이 부족한 일이 없어짐 )
+	// 광원 개수보다 구조화 버퍼 요소크기가 더 작으면 확장.
+	if (m_Light2DBuffer->GetElementCount() < m_vecLight2D.size())
+	{
+		m_Light2DBuffer->Create(sizeof(tLightInfo), (UINT)m_vecLight2D.size());
+	}
+
+	// m_vecLight2D 에 모인 광원의 정보를 구조화 버퍼로 전달
+	static vector<tLightInfo> vecLightInfo;
+
+	for (size_t i = 0; i < m_vecLight2D.size(); i++)
+	{
+		vecLightInfo.push_back(m_vecLight2D[i]->GetLightInfo());
+	}
+
+	m_Light2DBuffer->SetData(vecLightInfo.data(), m_vecLight2D.size());
+	m_Light2DBuffer->Binding(15);
+}
+
+void CRenderManager::DataClear()
+{
+	m_vecLight2D.clear();
 }
 
 void CRenderManager::RegisterCamera(CCamera* newCamera, int priority)

@@ -8,7 +8,6 @@ class CPlayerScript : public CScript
 private:
 	float		 m_Speed;
 	CGameObject* m_TargetMonster;
-	CStructuredBuffer* m_StructBuffer;
 
 public:
 	void SetTarget(CGameObject* target) { m_TargetMonster = target; }

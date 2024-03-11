@@ -1,6 +1,8 @@
 #ifndef _VALUE
 #define _VALUE
 
+#include "struct.fx"
+
 cbuffer TRANSFORM : register(b0)
 {
     // 행으로 읽을 수 있게
@@ -72,5 +74,12 @@ Texture2DArray  g_texarr_3  : register(t13);
 
 // Animation Atlas 바인딩
 Texture2D       g_Atlas     : register(t14);
+
+
+// Light2DInfo
+StructuredBuffer<tLightInfo> g_Light2D : register(t15);
+
+// Light3DInfo
+StructuredBuffer<tLightInfo> g_Light3D : register(t16);
 
 #endif

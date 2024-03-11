@@ -125,6 +125,9 @@
     <ClCompile Include="CStructuredBuffer.cpp">
       <Filter>03. Device\StructuredBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="CLight2D.cpp">
+      <Filter>07. Component\07. Light2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -272,6 +275,9 @@
     <ClInclude Include="CStructuredBuffer.h">
       <Filter>03. Device\StructuredBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="CLight2D.h">
+      <Filter>07. Component\07. Light2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. Header">
@@ -382,9 +388,6 @@
     <Filter Include="08. Asset\Texture">
       <UniqueIdentifier>{df103c29-72a2-4dd4-a932-4386988c3d10}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HLSL\2D">
-      <UniqueIdentifier>{87add515-7982-4dad-a21a-ea3d6e53fb0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Component\Rendering\01. MeshRender">
       <UniqueIdentifier>{37084b8d-8e07-4433-8648-2b49082c33c7}</UniqueIdentifier>
     </Filter>
@@ -427,16 +430,25 @@
     <Filter Include="03. Device\StructuredBuffer">
       <UniqueIdentifier>{a2e14fa5-e79f-4350-8789-6f1c6e940c18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLSL\01. Header">
+      <UniqueIdentifier>{3bee5b32-f30e-4ac2-bda2-6619f9170b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\02. 2D">
+      <UniqueIdentifier>{87add515-7982-4dad-a21a-ea3d6e53fb0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
-      <Filter>HLSL\2D</Filter>
-    </FxCompile>
-    <FxCompile Include="value.fx">
-      <Filter>HLSL\2D</Filter>
+      <Filter>HLSL\02. 2D</Filter>
     </FxCompile>
     <FxCompile Include="debug_shape.fx">
-      <Filter>HLSL\2D</Filter>
+      <Filter>HLSL\02. 2D</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>HLSL\01. Header</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <Filter>HLSL\01. Header</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

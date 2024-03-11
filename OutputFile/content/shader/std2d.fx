@@ -25,6 +25,8 @@ struct VS_OUT // 반환 타입
     float4 vPosition : SV_Position;
     float4 vColor : COLOR;
     float2 vUV : TEXCOORD;
+    
+    float3 vWorldPos : POSITION;
 };
 
 
@@ -49,6 +51,7 @@ VS_OUT VS_Std2D(VS_IN _in)
     // 이전에 1 을 넣은 이유는 기존 그대로의 형태를 그리기 위해서.
     // 투영 행렬을 각각의 모든 물체가 가지고 있는 형태는 존재할 수 없다고 판단.
     // 그래서 내부에서 w 값을 나눠주는 시스템이 존재함.
+    output.vWorldPos = vWorldPos;
     output.vPosition = vProjPos;
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
@@ -61,7 +64,7 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
 {
     float4 vColor = (float4) 0.f;
     
-    if (g_TestBuffer[0].w == 1.f)
+    if (g_TestBuffer[0].w == 4.f)
         return float4(1.f, 0.f, 0.f, 1.f);
     
     if (UseAnim2D)
@@ -86,11 +89,41 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
         vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
     }
     
+    // ==================
+    // 광원 처리
+    float3 vLightPower = (float3) 0.f;
+    
+    // Directional Light
+    if(g_Light2D[0].LightType == 0)
+    {
+        vLightPower = g_Light2D[0].Light.vDiffuse.rgb + g_Light2D[0].Light.vAmbient.rgb;
+    }
+    
+    // Point Light
+    else if (g_Light2D[0].LightType == 1)
+    {
+        // Pixel World Space
+        float fDist = distance(g_Light2D[0].WorldPos.xy, _in.vWorldPos.xy);
+        
+        if (fDist < g_Light2D[0].Range)
+        {
+            vLightPower = g_Light2D[0].Light.vDiffuse;
+        }
+    }
+    
+    // Spot Light
+    else
+    {
+        
+    }
+    
+    vColor.rgb *= vLightPower;
+    
+    // ===================
     // 보간 개념이 들어간 Color
     // 각 정점이 Color 값을 들고 있기 때문에
     // 가중치 보간 개념이 들어가 픽셀 마다의 색상 값을 정해준다. ( Rasterize Stage )
     return vColor;
 }
-
 
 #endif
