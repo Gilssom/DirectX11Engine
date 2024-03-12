@@ -12,7 +12,6 @@ class CRenderManager : public CSingleton<CRenderManager>
 private:
 	vector<CCamera*>	m_vecCam;
 	vector<CLight2D*>	m_vecLight2D; // 매 프레임마다 등록해야함 ( = Layer )
-
 	CStructuredBuffer*	m_Light2DBuffer; // 구조화 버퍼
 
 public:

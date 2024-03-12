@@ -26,6 +26,18 @@ void CPlayerScript::Begin()
 
 void CPlayerScript::Tick()
 {
+	if (KEY_TAP(KEY::_1))
+	{
+		Ptr<CMaterial> pMtrl = CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial");
+		pMtrl->SetScalarParam(INT_1, 1);
+	}
+
+	if (KEY_TAP(KEY::_2))
+	{
+		Ptr<CMaterial> pMtrl = CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial");
+		pMtrl->SetScalarParam(INT_1, 0);
+	}
+
 	// 키 입력에 따른 위치 이동
 	Vec3 vCurPos = GetOwner()->Transform()->GetRelativePos();
 

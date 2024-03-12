@@ -27,6 +27,12 @@ private:
 	// 자식 오브젝트는 Layer 가 다를 수 있다.
 	UINT	m_LayerCheck;
 
+	vector<CGameObject*>	m_vecOpaque;
+	vector<CGameObject*>	m_vecMasked;
+	vector<CGameObject*>	m_vecTransParent;
+	vector<CGameObject*>	m_vecParticle;
+	vector<CGameObject*>	m_vecPostProcess;
+
 public:
 	void SetCameraPriority(int priority);
 
@@ -48,9 +54,18 @@ public:
 	void LayerCheck(int layerIdx);
 	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 모든 숫자에 1 을 넣는
 
+	void SortObject();
+
 public:
 	virtual	void FinalTick() override; // 반드시 구현
 	void Render();
+
+private:
+	void Render_opaque();
+	void Render_masked();
+	void Render_transparent();
+	void Render_particle();
+	void Render_postprocess();
 
 public:
 	CCamera();

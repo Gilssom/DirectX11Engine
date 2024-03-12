@@ -19,8 +19,7 @@ struct tLightInfo
     float3  WorldPos;     // World Space 에서 광원의 위치
     float   Range;          // Spot Light 또는 Point Light 인 경우 광원의 영향 범위
     float   Angle;          // Spot Light 인 경우 광원의 각도
-
-    float3  vPadding;       // 16 Byte 맞추기 위한 용도
+    float3  Padding;       // 16 Byte 맞추기 위한 용도
 };
 
 #endif

@@ -54,4 +54,8 @@ void CTimeManager::Tick()
 		m_AccTime -= 1.f;
 		m_FrameCount = 0;
 	}
+
+	// Global Time
+	g_GlobalData.DeltaTime = DT;
+	g_GlobalData.Time += DT;
 }

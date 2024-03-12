@@ -19,6 +19,8 @@ private:
     DS_TYPE                     m_DSType;
     BS_TYPE                     m_BSType;
 
+    SHADER_DOMAIN               m_Domain;
+
 public:
     int CreateVertexShader(const wstring& strFilePath, const string& vsFuncName);
     int CreatePixelShader(const wstring& strFilePath, const string& psFuncName);
@@ -29,6 +31,9 @@ public:
     void SetBSType(BS_TYPE type) { m_BSType = type; }
 
     virtual void Binding() override;
+
+    void SetDomain(SHADER_DOMAIN domain) { m_Domain = domain; }
+    SHADER_DOMAIN GetDomain() { return m_Domain; }
 
 public:
     CGraphicShader();

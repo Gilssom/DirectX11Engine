@@ -31,7 +31,7 @@ int CStructuredBuffer::Create(UINT elementSize, UINT elementCount, void* initial
 
 	m_Desc.ByteWidth = m_ElementSize * m_ElementCount; // 생성될 버퍼의 크기
 
-	m_Desc.Usage = D3D11_USAGE_DEFAULT;
+	m_Desc.Usage = D3D11_USAGE_DYNAMIC;
 	m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	m_Desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;

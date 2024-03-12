@@ -14,7 +14,6 @@ private:
 	CRenderComponent*		m_RenderCom;
 	vector<CScript*>		m_vecScripts;
 
-
 	// 오브젝트의 계층 구조 관계 필요
 	CGameObject*			m_Parent;		// 부모 오브젝트 포인터
 	vector<CGameObject*>	m_vecChild;		// 자식 오브젝트들 포인터 vector
@@ -33,6 +32,7 @@ public:
 public:
 	void AddComponent(CComponent* component);
 	CComponent* GetComonent(COMPONENT_TYPE type) { return m_arrCom[(UINT)type]; }
+	CRenderComponent* GetRenderComponent() { return m_RenderCom; }
 
 	GET_COMPONENT(Transform, TRANSFORM);
 	GET_COMPONENT(MeshRender, MESHRENDER);

@@ -3,6 +3,7 @@
 
 #include "struct.fx"
 
+
 cbuffer TRANSFORM : register(b0)
 {
     // 행으로 읽을 수 있게
@@ -51,6 +52,18 @@ cbuffer ANIMATION2D : register(b2)
     int3    padding;
 };
 
+cbuffer GLOBALDATA : register(b3)
+{
+    float2 vResolution;     // 렌더링 해상도
+    float DeltaTime;        // DT
+    float Time;             // 게임 시작한 후 경과한 시간
+
+    int Light2DCount;       // 2D 광원 개수
+    int Light3DCount;       // 3D 광원 개수
+
+    float2 Padding;
+};
+
 
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);
@@ -81,5 +94,7 @@ StructuredBuffer<tLightInfo> g_Light2D : register(t15);
 
 // Light3DInfo
 StructuredBuffer<tLightInfo> g_Light3D : register(t16);
+
+#define PI 3.1415926535f
 
 #endif

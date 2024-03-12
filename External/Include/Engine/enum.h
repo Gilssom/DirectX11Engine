@@ -186,3 +186,13 @@ enum class TASK_TYPE
 	//
 	CHANGE_LEVEL,
 };
+
+enum class SHADER_DOMAIN
+{
+	DOMAIN_OPAQUE,		// 불투명
+	DOMAIN_MASKED,		// 일부 투명
+	DOMAIN_TRANSPARENT,	// 반투명
+
+	DOMAIN_PARTICLE,	// 파티클
+	DOMAIN_POSTPROCESS, // 후처리
+};

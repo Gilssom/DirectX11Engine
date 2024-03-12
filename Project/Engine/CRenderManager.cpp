@@ -2,6 +2,7 @@
 #include "CRenderManager.h"
 
 #include "CDevice.h"
+#include "CConstBuffer.h"
 #include "CStructuredBuffer.h"
 
 #include "CCamera.h"
@@ -47,6 +48,15 @@ void CRenderManager::Render()
 
 void CRenderManager::DataBinding()
 {
+	// Global Data Binding
+	g_GlobalData.Light2DCount = (int)m_vecLight2D.size();
+	//g_GlobalData.Light3DCount = (int)m_vecLight3D.size();
+
+	static CConstBuffer* GlobalBuffer = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL);
+	GlobalBuffer->SetData(&g_GlobalData);
+	GlobalBuffer->Binding();
+
+
 	// Light 구조화 버퍼로 Binding
 	// 크기가 더 커지면 새롭게 Create ( 공간이 부족한 일이 없어짐 )
 	// 광원 개수보다 구조화 버퍼 요소크기가 더 작으면 확장.

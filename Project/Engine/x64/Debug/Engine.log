@@ -50,14 +50,18 @@
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\debug_shape.fx
+  .\Project\Engine\func.fx
   .\Project\Engine\std2d.fx
   .\Project\Engine\struct.fx
   .\Project\Engine\value.fx
-  4개 파일이 복사되었습니다.
+  5개 파일이 복사되었습니다.
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
-C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\std2d.fx(54,5-32): warning X3206: implicit truncation of vector type
-C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\std2d.fx(110,13-53): warning X3206: implicit truncation of vector type
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\std2d.fx(56,5-32): warning X3206: implicit truncation of vector type
   
   compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
-  CLevelManager.cpp
+  CAssetMgr_Init.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetMgr_Init.cpp(118,20): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
+  
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

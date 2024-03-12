@@ -57,14 +57,31 @@ void CLevelManager::Init()
 	pLightObject->AddComponent(new CTransform);
 	pLightObject->AddComponent(new CLight2D);
 
+	pLightObject->Transform()->SetRelativePos(Vec3(-300.f, 0.f, 0.f));
+
 	//pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
 	//pLightObject->Light2D()->SetDiffuse(Vec3(0.2f, 0.2f, 0.2f));
 	//pLightObject->Light2D()->SetAmbient(Vec3(0.15f, 0.15f, 0.15f));
 
 	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
+	pLightObject->Light2D()->SetDiffuse(Vec3(0.8f, 0.2f, 0.2f));
 	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
-	pLightObject->Light2D()->SetRange(500.f);
+	pLightObject->Light2D()->SetRange(400.f);
+
+	m_CurLevel->AddObject(0, pLightObject);
+
+	// Light Object 2
+	pLightObject = new CGameObject;
+	pLightObject->SetName(L"Light2");
+	pLightObject->AddComponent(new CTransform);
+	pLightObject->AddComponent(new CLight2D);
+
+	pLightObject->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
+
+	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLightObject->Light2D()->SetDiffuse(Vec3(0.2f, 0.8f, 0.2f));
+	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
+	pLightObject->Light2D()->SetRange(400.f);
 
 	m_CurLevel->AddObject(0, pLightObject);
 
@@ -99,6 +116,7 @@ void CLevelManager::Init()
 
 	m_CurLevel->AddObject(1, pPlayer, false);
 
+
 	// Monster
 	CGameObject* pMonster = new CGameObject;
 	pMonster->SetName(L"Monster");
@@ -122,6 +140,22 @@ void CLevelManager::Init()
 	m_CurLevel->AddObject(1, pMonster, false);
 
 	pPlayer->GetScript<CPlayerScript>()->SetTarget(pMonster);
+
+
+	// Back Ground Object
+	CGameObject* pBackGround = new CGameObject;
+	pBackGround->AddComponent(new CTransform);
+	pBackGround->AddComponent(new CMeshRender);
+
+	pBackGround->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pBackGround->Transform()->SetRelativeScale(Vec3(1600.f, 900.f, 1.f));
+
+	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\Background.jpg", L"texture\\Background.jpg"));
+
+	m_CurLevel->AddObject(0, pBackGround, false);
+
 
 	// Level ÀÇ Collision Setting
 	CCollisionManager::GetInst()->LayerCheck(1, 1);

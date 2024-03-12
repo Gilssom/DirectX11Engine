@@ -95,3 +95,17 @@ struct tAnim2DInfo
 	int		UseAnim2D;
 	int		padding[3];
 };
+
+struct tGlobalData
+{
+	Vec2	vResolution;	// 렌더링 해상도
+	float	DeltaTime;		// DT
+	float	Time;			// 게임 시작한 후 경과한 시간
+
+	int		Light2DCount;	// 2D 광원 개수
+	int		Light3DCount;	// 3D 광원 개수
+
+	Vec2	Padding;
+};
+
+extern tGlobalData g_GlobalData;

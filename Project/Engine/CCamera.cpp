@@ -7,6 +7,7 @@
 #include "CGameObject.h"
 
 #include "CRenderManager.h"
+#include "CRenderComponent.h"
 
 #include "CTransform.h"
 
@@ -96,22 +97,54 @@ void CCamera::Render()
 	g_Trans.matView = m_matView;
 	g_Trans.matProj = m_matProj;
 
-	// 일단은 모든 Layer 를 다 그릴 수 있게 설정한다.
-	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+	// Shader Domain 에 따른 물체의 분류 작업
+	SortObject();
 
-	for (UINT i = 0; i < MAX_LAYER; i++)
+	// Shader Domain 에 따라서 순차적으로 렌더링
+	Render_opaque();
+	Render_masked();
+	Render_transparent();
+	Render_particle();
+	Render_postprocess();
+}
+
+void CCamera::Render_opaque()
+{
+	for (size_t i = 0; i < m_vecOpaque.size(); i++)
 	{
-		// 해당 i번째 Layer 에 비트 체크가 되어 있는지 확인
-		if (m_LayerCheck & (1 << i))
-		{
-			CLayer* pLayer = pCurLevel->GetLayer(i);
-			const vector<CGameObject*>& vecObjects = pLayer->GetObjects();
+		m_vecOpaque[i]->Render();
+	}
+}
 
-			for (size_t i = 0; i < vecObjects.size(); i++)
-			{
-				vecObjects[i]->Render();
-			}
-		}
+void CCamera::Render_masked()
+{
+	for (size_t i = 0; i < m_vecMasked.size(); i++)
+	{
+		m_vecMasked[i]->Render();
+	}
+}
+
+void CCamera::Render_transparent()
+{
+	for (size_t i = 0; i < m_vecTransParent.size(); i++)
+	{
+		m_vecTransParent[i]->Render();
+	}
+}
+
+void CCamera::Render_particle()
+{
+	for (size_t i = 0; i < m_vecParticle.size(); i++)
+	{
+		m_vecParticle[i]->Render();
+	}
+}
+
+void CCamera::Render_postprocess()
+{
+	for (size_t i = 0; i < m_vecPostProcess.size(); i++)
+	{
+		m_vecPostProcess[i]->Render();
 	}
 }
 
@@ -135,5 +168,51 @@ void CCamera::LayerCheck(int layerIdx)
 	else
 	{
 		m_LayerCheck |= (1 << layerIdx);
+	}
+}
+
+void CCamera::SortObject()
+{
+	// Shader 의 속성마다 렌더링이 달라지기 때문에 오브젝트 정렬이 필요하다.
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+
+	for (UINT i = 0; i < MAX_LAYER; i++)
+	{
+		// 해당 i번째 Layer 에 비트 체크가 되어 있는지 확인
+		if (m_LayerCheck & (1 << i))
+		{
+			CLayer* pLayer = pCurLevel->GetLayer(i);
+			const vector<CGameObject*>& vecObjects = pLayer->GetObjects();
+
+			for (size_t j = 0; j < vecObjects.size(); j++)
+			{
+				// Render Com 있는지 확인 > Material 있는지 확인 > Shader 있는지 확인 후 처리
+				if (!vecObjects[j]->GetRenderComponent() 
+					|| vecObjects[j]->GetRenderComponent()->GetMaterial() == nullptr
+					|| vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader() == nullptr)
+					continue;
+
+				SHADER_DOMAIN domain = vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader()->GetDomain();
+
+				switch (domain)
+				{
+				case SHADER_DOMAIN::DOMAIN_OPAQUE:
+					m_vecOpaque.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_MASKED:
+					m_vecMasked.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
+					m_vecTransParent.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_PARTICLE:
+					m_vecParticle.push_back(vecObjects[j]);
+					break;
+				case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+					m_vecPostProcess.push_back(vecObjects[j]);
+					break;
+				}
+			}
+		}
 	}
 }

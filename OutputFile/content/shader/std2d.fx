@@ -3,6 +3,8 @@
 #define _STD2D
 
 #include "value.fx"
+#include "func.fx"
+
 
 StructuredBuffer<float4> g_TestBuffer : register(t20);
 
@@ -64,8 +66,51 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
 {
     float4 vColor = (float4) 0.f;
     
-    if (g_TestBuffer[0].w == 4.f)
-        return float4(1.f, 0.f, 0.f, 1.f);
+    if (UseAnim2D)
+    {
+        float2 vBackGroundLeftTop = vLeftTop - ((vBackGround - vSliceSize) * 0.5f);
+        float2 vUV = (vBackGroundLeftTop + _in.vUV * vBackGround) - vOffset;
+        
+        if (vUV.x < vLeftTop.x || vUV.x > vSliceSize.x + vLeftTop.x
+            || vUV.y < vLeftTop.y || vUV.y > vSliceSize.y + vLeftTop.y)
+        {
+            // 해당 영역은 무시
+            discard;
+        }
+        else
+        {
+            vColor = g_Atlas.Sample(g_sam_0, vUV);
+        }
+    }
+    else
+    {
+        // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
+        vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+    }
+    
+    // Global Data 에 들어있는 광원의 개수 가져와서 반복문 돌리기
+    float3 vLightPower = 0.f;
+    for (int i = 0; i < Light2DCount; i++)
+    {
+        vLightPower += CalLight2D(i, _in.vWorldPos);
+    }
+    
+    vColor.rgb *= vLightPower;
+    
+    // 보간 개념이 들어간 Color
+    // 각 정점이 Color 값을 들고 있기 때문에
+    // 가중치 보간 개념이 들어가 픽셀 마다의 색상 값을 정해준다. ( Rasterize Stage )
+    
+    if(vColor.a == 0.f)
+        discard;
+    
+    return vColor;
+}
+
+
+float4 PS_Std2D_AB(VS_OUT _in) : SV_Target // 반환 타입
+{
+    float4 vColor = (float4) 0.f;
     
     if (UseAnim2D)
     {
@@ -89,37 +134,15 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
         vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
     }
     
-    // ==================
-    // 광원 처리
-    float3 vLightPower = (float3) 0.f;
-    
-    // Directional Light
-    if(g_Light2D[0].LightType == 0)
+    // Global Data 에 들어있는 광원의 개수 가져와서 반복문 돌리기
+    float3 vLightPower = 0.f;
+    for (int i = 0; i < Light2DCount; i++)
     {
-        vLightPower = g_Light2D[0].Light.vDiffuse.rgb + g_Light2D[0].Light.vAmbient.rgb;
-    }
-    
-    // Point Light
-    else if (g_Light2D[0].LightType == 1)
-    {
-        // Pixel World Space
-        float fDist = distance(g_Light2D[0].WorldPos.xy, _in.vWorldPos.xy);
-        
-        if (fDist < g_Light2D[0].Range)
-        {
-            vLightPower = g_Light2D[0].Light.vDiffuse;
-        }
-    }
-    
-    // Spot Light
-    else
-    {
-        
+        vLightPower += CalLight2D(i, _in.vWorldPos);
     }
     
     vColor.rgb *= vLightPower;
     
-    // ===================
     // 보간 개념이 들어간 Color
     // 각 정점이 Color 값을 들고 있기 때문에
     // 가중치 보간 개념이 들어가 픽셀 마다의 색상 값을 정해준다. ( Rasterize Stage )
