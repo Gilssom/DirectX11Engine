@@ -92,6 +92,9 @@ void CTransform::Binding()
 	// 자신을 찍고있는 Camera 의 View 행렬 정보가 온다.
 	g_Trans.matWorld = m_matWorld;
 
+	g_Trans.matWV = g_Trans.matWorld * g_Trans.matView;
+	g_Trans.matWVP = g_Trans.matWV * g_Trans.matProj;
+
 	pCB->SetData(&g_Trans);
 	pCB->Binding();
 }

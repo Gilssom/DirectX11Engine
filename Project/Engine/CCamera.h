@@ -61,6 +61,8 @@ public:
 	void Render();
 
 private:
+	void SortClear();
+
 	void Render_opaque();
 	void Render_masked();
 	void Render_transparent();

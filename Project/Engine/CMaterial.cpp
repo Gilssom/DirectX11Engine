@@ -8,6 +8,7 @@
 
 CMaterial::CMaterial()
 	:CAsset(ASSET_TYPE::MATERIAL)
+	, m_bDynamic(false)
 {
 
 }
@@ -20,6 +21,15 @@ CMaterial::~CMaterial()
 void CMaterial::SetTexParam(TEX_PARAM param, Ptr<CTexture> tex)
 {
 	m_arrTex[param] = tex;
+}
+
+Ptr<CMaterial> CMaterial::GetDynamicMaterial()
+{
+	// 본인을 이용해서(복사) 새로운 재질 생성
+	Ptr<CMaterial> pDynamicMtrl = new CMaterial(*this); 
+	pDynamicMtrl->m_bDynamic = true;
+
+	return pDynamicMtrl;
 }
 
 void CMaterial::Binding()

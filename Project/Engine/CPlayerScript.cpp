@@ -6,10 +6,10 @@
 #include "CLevel.h"
 
 #include "CCollider2D.h"
-#include "CStructuredBuffer.h"
 
 CPlayerScript::CPlayerScript()
 	: m_Speed(300.f)
+	, m_TargetMonster(nullptr)
 {
 
 }
@@ -21,7 +21,7 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::Begin()
 {
-
+	// Get Dynamic Material
 }
 
 void CPlayerScript::Tick()
@@ -36,6 +36,16 @@ void CPlayerScript::Tick()
 	{
 		Ptr<CMaterial> pMtrl = CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial");
 		pMtrl->SetScalarParam(INT_1, 0);
+	}
+
+	if (KEY_TAP(KEY::U))
+	{
+		Ptr<CMaterial> pMtrl = GetRenderComponent()->GetDynamicMaterial();
+		pMtrl->SetScalarParam(INT_0, 1);
+	}
+	else if (KEY_RELEASED(KEY::U))
+	{
+		GetRenderComponent()->RestoreMaterial();
 	}
 
 	// 키 입력에 따른 위치 이동
@@ -93,18 +103,7 @@ void CPlayerScript::Tick()
 		pNewObj->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
 
 		SpawnObject(0, pNewObj);
-
-		//CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
-		//pCurLevel->AddObject(0, pNewObj);
 	}
-
-	/*if (IsValid(m_TargetMonster))
-	{
-		Vec3 vDir = m_TargetMonster->Transform()->GetWorldPos() - Transform()->GetWorldPos();
-		vDir.Normalize();
-
-		vCurPos += vDir * m_Speed * DT;
-	}*/
 
 	Transform()->SetRelativePos(vCurPos);
 }

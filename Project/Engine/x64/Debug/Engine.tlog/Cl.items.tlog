@@ -34,6 +34,7 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CMaterial.c
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CStructuredBuffer.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CStructuredBuffer.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTaskManager.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTaskManager.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTexture.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTexture.obj
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTileMap.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTimeManager.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTimeManager.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTransform.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTransform.obj
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\Engine.cpp;C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\x64\Debug\Engine.obj

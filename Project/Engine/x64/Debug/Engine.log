@@ -35,6 +35,7 @@
   .\Project\Engine\CStructuredBuffer.h
   .\Project\Engine\CTaskManager.h
   .\Project\Engine\CTexture.h
+  .\Project\Engine\CTileMap.h
   .\Project\Engine\CTimeManager.h
   .\Project\Engine\CTransform.h
   .\Project\Engine\define.h
@@ -46,22 +47,15 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  48개 파일이 복사되었습니다.
+  49개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\debug_shape.fx
   .\Project\Engine\func.fx
   .\Project\Engine\std2d.fx
   .\Project\Engine\struct.fx
+  .\Project\Engine\tilemap.fx
   .\Project\Engine\value.fx
-  5개 파일이 복사되었습니다.
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
-C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\std2d.fx(56,5-32): warning X3206: implicit truncation of vector type
-  
-  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
-  CAssetMgr_Init.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetMgr_Init.cpp(118,20): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
-  
+  6개 파일이 복사되었습니다.
+  CLevelManager.cpp
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

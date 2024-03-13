@@ -171,6 +171,19 @@ void CAssetManager::CreateDefaultGraphicShader()
 	AddAsset<CGraphicShader>(L"Std2DAlphaBlendShader", pShader);
 
 
+	// =================
+	//	Tile Map Shader
+	// =================
+	pShader = new CGraphicShader;
+	pShader->CreateVertexShader(strPath + L"shader\\tilemap.fx", "VS_TileMap");
+	pShader->CreatePixelShader(strPath + L"shader\\tilemap.fx", "PS_TileMap");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
+
+	AddAsset<CGraphicShader>(L"TileMapShader", pShader);
+
+
 	// ====================
 	//	Debug Shape Shader
 	// ====================
@@ -180,7 +193,6 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetBSType(BS_TYPE::DEFAULT);
-	//pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 	pShader->SetDSType(DS_TYPE::NO_TEST);
 
 	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
@@ -208,6 +220,13 @@ void CAssetManager::CreateDefaultMaterial()
 	pMaterial = new CMaterial;
 	pMaterial->SetName(L"BackGroundMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DShader"));
+
+	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
+
+	// Tile Map Material
+	pMaterial = new CMaterial;
+	pMaterial->SetName(L"TileMapMaterial");
+	pMaterial->SetShader(FindAsset<CGraphicShader>(L"TileMapShader"));
 
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 

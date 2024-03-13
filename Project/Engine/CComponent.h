@@ -22,6 +22,7 @@ public:
 public:
 	COMPONENT_TYPE GetComponentType() { return m_Type; }
 	CGameObject* GetOwner() { return m_Owner; }
+	CRenderComponent* GetRenderComponent() { return m_Owner->GetRenderComponent(); }
 
 	GET_OTHER_COMPONENT(Transform);
 	GET_OTHER_COMPONENT(MeshRender);
@@ -29,6 +30,7 @@ public:
 	GET_OTHER_COMPONENT(Collider2D);
 	GET_OTHER_COMPONENT(Animator2D);
 	GET_OTHER_COMPONENT(Light2D);
+	GET_OTHER_COMPONENT(TileMap);
 
 public:
 	CComponent(COMPONENT_TYPE type);

@@ -12,14 +12,19 @@ private:
 
 	Ptr<CTexture>		m_arrTex[TEX_PARAM::END];
 
+	bool				m_bDynamic;
+
 public:
 	void SetShader(Ptr<CGraphicShader> shader) { m_Shader = shader; }
 	Ptr<CGraphicShader> GetShader() { return m_Shader; }
 
 	template<typename T>
 	void SetScalarParam(SCALAR_PARAM param, const T& value);
-
 	void SetTexParam(TEX_PARAM param, Ptr<CTexture> tex);
+
+	bool IsDynamic() { return m_bDynamic; }
+
+	Ptr<CMaterial> GetDynamicMaterial();
 
 public:
 	void Binding();

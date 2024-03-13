@@ -53,37 +53,38 @@ void CLevelManager::Init()
 
 	// Light Object
 	CGameObject* pLightObject = new CGameObject;
-	pLightObject->SetName(L"Light");
+	pLightObject->SetName(L"Directinal Light");
 	pLightObject->AddComponent(new CTransform);
 	pLightObject->AddComponent(new CLight2D);
 
-	pLightObject->Transform()->SetRelativePos(Vec3(-300.f, 0.f, 0.f));
+	pLightObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
-	//pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
-	//pLightObject->Light2D()->SetDiffuse(Vec3(0.2f, 0.2f, 0.2f));
-	//pLightObject->Light2D()->SetAmbient(Vec3(0.15f, 0.15f, 0.15f));
+	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
+	pLightObject->Light2D()->SetAmbient(Vec3(0.1f, 0.1f, 0.1f));
 
-	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	/*pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
 	pLightObject->Light2D()->SetDiffuse(Vec3(0.8f, 0.2f, 0.2f));
 	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
-	pLightObject->Light2D()->SetRange(400.f);
+	pLightObject->Light2D()->SetRange(400.f);*/
 
 	m_CurLevel->AddObject(0, pLightObject);
 
-	// Light Object 2
-	pLightObject = new CGameObject;
-	pLightObject->SetName(L"Light2");
-	pLightObject->AddComponent(new CTransform);
-	pLightObject->AddComponent(new CLight2D);
 
-	pLightObject->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
+	// TileMap Object
+	CGameObject* pTileMapObj = new CGameObject;
+	pTileMapObj->SetName(L"TileMap");
+	pTileMapObj->AddComponent(new CTransform);
+	pTileMapObj->AddComponent(new CTileMap);
 
-	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLightObject->Light2D()->SetDiffuse(Vec3(0.2f, 0.8f, 0.2f));
-	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
-	pLightObject->Light2D()->SetRange(400.f);
+	pTileMapObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
 
-	m_CurLevel->AddObject(0, pLightObject);
+	pTileMapObj->TileMap()->SetAtlasTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\TILE.bmp", L"texture\\TILE.bmp"));
+	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
+	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
+	pTileMapObj->TileMap()->SetRowCol(1, 1);
+
+	m_CurLevel->AddObject(0, pTileMapObj);
 
 
 	// Player

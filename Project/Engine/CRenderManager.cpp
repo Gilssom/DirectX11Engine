@@ -67,6 +67,7 @@ void CRenderManager::DataBinding()
 
 	// m_vecLight2D 에 모인 광원의 정보를 구조화 버퍼로 전달
 	static vector<tLightInfo> vecLightInfo;
+	vecLightInfo.clear();
 
 	for (size_t i = 0; i < m_vecLight2D.size(); i++)
 	{

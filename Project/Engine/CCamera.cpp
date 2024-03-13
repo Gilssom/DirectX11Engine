@@ -108,6 +108,15 @@ void CCamera::Render()
 	Render_postprocess();
 }
 
+void CCamera::SortClear()
+{
+	m_vecOpaque.clear();
+	m_vecMasked.clear();
+	m_vecTransParent.clear();
+	m_vecParticle.clear();
+	m_vecPostProcess.clear();
+}
+
 void CCamera::Render_opaque()
 {
 	for (size_t i = 0; i < m_vecOpaque.size(); i++)
@@ -173,6 +182,8 @@ void CCamera::LayerCheck(int layerIdx)
 
 void CCamera::SortObject()
 {
+	SortClear();
+
 	// Shader 의 속성마다 렌더링이 달라지기 때문에 오브젝트 정렬이 필요하다.
 	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
 

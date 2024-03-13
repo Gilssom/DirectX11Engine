@@ -10,6 +10,9 @@ cbuffer TRANSFORM : register(b0)
     row_major matrix g_matWorld;
     row_major matrix g_matView;
     row_major matrix g_matProj;
+    
+    row_major matrix g_matWV;
+    row_major matrix g_matWVP;
 };
 
 cbuffer MATERIAL_CONST : register(b1)

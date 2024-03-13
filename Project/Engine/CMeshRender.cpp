@@ -24,7 +24,7 @@ void CMeshRender::FinalTick()
 
 void CMeshRender::Render()
 {
-	// 만약 Mesh 나 Material 이 없다면
+	// 만약 Mesh 나 Material 이 없다면 (동적 재질이 있으면 동적 재질을 반환함)
 	if (GetMesh() == nullptr || GetMaterial() == nullptr)
 	{
 		return;

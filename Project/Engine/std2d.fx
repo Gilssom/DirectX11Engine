@@ -38,15 +38,17 @@ VS_OUT VS_Std2D(VS_IN _in)
     
     // 행렬을 곱할때 3차원 좌표를 4차원으로 확장 (동차좌표)
     
+    output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
+    
     // 1. 월드 위치로 물체를 배치 시킨다.
     float4 vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
     
     // 2. 카메라 위치를 기준으로 View Space 좌표 재배치
     //   모든 물체가 카메라가 기준이 되는 좌표계로 다 넘어온다.
-    float4 vViewPos = mul(vWorldPos, g_matView);
+    //float4 vViewPos = mul(vWorldPos, g_matView);
     
     // 3. 투영 좌표도 곱해준다. ( 최종 좌표 X )
-    float4 vProjPos = mul(vViewPos, g_matProj);
+    //float4 vProjPos = mul(vViewPos, g_matProj);
     
     // 4. Rasterizer 단계에서 행렬의 4번째 w 값을 알아서 나눠서 최종 좌표를 계산을 해준다.
     // 직접 투영 좌표를 나눠서 계산을해서 넘겨주고 할 필요가 없다.
@@ -54,7 +56,7 @@ VS_OUT VS_Std2D(VS_IN _in)
     // 투영 행렬을 각각의 모든 물체가 가지고 있는 형태는 존재할 수 없다고 판단.
     // 그래서 내부에서 w 값을 나눠주는 시스템이 존재함.
     output.vWorldPos = vWorldPos;
-    output.vPosition = vProjPos;
+    //output.vPosition = vProjPos;
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
     
@@ -103,6 +105,9 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
     
     if(vColor.a == 0.f)
         discard;
+    
+    if(g_int_0)
+        vColor.r *= 1.5f;
     
     return vColor;
 }

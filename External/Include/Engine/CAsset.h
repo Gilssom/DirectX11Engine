@@ -35,7 +35,7 @@ private:
 
 public:
 	CAsset(ASSET_TYPE type); // 실수로 type 을 지정 못해줄 수 있는 것을 방지함 ( 기본 생성자 삭제 )
-	CAsset(const CAsset& _Origin) = delete;
+	CAsset(const CAsset& _Origin);
 	~CAsset();
 
 	// Ptr 에서 가르키는 T 의 Private 에 접근 가능하게 한다.

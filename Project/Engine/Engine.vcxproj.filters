@@ -128,6 +128,9 @@
     <ClCompile Include="CLight2D.cpp">
       <Filter>07. Component\07. Light2D</Filter>
     </ClCompile>
+    <ClCompile Include="CTileMap.cpp">
+      <Filter>07. Component\Rendering\TileMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="CLight2D.h">
       <Filter>07. Component\07. Light2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CTileMap.h">
+      <Filter>07. Component\Rendering\TileMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -451,6 +457,9 @@
       <Filter>HLSL\01. Header</Filter>
     </FxCompile>
     <FxCompile Include="std2d.fx">
+      <Filter>HLSL\02. 2D</Filter>
+    </FxCompile>
+    <FxCompile Include="tilemap.fx">
       <Filter>HLSL\02. 2D</Filter>
     </FxCompile>
   </ItemGroup>
