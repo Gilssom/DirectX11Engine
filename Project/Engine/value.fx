@@ -98,6 +98,8 @@ StructuredBuffer<tLightInfo> g_Light2D : register(t15);
 // Light3DInfo
 StructuredBuffer<tLightInfo> g_Light3D : register(t16);
 
+
+
 #define PI 3.1415926535f
 
 #endif

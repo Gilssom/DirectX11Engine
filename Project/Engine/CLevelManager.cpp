@@ -82,7 +82,7 @@ void CLevelManager::Init()
 	pTileMapObj->TileMap()->SetAtlasTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\TILE.bmp", L"texture\\TILE.bmp"));
 	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
 	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
-	pTileMapObj->TileMap()->SetRowCol(1, 1);
+	pTileMapObj->TileMap()->SetRowCol(4, 4);
 
 	m_CurLevel->AddObject(0, pTileMapObj);
 

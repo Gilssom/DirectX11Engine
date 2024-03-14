@@ -17,8 +17,7 @@ void CRenderComponent::SetMaterial(Ptr<CMaterial> material)
 	// 동적 재질을 세팅받을 수 없다.
 	assert(!material->IsDynamic());
 
-	m_SharedMaterial = material;
-	m_CurMaterial = m_SharedMaterial;
+	m_CurMaterial = m_SharedMaterial = material;
 }
 
 Ptr<CMaterial> CRenderComponent::GetDynamicMaterial()
@@ -32,8 +31,7 @@ Ptr<CMaterial> CRenderComponent::GetDynamicMaterial()
 		return m_DynamicMaterial;
 	
 	// 현재 사용되고 있는 재질도 동적 재질로 변경
-	m_DynamicMaterial = m_SharedMaterial->GetDynamicMaterial();
-	m_CurMaterial = m_DynamicMaterial;
+	m_CurMaterial = m_DynamicMaterial = m_SharedMaterial->GetDynamicMaterial();
 
 	return m_DynamicMaterial;
 }

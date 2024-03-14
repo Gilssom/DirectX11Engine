@@ -42,34 +42,6 @@ public:
 
 	// 복사 생성자로 대체를 하면 안되는 이유
 	// 그 이전에 무언가를 가르키고 있을 수도 있다.
-	//void operator = (T* asset)
-	//{
-	//	if (m_Asset != nullptr)
-	//		m_Asset->Release();
-
-	//	m_Asset = asset;
-	//	
-	//	if (m_Asset != nullptr)
-	//		m_Asset->AddRef();
-	//}
-
-	//// 자신과 같은 녀석을 받을 수도 있다.
-	//void operator = (const Ptr<T>& other)
-	//{
-	//	if (m_Asset != nullptr)
-	//		m_Asset->Release();
-
-	//	m_Asset = other.m_Asset;
-
-	//	if (m_Asset != nullptr)
-	//		m_Asset->AddRef();
-	//}
-
-	//T* operator -> ()
-	//{
-	//	return m_Asset;
-	//}
-
 	void operator = (T* _Asset)
 	{
 		if (nullptr != m_Asset)
@@ -81,7 +53,8 @@ public:
 			m_Asset->AddRef();
 	}
 
-	void operator = (const Ptr<T>& _Other)
+	// 자신과 같은 녀석을 받을 수도 있다.
+	Ptr<T>& operator = (const Ptr<T>& _Other)
 	{
 		if (nullptr != m_Asset)
 			m_Asset->Release();
@@ -90,6 +63,8 @@ public:
 
 		if (nullptr != m_Asset)
 			m_Asset->AddRef();
+
+		return *this;
 	}
 
 	T* operator->()
