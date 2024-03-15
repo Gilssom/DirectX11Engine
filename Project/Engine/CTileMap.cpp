@@ -72,8 +72,8 @@ void CTileMap::SetRowCol(UINT row, UINT col)
 
 	for (int i = 0; i < m_vecTileInfo.size(); i++)
 	{
-		//m_vecTileInfo[i].ImageIndex = i % (m_AtlasMaxRow * m_AtlasMaxCol);
-		m_vecTileInfo[i].ImageIndex = 10;
+		m_vecTileInfo[i].ImageIndex = i % (m_AtlasMaxRow * m_AtlasMaxCol);
+		//m_vecTileInfo[i].ImageIndex = 10;
 	}
 }
 

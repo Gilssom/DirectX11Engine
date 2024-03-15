@@ -442,6 +442,12 @@
     <Filter Include="HLSL\02. 2D">
       <UniqueIdentifier>{87add515-7982-4dad-a21a-ea3d6e53fb0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLSL\03. 3D">
+      <UniqueIdentifier>{9d8570c2-113b-4c96-92ea-61e5286e00c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\04. ComputeShader">
+      <UniqueIdentifier>{bdbadfca-1f71-4564-a960-8de39dee9846}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="debug_shape.fx">
@@ -461,6 +467,9 @@
     </FxCompile>
     <FxCompile Include="tilemap.fx">
       <Filter>HLSL\02. 2D</Filter>
+    </FxCompile>
+    <FxCompile Include="compute.fx">
+      <Filter>HLSL\04. ComputeShader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

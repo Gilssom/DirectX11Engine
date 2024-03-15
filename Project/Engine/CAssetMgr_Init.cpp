@@ -202,7 +202,14 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 void CAssetManager::CreateDefaultComputeShader()
 {
+	wstring strPath = CPathManager::GetInst()->GetContentPath();
 
+	Ptr<CComputeShader> pComputeShader = nullptr;
+
+	pComputeShader = new CComputeShader;
+	pComputeShader->CreateComputeShader(strPath + L"shader\\compute.fx", "CS_Test");
+
+	AddAsset<CComputeShader>(L"DefaultComputeShader", pComputeShader);
 }
 
 void CAssetManager::CreateDefaultMaterial()

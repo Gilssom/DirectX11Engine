@@ -52,10 +52,10 @@ float4 PS_TileMap(VS_OUT _in) : SV_Target
     // 1. 입력된 UV (0 ~ 1 사이) 를 실제 타일 행렬 개수에 맞추어 확장한다.
     _in.vUV *= TileColRow;
     
-    // 2. 확장시킨 UV 에서 해당 픽셀 Shader 의 타일 상에서의 위치값을 행렬로 알아낼 수 있다.
+    // 2. 확장시킨 UV 에서 해당 픽셀 Shader 의 타일 상에서의 위치값을 행렬로 알아낼 수 있다. ex) (2.8, 2.8) => 2행 2열
     int2 PixelColRowIndex = (int2)_in.vUV;
     
-    // 3. 확장시킨 UV 에서 소수점만 취한다. 해당 픽셀이 해당 칸 내에서 어느 위치인지 알 수 있다. ex) (2.8, 2.8) => 2행 2열
+    // 3. 확장시킨 UV 에서 소수점만 취한다. 해당 픽셀이 해당 칸 내에서 어느 위치인지 알 수 있다.
     _in.vUV = _in.vUV - floor(_in.vUV);
     
     // 4. Atlas Texture 상에서 하나의 타일 이미지가 차지하는 크기를 UV 단위로 구한다.
