@@ -15,7 +15,7 @@
 //Texture2D TargetTex : register(t21);
 
 // 읽기 및 수정 가능 (register 는 u 로 시작) = unordered register
-RWTexture2D TargetTex : register(u0);
+RWTexture2D<float4> TargetTex : register(u0);
 
 
 [numthreads(32, 32, 1)]

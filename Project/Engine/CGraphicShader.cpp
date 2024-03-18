@@ -122,7 +122,7 @@ int CGraphicShader::CreatePixelShader(const wstring& strFilePath, const string& 
 	return S_OK;
 }
 
-void CGraphicShader::Binding()
+int CGraphicShader::Binding()
 {
 	CONTEXT->IASetInputLayout(m_Layout.Get());
 	CONTEXT->IASetPrimitiveTopology(m_Topology); // 도형의 구조를 알려주는 함수
@@ -136,4 +136,6 @@ void CGraphicShader::Binding()
 	CONTEXT->OMSetDepthStencilState(CDevice::GetInst()->GetDS(m_DSType).Get(), 0);
 
 	CONTEXT->OMSetBlendState(CDevice::GetInst()->GetBS(m_BSType).Get(), Vec4(0.f, 0.f, 0.f, 0.f), 0xffffffff); // 0xffffffff 모든 마스킹 비트가 출력 될 수 있게
+
+	return S_OK;
 }

@@ -15,14 +15,15 @@ private:
 
 public:
     void Init();
-    void CreateDefaultMesh();
-    void CreateDefaultTexture();
-    void CreateDefaultMaterial();
-    void CreateDefaultGraphicShader();
-    void CreateDefaultComputeShader();
 
 
 public:
+    // bindFlag : D3D11_BIND_FLAG
+    Ptr<CTexture> CreateTexture(const wstring& strKey, UINT width, UINT height
+                            , DXGI_FORMAT pixelFormat, UINT bindFlag, D3D11_USAGE usage = D3D11_USAGE_DEFAULT);
+
+    Ptr<CTexture> CreateTexture(const wstring& strKey, ComPtr<ID3D11Texture2D> tex2D);
+
     // Asset 불러오기
     template<typename T>
     Ptr<T> Load(const wstring& strKey, const wstring& strRelativePath);
@@ -35,8 +36,14 @@ public:
     template<typename T>
     void AddAsset(const wstring& strKey, Ptr<T> pAsset);
 
-};
 
+private:
+    void CreateDefaultMesh();
+    void CreateDefaultTexture();
+    void CreateDefaultMaterial();
+    void CreateDefaultGraphicShader();
+    void CreateDefaultComputeShader();
+};
 
 // 변수 템플릿
 //template<typename T1, typename T2>

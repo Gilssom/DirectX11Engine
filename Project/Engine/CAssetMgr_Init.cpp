@@ -200,16 +200,18 @@ void CAssetManager::CreateDefaultGraphicShader()
 	AddAsset<CGraphicShader>(L"DebugShapeShader", pShader);
 }
 
+#include "CSetColorShader.h"
+
 void CAssetManager::CreateDefaultComputeShader()
 {
 	wstring strPath = CPathManager::GetInst()->GetContentPath();
 
 	Ptr<CComputeShader> pComputeShader = nullptr;
 
-	pComputeShader = new CComputeShader;
+	pComputeShader = new CSetColorShader;
 	pComputeShader->CreateComputeShader(strPath + L"shader\\compute.fx", "CS_Test");
-
-	AddAsset<CComputeShader>(L"DefaultComputeShader", pComputeShader);
+	// 등록 및 검색은 부모 클래스인 CComputeShader 로
+	AddAsset<CComputeShader>(L"SetColorCS", pComputeShader);
 }
 
 void CAssetManager::CreateDefaultMaterial()

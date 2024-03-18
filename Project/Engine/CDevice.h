@@ -1,5 +1,7 @@
 #pragma once
 
+#include "CTexture.h"
+
 class CConstBuffer;
 
 class CDevice : public CSingleton<CDevice>
@@ -19,11 +21,8 @@ private:
 	ComPtr<ID3D11DeviceContext>		m_Context;		// GPU 렌더링 관련 명령,
 	ComPtr<IDXGISwapChain>			m_SwapChain;	// 렌더타겟 버퍼 소유, 화면에 최종 장면을 게시
 
-	ComPtr<ID3D11Texture2D>			m_RenderTargetTex;
-	ComPtr<ID3D11RenderTargetView>	m_RTV;
-
-	ComPtr<ID3D11Texture2D>			m_DepthStencilTex;
-	ComPtr<ID3D11DepthStencilView>  m_DSV;
+	Ptr<CTexture>					m_RTTex;
+	Ptr<CTexture>					m_DSTex;
 
 	ComPtr<ID3D11SamplerState>		m_Sampler[2];
 	ComPtr<ID3D11RasterizerState>	m_RS[(UINT)RS_TYPE::END];

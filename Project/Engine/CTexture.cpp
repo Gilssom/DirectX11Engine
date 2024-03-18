@@ -17,10 +17,142 @@ void CTexture::Binding(int registerNum)
     CONTEXT->PSSetShaderResources(registerNum, 1, m_SRV.GetAddressOf());
 }
 
+void CTexture::Binding_CS_SRV(int registerNum)
+{
+    CONTEXT->CSSetShaderResources(registerNum, 1, m_SRV.GetAddressOf());
+}
+
+void CTexture::Binding_CS_UAV(int registerNum)
+{
+    UINT i = -1;
+    CONTEXT->CSSetUnorderedAccessViews(registerNum, 1, m_UAV.GetAddressOf(), &i);
+}
+
 void CTexture::Clear(int registerNum)
 {
     ID3D11ShaderResourceView* pSRV = nullptr;
     CONTEXT->PSSetShaderResources(registerNum, 1, &pSRV);
+}
+
+void CTexture::Clear_CS_SRV(int registerNum)
+{
+    ID3D11ShaderResourceView* pSRV = nullptr;
+    CONTEXT->CSSetShaderResources(registerNum, 1, &pSRV);
+}
+
+void CTexture::Clear_CS_UAV(int registerNum)
+{
+    UINT i = -1;
+    ID3D11UnorderedAccessView* pUAV = nullptr;
+    CONTEXT->CSSetUnorderedAccessViews(registerNum, 1, &pUAV, &i);
+}
+
+int CTexture::Create(UINT width, UINT height, DXGI_FORMAT pixelFormat
+                    , UINT bindFlag, D3D11_USAGE usage)
+{
+    m_Desc.Format = pixelFormat;
+    m_Desc.Width = width;
+    m_Desc.Height = height;
+    m_Desc.ArraySize = 1;
+
+    m_Desc.Usage = usage;
+    if (D3D11_USAGE_DYNAMIC == m_Desc.Usage)
+    {
+        m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    }
+
+    // Bind Flag 가 조합이 될 수도 있다. (내부 값 확인 필요) 각자의 비트로 설계되어 있음 (정수타입으로 받게 됨)
+    // D3D11_BIND_VERTEX_BUFFER | D3D11_BIND_INDEX_BUFFER ...
+    m_Desc.BindFlags = bindFlag;
+    m_Desc.MipLevels = 1;
+    m_Desc.SampleDesc.Count = 1;
+    m_Desc.SampleDesc.Quality = 0;
+
+    if (FAILED(DEVICE->CreateTexture2D(&m_Desc, nullptr, &m_Tex2D)))
+    {
+        return E_FAIL;
+    }
+
+    // 비트 연산자로 해당 Bing Flag Type 확인
+    if (m_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
+    {
+        DEVICE->CreateDepthStencilView(m_Tex2D.Get(), nullptr, m_DSV.GetAddressOf());
+    }
+    // Depth Stencil Flag 는 단일 Flag 이여야 하기 때문에 else 처리 (다른 것과 조합이 불가능)
+    else
+    {
+        if (m_Desc.BindFlags & D3D11_BIND_RENDER_TARGET)
+        {
+            // Render Target View
+            DEVICE->CreateRenderTargetView(m_Tex2D.Get(), nullptr, m_RTV.GetAddressOf());
+        }
+
+        if (m_Desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
+        {
+            // Shader Resource View
+            D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
+            desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+            desc.Texture2D.MipLevels = 1;
+            desc.Texture2D.MostDetailedMip = 0;
+
+            DEVICE->CreateShaderResourceView(m_Tex2D.Get(), &desc, m_SRV.GetAddressOf());
+        }
+
+        if (m_Desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS)
+        {
+            // Unordered Access View
+            D3D11_UNORDERED_ACCESS_VIEW_DESC desc = {};
+            desc.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2D;
+
+            DEVICE->CreateUnorderedAccessView(m_Tex2D.Get(), &desc, m_UAV.GetAddressOf());
+        }
+    }
+
+    return S_OK;
+}
+
+int CTexture::Create(ComPtr<ID3D11Texture2D> tex2D)
+{
+    // 이미 만들어진 Texture 정보 가져오기
+    m_Tex2D = tex2D;
+    m_Tex2D->GetDesc(&m_Desc);
+
+    // 비트 연산자로 해당 Bing Flag Type 확인
+    if (m_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
+    {
+        DEVICE->CreateDepthStencilView(m_Tex2D.Get(), nullptr, m_DSV.GetAddressOf());
+    }
+    // Depth Stencil Flag 는 단일 Flag 이여야 하기 때문에 else 처리 (다른 것과 조합이 불가능)
+    else
+    {
+        if (m_Desc.BindFlags & D3D11_BIND_RENDER_TARGET)
+        {
+            // Render Target View
+            DEVICE->CreateRenderTargetView(m_Tex2D.Get(), nullptr, m_RTV.GetAddressOf());
+        }
+
+        if (m_Desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
+        {
+            // Shader Resource View
+            D3D11_SHADER_RESOURCE_VIEW_DESC desc = {};
+            desc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+            desc.Texture2D.MipLevels = 1;
+            desc.Texture2D.MostDetailedMip = 0;
+
+            DEVICE->CreateShaderResourceView(m_Tex2D.Get(), &desc, m_SRV.GetAddressOf());
+        }
+
+        if (m_Desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS)
+        {
+            // Unordered Access View
+            D3D11_UNORDERED_ACCESS_VIEW_DESC desc = {};
+            desc.ViewDimension = D3D11_UAV_DIMENSION_TEXTURE2D;
+
+            DEVICE->CreateUnorderedAccessView(m_Tex2D.Get(), &desc, m_UAV.GetAddressOf());
+        }
+    }
+
+    return S_OK;
 }
 
 int CTexture::Load(const wstring& FilePath)

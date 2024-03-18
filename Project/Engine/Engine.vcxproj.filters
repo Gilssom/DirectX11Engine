@@ -131,6 +131,9 @@
     <ClCompile Include="CTileMap.cpp">
       <Filter>07. Component\Rendering\TileMap</Filter>
     </ClCompile>
+    <ClCompile Include="CSetColorShader.cpp">
+      <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="CTileMap.h">
       <Filter>07. Component\Rendering\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetColorShader.h">
+      <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +454,9 @@
     <Filter Include="HLSL\04. ComputeShader">
       <UniqueIdentifier>{bdbadfca-1f71-4564-a960-8de39dee9846}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLSL\04. ComputeShader\SetColorShader">
+      <UniqueIdentifier>{904bca3d-0809-43f4-b3be-2ba2c1c8b14b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="debug_shape.fx">
@@ -469,7 +478,7 @@
       <Filter>HLSL\02. 2D</Filter>
     </FxCompile>
     <FxCompile Include="compute.fx">
-      <Filter>HLSL\04. ComputeShader</Filter>
+      <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

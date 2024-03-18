@@ -3,8 +3,14 @@
 
 #include "CDevice.h"
 
-CComputeShader::CComputeShader()
+CComputeShader::CComputeShader(UINT threadPerGroupX, UINT threadPerGroupY, UINT threadPerGroupZ)
 	: CShader(ASSET_TYPE::COMPUTE_SHADER)
+	, m_ThreadPerGroupX(threadPerGroupX)
+	, m_ThreadPerGroupY(threadPerGroupY)
+	, m_ThreadPerGroupZ(threadPerGroupZ)
+	, m_GroupX(1)
+	, m_GroupY(1)
+	, m_GroupZ(1)
 {
 
 }
@@ -49,15 +55,22 @@ int CComputeShader::CreateComputeShader(const wstring& strFilePath, const string
 	return S_OK;
 }
 
-void CComputeShader::Binding()
-{
-
-}
-
 void CComputeShader::Execute()
 {
+	// 상속 받아간 Class 의 Binding 함수로
+	if (FAILED(Binding()))
+	{
+		return;
+	}
+
+	// 상속 받아간 Class 의 CalculateGroupNum 함수로
+	CalculateGroupNum();
+
 	CONTEXT->CSSetShader(m_CS.Get(), nullptr, 0);
 
 	// Group Count (최대 개수 제한 X) (그룹 당 Thread 개수는 1,024개)
-	CONTEXT->Dispatch(2, 2, 1);
+	CONTEXT->Dispatch(m_GroupX, m_GroupY, m_GroupZ);
+
+	// 상속 받아간 Class 의 Clear 함수로
+	Clear();
 }

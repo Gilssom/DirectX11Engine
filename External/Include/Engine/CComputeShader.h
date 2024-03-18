@@ -25,8 +25,21 @@ private:
     ComPtr<ID3D11ComputeShader>     m_CS;
 
 
+protected:
+    // 1개의 그룹 당 스레드 개수
+    UINT                            m_ThreadPerGroupX;
+    UINT                            m_ThreadPerGroupY;
+    UINT                            m_ThreadPerGroupZ;
+
+    // 그룹 개수
+    UINT                            m_GroupX;
+    UINT                            m_GroupY;
+    UINT                            m_GroupZ;
+
 public:
-    virtual void Binding();
+    virtual int Binding() = 0;
+    virtual void CalculateGroupNum() = 0;
+    virtual void Clear() = 0;
 
 public:
     void Execute();
@@ -37,7 +50,7 @@ public:
 
 
 public:
-    CComputeShader();
+    CComputeShader(UINT threadPerGroupX, UINT threadPerGroupY, UINT threadPerGroupZ);
     ~CComputeShader();
 };
 

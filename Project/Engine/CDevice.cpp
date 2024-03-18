@@ -3,6 +3,8 @@
 
 #include "CConstBuffer.h"
 
+#include "CAssetManager.h"
+
 CDevice::CDevice()
 	: m_hMainHwnd(nullptr)
 	, m_CB{}
@@ -100,11 +102,11 @@ int CDevice::Init(HWND hwnd, Vec2 resolution)
 
 void CDevice::ClearTarget(float(&ArrColor)[4])
 {
-	m_Context->ClearRenderTargetView(m_RTV.Get(), ArrColor);
+	m_Context->ClearRenderTargetView(m_RTTex->GetRTV().Get(), ArrColor);
 
 	// Depth Stencil 에서 자신의 깊이 값보다 작은 값들의 물체들만 그려줌
 	// 그래서 Depth Stencil View 의 초기값은 1로 초기화 해야 함
-	m_Context->ClearDepthStencilView(m_DSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_DEPTH, 1.f, 0);
+	m_Context->ClearDepthStencilView(m_DSTex->GetDSV().Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_DEPTH, 1.f, 0);
 }
 
 int CDevice::CreateSwapChain()
@@ -154,39 +156,21 @@ int CDevice::CreateView()
 	// 중간에 정보를 전달해 주는 매개체 (전달자 역할)
 	
 	// 1. RenderTarget 용 텍스쳐를 SwapChain 으로부터 가져와야 한다. 이미 있는 정보들이라 간단하다. (포인터 형식)
-	m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)m_RenderTargetTex.GetAddressOf());
+	ComPtr<ID3D11Texture2D> Tex2D = nullptr;
+	m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)Tex2D.GetAddressOf());
 
-	// 2. 렌더타겟 텍스쳐를 이용해서 렌더타겟 뷰를 만든다.
-	m_Device->CreateRenderTargetView(m_RenderTargetTex.Get(), nullptr, m_RTV.GetAddressOf());
-
+	// 2. CTextrue 로 변환
+	m_RTTex = CAssetManager::GetInst()->CreateTexture(L"RenderTargetTex", Tex2D);
 
 	// DepthStencil View : 새로운 텍스쳐를 만들어 내야 한다.
 	// 1. DepthStencil Texture 생성 ( RenderTarget Tex 와 1:1 비율이여야 한다. )
-	D3D11_TEXTURE2D_DESC desc = {};
-
-	desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT; // 32bit / 3byte = depth , 1byte = stencil
-	desc.Width = m_RenderResolution.x;
-	desc.Height = m_RenderResolution.y;
-	desc.ArraySize = 1; // 배열 텍스처
-	
-	// 깊이 텍스처는 시스템 상에서 접근이 불가능하기 때문에 꺼버림
-	desc.CPUAccessFlags = 0;
-	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	desc.MipLevels = 1;
-	desc.SampleDesc.Count = 1;
-	desc.SampleDesc.Quality = 0;
-
-	// 무언가를 만들어주는 역할은 Device 역할
-	m_Device->CreateTexture2D(&desc, nullptr, &m_DepthStencilTex);
-
-	// 2. DepthStencil View 를 생성한다.
-	// 여기서 RenderTarget , DepthStencil View 가 필요하다.
-	m_Device->CreateDepthStencilView(m_DepthStencilTex.Get(), nullptr, m_DSV.GetAddressOf());
+	m_DSTex = CAssetManager::GetInst()->CreateTexture(L"DepthStencilTex"
+													, (UINT)m_RenderResolution.x, (UINT)m_RenderResolution.y
+													, DXGI_FORMAT_D24_UNORM_S8_UINT, D3D11_BIND_DEPTH_STENCIL);
 
 	// Swap Chain 의 텍스처를 렌더타겟으로 지정하고, 
 	// 새로 만든 DepthStencil 용 텍스처를 깊이 저장용 텍스처로 지정한다.
-	m_Context->OMSetRenderTargets(1, m_RTV.GetAddressOf(), m_DSV.Get()); // 깊이 텍스쳐는 무조건 하나밖에 쓸수 없기 때문에 이중포인터로 안넘긴다.
+	m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get()); // 깊이 텍스쳐는 무조건 하나밖에 쓸수 없기 때문에 이중포인터로 안넘긴다.
 	
 	// 여기서 DepthStencil View 란?
 	// Api 에서 더블 버퍼링 시스템으로 화면에 텍스처를 그려주는 방법이 있었다.

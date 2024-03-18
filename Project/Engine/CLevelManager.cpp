@@ -13,6 +13,8 @@
 
 #include "CCollisionManager.h"
 
+#include "CSetColorShader.h"
+
 CLevelManager::CLevelManager()
 	: m_CurLevel(nullptr)
 {
@@ -29,6 +31,18 @@ CLevelManager::~CLevelManager()
 
 void CLevelManager::Init()
 {
+	// Texture 생성하기
+	Ptr<CTexture> pTestTex = CAssetManager::GetInst()->CreateTexture(L"TestTex"
+																	, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
+																	, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+	
+	// Compute Shader Test
+	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"SetColorCS").Get();
+	pCS->SetTargetTextrue(pTestTex);
+	pCS->Execute();
+
+
+	// Level
 	m_CurLevel = new CLevel;
 
 	m_CurLevel->GetLayer(0)->SetName(L"Default");
@@ -37,6 +51,7 @@ void CLevelManager::Init()
 
 	// 오브젝트에 컴포넌트 등록 후, 컴포넌트의 함수에 접근 후 세팅
 	
+
 	// Camera
 	CGameObject* pCamObject = new CGameObject;
 	pCamObject->SetName(L"Camera");
@@ -135,6 +150,9 @@ void CLevelManager::Init()
 	pMonster->Collider2D()->SetAbsolute(false);
 	pMonster->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
 	pMonster->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
+
+	pMonster->GetRenderComponent()->GetMaterial()->SetTexParam(TEX_0, pTestTex);
+
 
 	// Player 와 Monster 를 부모-자식 관계로 연결
 	//pPlayer->AddChild(pMonster);

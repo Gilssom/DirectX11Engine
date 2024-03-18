@@ -30,7 +30,7 @@ public:
     void SetDSType(DS_TYPE type) { m_DSType = type; }
     void SetBSType(BS_TYPE type) { m_BSType = type; }
 
-    virtual void Binding() override;
+    virtual int Binding() override;
 
     void SetDomain(SHADER_DOMAIN domain) { m_Domain = domain; }
     SHADER_DOMAIN GetDomain() { return m_Domain; }
