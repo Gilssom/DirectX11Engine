@@ -1,7 +1,9 @@
 #ifndef _COMPUTE
 #define _COMPUTE
 
+#include "value.fx"
 
+#ifndef Compute_Shader_Info
 // thread 개수 명시 (HLSL 5.0 ver Max = 1,024)
 // 3차원 공간 개수 계산 ex) 2, 2, 2 = 8개 / Max = 32, 32, 1 or 1024, 1, 1
 // = Group 당 Thread 개수
@@ -15,13 +17,24 @@
 //Texture2D TargetTex : register(t21);
 
 // 읽기 및 수정 가능 (register 는 u 로 시작) = unordered register
+#endif
+
 RWTexture2D<float4> TargetTex : register(u0);
+
+
+#define Width   g_int_0
+#define Height  g_int_1
+#define Color   g_vec4_0
 
 
 [numthreads(32, 32, 1)]
 void CS_Test(int3 _ThreadID : SV_DispatchThreadID)
 {
-    TargetTex[_ThreadID.xy] = float4(1.f, 0.f, 0.f, 1.f);
+    // 지정된 Texture 의 범위를 벗어난 Thread 들은 return 처리
+    if (Width <= _ThreadID.x || Height <= _ThreadID.y)
+        return;
+    
+    TargetTex[_ThreadID.xy] = Color;
 }
 
 

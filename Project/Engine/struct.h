@@ -58,6 +58,19 @@ struct tLightInfo
 	Vec3	vPadding;	// 16 Byte 맞추기 위한 용도
 };
 
+// 파티클 (입자 한개 당 가지고 있어야 할 정보들)
+struct tParticle
+{
+	Vec3	vWorldPos;
+	Vec3	vWorldScale;
+	Vec4	vColor;
+	Vec3	vVelocity;
+
+	float	Life;
+	float	Age;
+	float	NormalizedAge; // 현재 수명의 비율
+};
+
 
 // ====================
 // 상수버퍼 관련 구조체

@@ -32,13 +32,15 @@ CLevelManager::~CLevelManager()
 void CLevelManager::Init()
 {
 	// Texture 생성하기
-	Ptr<CTexture> pTestTex = CAssetManager::GetInst()->CreateTexture(L"TestTex"
-																	, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
-																	, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+	Ptr<CTexture> pTestTex = 
+		CAssetManager::GetInst()->CreateTexture(L"TestTex"
+											, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
+											, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
 	
 	// Compute Shader Test
 	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"SetColorCS").Get();
 	pCS->SetTargetTextrue(pTestTex);
+	pCS->SetClearColor(Vec3(0.f, 0.f, 1.f));
 	pCS->Execute();
 
 
@@ -87,7 +89,7 @@ void CLevelManager::Init()
 
 
 	// TileMap Object
-	CGameObject* pTileMapObj = new CGameObject;
+	/*CGameObject* pTileMapObj = new CGameObject;
 	pTileMapObj->SetName(L"TileMap");
 	pTileMapObj->AddComponent(new CTransform);
 	pTileMapObj->AddComponent(new CTileMap);
@@ -99,48 +101,48 @@ void CLevelManager::Init()
 	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
 	pTileMapObj->TileMap()->SetRowCol(4, 4);
 
-	m_CurLevel->AddObject(0, pTileMapObj);
+	m_CurLevel->AddObject(0, pTileMapObj);*/
 
 
 	// Player
-	CGameObject* pPlayer = new CGameObject;
-	pPlayer->SetName(L"Player");
-	pPlayer->AddComponent(new CTransform);
-	pPlayer->AddComponent(new CMeshRender);
-	pPlayer->AddComponent(new CCollider2D);
-	pPlayer->AddComponent(new CAnimator2D);
-	pPlayer->AddComponent(new CPlayerScript);
+	/*CGameObject* pPlayer = new CGameObject;
+	//pPlayer->SetName(L"Player");
+	//pPlayer->AddComponent(new CTransform);
+	//pPlayer->AddComponent(new CMeshRender);
+	//pPlayer->AddComponent(new CCollider2D);
+	//pPlayer->AddComponent(new CAnimator2D);
+	//pPlayer->AddComponent(new CPlayerScript);
 
-	pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
-	pPlayer->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
+	//pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	//pPlayer->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
 
-	pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
-	pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
+	//pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	//pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
 
-	pPlayer->Collider2D()->SetAbsolute(false);
-	pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
-	pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
+	//pPlayer->Collider2D()->SetAbsolute(false);
+	//pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
+	//pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
-	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
-	//pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
-	//pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
-	//pPlayer->Animator2D()->FindAnimation(L"MOVE_DOWN")->Save(L"Animation\\");
+	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
+	////pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
+	////pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
+	////pPlayer->Animator2D()->FindAnimation(L"MOVE_DOWN")->Save(L"Animation\\");
 
-	pPlayer->Animator2D()->LoadAnimation(L"Animation\\MOVE_DOWN.anim");
-	pPlayer->Animator2D()->Play(L"MOVE_DOWN", true);
+	//pPlayer->Animator2D()->LoadAnimation(L"Animation\\MOVE_DOWN.anim");
+	//pPlayer->Animator2D()->Play(L"MOVE_DOWN", true);
 
-	m_CurLevel->AddObject(1, pPlayer, false);
+	//m_CurLevel->AddObject(1, pPlayer, false);*/
 
 
 	// Monster
-	CGameObject* pMonster = new CGameObject;
+	/*CGameObject* pMonster = new CGameObject;
 	pMonster->SetName(L"Monster");
 	pMonster->AddComponent(new CTransform);
 	pMonster->AddComponent(new CMeshRender);
 	pMonster->AddComponent(new CCollider2D);
 
-	pMonster->Transform()->SetRelativePos(Vec3(200.f, 0.f, 0.f));
+	pMonster->Transform()->SetRelativePos(Vec3(200.f, 100.f, 0.f));
 	pMonster->Transform()->SetRelativeScale(100.f, 100.f, 0.f);
 	pMonster->Transform()->SetAbsolute(true);
 
@@ -156,9 +158,9 @@ void CLevelManager::Init()
 
 	// Player 와 Monster 를 부모-자식 관계로 연결
 	//pPlayer->AddChild(pMonster);
-	m_CurLevel->AddObject(1, pMonster, false);
+	m_CurLevel->AddObject(1, pMonster, false);*/
 
-	pPlayer->GetScript<CPlayerScript>()->SetTarget(pMonster);
+	//pPlayer->GetScript<CPlayerScript>()->SetTarget(pMonster);
 
 
 	// Back Ground Object
@@ -166,7 +168,7 @@ void CLevelManager::Init()
 	pBackGround->AddComponent(new CTransform);
 	pBackGround->AddComponent(new CMeshRender);
 
-	pBackGround->Transform()->SetRelativePos(Vec3(0.f, 0.f, 200.f));
+	pBackGround->Transform()->SetRelativePos(Vec3(0.f, 0.f, 1000.f));
 	pBackGround->Transform()->SetRelativeScale(Vec3(1600.f, 900.f, 1.f));
 
 	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
@@ -174,6 +176,17 @@ void CLevelManager::Init()
 	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\Background.jpg", L"texture\\Background.jpg"));
 
 	m_CurLevel->AddObject(0, pBackGround, false);
+
+
+	// Particle Object
+	CGameObject* pParticleObject = new CGameObject;
+	pParticleObject->SetName(L"Particle");
+	pParticleObject->AddComponent(new CTransform);
+	pParticleObject->AddComponent(new CParticleSystem);
+
+	pParticleObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
+
+	m_CurLevel->AddObject(0, pParticleObject, false);
 
 
 	// Level 의 Collision Setting

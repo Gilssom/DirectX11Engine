@@ -62,7 +62,7 @@ void CRenderManager::DataBinding()
 	// 광원 개수보다 구조화 버퍼 요소크기가 더 작으면 확장.
 	if (m_Light2DBuffer->GetElementCount() < m_vecLight2D.size())
 	{
-		m_Light2DBuffer->Create(sizeof(tLightInfo), (UINT)m_vecLight2D.size());
+		m_Light2DBuffer->Create(sizeof(tLightInfo), (UINT)m_vecLight2D.size(), SB_TYPE::SRV_ONLY, true);
 	}
 
 	// m_vecLight2D 에 모인 광원의 정보를 구조화 버퍼로 전달

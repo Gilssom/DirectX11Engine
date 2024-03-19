@@ -50,7 +50,7 @@ void CTileMap::Render()
 
 	// Tile Info Binding
 	if (m_TileBuffer->GetElementCount() < m_vecTileInfo.size())
-		m_TileBuffer->Create(sizeof(tTileInfo), m_vecTileInfo.size(), m_vecTileInfo.data());
+		m_TileBuffer->Create(sizeof(tTileInfo), m_vecTileInfo.size(), SB_TYPE::SRV_ONLY, true, m_vecTileInfo.data());
 	else
 		m_TileBuffer->SetData(m_vecTileInfo.data(), m_vecTileInfo.size());
 

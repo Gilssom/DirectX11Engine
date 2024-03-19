@@ -31,6 +31,8 @@ public:
 	GET_OTHER_COMPONENT(Animator2D);
 	GET_OTHER_COMPONENT(Light2D);
 	GET_OTHER_COMPONENT(TileMap);
+	GET_OTHER_COMPONENT(ParticleSystem);
+
 
 public:
 	CComponent(COMPONENT_TYPE type);

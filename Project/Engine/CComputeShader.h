@@ -26,6 +26,10 @@ private:
 
 
 protected:
+    tMtrlConst                      m_Const;
+
+
+protected:
     // 1개의 그룹 당 스레드 개수
     UINT                            m_ThreadPerGroupX;
     UINT                            m_ThreadPerGroupY;
@@ -36,10 +40,12 @@ protected:
     UINT                            m_GroupY;
     UINT                            m_GroupZ;
 
+
 public:
     virtual int Binding() = 0;
     virtual void CalculateGroupNum() = 0;
     virtual void Clear() = 0;
+
 
 public:
     void Execute();

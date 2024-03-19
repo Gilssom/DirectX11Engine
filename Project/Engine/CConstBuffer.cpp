@@ -61,6 +61,11 @@ void CConstBuffer::Binding()
 	CONTEXT->PSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
 }
 
+void CConstBuffer::Binding_CS()
+{
+	CONTEXT->CSSetConstantBuffers(/*레지스터 번호*/ (UINT)m_Type, 1, m_CB.GetAddressOf());
+}
+
 void CConstBuffer::Clear()
 {
 	ID3D11Buffer* pBuffer = nullptr;

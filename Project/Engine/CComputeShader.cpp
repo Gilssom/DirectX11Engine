@@ -2,6 +2,7 @@
 #include "CComputeShader.h"
 
 #include "CDevice.h"
+#include "CConstBuffer.h"
 
 CComputeShader::CComputeShader(UINT threadPerGroupX, UINT threadPerGroupY, UINT threadPerGroupZ)
 	: CShader(ASSET_TYPE::COMPUTE_SHADER)
@@ -66,6 +67,12 @@ void CComputeShader::Execute()
 	// 상속 받아간 Class 의 CalculateGroupNum 함수로
 	CalculateGroupNum();
 
+	// 상수 데이터를 Compute Shader 로 전달
+	static CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL);
+	pCB->SetData(&m_Const);
+	pCB->Binding_CS();
+
+	// Compute Shader 실행
 	CONTEXT->CSSetShader(m_CS.Get(), nullptr, 0);
 
 	// Group Count (최대 개수 제한 X) (그룹 당 Thread 개수는 1,024개)

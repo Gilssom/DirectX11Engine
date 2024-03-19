@@ -134,6 +134,9 @@
     <ClCompile Include="CSetColorShader.cpp">
       <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
     </ClCompile>
+    <ClCompile Include="CParticleSystem.cpp">
+      <Filter>07. Component\Rendering\ParticleSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -289,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="CSetColorShader.h">
       <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticleSystem.h">
+      <Filter>07. Component\Rendering\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

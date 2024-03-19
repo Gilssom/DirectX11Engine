@@ -186,6 +186,7 @@ call Copy.bat</Command>
     <ClInclude Include="CMeshRender.h" />
     <ClInclude Include="CMissileScript.h" />
     <ClInclude Include="components.h" />
+    <ClInclude Include="CParticleSystem.h" />
     <ClInclude Include="CPathManager.h" />
     <ClInclude Include="CPlayerScript.h" />
     <ClInclude Include="CRenderComponent.h" />
@@ -239,6 +240,7 @@ call Copy.bat</Command>
     <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="CMissileScript.cpp" />
+    <ClCompile Include="CParticleSystem.cpp" />
     <ClCompile Include="CPathManager.cpp" />
     <ClCompile Include="CPlayerScript.cpp" />
     <ClCompile Include="CRenderComponent.cpp" />

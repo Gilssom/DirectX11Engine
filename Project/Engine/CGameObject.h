@@ -41,6 +41,7 @@ public:
 	GET_COMPONENT(Animator2D, ANIMATOR2D);
 	GET_COMPONENT(Light2D, LIGHT2D);
 	GET_COMPONENT(TileMap, TILEMAP);
+	GET_COMPONENT(ParticleSystem, PARTICLESYSTEM);
 
 	void AddChild(CGameObject* object);
 	const vector<CGameObject*>& GetChildren() { return m_vecChild; }
