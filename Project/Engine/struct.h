@@ -61,6 +61,7 @@ struct tLightInfo
 // 파티클 (입자 한개 당 가지고 있어야 할 정보들)
 struct tParticle
 {
+	Vec3	vLocalPos;
 	Vec3	vWorldPos;
 	Vec3	vWorldScale;
 	Vec4	vColor;
@@ -69,6 +70,7 @@ struct tParticle
 	float	Life;
 	float	Age;
 	float	NormalizedAge; // 현재 수명의 비율
+	int		Active;
 };
 
 

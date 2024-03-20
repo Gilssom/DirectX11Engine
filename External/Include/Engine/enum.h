@@ -63,9 +63,10 @@ enum class DS_TYPE
 {
 	LESS,		// 작은 경우
 	LESS_EQUAL, // 작거나 같은 경우
-	
+
 	GREATER,	// 더 큰 경우
 
+	NO_WRITE,	// 깊이 테스트는 받지만, 본인의 깊이는 기록 X
 	NO_TEST,	// 깊이 테스트 상관 없이 바로 통과
 	NO_TEST_NO_WRITE, // 깊이 테스트도 상관 없고, 그리지도 않을 것
 

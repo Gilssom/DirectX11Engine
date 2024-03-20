@@ -22,4 +22,19 @@ struct tLightInfo
     float3  Padding;       // 16 Byte 맞추기 위한 용도
 };
 
+// 파티클 정보
+struct tParticle
+{
+    float3 vLocalPos;
+    float3 vWorldPos;
+    float3 vWorldScale;
+    float4 vColor;
+    float3 vVelocity;
+
+    float Life;
+    float Age;
+    float NormalizedAge; // 현재 수명의 비율
+    int Active;
+};
+
 #endif

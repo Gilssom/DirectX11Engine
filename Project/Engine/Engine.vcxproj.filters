@@ -486,6 +486,9 @@
     <FxCompile Include="compute.fx">
       <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
     </FxCompile>
+    <FxCompile Include="particle.fx">
+      <Filter>HLSL\03. 3D</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

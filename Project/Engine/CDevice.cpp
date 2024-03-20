@@ -274,6 +274,14 @@ int CDevice::CreateDepthStencilState()
 	DEVICE->CreateDepthStencilState(&desc, m_DS[(UINT)DS_TYPE::GREATER].GetAddressOf());
 
 
+	// NO_WRITE
+	desc.DepthEnable = true;							// 1. 깊이 비교 기능 사용
+	desc.StencilEnable = false;							// 2. Stencil 기능 비활성화
+	desc.DepthFunc = D3D11_COMPARISON_LESS;				// 3. 작은 경우 통과
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;	// 4. 깊이 테스트 성공 시, 깊이 기록 X
+	DEVICE->CreateDepthStencilState(&desc, m_DS[(UINT)DS_TYPE::NO_WRITE].GetAddressOf());
+
+
 	// NO_TEST
 	desc.DepthEnable = true;							// 1. 깊이 비교 기능 사용
 	desc.StencilEnable = false;							// 2. Stencil 기능 비활성화

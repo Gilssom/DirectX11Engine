@@ -12,8 +12,9 @@
 #include "CCameraMoveScript.h"
 
 #include "CCollisionManager.h"
-
 #include "CSetColorShader.h"
+
+#include "CStructuredBuffer.h"
 
 CLevelManager::CLevelManager()
 	: m_CurLevel(nullptr)
@@ -42,6 +43,25 @@ void CLevelManager::Init()
 	pCS->SetTargetTextrue(pTestTex);
 	pCS->SetClearColor(Vec3(0.f, 0.f, 1.f));
 	pCS->Execute();
+
+
+	// 구조화버퍼 데이터 이동 테스트
+	CStructuredBuffer* pTestBuffer = new CStructuredBuffer;
+
+	// Buffer 총 3개 생성
+	pTestBuffer->Create(sizeof(tParticle), 1, SB_TYPE::SRV_UAV, true, nullptr);
+
+	// 0번 particle 에 정보 기입 후 테스트용 구조화 버퍼로 데이터 이동
+	tParticle particle = {};
+	particle.Life = 10.f;
+	particle.vWorldPos = Vec3(100.f, 100.f, 100.f);
+	pTestBuffer->SetData(&particle);
+
+	// 테스트용 구조화 버퍼의 데이터를 1번 particle 로 데이터 복사
+	tParticle particle1 = {};
+	pTestBuffer->GetData(&particle1);
+
+	delete pTestBuffer;
 
 
 	// Level

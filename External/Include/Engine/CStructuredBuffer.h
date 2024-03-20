@@ -44,6 +44,9 @@ private:
 	SB_TYPE								m_Type;			// SRV Only or SRV + UAV
 	bool								m_SysMemMove;	// System Memory Move Possible
 	
+	UINT								m_SRV_Register;
+	UINT								m_UAV_Register;
+
 
 public:
 	UINT GetElementSize() { return m_ElementSize; }
@@ -51,11 +54,14 @@ public:
 
 	int Create(UINT elementSize, UINT elementCount, SB_TYPE type, bool sysMemMove, void* initialData = nullptr);
 	void SetData(void* data, UINT elementCount = 0);
+	void GetData(void* pDest, UINT elementCount = 0);
 
 	void Binding(UINT registerNum);
 	void Binding_CS_SRV(UINT registerNum);
 	void Binding_CS_UAV(UINT registerNum);
 
+	void Clear_SRV();
+	void Clear_UAV();
 
 public:
 	CStructuredBuffer();

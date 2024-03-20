@@ -10,6 +10,7 @@ private:
 
 	UINT				m_MaxParticle;		// 파티클 최대 개수
 
+
 public:
 	virtual void FinalTick() override;
 	virtual void Render() override;
