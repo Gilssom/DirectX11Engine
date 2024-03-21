@@ -88,6 +88,108 @@ int CGraphicShader::CreateVertexShader(const wstring& strFilePath, const string&
 	return S_OK;
 }
 
+int CGraphicShader::CreateHullShader(const wstring& strFilePath, const string& hsFuncName)
+{
+	// Hull Shader
+	if (FAILED(D3DCompileFromFile(strFilePath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		, hsFuncName.c_str(), "hs_5_0", D3DCOMPILE_DEBUG, 0
+		, m_HSBlob.GetAddressOf()
+		, m_ErrBlob.GetAddressOf())))
+	{
+		if (m_ErrBlob != nullptr)
+		{
+			MessageBoxA(nullptr
+				, (char*)m_ErrBlob->GetBufferPointer()
+				, "Hull Shader Compile 오류", MB_OK);
+		}
+		else
+		{
+			MessageBox(nullptr
+				, L"파일을 찾을 수 없습니다."
+				, L"Hull Shader Compile 오류", MB_OK);
+		}
+
+		return E_FAIL;
+	}
+
+	if (FAILED(DEVICE->CreateHullShader(m_HSBlob->GetBufferPointer()
+									  , m_HSBlob->GetBufferSize()
+									  , nullptr, m_HS.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
+
+	return S_OK;
+}
+
+int CGraphicShader::CreateDomainShader(const wstring& strFilePath, const string& dsFuncName)
+{
+	// Domain Shader
+	if (FAILED(D3DCompileFromFile(strFilePath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		, dsFuncName.c_str(), "ds_5_0", D3DCOMPILE_DEBUG, 0
+		, m_DSBlob.GetAddressOf()
+		, m_ErrBlob.GetAddressOf())))
+	{
+		if (m_ErrBlob != nullptr)
+		{
+			MessageBoxA(nullptr
+				, (char*)m_ErrBlob->GetBufferPointer()
+				, "Domain Shader Compile 오류", MB_OK);
+		}
+		else
+		{
+			MessageBox(nullptr
+				, L"파일을 찾을 수 없습니다."
+				, L"Domain Shader Compile 오류", MB_OK);
+		}
+
+		return E_FAIL;
+	}
+
+	if (FAILED(DEVICE->CreateDomainShader(m_DSBlob->GetBufferPointer()
+										, m_DSBlob->GetBufferSize()
+										, nullptr, m_DS.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
+
+	return S_OK;
+}
+
+int CGraphicShader::CreateGeometryShader(const wstring& strFilePath, const string& gsFuncName)
+{
+	// Geometry Shader
+	if (FAILED(D3DCompileFromFile(strFilePath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
+		, gsFuncName.c_str(), "gs_5_0", D3DCOMPILE_DEBUG, 0
+		, m_GSBlob.GetAddressOf()
+		, m_ErrBlob.GetAddressOf())))
+	{
+		if (m_ErrBlob != nullptr)
+		{
+			MessageBoxA(nullptr
+				, (char*)m_ErrBlob->GetBufferPointer()
+				, "Geometry Shader Compile 오류", MB_OK);
+		}
+		else
+		{
+			MessageBox(nullptr
+				, L"파일을 찾을 수 없습니다."
+				, L"Geometry Shader Compile 오류", MB_OK);
+		}
+
+		return E_FAIL;
+	}
+
+	if (FAILED(DEVICE->CreateGeometryShader(m_GSBlob->GetBufferPointer()
+										  , m_GSBlob->GetBufferSize()
+										  , nullptr, m_GS.GetAddressOf())))
+	{
+		return E_FAIL;
+	}
+
+	return S_OK;
+}
+
 int CGraphicShader::CreatePixelShader(const wstring& strFilePath, const string& psFuncName)
 {
 	// Pixel Shader
@@ -128,6 +230,9 @@ int CGraphicShader::Binding()
 	CONTEXT->IASetPrimitiveTopology(m_Topology); // 도형의 구조를 알려주는 함수
 
 	CONTEXT->VSSetShader(m_VS.Get(), nullptr, 0);
+	CONTEXT->HSSetShader(m_HS.Get(), nullptr, 0);
+	CONTEXT->DSSetShader(m_DS.Get(), nullptr, 0);
+	CONTEXT->GSSetShader(m_GS.Get(), nullptr, 0);
 
 	CONTEXT->RSSetState(CDevice::GetInst()->GetRS(m_RSType).Get());
 

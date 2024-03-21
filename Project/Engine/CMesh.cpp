@@ -105,3 +105,12 @@ void CMesh::Render()
 	// Index Buffer 의 갯수만큼 렌더링을 해야 한다. ( Vertex Buffer X )
 	CONTEXT->DrawIndexed(m_IdxCount, 0, 0);
 }
+
+void CMesh::Render_Particle(UINT instance)
+{
+	Binding();
+
+	// Instance 의 개수에 따라 정해진 개수의 객체를 한번에 Rendering 을 돌릴 수 있는 함수
+	// 단, 모든 세팅 데이터가 모두 동일해야한다.
+	CONTEXT->DrawIndexedInstanced(m_IdxCount, instance, 0, 0, 0);
+}

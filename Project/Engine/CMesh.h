@@ -25,6 +25,8 @@ public:
 	int Create(Vtx* VtxSysMem, size_t VtxCount, UINT* IdxSysMem, size_t IdxCount);
 	void Render();
 
+	void Render_Particle(UINT instance);
+
 public:
 	CMesh();
 	~CMesh();

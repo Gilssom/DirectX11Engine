@@ -25,6 +25,20 @@ void CAssetManager::CreateDefaultMesh()
 	Vtx v;
 
 	// ===============
+	// Point Mesh
+	// ===============
+	v.vPos = Vec3(0.f, 0.f, 0.f);
+	v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+	v.vUv = Vec2(0.f, 0.f);
+
+	UINT idx = 0;
+
+	pMesh = new CMesh;
+	pMesh->Create(&v, 1, &idx, 1);
+	AddAsset<CMesh>(L"PointMesh", pMesh);
+
+
+	// ===============
 	// Rect Mesh
 	// ===============
 	v.vPos = Vec3(-0.5f, 0.5f, 0.f);
@@ -189,7 +203,11 @@ void CAssetManager::CreateDefaultGraphicShader()
 	// ========================
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(strPath + L"shader\\particle.fx", "VS_Particle");
+	pShader->CreateGeometryShader(strPath + L"shader\\particle.fx", "GS_Particle");
 	pShader->CreatePixelShader(strPath + L"shader\\particle.fx", "PS_Particle");
+
+	// Point List 로 Topology 변경 (점 1개짜리를 사용할 것이기 때문에)
+	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
