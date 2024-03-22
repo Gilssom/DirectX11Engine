@@ -29,8 +29,8 @@ CParticleSystem::CParticleSystem()
 		arrParticle[i].vWorldScale = Vec3(10.f, 10.f, 1.f);
 		arrParticle[i].Active = 1;
 
-		if (i > (m_MaxParticle / 2))
-			arrParticle[i].Active = 0;
+		//if (i > (m_MaxParticle / 2))
+			//arrParticle[i].Active = 0;
 	}
 
 	m_ParticleBuffer = new CStructuredBuffer;
@@ -61,6 +61,8 @@ void CParticleSystem::Render()
 	// Test Particle Render
 	m_ParticleBuffer->Binding(17);
 	Transform()->Binding();
+
+	GetMaterial()->SetTexParam(TEX_0, m_ParticleTex);
 	GetMaterial()->Binding();
 
 	// Instance 로 Render 시 Inatance 고유 ID(몇번째) 를 자동으로 넘겨줌

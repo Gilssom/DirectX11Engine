@@ -100,6 +100,7 @@ struct tMtrlConst
 	Vec2	v2Arr[4];
 	Vec4	v4Arr[4];
 	Matrix	matArr[4];
+	UINT	btex[16];
 };
 
 struct tAnim2DInfo

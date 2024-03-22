@@ -27,12 +27,13 @@
   .\Project\Engine\CMissileScript.h
   .\Project\Engine\components.h
   .\Project\Engine\CParticleSystem.h
+  .\Project\Engine\CParticleTickCS.h
   .\Project\Engine\CPathManager.h
   .\Project\Engine\CPlayerScript.h
   .\Project\Engine\CRenderComponent.h
   .\Project\Engine\CRenderManager.h
   .\Project\Engine\CScript.h
-  .\Project\Engine\CSetColorShader.h
+  .\Project\Engine\CSetColorCS.h
   .\Project\Engine\CShader.h
   .\Project\Engine\CStructuredBuffer.h
   .\Project\Engine\CTaskManager.h
@@ -49,17 +50,25 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  51개 파일이 복사되었습니다.
+  52개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\compute.fx
   .\Project\Engine\debug_shape.fx
   .\Project\Engine\func.fx
   .\Project\Engine\particle.fx
+  .\Project\Engine\particletick.fx
   .\Project\Engine\std2d.fx
   .\Project\Engine\struct.fx
   .\Project\Engine\tilemap.fx
   .\Project\Engine\value.fx
-  8개 파일이 복사되었습니다.
-  CGraphicShader.cpp
+  9개 파일이 복사되었습니다.
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\particle.cso
+  CAssetMgr_Init.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetMgr_Init.cpp(132,20): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
+  
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

@@ -57,4 +57,18 @@ float3 CalLight2D(int lightIdx, float3 vWorldPos)
     return vLightPower;
 }
 
+
+int IsBinding(in Texture2D _tex)
+{
+    uint width = 0;
+    uint height = 0;
+    g_tex_0.GetDimensions(width, height);
+    
+    if(width && height)
+        return 1;
+    else
+        return 0;
+}
+
+
 #endif

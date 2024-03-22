@@ -307,7 +307,34 @@ int CDevice::CreateBlendState()
 
 	D3D11_BLEND_DESC desc = {};
 
-	// ALPHA_BLEND
+
+	// ALPHA_BLEND_NOCOVERAGE
+	desc.AlphaToCoverageEnable = false; // 풀, 나뭇잎 같은 경우에 사용할 때
+	// Direct 내부에서 Alpha 값의 깊이를 모두 보정을 해줌
+
+	// 독립적인 기능 ( 렌더 타겟이 여러개 일 상황이 있을 수 있어서 ) ( 최대 8장 )
+	// 꺼놓으면 모든 Render Target 은 0번 옵션으로 출력이 된다.
+	desc.IndependentBlendEnable = false;
+
+	desc.RenderTarget[0].BlendEnable = true; // 블렌딩 기능 사용
+
+	// 블렌딩 방식
+	desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+	desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+
+	// 블렌딩 계수
+	desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;						// 본인의 Alpha 값을 사용하겠다.
+	desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;					// Source 의 Alpha 의 역수를 사용하겠다.
+	desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;	// 최종 출력
+
+	// 알파 끼리의 혼합식
+	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+
+	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND].GetAddressOf());
+
+
+	// ALPHA_BLEND_COVERAGE
 	desc.AlphaToCoverageEnable = true; // 풀, 나뭇잎 같은 경우에 사용할 때
 	// Direct 내부에서 Alpha 값의 깊이를 모두 보정을 해줌
 
@@ -330,7 +357,8 @@ int CDevice::CreateBlendState()
 	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 
-	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND].GetAddressOf());
+	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND_COVERAGE].GetAddressOf());
+
 
 	// ONE_ONE
 	desc.AlphaToCoverageEnable = false; 

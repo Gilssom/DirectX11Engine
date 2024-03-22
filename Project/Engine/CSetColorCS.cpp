@@ -1,18 +1,18 @@
 #include "pch.h"
-#include "CSetColorShader.h"
+#include "CSetColorCS.h"
 
-CSetColorShader::CSetColorShader()
+CSetColorCS::CSetColorCS()
 	: CComputeShader(32, 32, 1) // Thread 개수 지정 필수로 강제화
 {
 
 }
 
-CSetColorShader::~CSetColorShader()
+CSetColorCS::~CSetColorCS()
 {
 
 }
 
-int CSetColorShader::Binding()
+int CSetColorCS::Binding()
 {
 	if (m_TargetTex == nullptr || m_TargetTex->GetUAV() == nullptr)
 		return E_FAIL;
@@ -26,7 +26,7 @@ int CSetColorShader::Binding()
 	return S_OK;
 }
 
-void CSetColorShader::CalculateGroupNum()
+void CSetColorCS::CalculateGroupNum()
 {
 	// Thread 의 개수와 Texture 의 해상도가 딱 떨어져 나뉘어지는 법도 없다.
 
@@ -39,7 +39,7 @@ void CSetColorShader::CalculateGroupNum()
 	m_GroupZ = 1;
 }
 
-void CSetColorShader::Clear()
+void CSetColorCS::Clear()
 {
 	m_TargetTex->Clear_CS_UAV(0);
 }

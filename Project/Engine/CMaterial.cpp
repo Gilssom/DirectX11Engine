@@ -34,16 +34,18 @@ Ptr<CMaterial> CMaterial::GetDynamicMaterial()
 
 void CMaterial::Binding()
 {
-	// 텍스처 바인딩
+	// 텍스처 바인딩 - 상수 데이터에 Texture Binding 여부까지 포함
 	for (UINT i = 0; i < TEX_PARAM::END; i++)
 	{
 		if (m_arrTex[i] == nullptr)
 		{
 			CTexture::Clear(i);
+			m_Const.btex[i] = false;
 			continue;
 		}
 
 		m_arrTex[i]->Binding(i);
+		m_Const.btex[i] = true;
 	}
 
 	// 상수 데이터 바인딩

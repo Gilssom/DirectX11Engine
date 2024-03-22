@@ -12,7 +12,7 @@
 #include "CCameraMoveScript.h"
 
 #include "CCollisionManager.h"
-#include "CSetColorShader.h"
+#include "CSetColorCS.h"
 
 #include "CStructuredBuffer.h"
 
@@ -32,36 +32,36 @@ CLevelManager::~CLevelManager()
 
 void CLevelManager::Init()
 {
-	// Texture 생성하기
-	Ptr<CTexture> pTestTex = 
-		CAssetManager::GetInst()->CreateTexture(L"TestTex"
-											, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
-											, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
-	
-	// Compute Shader Test
-	Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"SetColorCS").Get();
-	pCS->SetTargetTextrue(pTestTex);
-	pCS->SetClearColor(Vec3(0.f, 0.f, 1.f));
-	pCS->Execute();
+	//// Texture 생성하기
+	//Ptr<CTexture> pTestTex = 
+	//	CAssetManager::GetInst()->CreateTexture(L"TestTex"
+	//										, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
+	//										, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+	//
+	//// Compute Shader Test
+	//Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"SetColorCS").Get();
+	//pCS->SetTargetTextrue(pTestTex);
+	//pCS->SetClearColor(Vec3(0.f, 0.f, 1.f));
+	//pCS->Execute();
 
 
-	// 구조화버퍼 데이터 이동 테스트
-	CStructuredBuffer* pTestBuffer = new CStructuredBuffer;
+	//// 구조화버퍼 데이터 이동 테스트
+	//CStructuredBuffer* pTestBuffer = new CStructuredBuffer;
 
-	// Buffer 총 3개 생성
-	pTestBuffer->Create(sizeof(tParticle), 1, SB_TYPE::SRV_UAV, true, nullptr);
+	//// Buffer 총 3개 생성
+	//pTestBuffer->Create(sizeof(tParticle), 1, SB_TYPE::SRV_UAV, true, nullptr);
 
-	// 0번 particle 에 정보 기입 후 테스트용 구조화 버퍼로 데이터 이동
-	tParticle particle = {};
-	particle.Life = 10.f;
-	particle.vWorldPos = Vec3(100.f, 100.f, 100.f);
-	pTestBuffer->SetData(&particle);
+	//// 0번 particle 에 정보 기입 후 테스트용 구조화 버퍼로 데이터 이동
+	//tParticle particle = {};
+	//particle.Life = 10.f;
+	//particle.vWorldPos = Vec3(100.f, 100.f, 100.f);
+	//pTestBuffer->SetData(&particle);
 
-	// 테스트용 구조화 버퍼의 데이터를 1번 particle 로 데이터 복사
-	tParticle particle1 = {};
-	pTestBuffer->GetData(&particle1);
+	//// 테스트용 구조화 버퍼의 데이터를 1번 particle 로 데이터 복사
+	//tParticle particle1 = {};
+	//pTestBuffer->GetData(&particle1);
 
-	delete pTestBuffer;
+	//delete pTestBuffer;
 
 
 	// Level
@@ -205,6 +205,7 @@ void CLevelManager::Init()
 	pParticleObject->AddComponent(new CParticleSystem);
 
 	pParticleObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
+	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png"));
 
 	m_CurLevel->AddObject(0, pParticleObject, false);
 

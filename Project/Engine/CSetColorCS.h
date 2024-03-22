@@ -3,7 +3,7 @@
 
 #include "CTexture.h"
 
-class CSetColorShader : public CComputeShader
+class CSetColorCS : public CComputeShader
 {
 private:
 	Ptr<CTexture>	m_TargetTex;
@@ -21,7 +21,7 @@ public:
 
 
 public:
-	CSetColorShader();
-	~CSetColorShader();
+	CSetColorCS();
+	~CSetColorCS();
 };
 

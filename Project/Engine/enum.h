@@ -75,10 +75,11 @@ enum class DS_TYPE
 
 // Blend State
 enum class BS_TYPE
-{					//  TEX     BACK
-	DEFAULT,		// Src(1), Dest(0)
-	ALPHA_BLEND,	// Src(A), Dest(1-A)
-	ONE_ONE,		// Src(1), Dest(1) : 검은색 배경을 뺄 상황, Light 혼합 기능 사용할 때
+{							//  TEX     BACK
+	DEFAULT,				// Src(1), Dest(0)
+	ALPHA_BLEND,			// Src(A), Dest(1-A)
+	ALPHA_BLEND_COVERAGE,
+	ONE_ONE,				// Src(1), Dest(1) : 검은색 배경을 뺄 상황, Light 혼합 기능 사용할 때
 
 	END,
 };

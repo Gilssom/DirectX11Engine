@@ -18,30 +18,46 @@ cbuffer TRANSFORM : register(b0)
 cbuffer MATERIAL_CONST : register(b1)
 {
     // 배열은 메모리 접근에 문제가 생긴다.
-    int     g_int_0;
-    int     g_int_1;
-    int     g_int_2;
-    int     g_int_3;
+    int              g_int_0;
+    int              g_int_1;
+    int              g_int_2;
+    int              g_int_3;
+                     
+    float            g_float_0;
+    float            g_float_1;
+    float            g_float_2;
+    float            g_float_3;
+                     
+    float2           g_vec2_0;
+    float2           g_vec2_1;
+    float2           g_vec2_2;
+    float2           g_vec2_3;
+                     
+    float4           g_vec4_0;
+    float4           g_vec4_1;
+    float4           g_vec4_2;
+    float4           g_vec4_3;
     
-    float   g_float_0;
-    float   g_float_1;
-    float   g_float_2;
-    float   g_float_3;
-    
-    float2  g_vec2_0;
-    float2  g_vec2_1;
-    float2  g_vec2_2;
-    float2  g_vec2_3;
-    
-    float4  g_vec4_0;
-    float4  g_vec4_1;
-    float4  g_vec4_2;
-    float4  g_vec4_3;
-    
-    row_major Matrix  g_mat_0;
+    row_major Matrix g_mat_0;
     row_major Matrix g_mat_1;
     row_major Matrix g_mat_2;
     row_major Matrix g_mat_3;
+    
+    // bool 값도 메모리 접근에 문제가 있음
+    uint             g_btex_0;
+    uint             g_btex_1;
+    uint             g_btex_2;
+    uint             g_btex_3;
+    uint             g_btex_4;
+    uint             g_btex_5;
+    uint             g_btex_6;
+    uint             g_btex_7;
+    uint             g_btex_8;
+    uint             g_btex_9;
+    uint             g_btex_10;
+    uint             g_btex_11;
+    uint             g_btex_12;
+    uint             g_btex_13;
 };
 
 
