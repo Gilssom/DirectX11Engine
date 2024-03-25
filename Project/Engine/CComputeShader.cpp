@@ -56,12 +56,12 @@ int CComputeShader::CreateComputeShader(const wstring& strFilePath, const string
 	return S_OK;
 }
 
-void CComputeShader::Execute()
+int CComputeShader::Execute()
 {
 	// 상속 받아간 Class 의 Binding 함수로
 	if (FAILED(Binding()))
 	{
-		return;
+		return E_FAIL;
 	}
 
 	// 상속 받아간 Class 의 CalculateGroupNum 함수로
@@ -80,4 +80,6 @@ void CComputeShader::Execute()
 
 	// 상속 받아간 Class 의 Clear 함수로
 	Clear();
+
+	return S_OK;
 }

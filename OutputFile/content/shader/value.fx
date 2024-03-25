@@ -71,7 +71,7 @@ cbuffer ANIMATION2D : register(b2)
     int3    padding;
 };
 
-cbuffer GLOBALDATA : register(b3)
+cbuffer GLOBAL_DATA : register(b3)
 {
     float2 vResolution;     // 렌더링 해상도
     float DeltaTime;        // DT

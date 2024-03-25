@@ -48,7 +48,7 @@ public:
 
 
 public:
-    void Execute();
+    int Execute();
 
 
 public:

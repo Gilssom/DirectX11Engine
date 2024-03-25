@@ -55,6 +55,7 @@ void CRenderManager::DataBinding()
 	static CConstBuffer* GlobalBuffer = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL);
 	GlobalBuffer->SetData(&g_GlobalData);
 	GlobalBuffer->Binding();
+	GlobalBuffer->Binding_CS();
 
 
 	// Light 구조화 버퍼로 Binding
