@@ -164,6 +164,7 @@ call Copy.bat</Command>
     <ClInclude Include="CAnimator2D.h" />
     <ClInclude Include="CAsset.h" />
     <ClInclude Include="CAssetManager.h" />
+    <ClInclude Include="CBackGroundScript.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCameraMoveScript.h" />
     <ClInclude Include="CCollider2D.h" />
@@ -220,6 +221,7 @@ call Copy.bat</Command>
     <ClCompile Include="CAsset.cpp" />
     <ClCompile Include="CAssetManager.cpp" />
     <ClCompile Include="CAssetMgr_Init.cpp" />
+    <ClCompile Include="CBackGroundScript.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCameraMoveScript.cpp" />
     <ClCompile Include="CCollider2D.cpp" />

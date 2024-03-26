@@ -4,7 +4,7 @@
 
 struct tSpawnCount
 {
-	UINT	SpawnCount;
+	int		SpawnCount;
 	UINT	padding[3];
 };
 
@@ -31,6 +31,9 @@ private:
 public:
 	void SetParticleTexture(Ptr<CTexture> tex) { m_ParticleTex = tex; }
 
+
+private:
+	void CalculateSpawnCount();
 
 public:
 	virtual void FinalTick() override;

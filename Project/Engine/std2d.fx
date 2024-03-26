@@ -99,6 +99,24 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
     
     vColor.rgb *= vLightPower;
     
+    // Noise Test
+    if(g_btex_1)
+    {
+        float4 vNoise = g_tex_1.Sample(g_sam_0, _in.vUV);
+        
+        float fIntence = g_float_0 + vNoise.r;
+        
+        // 선형 그래프 활용 ( Dissolve Effect 효과 같은 느낌 )
+        vColor.r += pow(fIntence * 10.f, 5) / pow(10, 5);
+        vColor.g += pow(fIntence * 10.f, 5) / pow(10, 5) * 0.5f;
+        vColor.b += pow(fIntence * 10.f, 5) / pow(10, 5) * 0.5f;
+        
+        if (1.f <= fIntence)
+        {
+            discard;
+        }
+    }
+    
     // 보간 개념이 들어간 Color
     // 각 정점이 Color 값을 들고 있기 때문에
     // 가중치 보간 개념이 들어가 픽셀 마다의 색상 값을 정해준다. ( Rasterize Stage )

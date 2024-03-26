@@ -140,6 +140,9 @@
     <ClCompile Include="CParticleTickCS.cpp">
       <Filter>HLSL\04. ComputeShader\ParticleTick</Filter>
     </ClCompile>
+    <ClCompile Include="CBackGroundScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="CParticleTickCS.h">
       <Filter>HLSL\04. ComputeShader\ParticleTick</Filter>
+    </ClInclude>
+    <ClInclude Include="CBackGroundScript.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

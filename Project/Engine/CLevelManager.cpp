@@ -10,6 +10,7 @@
 
 #include "CPlayerScript.h"
 #include "CCameraMoveScript.h"
+#include "CBackGroundScript.h"
 
 #include "CCollisionManager.h"
 #include "CSetColorCS.h"
@@ -187,6 +188,7 @@ void CLevelManager::Init()
 	CGameObject* pBackGround = new CGameObject;
 	pBackGround->AddComponent(new CTransform);
 	pBackGround->AddComponent(new CMeshRender);
+	pBackGround->AddComponent(new CBackGroundScript);
 
 	pBackGround->Transform()->SetRelativePos(Vec3(0.f, 0.f, 1000.f));
 	pBackGround->Transform()->SetRelativeScale(Vec3(1600.f, 900.f, 1.f));
@@ -194,6 +196,7 @@ void CLevelManager::Init()
 	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
 	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\Background.jpg", L"texture\\Background.jpg"));
+	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
 
 	m_CurLevel->AddObject(0, pBackGround, false);
 
