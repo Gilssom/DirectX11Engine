@@ -2,6 +2,7 @@
 #define _PARTICLE_TICK
 
 #include "value.fx"
+#include "func.fx"
 
 struct tSpawnCount
 {
@@ -9,13 +10,35 @@ struct tSpawnCount
     uint3   padding;
 };
 
+struct tParticleModule
+{
+    // Spawn Module
+    uint    vSpawnRate;     // 초당 파티클 생성 개수
+    float4  vSpawnColor;    // 생성 시점 색상
+    float4  vSpawnMinScale; // 생성 시, 최소 크기
+    float4  vSpawnMaxScale; // 생성 시, 최대 크기
+
+    float   MinLife;        // 파티클 최소 수명
+    float   MaxLife;        // 파티클 최대 수명
+
+	// Module On / Off
+    int     Module[1];
+    
+    float4 padding;
+};
+
 // Tick 을 호출 받을 Particle 들이 Binding 될 곳
 RWStructuredBuffer<tParticle>   ParticleBuffer   : register(u0);
 RWStructuredBuffer<tSpawnCount> SpawnCountBuffer : register(u1);
+Texture2D                       NoiseTex         : register(t20);
+StructuredBuffer<tParticleModule> Module         : register(t21);
 
 
 // Particle Buffer 의 개수
 #define ParticleBufferSize  g_int_0
+
+// Particle Object 의 위치
+#define ParticleObjectPos   g_vec4_0
 
 // Particle Tick Buffer 접근
 #define Particle            ParticleBuffer[_ID.x]
@@ -52,42 +75,65 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
     //비활성화된 파티클을 활성화 시켜야함
     if (Particle.Active == 0)
     {
-        // 이번에 활성화 가능한 파티클 수 체크
-        int CurSpawnCount = SpawnCount;
-        
-        // 파티클 활성화 가능 숫자가 0보다 크면
-        while (0 < CurSpawnCount)
+        if (Module[0].Module[0])
         {
-            // Spawn Count 에 들어있던 값을 받을 변수
-            int OriginValue = 0;
-            
-            // 교체를 시도할 때, SpawnCount 에 들어있는 값이 예상 값과 동일한 경우에만 값을 교체한다.
-            InterlockedCompareExchange(SpawnCount, CurSpawnCount, SpawnCount - 1, OriginValue);
-            
-            // 교체한 값이 원래 예상하던 값과 일치하면 활성화 성공
-            // 진입한 Thread 가 존재하면 다음 Thread 들은 아래 조건에 들어올 수 없음
-            // 다음 활성화 시도 단계로 진입 대기
-            if (OriginValue == CurSpawnCount)
+            // 이번에 활성화 가능한 파티클 수 체크
+            int CurSpawnCount = SpawnCount;
+        
+            // 파티클 활성화 가능 숫자가 0보다 크면
+            while (0 < CurSpawnCount)
             {
-                Particle.Active = 1;
-                
-                // 파티클의 포지션을 Random Position 으로 지정
-                float2 vUV = (float2) 0.f;
-                vUV.x = _ID.x / (ParticleBufferSize - 1); // 0 ~ 1 정규화
-                
-                
-                
-                break;
-            }
+                // Spawn Count 에 들어있던 값을 받을 변수
+                int OriginValue = 0;
             
-            // 진입하지 못한 Thread 들은 활성화 가능한 파티클 수를 재체크
-            CurSpawnCount = SpawnCount;
+                //InterlockedExchange(SpawnCount, SpawnCount - 1, OriginValue);
+                // 교체를 시도할 때, SpawnCount 에 들어있는 값이 예상 값과 동일한 경우에만 값을 교체한다.
+                InterlockedCompareExchange(SpawnCount, CurSpawnCount, SpawnCount - 1, OriginValue);
+            
+                // 교체한 값이 원래 예상하던 값과 일치하면 활성화 성공
+                // 진입한 Thread 가 존재하면 다음 Thread 들은 아래 조건에 들어올 수 없음
+                // 다음 활성화 시도 단계로 진입 대기
+                if (OriginValue == CurSpawnCount)
+                {
+                    // Random 함수화
+                    float3 vRandom = GetRandom(NoiseTex, _ID.x / (ParticleBufferSize - 1));
+                    
+                    // 300 * 300 * 300 의 박스 범위 안에 생성 테스트
+                    float BoxScale = 300.f;
+                    float3 vRandomPos = (float3) 0.f;
+                    
+                    vRandomPos.x = vRandom.x * BoxScale - (BoxScale / 2.f);
+                    vRandomPos.y = vRandom.y * BoxScale - (BoxScale / 2.f);
+                    vRandomPos.z = vRandom.z * BoxScale - (BoxScale / 2.f);
+                    
+                    Particle.vLocalPos = vRandomPos;
+                    Particle.vWorldPos = Particle.vLocalPos + ParticleObjectPos.xyz;                   
+                    // Min ~ Max Random
+                    Particle.vWorldScale = clamp(vRandom.x, Module[0].vSpawnMinScale, Module[0].vSpawnMaxScale);
+                    
+                    Particle.vColor = Module[0].vSpawnColor;
+                    
+                    Particle.Age = 0.f;
+                    Particle.Life = clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
+                    Particle.Active = 1;
+                
+                    break;
+                }
+            
+                // 진입하지 못한 Thread 들은 활성화 가능한 파티클 수를 재체크
+                CurSpawnCount = SpawnCount;
+            }
         }
     }
     else
     {
         // Global Data 를 Binding_CS 를 통해서 받아왔으니 활용
-        Particle.vWorldPos.y += DeltaTime * 100.f;
+        Particle.Age += DeltaTime;
+        
+        if(Particle.Life <= Particle.Age)
+        {
+            Particle.Active = 0;
+        }
     }
 }
 

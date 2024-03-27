@@ -73,6 +73,23 @@ struct tParticle
 	int		Active;
 };
 
+// 파티클 모듈
+struct tParticleModule
+{
+	// Spawn Module
+	UINT	vSpawnRate;		// 초당 파티클 생성 개수 (Spawn Per Second)
+	Vec4	vSpawnColor;	// 생성 시점 색상
+	Vec4	vSpawnMinScale;	// 생성 시, 최소 크기
+	Vec4	vSpawnMaxScale;	// 생성 시, 최대 크기
+
+	float	MinLife;		// 파티클 최소 수명
+	float	MaxLife;		// 파티클 최대 수명
+
+	// Module On / Off
+	int		Module[(UINT)PARTICLE_MODULE::END];
+};
+
+
 
 // ====================
 // 상수버퍼 관련 구조체

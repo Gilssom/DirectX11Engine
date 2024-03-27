@@ -209,20 +209,35 @@ int CDevice::CreateSamplerState()
 {
 	D3D11_SAMPLER_DESC desc[2] = {};
 
+	// ANISOTROPIC Sampler - 필터링 작업
 	desc[0].AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc[0].AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc[0].AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc[0].Filter = D3D11_FILTER_ANISOTROPIC;
 	DEVICE->CreateSamplerState(desc, m_Sampler[0].GetAddressOf());
+
+	CONTEXT->VSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
+	CONTEXT->HSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
+	CONTEXT->DSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
+	CONTEXT->GSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
 	CONTEXT->PSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
+	CONTEXT->CSSetSamplers(0, 1, m_Sampler[0].GetAddressOf());
+
 
 	// 저해상도 > 고해상도로 출력할 수 있게 해주는 옵션
+	// MIN_MAG_MIP_POINT Sampler
 	desc[1].AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc[1].AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc[1].AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc[1].Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 	DEVICE->CreateSamplerState(desc + 1, m_Sampler[1].GetAddressOf());
+
+	CONTEXT->VSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
+	CONTEXT->HSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
+	CONTEXT->DSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
+	CONTEXT->GSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
 	CONTEXT->PSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
+	CONTEXT->CSSetSamplers(1, 1, m_Sampler[1].GetAddressOf());
 
 	return 0;
 }
@@ -331,7 +346,7 @@ int CDevice::CreateBlendState()
 	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 
-	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND].GetAddressOf());
+	HRESULT hr = DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND].GetAddressOf());
 
 
 	// ALPHA_BLEND_COVERAGE
@@ -357,7 +372,7 @@ int CDevice::CreateBlendState()
 	desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
 	desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
 
-	DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND_COVERAGE].GetAddressOf());
+	hr = DEVICE->CreateBlendState(&desc, m_BS[(UINT)BS_TYPE::ALPHA_BLEND_COVERAGE].GetAddressOf());
 
 
 	// ONE_ONE

@@ -14,7 +14,7 @@ CBackGroundScript::~CBackGroundScript()
 
 void CBackGroundScript::Tick()
 {
-	// Dissolve Shader Effect
+	//Dissolve Shader Effect
 	//m_Intence += DT * 0.3f;
 	//GetRenderComponent()->GetMaterial()->SetScalarParam(FLOAT_0, m_Intence);
 }

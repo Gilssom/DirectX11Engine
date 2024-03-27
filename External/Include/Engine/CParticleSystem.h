@@ -15,17 +15,18 @@ class CParticleSystem : public CRenderComponent
 {
 private:
 	Ptr<CParticleTickCS>	m_TickCS;
-	CStructuredBuffer*		m_ParticleBuffer;	// 구조화 버퍼로 GPU 메모리 전달용
+	CStructuredBuffer*		m_ParticleBuffer;	// 구조화 버퍼로 GPU 메모리 전달 용도
 	CStructuredBuffer*		m_SpawnCountBuffer;	// Spawn Count 정보 전달 용도
+	CStructuredBuffer*		m_ModuleBuffer;		// Module 정보 전달 용도
 
 	Ptr<CTexture>			m_ParticleTex;		// 파티클 입자 텍스처
 
-	UINT					m_SpawnCount;		// SpawnCount Per Tick
 	float					m_Time;				// 파티클 생성 누적 시간
 
 	// Particle Data
 	UINT					m_MaxParticle;		// 파티클 최대 개수
-	UINT					m_SpawnRate;		// 초당 파티클 생성 개수 (Spawn Per Second)
+
+	tParticleModule			m_Module;			// 파티클의 기능 정의
 
 
 public:

@@ -65,6 +65,14 @@
   .\Project\Engine\value.fx
   9개 파일이 복사되었습니다.
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\particletick.fx(112,21-111): warning X3206: implicit truncation of vector type
   
   compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\particletick.cso
+  CParticleSystem.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CParticleSystem.cpp(123,24): warning C4838: 'UINT'에서 'int'(으)로의 변환에는 축소 변환이 필요합니다.
+  (소스 파일 '/CParticleSystem.cpp'을(를) 컴파일하는 중)
+  
+  CParticleTickCS.cpp
+  코드를 생성하고 있습니다...
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

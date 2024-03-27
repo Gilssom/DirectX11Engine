@@ -198,3 +198,10 @@ enum class SHADER_DOMAIN
 	DOMAIN_PARTICLE,	// 파티클
 	DOMAIN_POSTPROCESS, // 후처리
 };
+
+enum class PARTICLE_MODULE
+{
+	SPAWN,
+
+	END,
+};

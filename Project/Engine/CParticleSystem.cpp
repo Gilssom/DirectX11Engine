@@ -11,10 +11,8 @@
 CParticleSystem::CParticleSystem()
 	: CRenderComponent(COMPONENT_TYPE::PARTICLESYSTEM)
 	, m_ParticleBuffer(nullptr)
-	, m_SpawnCount(0)
 	, m_Time(0.f)
-	, m_MaxParticle(100)
-	, m_SpawnRate(10)
+	, m_MaxParticle(1000)
 {
 	// Particle Tick 용도 Compute Shader
 	m_TickCS = (CParticleTickCS*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"ParticleTickCS").Get();
@@ -30,26 +28,40 @@ CParticleSystem::CParticleSystem()
 	Vec2 vResolution = CDevice::GetInst()->GetRenderResolution();
 	float fTerm = vResolution.x / (m_MaxParticle + 1);
 
-	tParticle arrParticle[100] = {};
+	/*tParticle arrParticle[100] = {};
 
 	for (int i = 0; i < m_MaxParticle; ++i)
 	{
 		arrParticle[i].vWorldPos = Vec3(-(vResolution.x / 2.f) + (i + 1) * fTerm, 0.f, 100.f);
 		arrParticle[i].vWorldScale = Vec3(10.f, 10.f, 1.f);
 		arrParticle[i].Active = 0;
-	}
+	}*/
 
 	m_ParticleBuffer = new CStructuredBuffer;
-	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticle, SB_TYPE::SRV_UAV, false, arrParticle);
+	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticle, SB_TYPE::SRV_UAV, false);
 
 	m_SpawnCountBuffer = new CStructuredBuffer;
 	m_SpawnCountBuffer->Create(sizeof(tSpawnCount), 1, SB_TYPE::SRV_UAV, true);
+
+
+	// Particle Module Setting Test
+	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] = true;
+	m_Module.vSpawnRate = 20;
+	m_Module.vSpawnColor = Vec3(1.f, 0.f, 0.f);
+	m_Module.MinLife = 1.f;
+	m_Module.MaxLife = 4.f;
+	m_Module.vSpawnMinScale = Vec3(10.f, 10.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec3(20.f, 20.f, 1.f);
+
+	m_ModuleBuffer = new CStructuredBuffer;
+	m_ModuleBuffer->Create(sizeof(tParticleModule) + (16 - sizeof(tParticleModule) % 16), 1, SB_TYPE::SRV_UAV, true, &m_Module);
 }
 
 CParticleSystem::~CParticleSystem()
 {
 	delete m_ParticleBuffer;
 	delete m_SpawnCountBuffer;
+	delete m_ModuleBuffer;
 }
 
 void CParticleSystem::FinalTick()
@@ -61,6 +73,8 @@ void CParticleSystem::FinalTick()
 	CalculateSpawnCount();
 
 	// Compute Shader Excecute
+	m_TickCS->SetParticleWorldPos(Transform()->GetWorldPos());
+	m_TickCS->SetParticleModuleBuffer(m_ModuleBuffer);
 	m_TickCS->SetParticleBuffer(m_ParticleBuffer);
 	m_TickCS->SetSpawnCount(m_SpawnCountBuffer);
 	
@@ -89,20 +103,23 @@ void CParticleSystem::Render()
 
 void CParticleSystem::CalculateSpawnCount()
 {
+	if (m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] == false)
+		return;
+
 	// Spawn Rate (이번 Tick 에서 파티클 하나가 생성될 시간)
-	float Term = 1.f / (float)m_SpawnRate;
-	m_Time += DT;
-	m_SpawnCount = 0;
+	float Term = 1.f / (float)m_Module.vSpawnRate;
+	m_Time += DT; 
+	UINT SpawnCount = 0;	// SpawnCount Per Tick
 
 	// 시간이 Term 을 넘을 경우를 대비해서 추가 연산 (1초에 10000개 생성같은 경우)
 	if (Term < m_Time)
 	{
 		float Value = m_Time / Term;
-		m_SpawnCount = (UINT)Value;
-		m_Time -= (float)m_SpawnCount * Term;
+		SpawnCount = (UINT)Value;
+		m_Time -= (float)SpawnCount * Term;
 	}
 
 	// SpawnCount Buffer 전달
-	tSpawnCount count = { m_SpawnCount , };
+	tSpawnCount count = { SpawnCount , };
 	m_SpawnCountBuffer->SetData(&count);
 }
