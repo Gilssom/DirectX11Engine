@@ -2,13 +2,6 @@
 #include "CRenderComponent.h"
 #include "CParticleTickCS.h"
 
-struct tSpawnCount
-{
-	int		SpawnCount;
-	UINT	padding[3];
-};
-
-
 class CStructuredBuffer;
 
 class CParticleSystem : public CRenderComponent
@@ -22,6 +15,7 @@ private:
 	Ptr<CTexture>			m_ParticleTex;		// 파티클 입자 텍스처
 
 	float					m_Time;				// 파티클 생성 누적 시간
+	float					m_BurstTime;		// Spawn Burst 체크용 변수
 
 	// Particle Data
 	UINT					m_MaxParticle;		// 파티클 최대 개수

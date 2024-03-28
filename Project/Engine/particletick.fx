@@ -4,28 +4,6 @@
 #include "value.fx"
 #include "func.fx"
 
-struct tSpawnCount
-{
-    int     spawnCount;
-    uint3   padding;
-};
-
-struct tParticleModule
-{
-    // Spawn Module
-    uint    vSpawnRate;     // 초당 파티클 생성 개수
-    float4  vSpawnColor;    // 생성 시점 색상
-    float4  vSpawnMinScale; // 생성 시, 최소 크기
-    float4  vSpawnMaxScale; // 생성 시, 최대 크기
-
-    float   MinLife;        // 파티클 최소 수명
-    float   MaxLife;        // 파티클 최대 수명
-
-	// Module On / Off
-    int     Module[1];
-    
-    float4 padding;
-};
 
 // Tick 을 호출 받을 Particle 들이 Binding 될 곳
 RWStructuredBuffer<tParticle>   ParticleBuffer   : register(u0);
@@ -45,6 +23,11 @@ StructuredBuffer<tParticleModule> Module         : register(t21);
 
 // Spawn Count Buffer 접근
 #define SpawnCount          SpawnCountBuffer[0].spawnCount
+
+// Module Check
+#define SpawnModule         Module[0].Module[0]
+#define SpawnBurstModule    Module[0].Module[1]
+#define SpawnShapeType      Module[0].SpawnShape
 
 
 // 유연하게 개수에 대처하기 위해서 적당히 32개만
@@ -75,7 +58,8 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
     //비활성화된 파티클을 활성화 시켜야함
     if (Particle.Active == 0)
     {
-        if (Module[0].Module[0])
+        // Spawn Module
+        if (SpawnModule || SpawnBurstModule)
         {
             // 이번에 활성화 가능한 파티클 수 체크
             int CurSpawnCount = SpawnCount;
@@ -96,26 +80,39 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
                 if (OriginValue == CurSpawnCount)
                 {
                     // Random 함수화
-                    float3 vRandom = GetRandom(NoiseTex, _ID.x / (ParticleBufferSize - 1));
+                    float3 vRandom  = GetRandom(NoiseTex, 2.f * (float) _ID.x       / (float) (ParticleBufferSize - 1));
+                    float3 vRandom1 = GetRandom(NoiseTex, 2.f * (float) (_ID.x + 1) / (float) (ParticleBufferSize - 1));
+                    float3 vRandom2 = GetRandom(NoiseTex, 2.f * (float) (_ID.x + 2) / (float) (ParticleBufferSize - 1));
                     
-                    // 300 * 300 * 300 의 박스 범위 안에 생성 테스트
-                    float BoxScale = 300.f;
-                    float3 vRandomPos = (float3) 0.f;
                     
-                    vRandomPos.x = vRandom.x * BoxScale - (BoxScale / 2.f);
-                    vRandomPos.y = vRandom.y * BoxScale - (BoxScale / 2.f);
-                    vRandomPos.z = vRandom.z * BoxScale - (BoxScale / 2.f);
+                    float3 vSpawnPos = (float3) 0.f;
+                    // 0 : Box,  1 : Sphere
+                    if (SpawnShapeType == 0)
+                    {
+                        vSpawnPos.x = vRandom.x * Module[0].SpawnShapeScale.x - (Module[0].SpawnShapeScale.x / 2.f);
+                        vSpawnPos.y = vRandom.y * Module[0].SpawnShapeScale.y - (Module[0].SpawnShapeScale.y / 2.f);
+                        vSpawnPos.z = vRandom.z * Module[0].SpawnShapeScale.z - (Module[0].SpawnShapeScale.z / 2.f);
+                    }
+                    else if (SpawnShapeType == 1)
+                    {
+                        float fRadius = Module[0].SpawnShapeScale.x / 2.f;
+                        //float fAngle = vRandom1.x * 2.f * PI;
+                        //float fDist = vRandom1.y * fRadius;
+                        vSpawnPos = normalize((vRandom1 - 0.5f)) * fRadius * vRandom2.x;
+                    }
                     
-                    Particle.vLocalPos = vRandomPos;
+                    Particle.vLocalPos = vSpawnPos;
                     Particle.vWorldPos = Particle.vLocalPos + ParticleObjectPos.xyz;                   
                     
                     // Min ~ Max Random
-                    Particle.vWorldScale = clamp(vRandom.x, Module[0].vSpawnMinScale, Module[0].vSpawnMaxScale);
+                    Particle.vWorldScale = (Module[0].vSpawnMaxScale - Module[0].vSpawnMinScale) * vRandom.x + Module[0].vSpawnMinScale;
+                    //clamp(vRandom.x, Module[0].vSpawnMinScale, Module[0].vSpawnMaxScale);
                     
-                    Particle.vColor = Module[0].vSpawnColor;
+                    Particle.vColor = Module[0].vSpawnColor + float4(vRandom.x, vRandom1.y, vRandom2.z, 1.f);
                     
                     Particle.Age = 0.f;
-                    Particle.Life = clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
+                    Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife;
+                    //clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
                     Particle.Active = 1;
                 
                     break;

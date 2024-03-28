@@ -61,29 +61,63 @@ struct tLightInfo
 // 파티클 (입자 한개 당 가지고 있어야 할 정보들)
 struct tParticle
 {
+	Vec4	vColor;
 	Vec3	vLocalPos;
 	Vec3	vWorldPos;
 	Vec3	vWorldScale;
-	Vec4	vColor;
+	Vec3	vWorldRatation;
+
+	Vec3	vForce;
 	Vec3	vVelocity;
 
+	float	Mass;			// 질량 추가
 	float	Life;
 	float	Age;
-	float	NormalizedAge; // 현재 수명의 비율
+	float	NormalizedAge;	// 현재 수명의 비율
 	int		Active;
+
+	float	padding;
+};
+
+// 파티클 Spawn Count
+struct tSpawnCount
+{
+	int		SpawnCount;
+	UINT	padding[3];
 };
 
 // 파티클 모듈
 struct tParticleModule
 {
-	// Spawn Module
-	UINT	vSpawnRate;		// 초당 파티클 생성 개수 (Spawn Per Second)
-	Vec4	vSpawnColor;	// 생성 시점 색상
-	Vec4	vSpawnMinScale;	// 생성 시, 최소 크기
-	Vec4	vSpawnMaxScale;	// 생성 시, 최대 크기
+	// Spawn Module (Base Info)
+	UINT	vSpawnRate;				// 초당 파티클 생성 개수 (Spawn Per Second)
+	Vec4	vSpawnColor;			// 생성 시점 색상
+	Vec4	vSpawnMinScale;			// 생성 시, 최소 크기
+	Vec4	vSpawnMaxScale;			// 생성 시, 최대 크기
 
-	float	MinLife;		// 파티클 최소 수명
-	float	MaxLife;		// 파티클 최대 수명
+	float	MinLife;				// 파티클 최소 수명
+	float	MaxLife;				// 파티클 최대 수명
+
+	// Spawn Area (No Module)
+	UINT	SpawnShape;				// 0 : Box,   1 : Sphere
+	Vec3	SpawnShapeScale;		// SpawnShapeSphere.x == Radius
+
+	// Don't Spawn Area
+	UINT	BlockSpawnShape;		// 0 : Box,   1 : Sphere
+	Vec3	BlockSpawnShapeScale;	// SpawnShapeSphere.x == Radius
+
+
+	// Spawn Burst
+	UINT	SpawnBurstCount;		// 한번에 생성할 파티클 개수
+	UINT	SpawnBurstRepeat;		// 재생성 할지 안할지
+	float	SpawnBurstRepeatTime;	// 재생성 시간 간격
+
+
+	// Add Velocity
+	UINT	AddVelocityType;		// (방향) 0 : Random, 1 : From Center(중심에서 밖), 2 : To Center(밖에서 중심), 3 : Fixed(고정 방향)
+	Vec3	AddVelocityFixedDir;
+	float	AddSpeed;				// (속도)
+
 
 	// Module On / Off
 	int		Module[(UINT)PARTICLE_MODULE::END];

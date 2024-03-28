@@ -12,6 +12,7 @@ CParticleSystem::CParticleSystem()
 	: CRenderComponent(COMPONENT_TYPE::PARTICLESYSTEM)
 	, m_ParticleBuffer(nullptr)
 	, m_Time(0.f)
+	, m_BurstTime(0.f)
 	, m_MaxParticle(1000)
 {
 	// Particle Tick 용도 Compute Shader
@@ -25,18 +26,6 @@ CParticleSystem::CParticleSystem()
 
 	// Particle 정보를 저장할 구조화 버퍼 생성
 	// Tick 이 생겼으니 데이터를 강제로 세팅할 필요도 없음
-	Vec2 vResolution = CDevice::GetInst()->GetRenderResolution();
-	float fTerm = vResolution.x / (m_MaxParticle + 1);
-
-	/*tParticle arrParticle[100] = {};
-
-	for (int i = 0; i < m_MaxParticle; ++i)
-	{
-		arrParticle[i].vWorldPos = Vec3(-(vResolution.x / 2.f) + (i + 1) * fTerm, 0.f, 100.f);
-		arrParticle[i].vWorldScale = Vec3(10.f, 10.f, 1.f);
-		arrParticle[i].Active = 0;
-	}*/
-
 	m_ParticleBuffer = new CStructuredBuffer;
 	m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticle, SB_TYPE::SRV_UAV, false);
 
@@ -45,13 +34,36 @@ CParticleSystem::CParticleSystem()
 
 
 	// Particle Module Setting Test
+	// Spawn Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] = true;
-	m_Module.vSpawnRate = 20;
+	m_Module.vSpawnRate = 30;
 	m_Module.vSpawnColor = Vec3(1.f, 0.f, 0.f);
 	m_Module.MinLife = 1.f;
 	m_Module.MaxLife = 4.f;
 	m_Module.vSpawnMinScale = Vec3(10.f, 10.f, 1.f);
 	m_Module.vSpawnMaxScale = Vec3(20.f, 20.f, 1.f);
+
+
+	// Spawn Area (No Module)
+	m_Module.SpawnShape = 1;
+	m_Module.SpawnShapeScale = Vec3(200.f, 200.f, 200.f);
+
+	// Don't Spawn Area
+
+
+	// Spawn Burst Module
+	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = true;
+	m_Module.SpawnBurstRepeat = true;
+	m_Module.SpawnBurstCount = 100;
+	m_Module.SpawnBurstRepeatTime = 3.f;
+
+	Vec3 vVelocity;
+	vVelocity.Length();		// 길이
+	vVelocity.Normalize();	// 순수한 방향정보
+
+	// Force = 질량 x 가속도
+	// 가속도 = Force / 질량
+	// Add Velocity Module : 생성된 입자에게 속도를 일정량 부여하는 Module
 
 	m_ModuleBuffer = new CStructuredBuffer;
 	m_ModuleBuffer->Create(sizeof(tParticleModule) + (16 - sizeof(tParticleModule) % 16), 1, SB_TYPE::SRV_UAV, true, &m_Module);
@@ -103,23 +115,47 @@ void CParticleSystem::Render()
 
 void CParticleSystem::CalculateSpawnCount()
 {
-	if (m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] == false)
-		return;
+	m_Time += DT;
+	tSpawnCount count = { };
 
-	// Spawn Rate (이번 Tick 에서 파티클 하나가 생성될 시간)
-	float Term = 1.f / (float)m_Module.vSpawnRate;
-	m_Time += DT; 
-	UINT SpawnCount = 0;	// SpawnCount Per Tick
-
-	// 시간이 Term 을 넘을 경우를 대비해서 추가 연산 (1초에 10000개 생성같은 경우)
-	if (Term < m_Time)
+	// Spawn Module
+	if (m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN])
 	{
-		float Value = m_Time / Term;
-		SpawnCount = (UINT)Value;
-		m_Time -= (float)SpawnCount * Term;
+		// Spawn Rate (이번 Tick 에서 파티클 하나가 생성될 시간)
+		float Term = 1.f / (float)m_Module.vSpawnRate;
+		UINT SpawnCount = 0;	// SpawnCount Per Tick
+
+		// 시간이 Term 을 넘을 경우를 대비해서 추가 연산 (1초에 10000개 생성같은 경우)
+		if (Term < m_Time)
+		{
+			float Value = m_Time / Term;
+			SpawnCount = (UINT)Value;
+			m_Time -= (float)SpawnCount * Term;
+		}
+
+		count.SpawnCount = SpawnCount;
+	}
+
+	if (m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST])
+	{
+		UINT BurstCount = 0;
+
+		if (m_BurstTime == 0.f)
+		{
+			BurstCount = m_Module.SpawnBurstCount;
+		}
+
+		m_BurstTime += DT;
+
+		if (m_Module.SpawnBurstRepeat && m_Module.SpawnBurstRepeatTime <= m_BurstTime)
+		{
+			m_BurstTime -= m_Module.SpawnBurstRepeatTime;
+			BurstCount += m_Module.SpawnBurstCount;
+		}
+
+		count.SpawnCount += BurstCount;
 	}
 
 	// SpawnCount Buffer 전달
-	tSpawnCount count = { SpawnCount , };
 	m_SpawnCountBuffer->SetData(&count);
 }

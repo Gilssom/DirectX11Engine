@@ -25,16 +25,71 @@ struct tLightInfo
 // 파티클 정보
 struct tParticle
 {
-    float3 vLocalPos;
-    float3 vWorldPos;
-    float3 vWorldScale;
-    float4 vColor;
-    float3 vVelocity;
+    float4  vColor;
+    float3  vLocalPos;
+    float3  vWorldPos;
+    float3  vWorldScale;
+    float3  vWorldRatation;
+    
+    float3  vForce;
+    float3  vVelocity;
+    
+    float   Life;
+    float   Age;
+    float   NormalizedAge; // 현재 수명의 비율
+    int     Active;
+    
+    float2  padding;
+};
 
-    float Life;
-    float Age;
-    float NormalizedAge; // 현재 수명의 비율
-    int Active;
+struct tSpawnCount
+{
+    int spawnCount;
+    uint3 padding;
+};
+
+struct tParticleModule
+{
+    // ==============
+    //  Spawn Module
+    // ==============
+    uint vSpawnRate;                // 초당 파티클 생성 개수
+    float4 vSpawnColor;             // 생성 시점 색상
+    float4 vSpawnMinScale;          // 생성 시, 최소 크기
+    float4 vSpawnMaxScale;          // 생성 시, 최대 크기
+
+    float MinLife;                  // 파티클 최소 수명
+    float MaxLife;                  // 파티클 최대 수명
+
+    // Spawn Area (No Module)
+    uint    SpawnShape;             // 0 : Box,   1 : Sphere
+    float3  SpawnShapeScale;        // SpawnShapeSphere.x == Radius
+
+	// Don't Spawn Area
+    uint    BlockSpawnShape;        // 0 : Box,   1 : Sphere
+    float3  BlockSpawnShapeScale;   // SpawnShapeSphere.x == Radius
+    
+    
+    // ==============
+    //  Spawn Burst
+    // ==============
+    uint    SpawnBurstCount;        // 한번에 생성할 파티클 개수
+    uint    SpawnBurstRepeat;       // 재생성 할지 안할지
+    float   SpawnBurstRepeatTime;   // 재생성 시간 간격
+    
+    
+    // ==============
+    //  Add Velocity
+    // ==============
+    uint    AddVelocityType;        // (방향) 0 : Random, 1 : From Center(중심에서 밖), 2 : To Center(밖에서 중심), 3 : Fixed(고정 방향)
+    float3  AddVelocityFixedDir;
+    float   AddSpeed;               // (속도)
+    
+    
+	// Module On / Off
+    int Module[3];
+    
+    float4 padding;
 };
 
 #endif
