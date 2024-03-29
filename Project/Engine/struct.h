@@ -64,7 +64,8 @@ struct tParticle
 	Vec4	vColor;
 	Vec3	vLocalPos;
 	Vec3	vWorldPos;
-	Vec3	vWorldScale;
+	Vec3	vWorldInitScale;		// 최초 크기
+	Vec3	vWorldCurrentScale;		// 현재 크기
 	Vec3	vWorldRatation;
 
 	Vec3	vForce;
@@ -76,7 +77,7 @@ struct tParticle
 	float	NormalizedAge;	// 현재 수명의 비율
 	int		Active;
 
-	float	padding;
+	Vec2	padding;
 };
 
 // 파티클 Spawn Count
@@ -116,8 +117,18 @@ struct tParticleModule
 	// Add Velocity
 	UINT	AddVelocityType;		// (방향) 0 : Random, 1 : From Center(중심에서 밖), 2 : To Center(밖에서 중심), 3 : Fixed(고정 방향)
 	Vec3	AddVelocityFixedDir;
-	float	AddSpeed;				// (속도)
+	float	AddMinSpeed;			// (속도)
+	float	AddMaxSpeed;			// (속도)
 
+
+	// Scale Module
+	float	StartScale;				// 최초 크기 비율
+	float	EndScale;				// 최종 크기 비율
+
+
+	// Drag Module
+	float	DestNormalizedAge;
+	float	LimitSpeed;
 
 	// Module On / Off
 	int		Module[(UINT)PARTICLE_MODULE::END];

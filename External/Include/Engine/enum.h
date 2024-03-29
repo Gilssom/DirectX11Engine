@@ -203,12 +203,11 @@ enum class PARTICLE_MODULE
 {
 	SPAWN,			// 지속적인 Spawn
 	SPAWN_BURST,	// 순간적인 Spawn
-	ADD_VELOCITY,
-	
-	// SCALE,
-	// DRAG,
-	// Render
-	// Noise Force
+	ADD_VELOCITY,	// 가속도 및 힘
+	SCALE,			// 크기
+	DRAG,
+	Noise_Force,
+	Rende,
 
 	END,
 };

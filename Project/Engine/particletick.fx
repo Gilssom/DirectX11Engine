@@ -28,7 +28,9 @@ StructuredBuffer<tParticleModule> Module         : register(t21);
 #define SpawnModule         Module[0].Module[0]
 #define SpawnBurstModule    Module[0].Module[1]
 #define SpawnShapeType      Module[0].SpawnShape
-
+#define AddVelocityModule   Module[0].Module[2]
+#define ScaleModule         Module[0].Module[3]
+#define DragModule          Module[0].Module[4]
 
 // 유연하게 개수에 대처하기 위해서 적당히 32개만
 [numthreads(32, 1, 1)]
@@ -97,20 +99,49 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
                     {
                         float fRadius = Module[0].SpawnShapeScale.x / 2.f;
                         //float fAngle = vRandom1.x * 2.f * PI;
-                        //float fDist = vRandom1.y * fRadius;
-                        vSpawnPos = normalize((vRandom1 - 0.5f)) * fRadius * vRandom2.x;
+                        //float fDist = vRandom1.y * fRadius;                       
+                        float fBlockRadius = Module[0].BlockSpawnShapeScale.x / 2.f;
+                        float fDifferRadius = fRadius - fBlockRadius;
+                        
+                        // 금지 영역 설정 (Sphere) - Box 는 개인 구현
+                        vSpawnPos = (normalize(vRandom1 - 0.5f) * fDifferRadius * vRandom2.x)
+                                    + (normalize(vRandom1 - 0.5f) * fBlockRadius);
+                    }                 
+                    
+                    // Add Velocity Module
+                    Particle.vVelocity = (float3) 0.f;
+                    if (AddVelocityModule)
+                    {
+                        float fSpeed = Module[0].AddMinSpeed + (Module[0].AddMaxSpeed - Module[0].AddMinSpeed) * vRandom2.x;
+                        
+                        // Random
+                        if (Module[0].AddVelocityType == 0)
+                            Particle.vVelocity = normalize(vRandom2 - 0.5f) * fSpeed;
+
+                        // From Center
+                        else if (Module[0].AddVelocityType == 1)
+                            Particle.vVelocity = normalize(vSpawnPos) * fSpeed;
+                        
+                        // To Center
+                        else if (Module[0].AddVelocityType == 2)
+                            Particle.vVelocity = -normalize(vSpawnPos) * fSpeed;
+                        
+                        // Fixed
+                        else
+                            Particle.vVelocity = normalize(Module[0].AddVelocityFixedDir) * fSpeed;                       
                     }
                     
                     Particle.vLocalPos = vSpawnPos;
                     Particle.vWorldPos = Particle.vLocalPos + ParticleObjectPos.xyz;                   
                     
                     // Min ~ Max Random
-                    Particle.vWorldScale = (Module[0].vSpawnMaxScale - Module[0].vSpawnMinScale) * vRandom.x + Module[0].vSpawnMinScale;
+                    Particle.vWorldInitScale = (Module[0].vSpawnMaxScale - Module[0].vSpawnMinScale) * vRandom.x + Module[0].vSpawnMinScale;
                     //clamp(vRandom.x, Module[0].vSpawnMinScale, Module[0].vSpawnMaxScale);
                     
-                    Particle.vColor = Module[0].vSpawnColor + float4(vRandom.x, vRandom1.y, vRandom2.z, 1.f);
+                    Particle.vColor = Module[0].vSpawnColor + float4(vRandom.x, vRandom1.y, vRandom1.z, 1.f);
                     
                     Particle.Age = 0.f;
+                    Particle.NormalizedAge = 0.f;
                     Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife;
                     //clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
                     Particle.Active = 1;
@@ -126,7 +157,45 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
     else
     {
         // Global Data 를 Binding_CS 를 통해서 받아왔으니 활용
+        
+        // Velocity 에 따른 이동
+        Particle.vWorldPos += Particle.vVelocity * DeltaTime;
+        
+        // Scale Module 에 따른 현재 크기 계산
+        Particle.vWorldCurrentScale = Particle.vWorldInitScale;
+        
+        if (ScaleModule)
+            Particle.vWorldCurrentScale = ((Module[0].EndScale - Module[0].StartScale) * Particle.NormalizedAge + Module[0].StartScale) * Particle.vWorldInitScale;
+        
+        // Drag Module (속도 감소)
+        if (DragModule)
+        {
+            if (Particle.NormalizedAge < Module[0].DestNormalizedAge)
+            {
+                // 기울기
+                // (목표 속력 - 현재 속력) / (목표 N.A - 현재 N.A)
+                float Gradient = (Module[0].LimitSpeed - length(Particle.vVelocity)) / (Module[0].DestNormalizedAge - Particle.NormalizedAge);
+            
+                // Normalized Age Delta Time (DT 가 가진 정규화된 수명에 대한 비율)
+                float NADT = DeltaTime / Particle.Life;
+            
+                float NewSpeed = length(Particle.vVelocity) + (Gradient * NADT);
+                Particle.vVelocity = normalize(Particle.vVelocity) * NewSpeed;
+            
+            }
+            else
+            {
+                if (length(Particle.vVelocity) > Module[0].LimitSpeed)
+                {
+                    Particle.vVelocity = normalize(Particle.vVelocity) * Module[0].LimitSpeed;
+                }
+            }
+        }
+                  
         Particle.Age += DeltaTime;
+        //Particle.vWorldScale -= (float3) DeltaTime * 5.f;
+        
+        Particle.NormalizedAge = Particle.Age / Particle.Life;
         
         if(Particle.Life <= Particle.Age)
         {

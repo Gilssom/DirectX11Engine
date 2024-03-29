@@ -38,32 +38,47 @@ CParticleSystem::CParticleSystem()
 	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] = true;
 	m_Module.vSpawnRate = 30;
 	m_Module.vSpawnColor = Vec3(1.f, 0.f, 0.f);
-	m_Module.MinLife = 1.f;
-	m_Module.MaxLife = 4.f;
+	m_Module.MinLife = 5.f;
+	m_Module.MaxLife = 5.f;
 	m_Module.vSpawnMinScale = Vec3(10.f, 10.f, 1.f);
 	m_Module.vSpawnMaxScale = Vec3(20.f, 20.f, 1.f);
 
 
 	// Spawn Area (No Module)
-	m_Module.SpawnShape = 1;
-	m_Module.SpawnShapeScale = Vec3(200.f, 200.f, 200.f);
+	m_Module.SpawnShape = 0;
+	m_Module.SpawnShapeScale = Vec3(300.f, 300.f, 300.f);
 
 	// Don't Spawn Area
+	m_Module.BlockSpawnShape = 1;
+	m_Module.BlockSpawnShapeScale.x = 0.f;
 
 
 	// Spawn Burst Module
-	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = true;
+	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = false;
 	m_Module.SpawnBurstRepeat = true;
 	m_Module.SpawnBurstCount = 100;
 	m_Module.SpawnBurstRepeatTime = 3.f;
 
-	Vec3 vVelocity;
-	vVelocity.Length();		// 길이
-	vVelocity.Normalize();	// 순수한 방향정보
+	
+	// Add Velocity Module
+	m_Module.Module[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = true;
+	m_Module.AddVelocityType = 1;
+	m_Module.AddVelocityFixedDir = Vec3(0.f, 1.f, 0.f);
+	m_Module.AddMinSpeed = 500.f;
+	m_Module.AddMaxSpeed = 500.f;
 
-	// Force = 질량 x 가속도
-	// 가속도 = Force / 질량
-	// Add Velocity Module : 생성된 입자에게 속도를 일정량 부여하는 Module
+
+	// Scale Module
+	m_Module.Module[(UINT)PARTICLE_MODULE::SCALE] = true;
+	m_Module.StartScale = 2.5f;
+	m_Module.EndScale = 2.f;
+
+
+	// Drag Module
+	m_Module.Module[(UINT)PARTICLE_MODULE::DRAG] = true;
+	m_Module.DestNormalizedAge = 0.5f;
+	m_Module.LimitSpeed = 0.f;
+
 
 	m_ModuleBuffer = new CStructuredBuffer;
 	m_ModuleBuffer->Create(sizeof(tParticleModule) + (16 - sizeof(tParticleModule) % 16), 1, SB_TYPE::SRV_UAV, true, &m_Module);

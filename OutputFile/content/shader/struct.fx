@@ -28,12 +28,14 @@ struct tParticle
     float4  vColor;
     float3  vLocalPos;
     float3  vWorldPos;
-    float3  vWorldScale;
+    float3  vWorldInitScale;
+    float3  vWorldCurrentScale;
     float3  vWorldRatation;
     
     float3  vForce;
     float3  vVelocity;
     
+    float   Mass;
     float   Life;
     float   Age;
     float   NormalizedAge; // 현재 수명의 비율
@@ -83,13 +85,26 @@ struct tParticleModule
     // ==============
     uint    AddVelocityType;        // (방향) 0 : Random, 1 : From Center(중심에서 밖), 2 : To Center(밖에서 중심), 3 : Fixed(고정 방향)
     float3  AddVelocityFixedDir;
-    float   AddSpeed;               // (속도)
+    float   AddMinSpeed;            // (최소 속도)
+    float   AddMaxSpeed;            // (최대 속도)
     
+    
+    // ==============
+    //  Scale
+    // ==============
+    float StartScale;
+    float EndScale;
+    
+    // ==============
+    //  Drag Module
+    // ==============
+    float DestNormalizedAge;
+    float LimitSpeed;
     
 	// Module On / Off
-    int Module[3];
+    int Module[7];
     
-    float4 padding;
+    float padding;
 };
 
 #endif

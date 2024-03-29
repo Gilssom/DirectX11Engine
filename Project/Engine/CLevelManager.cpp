@@ -207,6 +207,7 @@ void CLevelManager::Init()
 	pParticleObject->AddComponent(new CTransform);
 	pParticleObject->AddComponent(new CParticleSystem);
 
+	//Vec3(200.f, 400.f, 500.f) : Snow
 	pParticleObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
 	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png"));
 
