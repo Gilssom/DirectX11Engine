@@ -206,8 +206,8 @@ enum class PARTICLE_MODULE
 	ADD_VELOCITY,	// 가속도 및 힘
 	SCALE,			// 크기
 	DRAG,
-	Noise_Force,
-	Rende,
+	NOISE_FORCE,
+	RENDER,
 
 	END,
 };

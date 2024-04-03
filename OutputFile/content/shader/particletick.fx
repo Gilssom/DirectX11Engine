@@ -31,6 +31,8 @@ StructuredBuffer<tParticleModule> Module         : register(t21);
 #define AddVelocityModule   Module[0].Module[2]
 #define ScaleModule         Module[0].Module[3]
 #define DragModule          Module[0].Module[4]
+#define NoiseForceModule    Module[0].Module[5]
+#define RenderModule        Module[0].Module[6]
 
 // 유연하게 개수에 대처하기 위해서 적당히 32개만
 [numthreads(32, 1, 1)]
@@ -138,10 +140,11 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
                     Particle.vWorldInitScale = (Module[0].vSpawnMaxScale - Module[0].vSpawnMinScale) * vRandom.x + Module[0].vSpawnMinScale;
                     //clamp(vRandom.x, Module[0].vSpawnMinScale, Module[0].vSpawnMaxScale);
                     
-                    Particle.vColor = Module[0].vSpawnColor + float4(vRandom.x, vRandom1.y, vRandom1.z, 1.f);
+                    Particle.vColor = Module[0].vSpawnColor * float4(vRandom.x, vRandom1.y, vRandom1.z, 1.f);
+                    Particle.Mass = 1.f;
                     
                     Particle.Age = 0.f;
-                    Particle.NormalizedAge = 0.f;
+                    Particle.NormalizedAge = 0;
                     Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife;
                     //clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
                     Particle.Active = 1;
@@ -158,8 +161,46 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
     {
         // Global Data 를 Binding_CS 를 통해서 받아왔으니 활용
         
+        Particle.vForce = float3(0.f, 0.f, 0.f);
+        
+        // Noise Force Module (Random Direction Force)
+        if (NoiseForceModule)
+        {
+            // 일정 시간마다 Noise Force 의 방향을 Random 으로 구한다.
+            if(Particle.NoiseForceAccTime >= Module[0].NoiseForceTerm)
+            {
+                Particle.NoiseForceAccTime -= Module[0].NoiseForceTerm;
+                
+                float3 vRandom = GetRandom(NoiseTex, ((float) _ID.x / (float) (ParticleBufferSize - 1)));
+                float3 vNoiseForce = normalize(vRandom.xyz - 0.5f); // Random Direction
+                
+                Particle.NoiseForceDir = vNoiseForce;
+            }
+            
+            Particle.vForce += Particle.NoiseForceDir * Module[0].NoiseForceScale;
+            Particle.NoiseForceAccTime += DeltaTime;
+        }
+
+        // Particle 에 주어진 힘에 따른 가속도 계산
+        float3 vAccel = Particle.vForce / Particle.Mass;
+        
+        // 가속도에 따른 속도의 실시간 변화
+        Particle.vVelocity += vAccel * DeltaTime;
+        
+        
         // Velocity 에 따른 이동
-        Particle.vWorldPos += Particle.vVelocity * DeltaTime;
+        if (Module[0].SpaceType == 0)
+        {
+            // Local Space Type
+            Particle.vLocalPos += Particle.vVelocity * DeltaTime;
+            Particle.vWorldPos = Particle.vLocalPos + ParticleObjectPos.xyz;
+        }
+        else
+        {
+            // World Space Type
+            Particle.vWorldPos += Particle.vVelocity * DeltaTime;
+        }
+            
         
         // Scale Module 에 따른 현재 크기 계산
         Particle.vWorldCurrentScale = Particle.vWorldInitScale;
@@ -192,6 +233,20 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
             }
         }
                   
+        if (RenderModule)
+        {
+            Particle.vColor.rgb = (Module[0].EndColor - Module[0].vSpawnColor.rgb) * Particle.NormalizedAge + Module[0].vSpawnColor.rgb;
+            
+            if(Module[0].FadeOut)
+            {
+                // 설정한 FadeOutStartRatio 부분 부터 Alpha 값이 1 부터 0 까지 줄어들어야함
+                // 또, 지정된 부분 이전에는 Alpha 값이 1이 유지되어야 함 (saturate : 0 에서 1 이상으로 값이 못 벗어나게 함.)
+                float fRatio = saturate(1.f - ((Particle.NormalizedAge - Module[0].FadeOutStartRatio) / (1.f - Module[0].FadeOutStartRatio)));
+                
+                Particle.vColor.a = fRatio;
+            }
+        }
+        
         Particle.Age += DeltaTime;
         //Particle.vWorldScale -= (float3) DeltaTime * 5.f;
         

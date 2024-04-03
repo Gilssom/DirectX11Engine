@@ -123,13 +123,12 @@ float4 PS_Particle(GS_OUT _in) : SV_Target
     if (g_btex_0)
     {
         vOutColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+        vOutColor *= ParticleBuffer[_in.InstID].vColor;
     }
     else
     {
         vOutColor = float4(1.f, 0.f, 1.f, 1.f);
     }
-    
-    vOutColor.rgb *= ParticleBuffer[_in.InstID].vColor;
     
     return vOutColor;
 }

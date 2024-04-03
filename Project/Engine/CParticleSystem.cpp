@@ -37,12 +37,11 @@ CParticleSystem::CParticleSystem()
 	// Spawn Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] = true;
 	m_Module.vSpawnRate = 30;
-	m_Module.vSpawnColor = Vec3(1.f, 0.f, 0.f);
+	m_Module.vSpawnColor = Vec4(0.2f, 0.67f, 0.87f, 1.f);
 	m_Module.MinLife = 5.f;
 	m_Module.MaxLife = 5.f;
 	m_Module.vSpawnMinScale = Vec3(10.f, 10.f, 1.f);
 	m_Module.vSpawnMaxScale = Vec3(20.f, 20.f, 1.f);
-
 
 	// Spawn Area (No Module)
 	m_Module.SpawnShape = 0;
@@ -51,6 +50,9 @@ CParticleSystem::CParticleSystem()
 	// Don't Spawn Area
 	m_Module.BlockSpawnShape = 1;
 	m_Module.BlockSpawnShapeScale.x = 0.f;
+
+	// Local || World Space Setting
+	m_Module.SpaceType = 0;
 
 
 	// Spawn Burst Module
@@ -61,7 +63,7 @@ CParticleSystem::CParticleSystem()
 
 	
 	// Add Velocity Module
-	m_Module.Module[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = true;
+	m_Module.Module[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = false;
 	m_Module.AddVelocityType = 1;
 	m_Module.AddVelocityFixedDir = Vec3(0.f, 1.f, 0.f);
 	m_Module.AddMinSpeed = 500.f;
@@ -75,10 +77,22 @@ CParticleSystem::CParticleSystem()
 
 
 	// Drag Module
-	m_Module.Module[(UINT)PARTICLE_MODULE::DRAG] = true;
+	m_Module.Module[(UINT)PARTICLE_MODULE::DRAG] = false;
 	m_Module.DestNormalizedAge = 0.5f;
 	m_Module.LimitSpeed = 0.f;
 
+
+	// Noise Force Module
+	m_Module.Module[(UINT)PARTICLE_MODULE::NOISE_FORCE] = true;
+	m_Module.NoiseForceTerm = 0.5f;
+	m_Module.NoiseForceScale = 50.f;
+
+
+	// Render Module
+	m_Module.Module[(UINT)PARTICLE_MODULE::RENDER] = true;
+	m_Module.EndColor = Vec3(1.f, 0.2f, 0.2f);
+	m_Module.FadeOut = true;
+	m_Module.FadeOutStartRatio = 0.9f;
 
 	m_ModuleBuffer = new CStructuredBuffer;
 	m_ModuleBuffer->Create(sizeof(tParticleModule) + (16 - sizeof(tParticleModule) % 16), 1, SB_TYPE::SRV_UAV, true, &m_Module);

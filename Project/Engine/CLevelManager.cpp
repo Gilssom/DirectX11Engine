@@ -206,6 +206,7 @@ void CLevelManager::Init()
 	pParticleObject->SetName(L"Particle");
 	pParticleObject->AddComponent(new CTransform);
 	pParticleObject->AddComponent(new CParticleSystem);
+	pParticleObject->AddComponent(new CPlayerScript);
 
 	//Vec3(200.f, 400.f, 500.f) : Snow
 	pParticleObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));

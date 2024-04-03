@@ -68,13 +68,16 @@ struct tParticle
 	Vec3	vWorldCurrentScale;		// 현재 크기
 	Vec3	vWorldRatation;
 
-	Vec3	vForce;
+	Vec3	vForce;					// Particle 에 누적된 힘
 	Vec3	vVelocity;
 
-	float	Mass;			// 질량 추가
+	float	NoiseForceAccTime;		// Noise Force Term 에 도달하는 누적 시간
+	Vec3	NoiseForceDir;			// 적용된 Noise Force 의 방향
+
+	float	Mass;					// 질량 추가
 	float	Life;
 	float	Age;
-	float	NormalizedAge;	// 현재 수명의 비율
+	float	NormalizedAge;			// 현재 수명의 비율
 	int		Active;
 
 	Vec2	padding;
@@ -107,6 +110,7 @@ struct tParticleModule
 	UINT	BlockSpawnShape;		// 0 : Box,   1 : Sphere
 	Vec3	BlockSpawnShapeScale;	// SpawnShapeSphere.x == Radius
 
+	UINT	SpaceType;				// 0 : LocalSpace,  1 : WorldSpace
 
 	// Spawn Burst
 	UINT	SpawnBurstCount;		// 한번에 생성할 파티클 개수
@@ -129,6 +133,18 @@ struct tParticleModule
 	// Drag Module
 	float	DestNormalizedAge;
 	float	LimitSpeed;
+
+
+	// Noise Force Module
+	float	NoiseForceTerm;			// Noise Force 적용 간격
+	float	NoiseForceScale;		// Noise Force 크기
+
+
+	// Render Module
+	Vec3	EndColor;				// 최종 변환 색상
+	UINT	FadeOut;				// 0 : Off,  1 : Normalized Age
+	float	FadeOutStartRatio;		// Fade Out 효과가 시작되는 Normalized Age 지점 
+
 
 	// Module On / Off
 	int		Module[(UINT)PARTICLE_MODULE::END];

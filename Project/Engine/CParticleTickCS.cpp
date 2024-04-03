@@ -6,6 +6,7 @@
 CParticleTickCS::CParticleTickCS()
     : CComputeShader(32, 1, 1)
     , m_ParticleBuffer(nullptr)
+    , m_ModuleBuffer(nullptr)
     , m_SpawnCountBuffer(nullptr)
 {
     // 사용할 Noise Texture 미리 참조

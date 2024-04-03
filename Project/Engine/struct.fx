@@ -35,6 +35,9 @@ struct tParticle
     float3  vForce;
     float3  vVelocity;
     
+    float   NoiseForceAccTime;  // Noise Force Term 에 도달하는 누적 시간
+    float3  NoiseForceDir;      // 적용된 Noise Force 의 방향
+    
     float   Mass;
     float   Life;
     float   Age;
@@ -55,13 +58,13 @@ struct tParticleModule
     // ==============
     //  Spawn Module
     // ==============
-    uint vSpawnRate;                // 초당 파티클 생성 개수
-    float4 vSpawnColor;             // 생성 시점 색상
-    float4 vSpawnMinScale;          // 생성 시, 최소 크기
-    float4 vSpawnMaxScale;          // 생성 시, 최대 크기
+    uint    vSpawnRate;                // 초당 파티클 생성 개수
+    float4  vSpawnColor;             // 생성 시점 색상
+    float4  vSpawnMinScale;          // 생성 시, 최소 크기
+    float4  vSpawnMaxScale;          // 생성 시, 최대 크기
 
-    float MinLife;                  // 파티클 최소 수명
-    float MaxLife;                  // 파티클 최대 수명
+    float   MinLife;                  // 파티클 최소 수명
+    float   MaxLife;                  // 파티클 최대 수명
 
     // Spawn Area (No Module)
     uint    SpawnShape;             // 0 : Box,   1 : Sphere
@@ -70,6 +73,8 @@ struct tParticleModule
 	// Don't Spawn Area
     uint    BlockSpawnShape;        // 0 : Box,   1 : Sphere
     float3  BlockSpawnShapeScale;   // SpawnShapeSphere.x == Radius
+    
+    uint    SpaceType;              // 0 : LocalSpace,  1 : WorldSpace
     
     
     // ==============
@@ -92,19 +97,34 @@ struct tParticleModule
     // ==============
     //  Scale
     // ==============
-    float StartScale;
-    float EndScale;
+    float   StartScale;
+    float   EndScale;
     
     // ==============
     //  Drag Module
     // ==============
-    float DestNormalizedAge;
-    float LimitSpeed;
+    float   DestNormalizedAge;
+    float   LimitSpeed;
+   
+    
+    // ====================
+    //  Noise Force Module
+    // ====================
+    float   NoiseForceTerm;         // Noise Force 적용 간격
+    float   NoiseForceScale;        // Noise Force 크기
+
+
+    // ====================
+    //  Noise Force Module
+    // ====================
+    float3  EndColor;               // 최종 변환 색상
+    uint    FadeOut;                // 0 : Off,  1 : Normalized Age
+    float   FadeOutStartRatio;      // Fade Out 효과가 시작되는 Normalized Age 지점 
     
 	// Module On / Off
-    int Module[7];
+    int     Module[7];
     
-    float padding;
+    float  padding;
 };
 
 #endif
