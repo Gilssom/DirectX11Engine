@@ -119,7 +119,8 @@ struct tParticleModule
     // ====================
     float3  EndColor;               // 최종 변환 색상
     uint    FadeOut;                // 0 : Off,  1 : Normalized Age
-    float   FadeOutStartRatio;      // Fade Out 효과가 시작되는 Normalized Age 지점 
+    float   FadeOutStartRatio;      // Fade Out 효과가 시작되는 Normalized Age 지점
+    uint    VelocityAlignment;      // 속도 정렬 0 : Off, 1 : On
     
 	// Module On / Off
     int     Module[7];

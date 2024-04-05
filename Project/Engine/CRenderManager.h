@@ -1,5 +1,6 @@
 #pragma once
-#include "Singletone.h"
+
+#include "CTexture.h"
 
 class CCamera;
 class CLight2D;
@@ -14,6 +15,8 @@ private:
 	vector<CLight2D*>	m_vecLight2D;		// 매 프레임마다 등록해야함 ( = Layer )
 	CStructuredBuffer*	m_Light2DBuffer;	// 구조화 버퍼
 
+	Ptr<CTexture>		m_RenderTargetCopyTex;
+
 
 public:
 	void RegisterCamera(CCamera* camera, int priority);
@@ -22,6 +25,8 @@ public:
 		m_vecLight2D.push_back(light2D);
 		return (int)m_vecLight2D.size() - 1; // 마지막 Index 알려줌
 	}
+
+	void CopyRenderTarget();
 
 public:
 	void Init();

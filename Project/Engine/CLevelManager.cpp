@@ -126,34 +126,34 @@ void CLevelManager::Init()
 
 
 	// Player
-	/*CGameObject* pPlayer = new CGameObject;
-	//pPlayer->SetName(L"Player");
-	//pPlayer->AddComponent(new CTransform);
-	//pPlayer->AddComponent(new CMeshRender);
-	//pPlayer->AddComponent(new CCollider2D);
-	//pPlayer->AddComponent(new CAnimator2D);
-	//pPlayer->AddComponent(new CPlayerScript);
+	CGameObject* pPlayer = new CGameObject;
+	pPlayer->SetName(L"Player");
+	pPlayer->AddComponent(new CTransform);
+	pPlayer->AddComponent(new CMeshRender);
+	pPlayer->AddComponent(new CCollider2D);
+	pPlayer->AddComponent(new CAnimator2D);
+	pPlayer->AddComponent(new CPlayerScript);
 
-	//pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
-	//pPlayer->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
+	pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	pPlayer->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
 
-	//pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
-	//pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
+	pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
 
-	//pPlayer->Collider2D()->SetAbsolute(false);
-	//pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
-	//pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
+	pPlayer->Collider2D()->SetAbsolute(false);
+	pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
+	pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
-	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
-	////pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
-	////pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
-	////pPlayer->Animator2D()->FindAnimation(L"MOVE_DOWN")->Save(L"Animation\\");
+	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
+	//pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
+	//pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
+	//pPlayer->Animator2D()->FindAnimation(L"MOVE_DOWN")->Save(L"Animation\\");
 
-	//pPlayer->Animator2D()->LoadAnimation(L"Animation\\MOVE_DOWN.anim");
-	//pPlayer->Animator2D()->Play(L"MOVE_DOWN", true);
+	pPlayer->Animator2D()->LoadAnimation(L"Animation\\MOVE_DOWN.anim");
+	pPlayer->Animator2D()->Play(L"MOVE_DOWN", true);
 
-	//m_CurLevel->AddObject(1, pPlayer, false);*/
+	m_CurLevel->AddObject(1, pPlayer, false);
 
 
 	// Monster
@@ -213,6 +213,23 @@ void CLevelManager::Init()
 	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png"));
 
 	m_CurLevel->AddObject(0, pParticleObject, false);
+
+
+	// PostProcee Filter Ãß°¡
+	CGameObject* pFilterObject = new CGameObject;
+
+	pFilterObject->AddComponent(new CTransform);
+	pFilterObject->AddComponent(new CMeshRender);
+
+	pFilterObject->Transform()->SetRelativePos(500.f, 0.f, 200.f);
+	pFilterObject->Transform()->SetRelativeScale(200.f, 200.f, 1.f);
+
+	pFilterObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pFilterObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"DistortionMaterial"));
+	pFilterObject->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"RenderTargetCopyTex"));
+	pFilterObject->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
+
+	m_CurLevel->AddObject(0, pFilterObject, false);
 
 
 	// Level ÀÇ Collision Setting

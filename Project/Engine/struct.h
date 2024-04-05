@@ -144,6 +144,7 @@ struct tParticleModule
 	Vec3	EndColor;				// 최종 변환 색상
 	UINT	FadeOut;				// 0 : Off,  1 : Normalized Age
 	float	FadeOutStartRatio;		// Fade Out 효과가 시작되는 Normalized Age 지점 
+	UINT	VelocityAlignment;		// 속도 정렬 0 : Off, 1 : On
 
 
 	// Module On / Off

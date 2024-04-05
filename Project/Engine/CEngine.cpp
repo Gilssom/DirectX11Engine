@@ -45,8 +45,8 @@ int CEngine::Init(HWND hwnd, Vec2 resolution)
 	CTimeManager::GetInst()->Init();
 	CKeyManager::GetInst()->Init();
 	CAssetManager::GetInst()->Init();
-	CLevelManager::GetInst()->Init();
 	CRenderManager::GetInst()->Init();
+	CLevelManager::GetInst()->Init();
 
 	return S_OK;
 }

@@ -507,6 +507,9 @@
     <FxCompile Include="particletick.fx">
       <Filter>HLSL\04. ComputeShader\ParticleTick</Filter>
     </FxCompile>
+    <FxCompile Include="postprocess.fx">
+      <Filter>HLSL\02. 2D</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">

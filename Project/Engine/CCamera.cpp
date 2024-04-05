@@ -151,6 +151,8 @@ void CCamera::Render_particle()
 
 void CCamera::Render_postprocess()
 {
+	CRenderManager::GetInst();
+
 	for (size_t i = 0; i < m_vecPostProcess.size(); i++)
 	{
 		m_vecPostProcess[i]->Render();

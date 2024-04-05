@@ -4,9 +4,11 @@
 #include "value.fx"
 #include "func.fx"
 
-StructuredBuffer<tParticle> ParticleBuffer : register(t17);
+StructuredBuffer<tParticle>         ParticleBuffer  : register(t17);
+StructuredBuffer<tParticleModule>   ModuleBuffer    : register(t18);
 
-#define Particle ParticleBuffer[_in[0].InstID]
+#define Particle    ParticleBuffer[_in[0].InstID]
+#define Module      ModuleBuffer[0]
 
 
 struct VS_PARTICLE_IN
@@ -56,10 +58,11 @@ struct GS_OUT
 };
 
 // 정점 사용 최대 개수
-[maxvertexcount(6)] // inout : Reference (HLSL 원본)
+[maxvertexcount(12)] // inout : Reference (HLSL 원본)
 void GS_Particle(point VS_PARTICLE_OUT _in[1], inout TriangleStream<GS_OUT> _OutStream)
 {
     GS_OUT output[4] = { (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f };
+    GS_OUT output_cross[4] = { (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f };
     
     // 1. 비활성화된 파티클의 경우, GS 단계에서 파이프라인을 중단시킬 수 있다.
     
@@ -86,8 +89,34 @@ void GS_Particle(point VS_PARTICLE_OUT _in[1], inout TriangleStream<GS_OUT> _Out
     output[2].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
     output[3].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
     
+    if(Module.VelocityAlignment)
+    {
+        output_cross[0].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+        output_cross[1].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+        output_cross[2].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+        output_cross[3].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+
+        float3 vR = normalize(mul(float4(Particle.vVelocity, 0.f), g_matView).xyz);
+        float3 vF = normalize(cross(vR, float3(0.f, 1.f, 0.f)));
+        float3 vU = normalize(cross(vF, vR));
+
+        float3x3 vRot =
+        {
+            vR,
+            vU,
+            vF,
+        };
+        
+        for (int i = 0; i < 4; ++i)
+        {
+            output[i].vPosition.xyz = mul(output[i].vPosition.xyz, vRot);
+            output_cross[i].vPosition.xyz = mul(output_cross[i].vPosition.xyz, vRot);
+        }
+    }
+    
     for (int i = 0; i < 4; i++)
     {
+        output[i].vPosition += vViewPos;
         output[i].vPosition = mul(output[i].vPosition, g_matProj);
     }
     
@@ -110,6 +139,35 @@ void GS_Particle(point VS_PARTICLE_OUT _in[1], inout TriangleStream<GS_OUT> _Out
     _OutStream.Append(output[2]);
     _OutStream.Append(output[3]);
     _OutStream.RestartStrip();
+    
+    if(Module.VelocityAlignment)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            output_cross[i].vPosition += vViewPos;
+            output_cross[i].vPosition = mul(output_cross[i].vPosition, g_matProj);
+        }
+    
+        // 생성시킨 정점의 UV 세팅
+        output_cross[0].vUV = float2(0.f, 0.f);
+        output_cross[1].vUV = float2(1.f, 0.f);
+        output_cross[2].vUV = float2(1.f, 1.f);
+        output_cross[3].vUV = float2(0.f, 1.f);
+    
+        // 생성시킨 정점의 Instance ID 세팅
+        output_cross[0].InstID = output_cross[1].InstID = output_cross[2].InstID = output_cross[3].InstID = _in[0].InstID;
+       
+        // OutStream 에 RectMesh 를 만들기 위해서 총 6개의 출력을 지정한다.
+        _OutStream.Append(output_cross[0]);
+        _OutStream.Append(output_cross[1]);
+        _OutStream.Append(output_cross[2]);
+        _OutStream.RestartStrip();
+    
+        _OutStream.Append(output_cross[0]);
+        _OutStream.Append(output_cross[2]);
+        _OutStream.Append(output_cross[3]);
+        _OutStream.RestartStrip();
+    }
     
     return;
 }

@@ -5,6 +5,8 @@
 #include "CConstBuffer.h"
 #include "CStructuredBuffer.h"
 
+#include "CAssetManager.h"
+
 #include "CCamera.h"
 #include "CLight2D.h"
 
@@ -19,8 +21,19 @@ CRenderManager::~CRenderManager()
 	delete m_Light2DBuffer;
 }
 
+void CRenderManager::CopyRenderTarget()
+{
+	Ptr<CTexture> pRenderTargetTex = CAssetManager::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
+	CONTEXT->CopyResource(m_RenderTargetCopyTex->GetTex2D().Get(), pRenderTargetTex->GetTex2D().Get());
+}
+
 void CRenderManager::Init()
 {
+	// RenderTarget 을 복사받을 수 있는 텍스쳐를 생성
+	Vec2 vRenderResol = CDevice::GetInst()->GetRenderResolution();
+	m_RenderTargetCopyTex = CAssetManager::GetInst()->CreateTexture(L"RenderTargetCopyTex"
+							, (UINT)vRenderResol.x, (UINT)vRenderResol.y
+							, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);
 }
 
 void CRenderManager::Tick()
