@@ -13,8 +13,21 @@ CCollider2D::CCollider2D()
 	, m_Active(true)
 	, m_SemiDeactive(false)
 {
-
 }
+
+CCollider2D::CCollider2D(const CCollider2D& other)
+	: CComponent(other)
+	, m_Offset(other.m_Offset)
+	, m_FinalPos(other.m_FinalPos)
+	, m_Scale(other.m_Scale)
+	, m_Rotation(other.m_Rotation)
+	, m_Absolute(other.m_Absolute)
+	, m_matColWorld(other.m_matColWorld)
+	, m_OverlapCount(0)
+	, m_Active(other.m_Active)
+	, m_SemiDeactive(false)
+{
+}	
 
 CCollider2D::~CCollider2D()
 {

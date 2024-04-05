@@ -143,6 +143,9 @@
     <ClCompile Include="CBackGroundScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="CPrefab.cpp">
+      <Filter>08. Asset\Prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="CBackGroundScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CPrefab.h">
+      <Filter>08. Asset\Prefab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

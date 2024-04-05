@@ -1,5 +1,6 @@
 #pragma once
 #include "CComponent.h"
+
 class CTransform : public CComponent
 {
 private:
@@ -47,6 +48,9 @@ public:
 
 	void SetAbsolute(bool absolute) { m_Absolute = absolute; }
 	bool IsAbsolute() { return m_Absolute; }
+
+
+	CLONE(CTransform);
 
 public:
 	CTransform();

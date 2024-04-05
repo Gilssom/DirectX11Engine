@@ -44,15 +44,15 @@ CParticleSystem::CParticleSystem()
 	m_Module.vSpawnMaxScale = Vec3(80.f, 10.f, 1.f);
 
 	// Spawn Area (No Module)
-	m_Module.SpawnShape = 0;
-	m_Module.SpawnShapeScale = Vec3(300.f, 300.f, 300.f);
+	m_Module.SpawnShape = 1;
+	m_Module.SpawnShapeScale.x = 300.f;
 
 	// Don't Spawn Area
 	m_Module.BlockSpawnShape = 1;
 	m_Module.BlockSpawnShapeScale.x = 0.f;
 
 	// Local || World Space Setting
-	m_Module.SpaceType = 0;
+	m_Module.SpaceType = 1;
 
 
 	// Spawn Burst Module
@@ -72,7 +72,7 @@ CParticleSystem::CParticleSystem()
 
 	// Scale Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::SCALE] = true;
-	m_Module.StartScale = 2.5f;
+	m_Module.StartScale = 2.f;
 	m_Module.EndScale = 2.f;
 
 

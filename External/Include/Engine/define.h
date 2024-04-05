@@ -21,6 +21,17 @@
 
 #define MAX_LAYER 32
 
+
+// Clone 을 사용할 때
+#define CLONE(Type)			virtual Type* Clone() { return new Type(*this); }
+
+// Clone 을 사용 안할 때
+// CLONE DISABLE 일 때는 복사 생성자 자체를 delete
+#define CLONE_DISABLE(Type) virtual Type* Clone() { return nullptr; }\
+							private:\
+								Type(const Type& other) = delete;
+
+
 typedef Vector2 Vec2;
 typedef Vector3 Vec3;
 typedef Vector4 Vec4;

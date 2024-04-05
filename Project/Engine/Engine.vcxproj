@@ -191,6 +191,7 @@ call Copy.bat</Command>
     <ClInclude Include="CParticleTickCS.h" />
     <ClInclude Include="CPathManager.h" />
     <ClInclude Include="CPlayerScript.h" />
+    <ClInclude Include="CPrefab.h" />
     <ClInclude Include="CRenderComponent.h" />
     <ClInclude Include="CRenderManager.h" />
     <ClInclude Include="CScript.h" />
@@ -247,6 +248,7 @@ call Copy.bat</Command>
     <ClCompile Include="CParticleTickCS.cpp" />
     <ClCompile Include="CPathManager.cpp" />
     <ClCompile Include="CPlayerScript.cpp" />
+    <ClCompile Include="CPrefab.cpp" />
     <ClCompile Include="CRenderComponent.cpp" />
     <ClCompile Include="CRenderManager.cpp" />
     <ClCompile Include="CScript.cpp" />

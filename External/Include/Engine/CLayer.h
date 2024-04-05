@@ -25,6 +25,9 @@ public:
 
 	const vector<CGameObject*>& GetObjects() { return m_vecObjects; }
 
+
+	CLONE_DISABLE(CLayer);
+
 public:
 	CLayer();
 	~CLayer();

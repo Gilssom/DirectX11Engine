@@ -11,6 +11,25 @@ CAnimator2D::CAnimator2D()
 
 }
 
+CAnimator2D::CAnimator2D(const CAnimator2D& other)
+	: CComponent(other)
+	, m_CurAnim(nullptr)
+	, m_Repeat(other.m_Repeat)
+{
+	for (const auto& pair : other.m_mapAnim)
+	{
+		CAnim2D* pCloneAnim = pair.second->Clone();
+
+		pCloneAnim->m_Animator = this;
+		m_mapAnim.insert(make_pair(pair.first, pCloneAnim));
+	}
+
+	if (other.m_CurAnim != nullptr)
+	{
+		m_CurAnim = FindAnimation(other.m_CurAnim->GetName());
+	}
+}
+
 CAnimator2D::~CAnimator2D()
 {
 	Safe_Del_Map(m_mapAnim);

@@ -48,6 +48,9 @@ public:
 	void SetAbsolute(bool absolute) { m_Absolute = absolute; }
 	bool IsAbsolute() { return m_Absolute; }
 
+
+	CLONE(CTransform);
+
 public:
 	CTransform();
 	~CTransform();

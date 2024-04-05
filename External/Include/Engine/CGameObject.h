@@ -57,8 +57,15 @@ public:
 private:
 	void SetLayerIdx(int idx) { m_LayerIdx = idx; }
 
+	CLONE(CGameObject);
+
 public:
 	CGameObject();
+
+	// GameObject 는 얕은 복사는 안되고 복사 생성자를 직접 구현해야한다. 
+	// Component 이나 모든 정보가 다 복제(복사X) 가 되어야 하기 때문
+	CGameObject(const CGameObject& other);
+
 	~CGameObject();
 
 	// Layer 에서만 Layer Index 를 건들일 수 있게

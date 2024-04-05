@@ -28,6 +28,18 @@ CCamera::CCamera()
 	m_AspectRatio = vRenderResol.x / vRenderResol.y;
 }
 
+CCamera::CCamera(const CCamera& other)
+	: CComponent(other)
+	, m_ProjType(other.m_ProjType)
+	, m_CamPriority(-1)
+	, m_FOV(other.m_FOV)
+	, m_Far(other.m_Far)
+	, m_Width(other.m_Width)
+	, m_Scale(other.m_Scale)
+	, m_LayerCheck(other.m_LayerCheck)
+{
+}
+
 CCamera::~CCamera()
 {
 
@@ -151,10 +163,11 @@ void CCamera::Render_particle()
 
 void CCamera::Render_postprocess()
 {
-	CRenderManager::GetInst();
-
 	for (size_t i = 0; i < m_vecPostProcess.size(); i++)
 	{
+		// Post Process 가 여러개여도 누적되어서 사용할 수 있음
+		CRenderManager::GetInst()->CopyRenderTarget();
+
 		m_vecPostProcess[i]->Render();
 	}
 }

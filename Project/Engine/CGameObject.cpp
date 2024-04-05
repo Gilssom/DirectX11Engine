@@ -20,6 +20,37 @@ CGameObject::CGameObject()
 {
 }
 
+// 복사 생성자를 구현할 때의 주의점은 부모의 복사 생성자도 명시적으로 지정해야 한다.
+CGameObject::CGameObject(const CGameObject& other)
+	: CEntity(other)
+	, m_arrCom{} 
+	, m_Parent(nullptr)
+	, m_LayerIdx(-1)
+	, m_Dead(false)
+{
+	// 원본 Object 의 Component 를 복제해서 받아옴 (복사X)
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		if (other.m_arrCom[i] != nullptr)
+		{
+			// Entity - Transform 의 중간 부모인 CComponent 에 Clone 가상 함수를 명시해줌.
+			// 최종적으로 Clone 은 Transform 이나 각각의 Component 의 Clone 을 가져오게 됨.
+			AddComponent(other.m_arrCom[i]->Clone());
+		}
+	}
+
+	for (size_t i = 0; i < other.m_vecScripts.size(); i++)
+	{
+		AddComponent(other.m_vecScripts[i]->Clone());
+	}
+
+	for (size_t i = 0; i < other.m_vecChild.size(); i++)
+	{
+		// 재귀 (자식끼리의 복제하는 과정을 모두 거치고 오면 AddChild 가 이루어짐)
+		AddChild(other.m_vecChild[i]->Clone());
+	}
+}
+
 CGameObject::~CGameObject()
 {
 	Safe_Del_Array(m_arrCom);

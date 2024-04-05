@@ -84,17 +84,17 @@ void GS_Particle(point VS_PARTICLE_OUT _in[1], inout TriangleStream<GS_OUT> _Out
     // 0 -- 1
     // |    |
     // 3 -- 2
-    output[0].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
-    output[1].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
-    output[2].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
-    output[3].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+    output[0].vPosition = float4(-Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+    output[1].vPosition = float4( Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+    output[2].vPosition = float4( Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+    output[3].vPosition = float4(-Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
     
     if(Module.VelocityAlignment)
     {
-        output_cross[0].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
-        output_cross[1].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
-        output_cross[2].vPosition = vViewPos + float4( Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
-        output_cross[3].vPosition = vViewPos + float4(-Particle.vWorldCurrentScale.x * 0.5f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f, 0.f);
+        output_cross[0].vPosition = float4(-Particle.vWorldCurrentScale.x * 0.5f, 0.f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f);
+        output_cross[1].vPosition = float4( Particle.vWorldCurrentScale.x * 0.5f, 0.f,  Particle.vWorldCurrentScale.y * 0.5f, 0.f);
+        output_cross[2].vPosition = float4( Particle.vWorldCurrentScale.x * 0.5f, 0.f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f);
+        output_cross[3].vPosition = float4(-Particle.vWorldCurrentScale.x * 0.5f, 0.f, -Particle.vWorldCurrentScale.y * 0.5f, 0.f);
 
         float3 vR = normalize(mul(float4(Particle.vVelocity, 0.f), g_matView).xyz);
         float3 vF = normalize(cross(vR, float3(0.f, 1.f, 0.f)));

@@ -44,6 +44,9 @@ public:
 	void Binding();
 	static void Clear();
 
+
+	CLONE(CAnim2D);
+
 public:
 	CAnim2D();
 	~CAnim2D();
