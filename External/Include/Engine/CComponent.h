@@ -5,6 +5,8 @@
 
 #define GET_OTHER_COMPONENT(Type) C##Type* Type() { return m_Owner->Type(); }
 
+class CRenderComponent;
+
 // 추상 클래스 정의
 class CComponent : public CEntity
 {
@@ -35,10 +37,11 @@ public:
 
 
 	// 반환 Type 재명시 (부모의 반환타입을 무조건 따라갈 필요 X)
-	virtual CComponent* Clone() = 0;
+	//virtual CComponent* Clone() = 0;
 
 public:
 	CComponent(COMPONENT_TYPE type);
+	CComponent(const CComponent& other);
 	~CComponent();
 
 	friend class CGameObject;

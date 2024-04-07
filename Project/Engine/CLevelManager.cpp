@@ -135,7 +135,7 @@ void CLevelManager::Init()
 	pPlayer->AddComponent(new CPlayerScript);
 
 	pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
-	pPlayer->Transform()->SetRelativeScale(100.f, 100.f, 0.2f);
+	pPlayer->Transform()->SetRelativeScale(400.f, 400.f, 0.2f);
 
 	pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
@@ -145,13 +145,13 @@ void CLevelManager::Init()
 	pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
 	pPlayer->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
-	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\link.png", L"texture\\link.png");
+	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Idle_Test2.png", L"texture\\Idle_Test2.png");
 	//pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
-	//pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 390.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 3, 2);
-	//pPlayer->Animator2D()->FindAnimation(L"MOVE_DOWN")->Save(L"Animation\\");
+	pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 0.f), Vec2(139.f, 141.f), Vec2(278.f, 282.f), 4, 3);
+	pPlayer->Animator2D()->FindAnimation(L"IDLE_RIGHT")->Save(L"Animation\\");
 
-	pPlayer->Animator2D()->LoadAnimation(L"Animation\\MOVE_DOWN.anim");
-	pPlayer->Animator2D()->Play(L"MOVE_DOWN", true);
+	pPlayer->Animator2D()->LoadAnimation(L"Animation\\IDLE_RIGHT.anim");
+	pPlayer->Animator2D()->Play(L"IDLE_RIGHT", true);
 
 	m_CurLevel->AddObject(1, pPlayer, false);
 
@@ -190,15 +190,33 @@ void CLevelManager::Init()
 	pBackGround->AddComponent(new CMeshRender);
 	pBackGround->AddComponent(new CBackGroundScript);
 
-	pBackGround->Transform()->SetRelativePos(Vec3(0.f, 0.f, 1000.f));
-	pBackGround->Transform()->SetRelativeScale(Vec3(1600.f, 900.f, 1.f));
+	pBackGround->Transform()->SetRelativePos(Vec3(1144.f, 0.f, 1000.f));
+	pBackGround->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
-	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\Background.jpg", L"texture\\Background.jpg"));
-	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
+	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard_Test.png", L"texture\\ElvenGard_Test.png"));
+	//pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
 
 	m_CurLevel->AddObject(0, pBackGround, false);
+
+
+	// Test Object
+	/*CGameObject* pTestObject = new CGameObject;
+	pTestObject->AddComponent(new CTransform);
+	pTestObject->AddComponent(new CMeshRender);
+	pTestObject->AddComponent(new CBackGroundScript);
+	pTestObject->AddComponent(new CPlayerScript);
+
+	pTestObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
+	pTestObject->Transform()->SetRelativeScale(Vec3(711.f, 358.f, 1.f));
+
+	pTestObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pTestObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	pTestObject->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\blacksmith.png", L"texture\\blacksmith.png"));
+	pTestObject->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
+
+	m_CurLevel->AddObject(0, pTestObject, false);*/
 
 
 	// Particle Object
@@ -208,27 +226,28 @@ void CLevelManager::Init()
 	pParticleObject->AddComponent(new CParticleSystem);
 
 	//Vec3(200.f, 400.f, 500.f) : Snow
-	pParticleObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
-	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png"));
+	pParticleObject->Transform()->SetRelativePos(Vec3(-675.f, 0.f, 500.f));
+	//pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png"));
+	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\SmokeParticleTest.png", L"texture\\particle\\SmokeParticleTest.png"));
 
 	m_CurLevel->AddObject(0, pParticleObject, false);
 
 
 	// PostProcee Filter Ãß°¡
-	CGameObject* pFilterObject = new CGameObject;
+	/*CGameObject* pFilterObject = new CGameObject;
 
 	pFilterObject->AddComponent(new CTransform);
 	pFilterObject->AddComponent(new CMeshRender);
 
-	pFilterObject->Transform()->SetRelativePos(500.f, 0.f, 200.f);
-	pFilterObject->Transform()->SetRelativeScale(200.f, 200.f, 1.f);
+	pFilterObject->Transform()->SetRelativePos(200.f, 0.f, 500.f);
+	pFilterObject->Transform()->SetRelativeScale(100.f, 100.f, 1.f);
 
 	pFilterObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pFilterObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"DistortionMaterial"));
 	pFilterObject->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"RenderTargetCopyTex"));
 	pFilterObject->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
 
-	m_CurLevel->AddObject(0, pFilterObject, false);
+	m_CurLevel->AddObject(0, pFilterObject, false);*/
 
 
 	// Level ÀÇ Collision Setting

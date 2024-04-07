@@ -140,12 +140,12 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
                     Particle.vWorldInitScale = (Module[0].vSpawnMaxScale - Module[0].vSpawnMinScale) * vRandom.x + Module[0].vSpawnMinScale;
                     //clamp(vRandom.x, Module[0].vSpawnMinScale, Module[0].vSpawnMaxScale);
                     
-                    Particle.vColor = Module[0].vSpawnColor * float4(vRandom.x, vRandom1.y, vRandom2.z, 1.f);
+                    Particle.vColor = Module[0].vSpawnColor/* * float4(vRandom.x, vRandom1.y, vRandom2.z, 1.f)*/;
                     Particle.Mass = 1.f;
                     
                     Particle.Age = 0.f;
                     Particle.NormalizedAge = 0;
-                    Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife;
+                    Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife + (DeltaTime * 10.f);
                     //clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
                     Particle.Active = 1;
                 

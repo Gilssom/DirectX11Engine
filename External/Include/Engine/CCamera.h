@@ -70,7 +70,11 @@ private:
 	void Render_postprocess();
 
 public:
+	CLONE(CCamera);
+
+public:
 	CCamera();
+	CCamera(const CCamera& other);
 	~CCamera();
 };
 

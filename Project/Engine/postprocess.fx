@@ -33,8 +33,9 @@ float4 PS_PostProcess(VS_OUT _in) : SV_Target
     
     if (g_btex_0)
     {
+        // 전체 영역에 영향을 준다.
         vOutColor = g_tex_0.Sample(g_sam_0, _in.vUV);
-        vOutColor = (vOutColor.r + vOutColor.g + vOutColor.b) / 3.f;
+        vOutColor = (vOutColor.r + vOutColor.g + vOutColor.b) / 3.f; // 전체 영역 흑백
     }
     
     return vOutColor;

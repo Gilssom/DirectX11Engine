@@ -15,7 +15,7 @@ private:
 	vector<CLight2D*>	m_vecLight2D;		// 매 프레임마다 등록해야함 ( = Layer )
 	CStructuredBuffer*	m_Light2DBuffer;	// 구조화 버퍼
 
-	Ptr<CTexture>		m_RenderTargetCopyTex;
+	Ptr<CTexture>		m_RenderTargetCopyTex;	// Post Process 를 위한 Copy Render Target Texture
 
 
 public:

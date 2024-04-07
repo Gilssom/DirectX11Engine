@@ -296,6 +296,12 @@ void CAssetManager::CreateDefaultMaterial()
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
+	// Test Material
+	pMaterial = new CMaterial;
+	pMaterial->SetName(L"TestObjectMaterial");
+	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DAlphaBlendShader"));
+	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
+
 	// Tile Map Material
 	pMaterial = new CMaterial;
 	pMaterial->SetName(L"TileMapMaterial");

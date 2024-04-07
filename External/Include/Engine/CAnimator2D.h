@@ -24,8 +24,12 @@ public:
 	virtual void FinalTick() override;
 	void Binding();
 
+
+	CLONE(CAnimator2D);
+
 public:
 	CAnimator2D();
+	CAnimator2D(const CAnimator2D& other);
 	~CAnimator2D();
 };
 

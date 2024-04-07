@@ -81,7 +81,7 @@ void CPlayerScript::Tick()
 		if (Collider2D()->IsActive())
 		{
 			Collider2D()->Deactivate();
-			m_Speed = 10.f;
+			//m_Speed = 10.f;
 		}
 		else
 		{

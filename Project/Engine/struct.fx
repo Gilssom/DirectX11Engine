@@ -124,8 +124,6 @@ struct tParticleModule
     
 	// Module On / Off
     int     Module[7];
-    
-    float  padding;
 };
 
 #endif

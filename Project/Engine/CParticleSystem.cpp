@@ -36,16 +36,16 @@ CParticleSystem::CParticleSystem()
 	// Particle Module Setting Test
 	// Spawn Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN] = true;
-	m_Module.vSpawnRate = 30;
-	m_Module.vSpawnColor = Vec4(0.2f, 0.67f, 0.87f, 1.f);
-	m_Module.MinLife = 5.f;
-	m_Module.MaxLife = 5.f;
-	m_Module.vSpawnMinScale = Vec3(80.f, 10.f, 1.f);
-	m_Module.vSpawnMaxScale = Vec3(80.f, 10.f, 1.f);
+	m_Module.vSpawnRate = 100;
+	m_Module.vSpawnColor = Vec4(0.3f, 0.f, 0.3f, 1.f);
+	m_Module.MinLife = 4.f;
+	m_Module.MaxLife = 8.f;
+	m_Module.vSpawnMinScale = Vec3(50.f, 50.f, 1.f);
+	m_Module.vSpawnMaxScale = Vec3(75.f, 75.f, 1.f);
 
 	// Spawn Area (No Module)
-	m_Module.SpawnShape = 1;
-	m_Module.SpawnShapeScale.x = 300.f;
+	m_Module.SpawnShape = 0;
+	m_Module.SpawnShapeScale.y = 2500.f;
 
 	// Don't Spawn Area
 	m_Module.BlockSpawnShape = 1;
@@ -56,44 +56,44 @@ CParticleSystem::CParticleSystem()
 
 
 	// Spawn Burst Module
-	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = false;
+	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = true;
 	m_Module.SpawnBurstRepeat = true;
 	m_Module.SpawnBurstCount = 100;
-	m_Module.SpawnBurstRepeatTime = 3.f;
+	m_Module.SpawnBurstRepeatTime = 0.5f;
 
 	
 	// Add Velocity Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::ADD_VELOCITY] = true;
-	m_Module.AddVelocityType = 1;
-	m_Module.AddVelocityFixedDir = Vec3(0.f, 1.f, 0.f);
-	m_Module.AddMinSpeed = 300.f;
-	m_Module.AddMaxSpeed = 800.f;
+	m_Module.AddVelocityType = 3;
+	m_Module.AddVelocityFixedDir = Vec3(1.f, 0.f, 0.f);
+	m_Module.AddMinSpeed = 20.f;
+	m_Module.AddMaxSpeed = 60.f;
 
 
 	// Scale Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::SCALE] = true;
-	m_Module.StartScale = 2.f;
+	m_Module.StartScale = 1.f;
 	m_Module.EndScale = 2.f;
 
 
 	// Drag Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::DRAG] = true;
-	m_Module.DestNormalizedAge = 0.5f;
-	m_Module.LimitSpeed = 0.f;
+	m_Module.DestNormalizedAge = 0.8f;
+	m_Module.LimitSpeed = 10.f;
 
 
 	// Noise Force Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::NOISE_FORCE] = false;
-	m_Module.NoiseForceTerm = 0.5f;
-	m_Module.NoiseForceScale = 50.f;
+	m_Module.NoiseForceTerm = 0.3f;
+	m_Module.NoiseForceScale = 1.f;
 
 
 	// Render Module
 	m_Module.Module[(UINT)PARTICLE_MODULE::RENDER] = true;
-	m_Module.EndColor = Vec3(1.f, 0.2f, 0.2f);
+	m_Module.EndColor = Vec3(1.f, 0.6f, 1.f);
 	m_Module.FadeOut = true;
-	m_Module.FadeOutStartRatio = 0.9f;
-	m_Module.VelocityAlignment = true;
+	m_Module.FadeOutStartRatio = 0.2f;
+	m_Module.VelocityAlignment = false;
 
 	m_ModuleBuffer = new CStructuredBuffer;
 	m_ModuleBuffer->Create(sizeof(tParticleModule) + (16 % (16 - sizeof(tParticleModule) % 16)), 1, SB_TYPE::SRV_UAV, true, &m_Module);
