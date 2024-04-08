@@ -49,6 +49,7 @@ public:
 
 public:
 	CAnim2D();
+	CAnim2D(const CAnim2D& other);
 	~CAnim2D();
 
 	friend class CAnimator2D;

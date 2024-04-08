@@ -145,7 +145,7 @@ void CS_ParticleTick(int3 _ID : SV_DispatchThreadID)
                     
                     Particle.Age = 0.f;
                     Particle.NormalizedAge = 0;
-                    Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife + (DeltaTime * 10.f);
+                    Particle.Life = (Module[0].MaxLife - Module[0].MinLife) * vRandom1.z + Module[0].MinLife;
                     //clamp(vRandom.y, Module[0].MinLife, Module[0].MaxLife);
                     Particle.Active = 1;
                 

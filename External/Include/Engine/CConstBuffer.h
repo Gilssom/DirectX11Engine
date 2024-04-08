@@ -17,6 +17,9 @@ public:
 	void Binding_CS();
 	void Clear();
 
+
+	CLONE_DISABLE(CConstBuffer);
+
 public:
 	CConstBuffer();
 	~CConstBuffer();

@@ -15,6 +15,9 @@ private:
 	void MoveByOrthographic();
 
 public:
+	CLONE(CCameraMoveScript);
+
+public:
 	CCameraMoveScript();
 	~CCameraMoveScript();
 };

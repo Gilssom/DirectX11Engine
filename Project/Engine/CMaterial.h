@@ -32,6 +32,9 @@ public:
 	virtual int Load(const wstring& FilePath) { return S_OK; }
 	virtual int Save(const wstring& FilePath) { return S_OK; }
 
+
+	CLONE(CMaterial);
+
 public:
 	CMaterial();
 	~CMaterial();

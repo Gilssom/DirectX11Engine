@@ -21,7 +21,9 @@ public:
 	virtual void EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider) override;
 
 public:
+	CLONE(CPlayerScript);
+
+public:
 	CPlayerScript();
 	~CPlayerScript();
 };
-

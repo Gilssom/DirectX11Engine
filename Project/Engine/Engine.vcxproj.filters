@@ -129,13 +129,13 @@
       <Filter>07. Component\07. Light2D</Filter>
     </ClCompile>
     <ClCompile Include="CTileMap.cpp">
-      <Filter>07. Component\Rendering\TileMap</Filter>
+      <Filter>07. Component\Rendering\02 .TileMap</Filter>
     </ClCompile>
     <ClCompile Include="CSetColorCS.cpp">
       <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
     </ClCompile>
     <ClCompile Include="CParticleSystem.cpp">
-      <Filter>07. Component\Rendering\ParticleSystem</Filter>
+      <Filter>07. Component\Rendering\03. ParticleSystem</Filter>
     </ClCompile>
     <ClCompile Include="CParticleTickCS.cpp">
       <Filter>HLSL\04. ComputeShader\ParticleTick</Filter>
@@ -297,13 +297,13 @@
       <Filter>07. Component\07. Light2D</Filter>
     </ClInclude>
     <ClInclude Include="CTileMap.h">
-      <Filter>07. Component\Rendering\TileMap</Filter>
+      <Filter>07. Component\Rendering\02 .TileMap</Filter>
     </ClInclude>
     <ClInclude Include="CSetColorCS.h">
       <Filter>HLSL\04. ComputeShader\SetColorShader</Filter>
     </ClInclude>
     <ClInclude Include="CParticleSystem.h">
-      <Filter>07. Component\Rendering\ParticleSystem</Filter>
+      <Filter>07. Component\Rendering\03. ParticleSystem</Filter>
     </ClInclude>
     <ClInclude Include="CParticleTickCS.h">
       <Filter>HLSL\04. ComputeShader\ParticleTick</Filter>
@@ -433,14 +433,8 @@
     <Filter Include="07. Component\Rendering\LandScape">
       <UniqueIdentifier>{413f56a1-efad-4039-a6e0-09124ea92b8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="07. Component\Rendering\ParticleSystem">
-      <UniqueIdentifier>{ba324304-3da1-410e-a29b-16c88577356b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Component\Rendering\SkyBox">
       <UniqueIdentifier>{2448658c-b180-4dd9-9b97-ada9917df8b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="07. Component\Rendering\TileMap">
-      <UniqueIdentifier>{9890abc6-5e7a-4df4-b757-d38ad15da98a}</UniqueIdentifier>
     </Filter>
     <Filter Include="08. Asset\Shader\ComputeShader">
       <UniqueIdentifier>{0dce31e0-27bc-4bf3-af03-c7a3bec1f3b9}</UniqueIdentifier>
@@ -483,6 +477,12 @@
     </Filter>
     <Filter Include="HLSL\04. ComputeShader\ParticleTick">
       <UniqueIdentifier>{b90fb15e-0fc7-413d-8a61-2a9135928322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\Rendering\03. ParticleSystem">
+      <UniqueIdentifier>{ba324304-3da1-410e-a29b-16c88577356b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\Rendering\02 .TileMap">
+      <UniqueIdentifier>{9890abc6-5e7a-4df4-b757-d38ad15da98a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

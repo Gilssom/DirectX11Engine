@@ -18,7 +18,7 @@ public:
 
 
 	// 자기 자신을 복제한 객체를 반환
-	//virtual CEntity* Clone() = 0;
+	virtual CEntity* Clone() = 0;
 
 public:
 	CEntity();

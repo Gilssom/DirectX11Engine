@@ -14,6 +14,29 @@ CStructuredBuffer::CStructuredBuffer()
 
 }
 
+CStructuredBuffer::CStructuredBuffer(const CStructuredBuffer& other)
+	: CEntity(other)
+	, m_SB_Main(nullptr)
+	, m_SB_Write(nullptr)
+	, m_SB_Read(nullptr)
+	, m_Desc(other.m_Desc)
+	, m_SRV(nullptr)
+	, m_UAV(nullptr)
+	, m_ElementSize(other.m_ElementSize)
+	, m_ElementCount(other.m_ElementCount)
+	, m_Type(other.m_Type)
+	, m_SysMemMove(other.m_SysMemMove)
+	, m_SRV_Register(0)
+	, m_UAV_Register(0)
+{ 
+	Create(m_ElementSize, m_ElementCount, m_Type, m_SysMemMove);
+
+	if (other.m_SB_Main != nullptr)
+	{
+		CONTEXT->CopyResource(m_SB_Main.Get(), other.m_SB_Main.Get());
+	}
+}
+
 CStructuredBuffer::~CStructuredBuffer()
 {
 

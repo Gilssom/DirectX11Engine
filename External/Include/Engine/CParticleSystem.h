@@ -34,9 +34,11 @@ public:
 	virtual void FinalTick() override;
 	virtual void Render() override;
 
+	CLONE(CParticleSystem);
 
 public:
 	CParticleSystem();
+	CParticleSystem(const CParticleSystem& other);
 	~CParticleSystem();
 
 };

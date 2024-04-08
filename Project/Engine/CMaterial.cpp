@@ -25,8 +25,8 @@ void CMaterial::SetTexParam(TEX_PARAM param, Ptr<CTexture> tex)
 
 Ptr<CMaterial> CMaterial::GetDynamicMaterial()
 {
-	// 본인을 이용해서(복사) 새로운 재질 생성
-	Ptr<CMaterial> pDynamicMtrl = new CMaterial(*this); 
+	// 본인을 이용해서(복사) 새로운 재질 생성 (Clone 복제 사용)
+	Ptr<CMaterial> pDynamicMtrl = Clone();
 	pDynamicMtrl->m_bDynamic = true;
 
 	return pDynamicMtrl;

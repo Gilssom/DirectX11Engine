@@ -12,6 +12,9 @@ public:
     virtual int Load(const wstring& _FilePath) override { return S_OK; }
     virtual int Save(const wstring& _FilePath) override { return S_OK; }
 
+
+    CLONE_DISABLE(CShader);
+
 public:
     CShader(ASSET_TYPE type);
     ~CShader();

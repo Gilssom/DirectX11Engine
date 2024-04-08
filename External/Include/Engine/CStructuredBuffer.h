@@ -63,7 +63,11 @@ public:
 	void Clear_SRV();
 	void Clear_UAV();
 
+
+	CLONE(CStructuredBuffer);
+
 public:
 	CStructuredBuffer();
+	CStructuredBuffer(const CStructuredBuffer& other);
 	~CStructuredBuffer();
 };

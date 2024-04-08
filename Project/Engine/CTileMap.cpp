@@ -18,6 +18,27 @@ CTileMap::CTileMap()
 	m_TileBuffer = new CStructuredBuffer;
 }
 
+CTileMap::CTileMap(const CTileMap& other)
+	: CRenderComponent(other)
+	, m_Row(other.m_Row)
+	, m_Col(other.m_Col)
+	, m_TileEachSize(other.m_TileEachSize)
+	, m_Atlas(other.m_Atlas)
+	, m_AtlasMaxRow(other.m_AtlasMaxRow)
+	, m_AtlasMaxCol(other.m_AtlasMaxCol)
+	, m_AtlasTileEachSize(other.m_AtlasTileEachSize)
+	, m_AtlasResolution(other.m_AtlasResolution)
+	, m_vecTileInfo(other.m_vecTileInfo)
+	, m_TileBuffer(nullptr)
+{
+	m_TileBuffer = new CStructuredBuffer;
+	m_TileBuffer->Create(sizeof(tTileInfo), m_vecTileInfo.size(), SB_TYPE::SRV_ONLY, true, m_vecTileInfo.data());
+
+	// 복사 생성자를 구현 함으로써 해당 생성자를 사용하여 원본 Buffer 를 복제
+	// (딱히 GPU 간의 연산을 할 필요가 없기 때문에 효율성을 위해 위의 코드를 사용)
+	//m_TileBuffer = new CStructuredBuffer(*other.m_TileBuffer);
+}
+
 CTileMap::~CTileMap()
 {
 	delete m_TileBuffer;

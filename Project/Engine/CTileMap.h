@@ -12,9 +12,9 @@ class CStructuredBuffer;
 class CTileMap : public CRenderComponent
 {
 private:
-    UINT                m_Row;          // Tile Row Size
-    UINT                m_Col;          // Tile Colum Size
-    Vec2                m_TileEachSize; // 각 타일 1개의 크기 (인게임 내의 크기)
+    UINT                m_Row;               // Tile Row Size
+    UINT                m_Col;               // Tile Colum Size
+    Vec2                m_TileEachSize;      // 각 타일 1개의 크기 (인게임 내의 크기)
 
     Ptr<CTexture>       m_Atlas;             // Use Atlas Texture
     UINT                m_AtlasMaxRow;       // Atlas Max Row (최대 행 크기)
@@ -23,7 +23,7 @@ private:
     Vec2                m_AtlasResolution;   // Atlas Texture 해상도 정보
 
     vector<tTileInfo>   m_vecTileInfo;
-    CStructuredBuffer*  m_TileBuffer;
+    CStructuredBuffer*  m_TileBuffer;        // 깊은 복사의 대상 (구조화 버퍼)
 
 public:
     void SetRowCol(UINT row, UINT col);
@@ -39,6 +39,7 @@ public:
 
 public:
     CTileMap();
+    CTileMap(const CTileMap& other);
     ~CTileMap();
 };
 

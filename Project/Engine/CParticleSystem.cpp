@@ -99,6 +99,26 @@ CParticleSystem::CParticleSystem()
 	m_ModuleBuffer->Create(sizeof(tParticleModule) + (16 % (16 - sizeof(tParticleModule) % 16)), 1, SB_TYPE::SRV_UAV, true, &m_Module);
 }
 
+CParticleSystem::CParticleSystem(const CParticleSystem& other)
+	: CRenderComponent(other)
+	, m_TickCS(other.m_TickCS)
+	, m_ParticleBuffer(nullptr)
+	, m_SpawnCountBuffer(nullptr)
+	, m_ModuleBuffer(nullptr)
+	, m_ParticleTex(other.m_ParticleTex)
+	, m_Time(0.f)
+	, m_BurstTime(0.f)
+	, m_MaxParticle(other.m_MaxParticle)
+	, m_Module(other.m_Module)
+{
+	assert(other.m_ParticleBuffer && other.m_SpawnCountBuffer && other.m_ModuleBuffer);
+
+	// GPU 간의 복사 과정이 걸리긴 하지만 별로 안걸리니까 그냥 써라
+	m_ParticleBuffer = new CStructuredBuffer(*other.m_ParticleBuffer);
+	m_SpawnCountBuffer = new CStructuredBuffer(*other.m_SpawnCountBuffer);
+	m_ModuleBuffer = new CStructuredBuffer(*other.m_ModuleBuffer);
+}
+
 CParticleSystem::~CParticleSystem()
 {
 	delete m_ParticleBuffer;

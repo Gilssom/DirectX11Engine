@@ -34,6 +34,9 @@ private:
 	}
 
 public:
+	virtual CAsset* Clone() = 0;
+
+public:
 	CAsset(ASSET_TYPE type); // 실수로 type 을 지정 못해줄 수 있는 것을 방지함 ( 기본 생성자 삭제 )
 	CAsset(const CAsset& _Origin);
 	~CAsset();

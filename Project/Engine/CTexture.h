@@ -49,6 +49,10 @@ private:
 
 
 public:
+	CLONE_DISABLE(CTexture);
+
+
+public:
 	CTexture();
 	~CTexture();
 

@@ -12,6 +12,10 @@ public:
 
 
 public:
+	CLONE(CBackGroundScript);
+
+
+public:
 	CBackGroundScript();
 	~CBackGroundScript();
 };

@@ -27,6 +27,9 @@ public:
 
 	void Render_Particle(UINT instance);
 
+
+	CLONE_DISABLE(CMesh);
+
 public:
 	CMesh();
 	~CMesh();
