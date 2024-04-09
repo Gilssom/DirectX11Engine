@@ -6,8 +6,10 @@ class CStructuredBuffer;
 class CPlayerScript : public CScript
 {
 private:
-	float		 m_Speed;
-	CGameObject* m_TargetMonster;
+	float			m_Speed;
+	CGameObject*	m_TargetMonster;
+	Ptr<CPrefab>	m_ParticlePrefab;
+	Ptr<CPrefab>	m_MissilePrefab;
 
 public:
 	void SetTarget(CGameObject* target) { m_TargetMonster = target; }

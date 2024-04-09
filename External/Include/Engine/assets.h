@@ -6,3 +6,4 @@
 #include "CTexture.h"
 #include "CGraphicShader.h"
 #include "CComputeShader.h"
+#include "CPrefab.h"

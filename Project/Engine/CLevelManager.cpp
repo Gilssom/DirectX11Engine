@@ -11,11 +11,13 @@
 #include "CPlayerScript.h"
 #include "CCameraMoveScript.h"
 #include "CBackGroundScript.h"
+#include "CMissileScript.h"
 
 #include "CCollisionManager.h"
 #include "CSetColorCS.h"
 
 #include "CStructuredBuffer.h"
+#include "CPrefab.h"
 
 CLevelManager::CLevelManager()
 	: m_CurLevel(nullptr)
@@ -33,37 +35,8 @@ CLevelManager::~CLevelManager()
 
 void CLevelManager::Init()
 {
-	//// Texture 생성하기
-	//Ptr<CTexture> pTestTex = 
-	//	CAssetManager::GetInst()->CreateTexture(L"TestTex"
-	//										, 1024, 1024, DXGI_FORMAT_R8G8B8A8_UNORM
-	//										, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
-	//
-	//// Compute Shader Test
-	//Ptr<CSetColorShader> pCS = (CSetColorShader*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"SetColorCS").Get();
-	//pCS->SetTargetTextrue(pTestTex);
-	//pCS->SetClearColor(Vec3(0.f, 0.f, 1.f));
-	//pCS->Execute();
-
-
-	//// 구조화버퍼 데이터 이동 테스트
-	//CStructuredBuffer* pTestBuffer = new CStructuredBuffer;
-
-	//// Buffer 총 3개 생성
-	//pTestBuffer->Create(sizeof(tParticle), 1, SB_TYPE::SRV_UAV, true, nullptr);
-
-	//// 0번 particle 에 정보 기입 후 테스트용 구조화 버퍼로 데이터 이동
-	//tParticle particle = {};
-	//particle.Life = 10.f;
-	//particle.vWorldPos = Vec3(100.f, 100.f, 100.f);
-	//pTestBuffer->SetData(&particle);
-
-	//// 테스트용 구조화 버퍼의 데이터를 1번 particle 로 데이터 복사
-	//tParticle particle1 = {};
-	//pTestBuffer->GetData(&particle1);
-
-	//delete pTestBuffer;
-
+	// Prefab 제작 및 Asset Manager 에 등록
+	CreatePrefab();
 
 	// Level
 	m_CurLevel = new CLevel;
@@ -82,11 +55,17 @@ void CLevelManager::Init()
 	pCamObject->AddComponent(new CCamera);
 	pCamObject->AddComponent(new CCameraMoveScript);
 
+	pCamObject->Camera()->LayerCheckAll();
 	pCamObject->Camera()->SetCameraPriority(0); // Main Camera Setting
 	pCamObject->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
-	pCamObject->Camera()->LayerCheckAll();
 
 	m_CurLevel->AddObject(0, pCamObject);
+
+	// Clone Test
+	//CGameObject* pCamClone = pCamObject->Clone();
+	//pCamClone->Camera()->SetCameraPriority(0);
+	//m_CurLevel->AddObject(0, pCamClone);
+	//delete pCamObject;
 
 
 	// Light Object
@@ -97,20 +76,25 @@ void CLevelManager::Init()
 
 	pLightObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
-	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	//pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	//pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
+	//pLightObject->Light2D()->SetAmbient(Vec3(0.1f, 0.1f, 0.1f));
+
+	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
 	pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
-	pLightObject->Light2D()->SetAmbient(Vec3(0.1f, 0.1f, 0.1f));
-
-	/*pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLightObject->Light2D()->SetDiffuse(Vec3(0.8f, 0.2f, 0.2f));
 	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
-	pLightObject->Light2D()->SetRange(400.f);*/
+	pLightObject->Light2D()->SetRange(500.f);
 
+	m_CurLevel->AddObject(0, pLightObject);
+
+	// Clone Test
+	pLightObject = pLightObject->Clone();
+	pLightObject->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
 	m_CurLevel->AddObject(0, pLightObject);
 
 
 	// TileMap Object
-	/*CGameObject* pTileMapObj = new CGameObject;
+	CGameObject* pTileMapObj = new CGameObject;
 	pTileMapObj->SetName(L"TileMap");
 	pTileMapObj->AddComponent(new CTransform);
 	pTileMapObj->AddComponent(new CTileMap);
@@ -121,9 +105,12 @@ void CLevelManager::Init()
 	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
 	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
 	pTileMapObj->TileMap()->SetRowCol(4, 4);
+	m_CurLevel->AddObject(0, pTileMapObj);
 
-	m_CurLevel->AddObject(0, pTileMapObj);*/
-
+	// Clone Test
+	//pTileMapObj = pTileMapObj->Clone();
+	//pTileMapObj->Transform()->SetRelativePos(Vec3(200.f, 100.f, 1.f));
+	//m_CurLevel->AddObject(0, pTileMapObj);
 
 	// Player
 	CGameObject* pPlayer = new CGameObject;
@@ -139,7 +126,7 @@ void CLevelManager::Init()
 
 	pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
-	pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
+	//pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
 
 	pPlayer->Collider2D()->SetAbsolute(false);
 	pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 1.f));
@@ -153,7 +140,12 @@ void CLevelManager::Init()
 	pPlayer->Animator2D()->LoadAnimation(L"Animation\\IDLE_RIGHT.anim");
 	pPlayer->Animator2D()->Play(L"IDLE_RIGHT", true);
 
-	m_CurLevel->AddObject(1, pPlayer, false);
+	m_CurLevel->AddObject(0, pPlayer, false);
+
+	// Clone Test
+	/*pPlayer = pPlayer->Clone();
+	pPlayer->Transform()->SetRelativePos(Vec3(100.f, 0.f, 100.f));
+	m_CurLevel->AddObject(0, pPlayer, false);*/
 
 
 	// Monster
@@ -219,20 +211,6 @@ void CLevelManager::Init()
 	m_CurLevel->AddObject(0, pTestObject, false);*/
 
 
-	// Particle Object
-	CGameObject* pParticleObject = new CGameObject;
-	pParticleObject->SetName(L"Particle");
-	pParticleObject->AddComponent(new CTransform);
-	pParticleObject->AddComponent(new CParticleSystem);
-
-	//Vec3(200.f, 400.f, 500.f) : Snow
-	pParticleObject->Transform()->SetRelativePos(Vec3(-675.f, 0.f, 500.f));
-	//pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\AlphaCircle.png", L"texture\\particle\\AlphaCircle.png"));
-	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\SmokeParticleTest.png", L"texture\\particle\\SmokeParticleTest.png"));
-
-	m_CurLevel->AddObject(0, pParticleObject, false);
-
-
 	// PostProcee Filter 추가
 	CGameObject* pFilterObject = new CGameObject;
 
@@ -265,4 +243,30 @@ void CLevelManager::Tick()
 		m_CurLevel->Tick(); 
 		m_CurLevel->FinalTick();
 	}
+}
+
+void CLevelManager::CreatePrefab()
+{
+	// Particle Prefab
+	CGameObject* pParticleObject = new CGameObject;
+	pParticleObject->SetName(L"Particle");
+	pParticleObject->AddComponent(new CTransform);
+	pParticleObject->AddComponent(new CParticleSystem);
+	pParticleObject->Transform()->SetRelativePos(Vec3(-675.f, 0.f, 500.f));
+	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\SmokeParticleTest.png", L"texture\\particle\\SmokeParticleTest.png"));
+
+	CAssetManager::GetInst()->AddAsset<CPrefab>(L"ParticlePrefab", new CPrefab(pParticleObject));
+
+
+	// Missile Prefab
+	CGameObject* pNewObj = new CGameObject;
+	pNewObj->SetName(L"Missile");
+	pNewObj->AddComponent(new CTransform);
+	pNewObj->AddComponent(new CMeshRender);
+	pNewObj->AddComponent(new CMissileScript);
+	pNewObj->Transform()->SetRelativeScale(Vec3(40.f, 40.f, 40.f));
+	pNewObj->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pNewObj->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+
+	CAssetManager::GetInst()->AddAsset<CPrefab>(L"MissilePrefab", new CPrefab(pNewObj));
 }

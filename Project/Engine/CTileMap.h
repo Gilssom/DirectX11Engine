@@ -37,6 +37,8 @@ public:
     virtual void Render() override;
 
 
+    CLONE(CTileMap);
+
 public:
     CTileMap();
     CTileMap(const CTileMap& other);

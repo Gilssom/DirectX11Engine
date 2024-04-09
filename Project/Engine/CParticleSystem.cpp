@@ -13,7 +13,7 @@ CParticleSystem::CParticleSystem()
 	, m_ParticleBuffer(nullptr)
 	, m_Time(0.f)
 	, m_BurstTime(0.f)
-	, m_MaxParticle(1000)
+	, m_MaxParticle(10000)
 {
 	// Particle Tick ¿ëµµ Compute Shader
 	m_TickCS = (CParticleTickCS*)CAssetManager::GetInst()->FindAsset<CComputeShader>(L"ParticleTickCS").Get();
@@ -56,7 +56,7 @@ CParticleSystem::CParticleSystem()
 
 
 	// Spawn Burst Module
-	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = true;
+	m_Module.Module[(UINT)PARTICLE_MODULE::SPAWN_BURST] = false;
 	m_Module.SpawnBurstRepeat = true;
 	m_Module.SpawnBurstCount = 100;
 	m_Module.SpawnBurstRepeatTime = 0.5f;

@@ -14,7 +14,7 @@ CMissileScript::~CMissileScript()
 
 void CMissileScript::Begin()
 {
-
+	GetRenderComponent()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect.png", L"texture\\Effect.png"));
 }
 
 void CMissileScript::Tick()

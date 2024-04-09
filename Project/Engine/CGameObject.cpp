@@ -35,13 +35,13 @@ CGameObject::CGameObject(const CGameObject& other)
 		{
 			// Entity - Transform 의 중간 부모인 CComponent 에 Clone 가상 함수를 명시해줌.
 			// 최종적으로 Clone 은 Transform 이나 각각의 Component 의 Clone 을 가져오게 됨.
-			//AddComponent(other.m_arrCom[i]->Clone());
+			AddComponent(other.m_arrCom[i]->Clone());
 		}
 	}
 
 	for (size_t i = 0; i < other.m_vecScripts.size(); i++)
 	{
-		//AddComponent(other.m_vecScripts[i]->Clone());
+		AddComponent(other.m_vecScripts[i]->Clone());
 	}
 
 	for (size_t i = 0; i < other.m_vecChild.size(); i++)

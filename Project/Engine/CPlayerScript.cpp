@@ -21,7 +21,8 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::Begin()
 {
-	// Get Dynamic Material
+	m_ParticlePrefab = CAssetManager::GetInst()->FindAsset<CPrefab>(L"ParticlePrefab");
+	m_MissilePrefab = CAssetManager::GetInst()->FindAsset<CPrefab>(L"MissilePrefab");
 }
 
 void CPlayerScript::Tick()
@@ -78,31 +79,17 @@ void CPlayerScript::Tick()
 	if (KEY_TAP(KEY::SPACE))
 	{
 		// Collider 활성화 - 비활성화 구현 완료
-		if (Collider2D()->IsActive())
-		{
-			Collider2D()->Deactivate();
-			//m_Speed = 10.f;
-		}
-		else
-		{
-			Collider2D()->Activate();
-		}
+		//if (Collider2D()->IsActive())
+		//{
+		//	Collider2D()->Deactivate();
+		//	//m_Speed = 10.f;
+		//}
+		//else
+		//{
+		//	Collider2D()->Activate();
+		//}
 
- 		CGameObject* pNewObj = new CGameObject;
-
-		pNewObj->AddComponent(new CTransform);
-		pNewObj->AddComponent(new CMeshRender);
-		pNewObj->AddComponent(new CMissileScript);
-
-		Vec3 vPos = Transform()->GetRelativePos();
-		vPos.y += Transform()->GetRelativeScale().y / 2.f;
-		pNewObj->Transform()->SetRelativePos(vPos);
-		pNewObj->Transform()->SetRelativeScale(Vec3(40.f, 40.f, 40.f));
-
-		pNewObj->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-		pNewObj->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
-
-		SpawnObject(0, pNewObj);
+		Instantiate(m_MissilePrefab, 0, Transform()->GetRelativePos());
 	}
 
 	Transform()->SetRelativePos(vCurPos);

@@ -15,14 +15,19 @@ class CPrefab : public CAsset
 private:
 	CGameObject* m_ProtoObject;
 
+public:
+	CGameObject* Instantiate();
+
+	CLONE(CPrefab);
 
 private:
-	int Load(const wstring& FilePath) override;
-	int Save(const wstring& FilePath) override;
-
+	int Load(const wstring& FilePath) override { return S_OK; }
+	int Save(const wstring& FilePath) override { return S_OK; }
 
 public:
 	CPrefab();
+	CPrefab(CGameObject* proto);
+	CPrefab(const CPrefab& other);
 	~CPrefab();
 
 };

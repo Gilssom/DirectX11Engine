@@ -87,7 +87,10 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
     else
     {
         // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
-        vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+        if (g_btex_0)
+            vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+        else
+            vColor = float4(1.f, 0.f, 1.f, 1.f);
     }
     
     // Global Data 에 들어있는 광원의 개수 가져와서 반복문 돌리기

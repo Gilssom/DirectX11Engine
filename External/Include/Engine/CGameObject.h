@@ -57,6 +57,7 @@ public:
 private:
 	void SetLayerIdx(int idx) { m_LayerIdx = idx; }
 
+public:
 	CLONE(CGameObject);
 
 public:

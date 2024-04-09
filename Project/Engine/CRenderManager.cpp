@@ -88,8 +88,12 @@ void CRenderManager::DataBinding()
 		vecLightInfo.push_back(m_vecLight2D[i]->GetLightInfo());
 	}
 
-	m_Light2DBuffer->SetData(vecLightInfo.data(), m_vecLight2D.size());
-	m_Light2DBuffer->Binding(15);
+	// 광원이 Level 에 1개 이상이 있다면
+	if (!vecLightInfo.empty())
+	{
+		m_Light2DBuffer->SetData(vecLightInfo.data(), m_vecLight2D.size());
+		m_Light2DBuffer->Binding(15);
+	}
 }
 
 void CRenderManager::DataClear()

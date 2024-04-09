@@ -57,6 +57,7 @@ public:
 	void SortObject();
 
 public:
+	virtual void Begin() override;
 	virtual	void FinalTick() override; // 반드시 구현
 	void Render();
 

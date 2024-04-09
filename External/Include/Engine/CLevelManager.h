@@ -13,6 +13,9 @@ private:
 public:
 	CLevel* GetCurrentLevel() { return m_CurLevel; }
 
+private:
+	void CreatePrefab();
+
 public:
 	void Init();
 	void Tick();
