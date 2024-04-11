@@ -20,6 +20,10 @@ CCollisionManager::~CCollisionManager()
 
 void CCollisionManager::Tick()
 {
+	// 현재 Level 이 설정되어 있지 않다면 return
+	if (!CLevelManager::GetInst()->GetCurrentLevel())
+		return;
+
 	for (UINT Row = 0; Row < MAX_LAYER; ++Row)
 	{
 		for (UINT Col = Row; Col < MAX_LAYER; ++Col)

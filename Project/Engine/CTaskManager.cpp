@@ -45,54 +45,63 @@ void CTaskManager::ExecuteTask(tTask& task)
 	// 다음번 프레임에 적용할 내용들
 	switch (task.Type)
 	{
-	case TASK_TYPE::SPAWN_OBJECT:
 		// Param_0 : LayerIndex
 		// Param_1 : Object Adress
-	{
-		int LayerIdx = (int)task.dwParam_0;
-		CGameObject* pSpawnObj = (CGameObject*)task.dwParam_1;
-		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
-		pCurLevel->AddObject(LayerIdx, pSpawnObj);
-
-		// 레벨에 합류하는 오브젝트는 Begin 호출을 받는다.
-		pSpawnObj->Begin();
-	}
-		break;
-
-	case TASK_TYPE::DESTROY_OBJECT:
-		// Param_0 : Object Adress ( Dead )
-	{
-		CGameObject* pObject = (CGameObject*)task.dwParam_0;
-
-		if (!pObject->IsDead())
+		case TASK_TYPE::SPAWN_OBJECT:
 		{
-			pObject->m_Dead = true;
-			m_vecDead.push_back(pObject);
+			int LayerIdx = (int)task.dwParam_0;
+			CGameObject* pSpawnObj = (CGameObject*)task.dwParam_1;
+			CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+			pCurLevel->AddObject(LayerIdx, pSpawnObj);
+
+			// Play 상태의 레벨에 합류하는 오브젝트는 Begin 호출을 받는다.
+			if (pCurLevel->GetState() == LEVEL_STATE::PLAY)
+			{
+				pSpawnObj->Begin();
+			}
 		}
-	}
 		break;
 
-	case TASK_TYPE::CHANGE_LEVEL:
-	{
+		// Param_0 : Object Adress ( Dead )
+		case TASK_TYPE::DESTROY_OBJECT:
+		{
+			CGameObject* pObject = (CGameObject*)task.dwParam_0;
 
-	}
+			if (!pObject->IsDead())
+			{
+				pObject->m_Dead = true;
+				m_vecDead.push_back(pObject);
+			}
+		}
 		break;
 
-	case TASK_TYPE::COLLIDER2D_SEMI_DEACTIVE:
 		// Param_0 : Collider2D Adress ( Deactive )
-	{
-		CCollider2D* pCollider = (CCollider2D*)task.dwParam_0;
-		pCollider->m_SemiDeactive = true;
-	}
+		case TASK_TYPE::COLLIDER2D_SEMI_DEACTIVE:
+		{
+			CCollider2D* pCollider = (CCollider2D*)task.dwParam_0;
+			pCollider->m_SemiDeactive = true;
+		}
 		break;
 
-	case TASK_TYPE::COLLIDER2D_DEACTIVE:
 		// Param_0 : Collider2D Adress ( Deactive )
-	{
-		CCollider2D* pCollider = (CCollider2D*)task.dwParam_0;
-		pCollider->m_SemiDeactive = false;
-		pCollider->m_Active = false;
-	}
+		case TASK_TYPE::COLLIDER2D_DEACTIVE:
+		{
+			CCollider2D* pCollider = (CCollider2D*)task.dwParam_0;
+			pCollider->m_SemiDeactive = false;
+			pCollider->m_Active = false;
+		}
+		break;
+
+		// Param_0 : Level Adress
+		// Param_1 : LEVEL_STATE
+		case TASK_TYPE::CHANGE_LEVEL:
+		{
+			CLevel* pNextLevel = (CLevel*)task.dwParam_0;
+			LEVEL_STATE NextLevelState = (LEVEL_STATE)task.dwParam_1;
+
+			CLevelManager::GetInst()->ChangeLevel(pNextLevel);
+			pNextLevel->ChangeState(NextLevelState);
+		}
 		break;
 	}
 }

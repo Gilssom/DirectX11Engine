@@ -16,7 +16,7 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 #include "CMeshRender.h"
-#include "CPlayerScript.h"
+//#include "CPlayerScript.h"
 
 #pragma region Graphics Pipeline
 // Graphics Pipeline

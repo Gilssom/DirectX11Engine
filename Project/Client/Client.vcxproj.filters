@@ -1,37 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{7007d9c7-6cfa-49da-a843-2407c91003c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager">
+      <UniqueIdentifier>{9c9901fa-9241-401f-8925-5559fcba97ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TestLevel">
+      <UniqueIdentifier>{c6c3e14e-685b-461d-8352-301ab98c6778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\02. EditorManager">
+      <UniqueIdentifier>{30759184-fbe3-4419-bc4a-a3b9854f261b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\02. EditorManager\GameObjectEx">
+      <UniqueIdentifier>{31eaa444-ecef-4dde-bf4c-3c7c8ef70a0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\02. EditorManager\Scripts">
+      <UniqueIdentifier>{28d57195-2073-4996-8f4c-335e7e1d147c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Client.h">
+      <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="framework.h">
+      <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Default</Filter>
     </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="targetver.h">
+      <Filter>Default</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Client.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
+    <ClInclude Include="CTestLevel.h">
+      <Filter>01. Manager\01. TestLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="CEditorManager.h">
+      <Filter>01. Manager\02. EditorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObjectEx.h">
+      <Filter>01. Manager\02. EditorManager\GameObjectEx</Filter>
+    </ClInclude>
+    <ClInclude Include="CEditorCameraScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -45,5 +63,21 @@
     <Image Include="Client.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CTestLevel.cpp">
+      <Filter>01. Manager\01. TestLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditorManager.cpp">
+      <Filter>01. Manager\02. EditorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObjectEx.cpp">
+      <Filter>01. Manager\02. EditorManager\GameObjectEx</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditorCameraScript.cpp" />
   </ItemGroup>
 </Project>

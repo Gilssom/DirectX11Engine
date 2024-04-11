@@ -3,9 +3,7 @@
   .\Project\Engine\CAnimator2D.h
   .\Project\Engine\CAsset.h
   .\Project\Engine\CAssetManager.h
-  .\Project\Engine\CBackGroundScript.h
   .\Project\Engine\CCamera.h
-  .\Project\Engine\CCameraMoveScript.h
   .\Project\Engine\CCollider2D.h
   .\Project\Engine\CCollisionManager.h
   .\Project\Engine\CComponent.h
@@ -25,12 +23,10 @@
   .\Project\Engine\CMaterial.h
   .\Project\Engine\CMesh.h
   .\Project\Engine\CMeshRender.h
-  .\Project\Engine\CMissileScript.h
   .\Project\Engine\components.h
   .\Project\Engine\CParticleSystem.h
   .\Project\Engine\CParticleTickCS.h
   .\Project\Engine\CPathManager.h
-  .\Project\Engine\CPlayerScript.h
   .\Project\Engine\CPrefab.h
   .\Project\Engine\CRenderComponent.h
   .\Project\Engine\CRenderManager.h
@@ -52,7 +48,7 @@
   .\Project\Engine\Singletone.h
   .\Project\Engine\struct.h
   .\Project\Engine\Temp.h
-  54개 파일이 복사되었습니다.
+  50개 파일이 복사되었습니다.
   .\Project\Engine\SimpleMath.inl
   1개 파일이 복사되었습니다.
   .\Project\Engine\compute.fx
@@ -66,4 +62,29 @@
   .\Project\Engine\tilemap.fx
   .\Project\Engine\value.fx
   10개 파일이 복사되었습니다.
+  CAnim2D.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAnim2D.cpp(80,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CAnim2D.cpp'을(를) 컴파일하는 중)
+  
+  CCollider2D.cpp
+  CDbgRenderManager.cpp
+  CEngine.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp(32,32): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp(32,32): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp(32,48): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp(32,48): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '/CEngine.cpp'을(를) 컴파일하는 중)
+  
+  CGameObject.cpp
+  CParticleSystem.cpp
+  CScript.cpp
+  CTimeManager.cpp
+  Temp.cpp
+  코드를 생성하고 있습니다...
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

@@ -3,6 +3,9 @@
 class CGameObject;
 void SpawnObject(int layerIdx, CGameObject* object);
 
+class CLevel;
+void ChangeLevel(CLevel* nextLevel, LEVEL_STATE nextLevelState);
+
 bool IsValid(CGameObject*& object);
 
 void DrawDebugRect(Vec3 worldPos, Vec3 worldScale, Vec3 worldRotation, Vec4 vColor, float duration);

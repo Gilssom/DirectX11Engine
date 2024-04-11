@@ -16,6 +16,17 @@ void SpawnObject(int layerIdx, CGameObject* object)
 	CTaskManager::GetInst()->AddTask(task);
 }
 
+// Level 변경 함수
+void ChangeLevel(CLevel* nextLevel, LEVEL_STATE nextLevelState)
+{
+	tTask task = {};
+	task.Type = TASK_TYPE::CHANGE_LEVEL;
+	task.dwParam_0 = (DWORD_PTR)nextLevel;
+	task.dwParam_1 = (DWORD_PTR)nextLevelState;
+
+	CTaskManager::GetInst()->AddTask(task);
+}
+
 // 오브젝트 유효성 체크
 bool IsValid(CGameObject*& object)
 {

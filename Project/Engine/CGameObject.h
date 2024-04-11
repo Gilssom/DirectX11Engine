@@ -31,7 +31,7 @@ public:
 
 public:
 	void AddComponent(CComponent* component);
-	CComponent* GetComonent(COMPONENT_TYPE type) { return m_arrCom[(UINT)type]; }
+	CComponent* GetComponent(COMPONENT_TYPE type) { return m_arrCom[(UINT)type]; }
 	CRenderComponent* GetRenderComponent() { return m_RenderCom; }
 
 	GET_COMPONENT(Transform, TRANSFORM);

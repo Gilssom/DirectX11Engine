@@ -11,9 +11,12 @@
 #include "CLight2D.h"
 
 CRenderManager::CRenderManager()
-	: m_Light2DBuffer(nullptr)
+	 : m_EditorCam(nullptr)
+	 , m_Light2DBuffer(nullptr)
 {
 	m_Light2DBuffer = new CStructuredBuffer;
+
+	Render_Func = &CRenderManager::Render_Play;
 }
 
 CRenderManager::~CRenderManager()
@@ -49,14 +52,26 @@ void CRenderManager::Render()
 	float clearColor[4] = { 0.3f, 0.3f, 0.3f, 1.f };
 	CDevice::GetInst()->ClearTarget(clearColor);
 
+	// 함수 포인터로 원하는 함수를 호출 시킬 수 있도록 (Render Play or Editor)
+	(this->*Render_Func)();
+
+	// 데이터 클리어
+	DataClear();
+}
+
+void CRenderManager::Render_Play()
+{
 	// Camera Draw in Render Target
 	for (size_t i = 0; i < m_vecCam.size(); i++)
 	{
 		m_vecCam[i]->Render();
 	}
+}
 
-	// 데이터 클리어
-	DataClear();
+void CRenderManager::Render_Editor()
+{
+	if(m_EditorCam != nullptr)
+		m_EditorCam->Render();
 }
 
 void CRenderManager::DataBinding()

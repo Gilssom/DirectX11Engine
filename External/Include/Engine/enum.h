@@ -185,7 +185,8 @@ enum class TASK_TYPE
 	COLLIDER2D_SEMI_DEACTIVE,
 	COLLIDER2D_DEACTIVE,
 
-	//
+	// Param_0 : Level Adress
+	// Param_1 : LEVEL_STATE
 	CHANGE_LEVEL,
 };
 
@@ -210,4 +211,11 @@ enum class PARTICLE_MODULE
 	RENDER,
 
 	END,
+};
+
+enum class LEVEL_STATE
+{
+	PLAY,
+	STOP,
+	PAUSE,
 };

@@ -10,4 +10,12 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 
+#include <Engine//global.h>
+
+#ifdef _DEBUG
+#pragma comment(lib, "Engine//Engine_d.lib")
+#else
+#pragma comment(lib, "Engine//Engine.lib")
+#endif
+
 #endif //PCH_H
