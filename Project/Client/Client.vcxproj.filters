@@ -23,6 +23,24 @@
     <Filter Include="01. Manager\02. EditorManager\Scripts">
       <UniqueIdentifier>{28d57195-2073-4996-8f4c-335e7e1d147c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Manager\03. ImGuiManager">
+      <UniqueIdentifier>{9666ddb5-f072-49bb-b51c-5d2eb0f01887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\03. ImGuiManager\ImGui">
+      <UniqueIdentifier>{221c0f38-a78b-4c29-8e22-daaf4de8ef27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI">
+      <UniqueIdentifier>{5cab3701-dc91-4401-b8df-0afd1a9f4faf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector">
+      <UniqueIdentifier>{5697259b-e3c2-4191-8fa4-bcfe6fbe41d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\02. Content">
+      <UniqueIdentifier>{30d7f0c5-c8b8-4137-b89b-01e3b80916f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\03. Outliner">
+      <UniqueIdentifier>{25690504-72a6-44ea-a022-0bdb8de7e683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -49,7 +67,42 @@
     <ClInclude Include="CGameObjectEx.h">
       <Filter>01. Manager\02. EditorManager\GameObjectEx</Filter>
     </ClInclude>
-    <ClInclude Include="CEditorCameraScript.h" />
+    <ClInclude Include="CEditorCameraScript.h">
+      <Filter>01. Manager\02. EditorManager\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="CImGuiManager.h">
+      <Filter>01. Manager\03. ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorUI.h">
+      <Filter>02. EditorUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>02. EditorUI\01. Inspector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -78,6 +131,38 @@
     <ClCompile Include="CGameObjectEx.cpp">
       <Filter>01. Manager\02. EditorManager\GameObjectEx</Filter>
     </ClCompile>
-    <ClCompile Include="CEditorCameraScript.cpp" />
+    <ClCompile Include="CEditorCameraScript.cpp">
+      <Filter>01. Manager\02. EditorManager\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="CImGuiManager.cpp">
+      <Filter>01. Manager\03. ImGuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorUI.cpp">
+      <Filter>02. EditorUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>02. EditorUI\01. Inspector</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

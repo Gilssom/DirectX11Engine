@@ -2,6 +2,7 @@
 #include "CLevel.h"
 
 #include "CLayer.h"
+#include "CGameObject.h"
 #include "CRenderManager.h"
 
 CLevel::CLevel()
@@ -78,4 +79,22 @@ void CLevel::ChangeState(LEVEL_STATE nextState)
 	}
 
 	m_State = nextState;
+}
+
+CGameObject* CLevel::FindObjectByName(const wstring& name)
+{
+	for (size_t i = 0; i < MAX_LAYER; i++)
+	{
+		const vector<CGameObject*>& vecObjects = m_arrLayer[i]->GetObjects();
+
+		for (size_t j = 0; j < vecObjects.size(); j++)
+		{
+			if (vecObjects[j]->GetName() == name)
+			{
+				return vecObjects[j];
+			}
+		}
+	}
+
+	return nullptr;
 }

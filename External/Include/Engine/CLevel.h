@@ -20,6 +20,7 @@ public:
 	void AddObject(UINT layerIdx, CGameObject* object, bool childMove = false);
 	CLayer* GetLayer(int layerIdx) { return m_arrLayer[layerIdx]; }
 	LEVEL_STATE GetState() { return m_State; }
+	CGameObject* FindObjectByName(const wstring& name);
 
 private:
 	void ChangeState(LEVEL_STATE nextState);

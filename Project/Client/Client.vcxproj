@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)External\Include\</IncludePath>
+    <IncludePath>$(SolutionDir)External\Include\;$(ProjectDir)</IncludePath>
     <LibraryPath>$(SolutionDir)External\Library\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)OutputFile\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)External\Include\</IncludePath>
+    <IncludePath>$(SolutionDir)External\Include\;$(ProjectDir)</IncludePath>
     <LibraryPath>$(SolutionDir)External\Library\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)OutputFile\bin\</OutDir>
   </PropertyGroup>
@@ -146,9 +146,20 @@
     <ClInclude Include="CEditorCameraScript.h" />
     <ClInclude Include="CEditorManager.h" />
     <ClInclude Include="CGameObjectEx.h" />
+    <ClInclude Include="CImGuiManager.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="CTestLevel.h" />
+    <ClInclude Include="EditorUI.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Inspector.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -157,6 +168,16 @@
     <ClCompile Include="CEditorCameraScript.cpp" />
     <ClCompile Include="CEditorManager.cpp" />
     <ClCompile Include="CGameObjectEx.cpp" />
+    <ClCompile Include="CImGuiManager.cpp" />
+    <ClCompile Include="EditorUI.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGui\imgui_tables.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Inspector.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CTestLevel.cpp" />
     <ClCompile Include="pch.cpp">

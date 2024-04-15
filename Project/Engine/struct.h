@@ -196,14 +196,15 @@ struct tAnim2DInfo
 
 struct tGlobalData
 {
-	Vec2	vResolution;	// 렌더링 해상도
-	float	DeltaTime;		// DT
-	float	Time;			// 게임 시작한 후 경과한 시간
+	Vec2	vResolution;		// 렌더링 해상도
+	float	DeltaTime;			// DT (레벨 상태에 영향을 받음)
+	float	Time;				// 게임 시작한 후 경과한 시간 (레벨 상태에 영향을 받음)
 
-	int		Light2DCount;	// 2D 광원 개수
-	int		Light3DCount;	// 3D 광원 개수
+	float	DeltaTimeEngine;	// (레벨 상태에 영향을 받지 않음)
+	float	TimeEngine;			// (레벨 상태에 영향을 받지 않음)
 
-	Vec2	Padding;
+	int		Light2DCount;		// 2D 광원 개수
+	int		Light3DCount;		// 3D 광원 개수
 };
 
 extern tGlobalData g_GlobalData;

@@ -56,19 +56,19 @@ void CEditorCameraScript::MoveByPerspective()
 
 	if (KEY_PRESSED(KEY::UP))
 	{
-		vCurPos += vFront * speed * DT;
+		vCurPos += vFront * speed * DT_Engine;
 	}
 	if (KEY_PRESSED(KEY::DOWN))
 	{
-		vCurPos += -vFront * speed * DT;
+		vCurPos += -vFront * speed * DT_Engine;
 	}
 	if (KEY_PRESSED(KEY::LEFT))
 	{
-		vCurPos += -vRight * speed * DT;
+		vCurPos += -vRight * speed * DT_Engine;
 	}
 	if (KEY_PRESSED(KEY::RIGHT))
 	{
-		vCurPos += vRight * speed * DT;
+		vCurPos += vRight * speed * DT_Engine;
 	}
 
 	if (KEY_PRESSED(KEY::RBTN))
@@ -76,8 +76,8 @@ void CEditorCameraScript::MoveByPerspective()
 		Vec2 vDrag = CKeyManager::GetInst()->GetMouseDrag();
 
 		Vec3 vRot = Transform()->GetRelativeRotation();
-		vRot.y += vDrag.x * DT * XM_PI * 10.f;
-		vRot.x -= vDrag.y * DT * XM_PI * 10.f;
+		vRot.y += vDrag.x * DT_Engine * XM_PI * 10.f;
+		vRot.x -= vDrag.y * DT_Engine * XM_PI * 10.f;
 
 		Transform()->SetRelativeRotation(vRot);
 	}
@@ -99,25 +99,25 @@ void CEditorCameraScript::MoveByOrthographic()
 
 	if (KEY_PRESSED(KEY::UP))
 	{
-		vCurPos.y += speed * DT;
+		vCurPos.y += speed * DT_Engine;
 	}
 	if (KEY_PRESSED(KEY::DOWN))
 	{
-		vCurPos.y -= speed * DT;
+		vCurPos.y -= speed * DT_Engine;
 	}
 	if (KEY_PRESSED(KEY::LEFT))
 	{
-		vCurPos.x -= speed * DT;
+		vCurPos.x -= speed * DT_Engine;
 	}
 	if (KEY_PRESSED(KEY::RIGHT))
 	{
-		vCurPos.x += speed * DT;
+		vCurPos.x += speed * DT_Engine;
 	}
 
 	if (KEY_PRESSED(KEY::NUM1))
 	{
 		float scale = Camera()->GetScale();
-		scale -= DT;
+		scale -= DT_Engine;
 
 		if (scale < 0.01f)
 		{
@@ -130,7 +130,7 @@ void CEditorCameraScript::MoveByOrthographic()
 	if (KEY_PRESSED(KEY::NUM2))
 	{
 		float scale = Camera()->GetScale();
-		scale += DT;
+		scale += DT_Engine;
 		Camera()->SetScale(scale);
 	}
 

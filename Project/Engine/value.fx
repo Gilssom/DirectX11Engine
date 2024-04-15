@@ -73,14 +73,15 @@ cbuffer ANIMATION2D : register(b2)
 
 cbuffer GLOBAL_DATA : register(b3)
 {
-    float2 vResolution;     // 렌더링 해상도
-    float DeltaTime;        // DT
-    float Time;             // 게임 시작한 후 경과한 시간
+    float2  vResolution;        // 렌더링 해상도
+    float   DeltaTime;          // DT
+    float   Time;               // 게임 시작한 후 경과한 시간
 
-    int Light2DCount;       // 2D 광원 개수
-    int Light3DCount;       // 3D 광원 개수
-
-    float2 Padding;
+    float   DeltaTime_Engine;
+    float   Time_Engine;
+    
+    int     Light2DCount;       // 2D 광원 개수
+    int     Light3DCount;       // 3D 광원 개수
 };
 
 

@@ -45,6 +45,11 @@ void CRenderManager::Tick()
 
 void CRenderManager::Render()
 {
+	// Swap Chain 의 Back Buffer 를 Render Target 으로 재지정
+	Ptr<CTexture> pRTTex = CAssetManager::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
+	Ptr<CTexture> pDSTex = CAssetManager::GetInst()->FindAsset<CTexture>(L"DepthStencilTex");
+	CONTEXT->OMSetRenderTargets(1, pRTTex->GetRTV().GetAddressOf(), pDSTex->GetDSV().Get());
+
 	// 렌더링에 필요한 데이터 바인딩
 	DataBinding();
 

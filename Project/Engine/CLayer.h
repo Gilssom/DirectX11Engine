@@ -23,8 +23,8 @@ public:
 	void RegisterObject(CGameObject* object) { m_vecObjects.push_back(object); }
 	void Clear() { m_vecObjects.clear(); }
 
+	const vector<CGameObject*>& GetParentObjects() { return m_vecParent; }
 	const vector<CGameObject*>& GetObjects() { return m_vecObjects; }
-
 
 	CLONE_DISABLE(CLayer);
 
