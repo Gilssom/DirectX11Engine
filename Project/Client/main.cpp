@@ -11,8 +11,12 @@
 #include <Engine//global.h>
 #include <Engine//CEngine.h>
 #include <Engine//CDevice.h>>
-
 #include <crtdbg.h>
+
+
+// Game Release Mode 면 Game 에 필요한 부분만 나타날 수 있게 설정 (주석 풀기)
+//#define GAME_RELEASE
+
 
 #ifdef _DEBUG
 #pragma comment(lib, "Engine//Engine_d.lib")
@@ -76,6 +80,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return 0;
     }
 
+#ifndef GAME_RELEASE
     // Editor 초기화
     CEditorManager::GetInst()->Init();
 
@@ -88,6 +93,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         MessageBox(nullptr, L"ImGui 초기화 실패", L"ImGui 초기화 실패", MB_OK);
         return 0;
     }
+#endif
 
 
     // 단축키 테이블 ( 그동안 Alt 누르면 프로그램이 일시정지 되었던 이유 ) 리소스 뷰 Accelerator 확인
@@ -128,11 +134,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             // CEngine::Progress() 한번 수행 ==> 1 프레임
             CEngine::GetInst()->Progress();
 
+#ifndef GAME_RELEASE
             // Editor 실행
             CEditorManager::GetInst()->Tick();
 
             // ImGui 실행
             CImGuiManager::GetInst()->Tick();
+#endif
 
             // Present (모든 Render 가 끝나고 Present 가 진행되어야 함)
             CDevice::GetInst()->Present();

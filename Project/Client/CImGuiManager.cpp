@@ -5,6 +5,7 @@
 #include "ImGui\\imgui_impl_win32.h"
 #include "ImGui\\imgui_impl_dx11.h"
 
+#include <Engine\\CKeyManager.h>
 #include <Engine\\CDevice.h>
 
 #include "EditorUI.h"
@@ -12,6 +13,8 @@
 
 CImGuiManager::CImGuiManager()
     : m_hMainHwnd(nullptr)
+    , m_mapUI{}
+    , m_bDemo(false)
 {
 
 }
@@ -78,6 +81,10 @@ void CImGuiManager::Tick()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
+    // Demo Window 활성화 비활성화
+    if (KEY_TAP(KEY::NUM9)) { m_bDemo ? m_bDemo = false : m_bDemo = true; }
+    if (m_bDemo) { ImGui::ShowDemoWindow(); }
+
     // Begin - End : Window 하나
     for (const auto& pair : m_mapUI)
     {
@@ -101,6 +108,6 @@ void CImGuiManager::CreateEditorUI()
     EditorUI* pUI = nullptr;
 
     pUI = new Inspector;
-
+    pUI->SetActive(true);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
 }
