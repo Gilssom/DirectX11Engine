@@ -139,6 +139,24 @@
     <ClInclude Include="ComponentUI.h">
       <Filter>02. EditorUI\01. Inspector\ComponentUI</Filter>
     </ClInclude>
+    <ClInclude Include="TileMapUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\TileMapUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystemUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\ParticleSystemUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator2DUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\Animator2DUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\CameraUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider2DUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\Collider2DUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Light2DUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\Light2DUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -208,6 +226,24 @@
     </ClCompile>
     <ClCompile Include="ComponentUI.cpp">
       <Filter>02. EditorUI\01. Inspector\ComponentUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\TileMapUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystemUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\ParticleSystemUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator2DUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\Animator2DUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\CameraUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2DUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\Collider2DUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Light2DUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\Light2DUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

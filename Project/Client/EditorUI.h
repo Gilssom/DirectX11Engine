@@ -14,6 +14,7 @@ private:
 	ImVec2				m_vChildSize;	// 자식 UI Size
 
 	bool				m_Active;		// 활성화 - 비활성화 여부
+	bool				m_Seperate;		// 구분선 옵션
 
 public:
 	void SetName(const string& name) { m_Name = name; }
@@ -21,7 +22,7 @@ public:
 
 	// ImVec2(0, 0) = Parent Default Size
 	void SetSize(ImVec2 size) { m_vChildSize = size; }
-
+	void SetSeperate(bool seperate) { m_Seperate = seperate; }
 	void SetActive(bool active) { m_Active = active; }
 
 	EditorUI* GetParentUI() { return m_ParentUI; }
@@ -33,6 +34,7 @@ public:
 		m_vecChildUI.push_back(child); 
 	}
 
+	bool IsActive() { return m_Active; }
 	// 자신의 타입을 반환
 	bool IsRootUI() { return !m_ParentUI; }
 

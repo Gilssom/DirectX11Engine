@@ -22,6 +22,9 @@ enum class COMPONENT_TYPE
 	SCRIPT,
 };
 
+extern const char* COMPONENT_TYPE_STRING[(UINT)COMPONENT_TYPE::END];
+
+
 enum class ASSET_TYPE
 {
 	PREFAB,
@@ -35,6 +38,9 @@ enum class ASSET_TYPE
 
 	END,
 };
+
+extern const char* ASSET_TYPE_STRING[(UINT)ASSET_TYPE::END];
+
 
 // 상수 버퍼 갯수는 거의 고정적임
 enum class CB_TYPE

@@ -9,19 +9,19 @@
 #include "ComponentUI.h"
 #include "TransformUI.h"
 #include "MeshRenderUI.h"
+#include "Animator2DUI.h"
+#include "Collider2DUI.h"
+#include "CameraUI.h"
+#include "Light2DUI.h"
+#include "ParticleSystemUI.h"
+#include "TileMapUI.h"
 
 Inspector::Inspector()
 	: EditorUI("Inspector", "##Inspector")
 	, m_TargetObject(nullptr)
 	, m_arrComUI{}
 {
-	// Transform UI 持失
-	m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM] = new TransformUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM]);
-
-	// Mesh Render UI 持失
-	m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER] = new MeshRenderUI;
-	AddChildUI(m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER]);
+	CreateComponentUI();
 }
 
 Inspector::~Inspector()
@@ -37,12 +37,8 @@ void Inspector::Render_Tick()
 
 		if (pLevel != nullptr)
 		{
-			CGameObject* pTarget = pLevel->FindObjectByName(L"TileMap");
-
-			if (pTarget != nullptr)
-			{
-				SetTargetObject(pTarget);
-			}
+			CGameObject* pTarget = pLevel->FindObjectByName(L"Player");
+			SetTargetObject(pTarget);
 		}
 
 		return;
@@ -62,5 +58,27 @@ void Inspector::SetTargetObject(CGameObject* target)
 			continue;
 
 		m_arrComUI[i]->SetTarget(m_TargetObject);
+	}
+}
+
+void Inspector::CreateComponentUI()
+{
+	m_arrComUI[(UINT)COMPONENT_TYPE::TRANSFORM] = new TransformUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::MESHRENDER] = new MeshRenderUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::COLLIDER2D] = new Collider2DUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::ANIMATOR2D] = new Animator2DUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::CAMERA] = new CameraUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::LIGHT2D] = new Light2DUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::TILEMAP] = new TileMapUI;
+	m_arrComUI[(UINT)COMPONENT_TYPE::PARTICLESYSTEM] = new ParticleSystemUI;
+
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		if (m_arrComUI[i] == nullptr)
+			continue;
+
+		m_arrComUI[i]->SetActive(true);
+		m_arrComUI[i]->SetSeperate(true);
+		AddChildUI(m_arrComUI[i]);
 	}
 }

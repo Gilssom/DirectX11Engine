@@ -6,6 +6,7 @@ EditorUI::EditorUI(const string& name, const  string& id)
 	, m_ID(id)
 	, m_ParentUI(nullptr)
 	, m_Active(true)
+	, m_Seperate(false)
 {
 
 }
@@ -27,7 +28,8 @@ void EditorUI::Tick()
 	// 자신이 "독립적인 UI" 혹은 "부모 UI" 라면 (최상위 UI 객체)
 	if (IsRootUI())
 	{
-		ImGui::Begin(fullname.c_str());
+		// 새로 생긴 x 버튼을 누르면 *bool 을 false 로 변경해줌.
+		ImGui::Begin(fullname.c_str(), &m_Active);
 
 		Render_Tick();
 
@@ -42,6 +44,12 @@ void EditorUI::Tick()
 	// 자신이 부모가 있는 "자식 UI" 라면
 	else
 	{
+		if (m_Seperate)
+		{
+			// 구분선 생성
+			ImGui::Separator();
+		}
+
 		ImGui::BeginChild(fullname.c_str(), m_vChildSize);
 
 		Render_Tick();

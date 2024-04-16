@@ -143,11 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animator2DUI.h" />
+    <ClInclude Include="CameraUI.h" />
     <ClInclude Include="CEditorCameraScript.h" />
     <ClInclude Include="CEditorManager.h" />
     <ClInclude Include="CGameObjectEx.h" />
     <ClInclude Include="CImGuiManager.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="Collider2DUI.h" />
     <ClInclude Include="ComponentUI.h" />
     <ClInclude Include="CTestLevel.h" />
     <ClInclude Include="EditorUI.h" />
@@ -161,17 +164,23 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Inspector.h" />
+    <ClInclude Include="Light2DUI.h" />
     <ClInclude Include="MeshRenderUI.h" />
+    <ClInclude Include="ParticleSystemUI.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TileMapUI.h" />
     <ClInclude Include="TransformUI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animator2DUI.cpp" />
+    <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="CEditorCameraScript.cpp" />
     <ClCompile Include="CEditorManager.cpp" />
     <ClCompile Include="CGameObjectEx.cpp" />
     <ClCompile Include="CImGuiManager.cpp" />
+    <ClCompile Include="Collider2DUI.cpp" />
     <ClCompile Include="ComponentUI.cpp" />
     <ClCompile Include="EditorUI.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
@@ -182,13 +191,16 @@
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Inspector.cpp" />
+    <ClCompile Include="Light2DUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CTestLevel.cpp" />
     <ClCompile Include="MeshRenderUI.cpp" />
+    <ClCompile Include="ParticleSystemUI.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TileMapUI.cpp" />
     <ClCompile Include="TransformUI.cpp" />
   </ItemGroup>
   <ItemGroup>

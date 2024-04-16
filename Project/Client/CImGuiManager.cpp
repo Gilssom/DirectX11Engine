@@ -88,7 +88,8 @@ void CImGuiManager::Tick()
     // Begin - End : Window ÇÏ³ª
     for (const auto& pair : m_mapUI)
     {
-        pair.second->Tick();
+        if(pair.second->IsActive())
+            pair.second->Tick();
     }
 
     // Rendering

@@ -18,6 +18,9 @@ public:
 public:
 	void SetTargetObject(CGameObject* target);
 
+private:
+	void CreateComponentUI();
+
 public:
 	Inspector();
 	~Inspector();
