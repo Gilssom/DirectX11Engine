@@ -80,7 +80,7 @@ void CTestLevel::CreateTestLevel()
 
 
 	// TileMap Object
-	CGameObject* pTileMapObj = new CGameObject;
+	/*CGameObject* pTileMapObj = new CGameObject;
 	pTileMapObj->SetName(L"TileMap");
 	pTileMapObj->AddComponent(new CTransform);
 	pTileMapObj->AddComponent(new CTileMap);
@@ -91,7 +91,7 @@ void CTestLevel::CreateTestLevel()
 	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
 	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
 	pTileMapObj->TileMap()->SetRowCol(4, 4);
-	m_CurLevel->AddObject(0, pTileMapObj);
+	m_CurLevel->AddObject(0, pTileMapObj);*/
 
 	// Clone Test
 	//pTileMapObj = pTileMapObj->Clone();

@@ -6,7 +6,7 @@
 TransformUI::TransformUI()
 	: ComponentUI("Transform", "##TransformUI", COMPONENT_TYPE::TRANSFORM)
 {
-	SetSize(ImVec2(0, 200));
+	//SetSize(ImVec2(0, 100));
 }
 
 TransformUI::~TransformUI()

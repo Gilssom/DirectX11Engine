@@ -28,6 +28,12 @@ void EditorUI::Tick()
 	// 자신이 "독립적인 UI" 혹은 "부모 UI" 라면 (최상위 UI 객체)
 	if (IsRootUI())
 	{
+		if (m_Seperate)
+		{
+			// 구분선 생성
+			ImGui::Separator();
+		}
+
 		// 새로 생긴 x 버튼을 누르면 *bool 을 false 로 변경해줌.
 		ImGui::Begin(fullname.c_str(), &m_Active);
 
@@ -47,19 +53,26 @@ void EditorUI::Tick()
 		if (m_Seperate)
 		{
 			// 구분선 생성
-			ImGui::Separator();
+			//ImGui::Separator();
 		}
 
-		ImGui::BeginChild(fullname.c_str(), m_vChildSize);
+		//ImGui::BeginChild(fullname.c_str(), m_vChildSize);
 
-		Render_Tick();
-
-		// 자식의 자식 UI 의 Tick 을 돌려준다.
-		for (size_t i = 0; i < m_vecChildUI.size(); i++)
+		if (ImGui::TreeNode(fullname.c_str()))
 		{
-			m_vecChildUI[i]->Tick();
-		}
+			Render_Tick();
 
-		ImGui::EndChild();
+			ImGui::Separator();
+
+			// 자식의 자식 UI 의 Tick 을 돌려준다.
+			for (size_t i = 0; i < m_vecChildUI.size(); i++)
+			{
+				m_vecChildUI[i]->Tick();
+			}
+
+			ImGui::TreePop();
+		}
+				
+		//ImGui::EndChild();
 	}
 }

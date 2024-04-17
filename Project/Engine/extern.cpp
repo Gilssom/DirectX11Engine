@@ -12,31 +12,31 @@ extern Vec3	ZAxis(0.f, 0.f, 1.f);
 extern const char* COMPONENT_TYPE_STRING[(UINT)COMPONENT_TYPE::END]
 =
 {
-	"TRANSFORM",
-	"CAMERA",
-	"COLLIDER2D",
-	"COLLIDER3D",
-	"ANIMATOR2D",
-	"ANIMATOR3D",
-	"LIGHT2D",
-	"LIGHT3D",
-	"MESHRENDER",
-	"DECAL",
-	"PARTICLESYSTEM",
-	"TILEMAP",
-	"LANDSCAPE"
+	"Transform",
+	"Camera",
+	"Collider2D",
+	"Collider3D",
+	"Aniamtor2D",
+	"Animator3D",
+	"Light2D",
+	"Light3D",
+	"Mesh Renderer",
+	"Decal",
+	"Particle System",
+	"Tile Map",
+	"LandScape"
 };
 
 
 extern const char* ASSET_TYPE_STRING[(UINT)ASSET_TYPE::END]
 =
 {
-	"PREFAB",
-	"MESH",
-	"MESH_DATA",
-	"MATERIAL",
-	"TEXTURE",
-	"SOUND",
-	"GRAPHICS_SHADER",
-	"COMPUTE_SHADER"
+	"Prefab",
+	"Mesh",
+	"Mesh Data",
+	"Material",
+	"Texture",
+	"Sount",
+	"Graphics Shader",
+	"Compute Shader"
 };
