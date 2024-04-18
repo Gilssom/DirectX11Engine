@@ -1,9 +1,15 @@
 #pragma once
 
+typedef void (*UI_CALLBACK)(void);
+
 class EditorUI;
+typedef UINT(EditorUI::* UI_DELEGATE)(void);
+typedef UINT(EditorUI::* UI_DELEGATE1)(DWORD_PTR);
+typedef UINT(EditorUI::* UI_DELEGATE2)(DWORD_PTR, DWORD_PTR);
+
+
 
 class CImGuiManager : public CSingleton<CImGuiManager>
-
 {
     SINGLE(CImGuiManager);
 private:
@@ -11,6 +17,10 @@ private:
     map<string, EditorUI*>  m_mapUI;
 
     bool                    m_bDemo;
+
+public:
+    template<typename T>
+    T* FindEditorUI(const string& strName);
 
 public:
     int Init(HWND hwnd);
@@ -21,3 +31,16 @@ private:
 
 };
 
+template<typename T>
+inline T* CImGuiManager::FindEditorUI(const string& strName)
+{
+    map<string, EditorUI*>::iterator iter = m_mapUI.find(strName);
+
+    if (iter == m_mapUI.end())
+        return nullptr;
+
+    // 최상위 EditorUI 를 dynamic_cast 로 자신이 원하는 Type 의 하위 Class 를 찾아줌
+    T* pUI = dynamic_cast<T*>(iter->second);
+
+    return pUI;
+}

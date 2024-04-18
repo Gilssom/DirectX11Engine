@@ -10,6 +10,7 @@
 
 #include "EditorUI.h"
 #include "Inspector.h"
+#include "ListUI.h"
 
 CImGuiManager::CImGuiManager()
     : m_hMainHwnd(nullptr)
@@ -110,5 +111,9 @@ void CImGuiManager::CreateEditorUI()
 
     pUI = new Inspector;
     pUI->SetActive(true);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new ListUI;
+    pUI->SetActive(false);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
 }

@@ -16,8 +16,8 @@ private:
 public:
     void Init();
 
+    void GetAssetNames(ASSET_TYPE type, _Out_ vector<string>& vecNames);
 
-public:
     // bindFlag : D3D11_BIND_FLAG
     Ptr<CTexture> CreateTexture(const wstring& strKey, UINT width, UINT height
                             , DXGI_FORMAT pixelFormat, UINT bindFlag, D3D11_USAGE usage = D3D11_USAGE_DEFAULT);

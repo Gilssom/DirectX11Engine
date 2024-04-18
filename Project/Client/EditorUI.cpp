@@ -17,6 +17,28 @@ EditorUI::~EditorUI()
 	Safe_Del_Vector(m_vecChildUI);
 }
 
+bool EditorUI::SetActive(bool active)
+{
+	if (m_Active == active)
+		return false;
+
+	m_Active = active;
+
+	if (m_Active)
+		Activate();
+	else
+		Deactivate();
+
+	return true;
+}
+
+void EditorUI::SetFocus()
+{
+	string fullname = m_Name + m_ID;
+
+	ImGui::SetWindowFocus(fullname.c_str());
+}
+
 void EditorUI::Tick()
 {
 	// 해당 UI 가 비활성화 상태면 return
@@ -35,7 +57,9 @@ void EditorUI::Tick()
 		}
 
 		// 새로 생긴 x 버튼을 누르면 *bool 을 false 로 변경해줌.
-		ImGui::Begin(fullname.c_str(), &m_Active);
+		bool bActive = m_Active;
+		ImGui::Begin(fullname.c_str(), &bActive);
+		SetActive(bActive);
 
 		Render_Tick();
 

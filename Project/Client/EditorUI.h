@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ImGui\\\imgui.h"
+#include "CImGuiManager.h"
 
 class EditorUI
 {
@@ -23,7 +24,7 @@ public:
 	// ImVec2(0, 0) = Parent Default Size
 	void SetSize(ImVec2 size) { m_vChildSize = size; }
 	void SetSeperate(bool seperate) { m_Seperate = seperate; }
-	void SetActive(bool active) { m_Active = active; }
+	bool SetActive(bool active);
 
 	EditorUI* GetParentUI() { return m_ParentUI; }
 	const vector<EditorUI*> GetChildUI() { return m_vecChildUI; }
@@ -34,6 +35,8 @@ public:
 		m_vecChildUI.push_back(child); 
 	}
 
+	void SetFocus();
+
 	bool IsActive() { return m_Active; }
 	// 자신의 타입을 반환
 	bool IsRootUI() { return !m_ParentUI; }
@@ -41,6 +44,9 @@ public:
 public:
 	virtual void Tick();
 	virtual void Render_Tick() = 0;
+
+	virtual void Activate() {}
+	virtual void Deactivate() {}
 
 public:
 	// 상속받아간 곳에선  Name 을 무조건 지정할 수 있게
