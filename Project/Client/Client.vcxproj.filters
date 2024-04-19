@@ -44,32 +44,32 @@
     <Filter Include="02. EditorUI\01. Inspector\ComponentUI">
       <UniqueIdentifier>{11ab8254-008f-41c0-87ae-87d70340aae2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\TransformUI">
-      <UniqueIdentifier>{92d448b5-69f8-4bee-9288-3b11b9fec65c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\MeshRenderUI">
-      <UniqueIdentifier>{3500ff59-409f-4e4e-b468-c433965c117f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\Collider2DUI">
-      <UniqueIdentifier>{924e11aa-c595-4be8-9799-7ed3599b2ac3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\CameraUI">
-      <UniqueIdentifier>{df336533-5324-473f-9812-0f67f9cd19e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\TileMapUI">
-      <UniqueIdentifier>{0e28ae69-4920-4e8e-af73-c61b0f51aa15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\ParticleSystemUI">
-      <UniqueIdentifier>{27721d5e-fcb1-4342-9638-19040c963e66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\Animator2DUI">
-      <UniqueIdentifier>{31c578cd-ef85-48e4-a7cc-d8aab77ed59d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\Light2DUI">
-      <UniqueIdentifier>{d4c626cd-430b-4431-a24b-11fc4b5b7589}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. EditorUI\04. List">
       <UniqueIdentifier>{6642a61a-6d7b-4846-b090-0c26fbcf9cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\05. Animator2DUI">
+      <UniqueIdentifier>{31c578cd-ef85-48e4-a7cc-d8aab77ed59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\06. MeshRenderUI">
+      <UniqueIdentifier>{3500ff59-409f-4e4e-b468-c433965c117f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\07. ParticleSystemUI">
+      <UniqueIdentifier>{27721d5e-fcb1-4342-9638-19040c963e66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\08. TileMapUI">
+      <UniqueIdentifier>{0e28ae69-4920-4e8e-af73-c61b0f51aa15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\01. TransformUI">
+      <UniqueIdentifier>{92d448b5-69f8-4bee-9288-3b11b9fec65c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\02. Collider2DUI">
+      <UniqueIdentifier>{924e11aa-c595-4be8-9799-7ed3599b2ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\03. CameraUI">
+      <UniqueIdentifier>{df336533-5324-473f-9812-0f67f9cd19e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\04. Light2DUI">
+      <UniqueIdentifier>{d4c626cd-430b-4431-a24b-11fc4b5b7589}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,31 +134,31 @@
       <Filter>02. EditorUI\01. Inspector</Filter>
     </ClInclude>
     <ClInclude Include="TransformUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\TransformUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\01. TransformUI</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\MeshRenderUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\06. MeshRenderUI</Filter>
     </ClInclude>
     <ClInclude Include="ComponentUI.h">
       <Filter>02. EditorUI\01. Inspector\ComponentUI</Filter>
     </ClInclude>
     <ClInclude Include="TileMapUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\TileMapUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\08. TileMapUI</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystemUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\ParticleSystemUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\07. ParticleSystemUI</Filter>
     </ClInclude>
     <ClInclude Include="Animator2DUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\Animator2DUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\05. Animator2DUI</Filter>
     </ClInclude>
     <ClInclude Include="CameraUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\CameraUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\03. CameraUI</Filter>
     </ClInclude>
     <ClInclude Include="Collider2DUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\Collider2DUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\02. Collider2DUI</Filter>
     </ClInclude>
     <ClInclude Include="Light2DUI.h">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\Light2DUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\04. Light2DUI</Filter>
     </ClInclude>
     <ClInclude Include="ListUI.h">
       <Filter>02. EditorUI\04. List</Filter>
@@ -225,31 +225,31 @@
       <Filter>02. EditorUI\01. Inspector</Filter>
     </ClCompile>
     <ClCompile Include="TransformUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\TransformUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\01. TransformUI</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\MeshRenderUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\06. MeshRenderUI</Filter>
     </ClCompile>
     <ClCompile Include="ComponentUI.cpp">
       <Filter>02. EditorUI\01. Inspector\ComponentUI</Filter>
     </ClCompile>
     <ClCompile Include="TileMapUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\TileMapUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\08. TileMapUI</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystemUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\ParticleSystemUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\07. ParticleSystemUI</Filter>
     </ClCompile>
     <ClCompile Include="Animator2DUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\Animator2DUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\05. Animator2DUI</Filter>
     </ClCompile>
     <ClCompile Include="CameraUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\CameraUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\03. CameraUI</Filter>
     </ClCompile>
     <ClCompile Include="Collider2DUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\Collider2DUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\02. Collider2DUI</Filter>
     </ClCompile>
     <ClCompile Include="Light2DUI.cpp">
-      <Filter>02. EditorUI\01. Inspector\ComponentUI\Light2DUI</Filter>
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\04. Light2DUI</Filter>
     </ClCompile>
     <ClCompile Include="ListUI.cpp">
       <Filter>02. EditorUI\04. List</Filter>

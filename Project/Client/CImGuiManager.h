@@ -2,11 +2,11 @@
 
 typedef void (*UI_CALLBACK)(void);
 
+// Editor UI 의 멤버함수이면서, 반환 타입은 UINT, 인자는 3가지 종류
 class EditorUI;
 typedef UINT(EditorUI::* UI_DELEGATE)(void);
 typedef UINT(EditorUI::* UI_DELEGATE1)(DWORD_PTR);
 typedef UINT(EditorUI::* UI_DELEGATE2)(DWORD_PTR, DWORD_PTR);
-
 
 
 class CImGuiManager : public CSingleton<CImGuiManager>

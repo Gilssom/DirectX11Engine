@@ -11,6 +11,7 @@ CTimeManager::CTimeManager()
 	, m_llPrevCount{}
 	, m_DT(0.f)
 	, m_Time(0.f)
+	, m_EngineTime(0.f)
 	, m_AccTime(0.f)
 	, m_FrameCount(0)
 {
@@ -67,8 +68,8 @@ void CTimeManager::Tick()
 	}
 
 	// Global Time
-	g_GlobalData.DeltaTime = DT;
-	g_GlobalData.Time += DT;
+	g_GlobalData.DeltaTime = m_DT;
+	g_GlobalData.Time += m_DT;
 
 	g_GlobalData.DeltaTimeEngine = m_EngineDT;
 	g_GlobalData.TimeEngine = m_EngineTime;

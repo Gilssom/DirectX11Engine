@@ -17,6 +17,7 @@ public:
 
 public:
 	void SetTargetObject(CGameObject* target);
+	CGameObject* GetTargetObject() { return m_TargetObject; }
 
 private:
 	void CreateComponentUI();

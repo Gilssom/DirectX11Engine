@@ -36,7 +36,7 @@ void CTestLevel::CreateTestLevel()
 
 	// Camera
 	CGameObject* pCamObject = new CGameObject;
-	pCamObject->SetName(L"Camera");
+	pCamObject->SetName(L"Main Camera");
 	pCamObject->AddComponent(new CTransform);
 	pCamObject->AddComponent(new CCamera);
 	pCamObject->AddComponent(new CCameraMoveScript);
@@ -222,7 +222,7 @@ void CTestLevel::CreateTestLevel()
 	//m_CurLevel->Init();
 
 	// Level Change System 을 이용해서 Level 을 전달해줄 것 (Task Manager)
-	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	ChangeLevel(m_CurLevel, LEVEL_STATE::PLAY);
 }
 
 void CTestLevel::CreatePrefab()

@@ -15,6 +15,9 @@ void DrawDebugCircle(Vec3 worldPos, float radius, Vec4 vColor, float duration);
 
 void DrawDebugLine();
 
+string ToString(const wstring& str);
+wstring ToWString(const string& str);
+
 void SaveWString(const wstring& str, FILE* file);
 void LoadWString(wstring& str, FILE* file);
 

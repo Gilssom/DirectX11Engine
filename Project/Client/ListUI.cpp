@@ -37,6 +37,11 @@ void ListUI::Render_Tick()
                 // 여러 종류의 기능을 대응하기 위한 함수를 설계해야한다. (CallBack || Delegate - 함수 포인터 Type)
                 if (m_CallBack)
                     m_CallBack();
+
+                if(m_Inst && m_Delegate)
+                    (m_Inst->*m_Delegate)((DWORD_PTR)&m_vecList[m_SelectedIdx]);
+
+                SetActive(false);
             }
         }
 
@@ -48,4 +53,11 @@ void ListUI::Deactivate()
 {
     m_vecList.clear();
     m_SelectedIdx = -1;
+
+    m_CallBack = nullptr;
+
+    m_Inst = nullptr;
+    m_Delegate = nullptr;
+
+    SetModal(false);
 }

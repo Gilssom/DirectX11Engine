@@ -6,26 +6,26 @@ class CCamera : public CComponent
 private:
 	PROJ_TYPE	m_ProjType;
 
-	int m_CamPriority;		// Render Manager 에 등록될때 카메라의 우선순위 ( 0 : Main Camera , -1 : 미등록 카메라, 0 보다 크다 : Sub Camera )
+	int			m_CamPriority;	// Render Manager 에 등록될때 카메라의 우선순위 ( 0 : Main Camera , -1 : 미등록 카메라, 0 보다 크다 : Sub Camera )
 
-	float m_FOV;			// Field of View (카메라 시야각)
-	float m_Far;			// 카메라가 볼 수 있는 최대 거리
+	float		m_FOV;			// Field of View (카메라 시야각)
+	float		m_Far;			// 카메라가 볼 수 있는 최대 거리
 
-	float m_Width;			// 시야 가로 길이
-	float m_AspectRatio;	// 종횡비
+	float		m_Width;		// 시야 가로 길이
+	float		m_AspectRatio;	// 종횡비
 
-	float m_Scale;			// 직교투영 배율
+	float		m_Scale;		// 직교투영 배율
 
 	// View Space 의 특징
 	// 1. Camera 가 원점이다
 	// 2. Camera 는 Z 축을 바라보고 있다.
-	Matrix m_matView;
-	Matrix m_matProj; // 투영
+	Matrix		m_matView;
+	Matrix		m_matProj;		// 투영
 
 	// Check 한 Layer 만 볼 수 있게 (필터 처리)
 	// 오브젝츠 계층 관계에서 부모 Layer 를 본다고 해도
 	// 자식 오브젝트는 Layer 가 다를 수 있다.
-	UINT	m_LayerCheck;
+	UINT		m_LayerCheck;
 
 	vector<CGameObject*>	m_vecOpaque;
 	vector<CGameObject*>	m_vecMasked;

@@ -4,6 +4,7 @@
 class CameraUI : public ComponentUI
 {
 private:
+	int		m_SelectedProjType;
 
 public:
 	virtual void Render_Tick() override;

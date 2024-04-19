@@ -16,6 +16,7 @@ private:
 
 	bool				m_Active;		// 활성화 - 비활성화 여부
 	bool				m_Seperate;		// 구분선 옵션
+	bool				m_Modal;
 
 public:
 	void SetName(const string& name) { m_Name = name; }
@@ -25,6 +26,7 @@ public:
 	void SetSize(ImVec2 size) { m_vChildSize = size; }
 	void SetSeperate(bool seperate) { m_Seperate = seperate; }
 	bool SetActive(bool active);
+	void SetModal(bool modal) { m_Modal = modal; }
 
 	EditorUI* GetParentUI() { return m_ParentUI; }
 	const vector<EditorUI*> GetChildUI() { return m_vecChildUI; }

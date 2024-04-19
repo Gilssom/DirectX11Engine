@@ -7,6 +7,7 @@ EditorUI::EditorUI(const string& name, const  string& id)
 	, m_ParentUI(nullptr)
 	, m_Active(true)
 	, m_Seperate(false)
+	, m_Modal(false)
 {
 
 }
@@ -58,18 +59,46 @@ void EditorUI::Tick()
 
 		// 새로 생긴 x 버튼을 누르면 *bool 을 false 로 변경해줌.
 		bool bActive = m_Active;
-		ImGui::Begin(fullname.c_str(), &bActive);
-		SetActive(bActive);
 
-		Render_Tick();
-
-		// 자식 UI 의 Tick 을 돌려준다.
-		for (size_t i = 0; i < m_vecChildUI.size(); i++)
+		// Modal Less
+		if (!m_Modal)
 		{
-			m_vecChildUI[i]->Tick();
-		}
+			ImGui::Begin(fullname.c_str(), &bActive);
+			SetActive(bActive);
 
-		ImGui::End();
+			Render_Tick();
+
+			// 자식 UI 의 Tick 을 돌려준다.
+			for (size_t i = 0; i < m_vecChildUI.size(); i++)
+			{
+				m_vecChildUI[i]->Tick();
+			}
+
+			ImGui::End();
+		}
+		// Modal Use
+		else
+		{
+			ImGui::OpenPopup(fullname.c_str());
+			if (ImGui::BeginPopupModal(fullname.c_str(), &bActive))
+			{
+				SetActive(bActive);
+
+				Render_Tick();
+
+				// 자식 UI 의 Tick 을 돌려준다.
+				for (size_t i = 0; i < m_vecChildUI.size(); i++)
+				{
+					m_vecChildUI[i]->Tick();
+				}
+
+				ImGui::EndPopup();
+			}
+			else
+			{
+				SetActive(bActive);
+			}
+		}
 	}
 	// 자신이 부모가 있는 "자식 UI" 라면
 	else

@@ -99,6 +99,16 @@ void DrawDebugCircle(Vec3 worldPos, float radius, Vec4 vColor, float duration)
 	CDbgRenderManager::GetInst()->AddDebugShapeInfo(info);
 }
 
+string ToString(const wstring& str)
+{
+	return string(str.begin(), str.end());
+}
+
+wstring ToWString(const string& str)
+{
+	return wstring(str.begin(), str.end());
+}
+
 void SaveWString(const wstring& str, FILE* file)
 {
 	size_t len = str.length();
