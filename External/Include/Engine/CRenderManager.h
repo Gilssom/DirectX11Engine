@@ -20,10 +20,8 @@ private:
 	vector<CCamera*>	m_vecCam;
 	CCamera*			m_EditorCam;
 
-
 	// 멤버 함수 포인터
 	void(CRenderManager::*Render_Func)(void);
-
 
 	vector<CLight2D*>	m_vecLight2D;		// 매 프레임마다 등록해야함 ( = Layer )
 	CStructuredBuffer*	m_Light2DBuffer;	// 구조화 버퍼
@@ -34,6 +32,8 @@ private:
 public:
 	void RegisterCamera(CCamera* camera, int priority);
 	void RegisterEditorCamera(CCamera* editorCam) { m_EditorCam = editorCam; }
+
+	vector<CCamera*>& GetRegisteredCamera() { return m_vecCam; }
 
 	int RegisterLight2D(CLight2D* light2D) 
 	{ 

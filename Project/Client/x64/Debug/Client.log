@@ -1,21 +1,7 @@
-﻿  CEditorCameraScript.cpp
-  CEditorManager.cpp
-  CGameObjectEx.cpp
-  CTestLevel.cpp
-  CameraUI.cpp
-  Inspector.cpp
-  코드를 생성하고 있습니다...
-  LINK : C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\OutputFile\bin\Client.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
-DirectXTex_debug.lib(DirectXTexImage.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexImage.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexDDS.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexDDS.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexTGA.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexTGA.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexWIC.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexWIC.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexD3D11.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexD3D11.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexUtil.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexUtil.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexConvert.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexConvert.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexCompress.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexCompress.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(DirectXTexMipMaps.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(DirectXTexMipMaps.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(BC.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(BC.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(BC4BC5.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(BC4BC5.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
-DirectXTex_debug.lib(BC6HBC7.obj) : warning LNK4099: '' PDB를 'DirectXTex_debug.lib(BC6HBC7.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+﻿  CameraUI.cpp
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\CameraUI.cpp(69,32): warning C4477: 'sprintf_s' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'size_t'입니다.
+  (소스 파일 '/CameraUI.cpp'을(를) 컴파일하는 중)
+  C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\CameraUI.cpp(69,32):
+  서식 문자열에서 '%zd'을(를) 사용하는 것이 좋습니다.
+  
   Client.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\OutputFile\bin\Client.exe

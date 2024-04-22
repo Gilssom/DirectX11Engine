@@ -25,16 +25,16 @@ void TransformUI::Render_Tick()
 	Vec3 vRotation = GetTarget()->Transform()->GetRelativeRotation();
 
 	ImGui::Text("Position  "); ImGui::SameLine();
-	if (ImGui::DragFloat3("##Position", vPos))
+	if (ImGui::DragFloat3("##Position", vPos, 0.1f))
 		GetTarget()->Transform()->SetRelativePos(vPos);
 
 	ImGui::Text("Scale     "); ImGui::SameLine();
-	if (ImGui::DragFloat3("##Scale", vScale))
+	if (ImGui::DragFloat3("##Scale", vScale, 0.1f))
 		GetTarget()->Transform()->SetRelativeScale(vScale);
 
 	ImGui::Text("Rotation  "); ImGui::SameLine();
 	vRotation = (vRotation / XM_PI) * 180.f;
-	if (ImGui::DragFloat3("##Rotation", vRotation))
+	if (ImGui::DragFloat3("##Rotation", vRotation, 0.1f))
 	{
 		vRotation = (vRotation / 180.f) * XM_PI;
 		GetTarget()->Transform()->SetRelativeRotation(vRotation);

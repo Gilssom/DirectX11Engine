@@ -10,6 +10,8 @@
 #include "CCamera.h"
 #include "CLight2D.h"
 
+#include "CLevelManager.h"
+
 CRenderManager::CRenderManager()
 	 : m_EditorCam(nullptr)
 	 , m_Light2DBuffer(nullptr)
@@ -45,6 +47,10 @@ void CRenderManager::Tick()
 
 void CRenderManager::Render()
 {
+	// Level 이 존재하지 않으면 Rendering X
+	if (!CLevelManager::GetInst()->GetCurrentLevel())
+		return;
+
 	// Swap Chain 의 Back Buffer 를 Render Target 으로 재지정
 	Ptr<CTexture> pRTTex = CAssetManager::GetInst()->FindAsset<CTexture>(L"RenderTargetTex");
 	Ptr<CTexture> pDSTex = CAssetManager::GetInst()->FindAsset<CTexture>(L"DepthStencilTex");
@@ -69,6 +75,9 @@ void CRenderManager::Render_Play()
 	// Camera Draw in Render Target
 	for (size_t i = 0; i < m_vecCam.size(); i++)
 	{
+		if (m_vecCam[i] == nullptr)
+			continue;
+
 		m_vecCam[i]->Render();
 	}
 }
@@ -123,25 +132,15 @@ void CRenderManager::DataClear()
 
 void CRenderManager::RegisterCamera(CCamera* newCamera, int priority)
 {
-	// 이미 등록되어 있는 Camera 인지 확인
-	for (size_t i = 0; i < m_vecCam.size(); i++)
-	{
-		if (m_vecCam[i] == newCamera)
-		{
-			// 이미 등록되어 있는데 같은 우선순위가 들어오면 return
-			if (priority == i)
-				return;
-			// 이미 등록되어 있는데 우선순위 변경이 요청들어오면 이전 Index 초기화
-			else
-				m_vecCam[i] = nullptr;
-		}
-	}
-
 	// 카메라 등록 | Vector Size 는 필요에 따라 계속 늘리기
 	if (m_vecCam.size() <= priority)
 	{
 		m_vecCam.resize(priority + 1);
 	}
+
+	// 이미 해당 자리에 다른 Camera 가 있고, 해당 Camera 와 자기와 다르다면 assert
+	if (m_vecCam[priority] && m_vecCam[priority] != newCamera)
+		assert(nullptr);
 
 	m_vecCam[priority] = newCamera;
 }
