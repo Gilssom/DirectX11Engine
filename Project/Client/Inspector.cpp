@@ -37,7 +37,7 @@ void Inspector::Render_Tick()
 
 		if (pLevel != nullptr)
 		{
-			CGameObject* pTarget = pLevel->FindObjectByName(L"Main Camera");
+			CGameObject* pTarget = pLevel->FindObjectByName(L"Directinal Light");
 			SetTargetObject(pTarget);
 		}
 

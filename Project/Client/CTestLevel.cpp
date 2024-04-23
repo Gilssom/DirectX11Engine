@@ -74,9 +74,9 @@ void CTestLevel::CreateTestLevel()
 	m_CurLevel->AddObject(0, pLightObject);
 
 	// Clone Test
-	pLightObject = pLightObject->Clone();
-	pLightObject->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
-	m_CurLevel->AddObject(0, pLightObject);
+	//pLightObject = pLightObject->Clone();
+	//pLightObject->Transform()->SetRelativePos(Vec3(300.f, 0.f, 0.f));
+	//m_CurLevel->AddObject(0, pLightObject);
 
 
 	// TileMap Object

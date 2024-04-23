@@ -71,6 +71,9 @@
     <Filter Include="02. EditorUI\01. Inspector\ComponentUI\04. Light2DUI">
       <UniqueIdentifier>{d4c626cd-430b-4431-a24b-11fc4b5b7589}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. EditorUI\05. Tree">
+      <UniqueIdentifier>{20a0c0d1-55c5-4149-89e2-45b3d2dfda99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -163,6 +166,12 @@
     <ClInclude Include="ListUI.h">
       <Filter>02. EditorUI\04. List</Filter>
     </ClInclude>
+    <ClInclude Include="TreeUI.h">
+      <Filter>02. EditorUI\05. Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentUI.h">
+      <Filter>02. EditorUI\02. Content</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -253,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="ListUI.cpp">
       <Filter>02. EditorUI\04. List</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeUI.cpp">
+      <Filter>02. EditorUI\05. Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentUI.cpp">
+      <Filter>02. EditorUI\02. Content</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -152,6 +152,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="Collider2DUI.h" />
     <ClInclude Include="ComponentUI.h" />
+    <ClInclude Include="ContentUI.h" />
     <ClInclude Include="CTestLevel.h" />
     <ClInclude Include="EditorUI.h" />
     <ClInclude Include="framework.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TileMapUI.h" />
     <ClInclude Include="TransformUI.h" />
+    <ClInclude Include="TreeUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator2DUI.cpp" />
@@ -183,6 +185,7 @@
     <ClCompile Include="CImGuiManager.cpp" />
     <ClCompile Include="Collider2DUI.cpp" />
     <ClCompile Include="ComponentUI.cpp" />
+    <ClCompile Include="ContentUI.cpp" />
     <ClCompile Include="EditorUI.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
@@ -204,6 +207,7 @@
     </ClCompile>
     <ClCompile Include="TileMapUI.cpp" />
     <ClCompile Include="TransformUI.cpp" />
+    <ClCompile Include="TreeUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

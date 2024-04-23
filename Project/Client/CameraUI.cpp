@@ -164,5 +164,5 @@ void CameraUI::Render_Tick()
     ImGui::EndDisabled();
 
 	// Camera Layer Check
-    //ImGui::Text("Layer Check"); ImGui::SameLine(120);
+    ImGui::Text("Layer Check"); ImGui::SameLine(120);
 }
