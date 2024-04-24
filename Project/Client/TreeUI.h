@@ -1,9 +1,12 @@
 #pragma once
 #include "EditorUI.h"
 
+class TreeUI;
+
 class TreeNode
 {
 private:
+	TreeUI*				m_Owner;
 	TreeNode*			m_ParentNode;
 	vector<TreeNode*>	m_vecChildNode;
 	string				m_Name;
@@ -33,34 +36,42 @@ public:
 	TreeNode()
 		: m_ParentNode(nullptr)
 		, m_Data(0)
+		, m_bFrame(false)
 	{}
 	TreeNode(const string& name, DWORD_PTR data)
 		: m_ParentNode(nullptr)
 		, m_Name(name)
 		, m_Data(data)
+		, m_bFrame(false)
 	{}
 	~TreeNode();
+
+	friend class TreeUI;
 };
 
 // 동적인 Data 를 Tree 구조로 나타내기 위한 구조 설계
 class TreeUI : public EditorUI
 {
 private:
-	TreeNode*	m_RootNode;		// 최상위 Root Node
-	bool		m_bShowRoot;	// Root Node 를 보여줄지 안보여줄지
+	TreeNode*	m_RootNode;			// 최상위 Root Node
+	bool		m_bShowRoot;		// Root Node 를 보여줄지 안보여줄지
+	bool		m_bShowFileName;	// File 이름만 보여줄지 안보여줄지
 
 
 public:
 	void ShowRoot(bool show) { m_bShowRoot = show; }
+	void ShowFileNameOnly(bool showFileName) { m_bShowFileName = showFileName; }
 	TreeNode* AddTreeNode(TreeNode* parent, const string& nodeName, DWORD_PTR dwData = 0);
-
+	void Clear() { if (m_RootNode != nullptr) { delete m_RootNode; m_RootNode = nullptr; }}
 
 public:
 	virtual void Render_Tick() override;
 
 
 public:
-	TreeUI();
+	TreeUI(const string& name);
 	~TreeUI();
+
+	friend class TreeNode;
 };
 

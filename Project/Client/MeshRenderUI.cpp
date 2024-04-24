@@ -58,7 +58,7 @@ void MeshRenderUI::Render_Tick()
 		strMeshKey = string(pMesh->GetKey().begin(), pMesh->GetKey().end());
 	}
 
-	ImGui::Text("Mesh      "); ImGui::SameLine();
+	ImGui::Text("Mesh      "); SAME;
 	ImGui::InputText("##MeshName", (char*)strMeshKey.c_str(), strMeshKey.capacity(), ImGuiInputTextFlags_ReadOnly); ImGui::SameLine();
 	if (ImGui::Button("##MeshButton", ImVec2(18, 18)))
 	{
@@ -84,7 +84,7 @@ void MeshRenderUI::Render_Tick()
 		strMaterialKey = string(pMaterial->GetKey().begin(), pMaterial->GetKey().end());
 	}
 
-	ImGui::Text("Material  "); ImGui::SameLine();
+	ImGui::Text("Material  "); SAME;
 	ImGui::InputText("##MaterialName", (char*)strMaterialKey.c_str(), strMaterialKey.capacity(), ImGuiInputTextFlags_ReadOnly); ImGui::SameLine();
 	if (ImGui::Button("##MaterialButton", ImVec2(18, 18)))
 	{

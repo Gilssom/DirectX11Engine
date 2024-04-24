@@ -56,7 +56,7 @@ void CTestLevel::CreateTestLevel()
 
 	// Light Object
 	CGameObject* pLightObject = new CGameObject;
-	pLightObject->SetName(L"Directinal Light");
+	pLightObject->SetName(L"Directional Light");
 	pLightObject->AddComponent(new CTransform);
 	pLightObject->AddComponent(new CLight2D);
 
@@ -164,6 +164,7 @@ void CTestLevel::CreateTestLevel()
 
 	// Back Ground Object
 	CGameObject* pBackGround = new CGameObject;
+	pBackGround->SetName(L"Back Ground");
 	pBackGround->AddComponent(new CTransform);
 	pBackGround->AddComponent(new CMeshRender);
 	pBackGround->AddComponent(new CBackGroundScript);
@@ -199,7 +200,7 @@ void CTestLevel::CreateTestLevel()
 
 	// PostProcee Filter Ãß°¡
 	CGameObject* pFilterObject = new CGameObject;
-
+	pFilterObject->SetName(L"Post Process");
 	pFilterObject->AddComponent(new CTransform);
 	pFilterObject->AddComponent(new CMeshRender);
 

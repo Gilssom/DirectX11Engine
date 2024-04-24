@@ -31,7 +31,7 @@ void CameraUI::Render_Tick()
     items[0] = "Orthographic";
     items[1] = "Perspective";
 
-    ImGui::Text("Projection Type"); ImGui::SameLine(150);
+    ImGui::Text("Projection Type"); SAME;
     if (ImGui::BeginCombo("##CameraProjType", items[(UINT)ProjType], 0))
     {
         for (int i = 0; i < 2; i++)
@@ -51,7 +51,7 @@ void CameraUI::Render_Tick()
     // Render Manager 로 부터 카메라 등록 최대 Capacity 를 알아낸다.
     vector<CCamera*>& vecCam = CRenderManager::GetInst()->GetRegisteredCamera();
     
-    ImGui::Text("Priority"); ImGui::SameLine(150);
+    ImGui::Text("Priority"); SAME;
     int iPriority = pCam->GetCameraPriority();
     if (ImGui::InputInt("##CameraPriority", &iPriority))
     {
@@ -81,7 +81,7 @@ void CameraUI::Render_Tick()
     strCurCamName = buffer;
     strCurCamName += ToString(pCam->GetOwner()->GetName());
 
-    ImGui::Text(""); ImGui::SameLine(150);
+    ImGui::Text(""); SAME;
     if (ImGui::BeginCombo("##RegisteredCamera", strCurCamName.c_str(), 0))
     {
         for (size_t i = 0; i < vecCamName.size(); i++)
@@ -100,7 +100,7 @@ void CameraUI::Render_Tick()
 	// Camera FOV (시야각도_원근 투영에서만)
     float FOV = pCam->GetFOV();
     FOV = (FOV * 180.f) / XM_PI;
-    ImGui::Text("FOV"); ImGui::SameLine(150);
+    ImGui::Text("FOV"); SAME;
 
     ImGui::BeginDisabled(IsOrthographic);
 
@@ -115,7 +115,7 @@ void CameraUI::Render_Tick()
 
 	// Camera Far
     float Far = pCam->GetFar();
-    ImGui::Text("Far"); ImGui::SameLine(150);
+    ImGui::Text("Far"); SAME;
 
     if (ImGui::DragFloat("##CameraFar", &Far, 1.f))
     {
@@ -126,7 +126,7 @@ void CameraUI::Render_Tick()
     }
 
 	// Camera Width
-    ImGui::Text("Width"); ImGui::SameLine(150);
+    ImGui::Text("Width"); SAME;
     float Width = pCam->GetWidth();
     if (ImGui::DragFloat("##CameraWidth", &Width, 1.f))
     {
@@ -137,7 +137,7 @@ void CameraUI::Render_Tick()
     }
     
 	// Camera AspectRatio
-    ImGui::Text("AspectRatio"); ImGui::SameLine(150);
+    ImGui::Text("AspectRatio"); SAME;
     float AspectRatio = pCam->GetAspectRatio();
     if (ImGui::DragFloat("##CameraAspectRatio", &AspectRatio, 0.1f))
     {
@@ -148,7 +148,7 @@ void CameraUI::Render_Tick()
     }
 
 	// Camera Scale(Orthographic - 투영 범위_직교 투영에서만)
-    ImGui::Text("Projection Scale"); ImGui::SameLine(150);
+    ImGui::Text("Projection Scale"); SAME;
     float Scale = pCam->GetScale();
     
     ImGui::BeginDisabled(IsPerspective);
@@ -164,5 +164,5 @@ void CameraUI::Render_Tick()
     ImGui::EndDisabled();
 
 	// Camera Layer Check
-    ImGui::Text("Layer Check"); ImGui::SameLine(120);
+    ImGui::Text("Layer Check"); SAME;
 }

@@ -11,7 +11,8 @@ CEntity::CEntity()
 }
 
 CEntity::CEntity(const CEntity& _Origin)
-	: m_ID(g_NextID++)
+	: m_Name(m_Name)
+	, m_ID(g_NextID++)
 {
 
 }

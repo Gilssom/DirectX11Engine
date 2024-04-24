@@ -14,8 +14,12 @@ class CTaskManager : public CSingleton<CTaskManager>
 
 private:
 	vector<tTask>		 m_vecTasks;
-
 	vector<CGameObject*> m_vecDead;
+
+	bool				 m_ObjectEvent;
+
+public:
+	bool IsObjectsChanged() { return m_ObjectEvent; }
 
 public:
 	void Tick();
@@ -24,6 +28,7 @@ public:
 private:
 	void ClearDeadObject();
 	void ExecuteTask(tTask& task);
+	void ClearEvent() { m_ObjectEvent = false; }
 
 };
 

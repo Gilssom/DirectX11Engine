@@ -6,7 +6,7 @@
 TransformUI::TransformUI()
 	: ComponentUI("Transform", "##TransformUI", COMPONENT_TYPE::TRANSFORM)
 {
-	//SetSize(ImVec2(0, 100));
+	SetSize(ImVec2(0, 150));
 }
 
 TransformUI::~TransformUI()
@@ -24,15 +24,15 @@ void TransformUI::Render_Tick()
 	Vec3 vScale = GetTarget()->Transform()->GetRelativeScale();
 	Vec3 vRotation = GetTarget()->Transform()->GetRelativeRotation();
 
-	ImGui::Text("Position  "); ImGui::SameLine();
+	ImGui::Text("Position"); SAME;
 	if (ImGui::DragFloat3("##Position", vPos, 0.1f))
 		GetTarget()->Transform()->SetRelativePos(vPos);
 
-	ImGui::Text("Scale     "); ImGui::SameLine();
+	ImGui::Text("Scale"); SAME;
 	if (ImGui::DragFloat3("##Scale", vScale, 0.1f))
 		GetTarget()->Transform()->SetRelativeScale(vScale);
 
-	ImGui::Text("Rotation  "); ImGui::SameLine();
+	ImGui::Text("Rotation"); SAME;
 	vRotation = (vRotation / XM_PI) * 180.f;
 	if (ImGui::DragFloat3("##Rotation", vRotation, 0.1f))
 	{
@@ -41,7 +41,7 @@ void TransformUI::Render_Tick()
 	}
 
 	bool Absolute = GetTarget()->Transform()->IsAbsolute();
-	ImGui::Text("Is Absolute   "); ImGui::SameLine();
+	ImGui::Text("Is Absolute"); SAME;
 	if (ImGui::Checkbox("##Absolute", &Absolute))
 	{
 		GetTarget()->Transform()->SetAbsolute(Absolute);

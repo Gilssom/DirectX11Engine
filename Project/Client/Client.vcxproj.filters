@@ -172,6 +172,9 @@
     <ClInclude Include="ContentUI.h">
       <Filter>02. EditorUI\02. Content</Filter>
     </ClInclude>
+    <ClInclude Include="OutlinerUI.h">
+      <Filter>02. EditorUI\03. Outliner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -268,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="ContentUI.cpp">
       <Filter>02. EditorUI\02. Content</Filter>
+    </ClCompile>
+    <ClCompile Include="OutlinerUI.cpp">
+      <Filter>02. EditorUI\03. Outliner</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

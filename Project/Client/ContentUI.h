@@ -10,6 +10,10 @@ private:
 
 
 public:
+	void RenewContent();
+
+
+public:
 	virtual void Render_Tick() override;
 
 

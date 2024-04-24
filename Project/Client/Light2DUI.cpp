@@ -21,7 +21,7 @@ void Light2DUI::Render_Tick()
 	const tLightInfo& Info = pLight2D->GetLightInfo();
 
 	// Light Type : Directional , Point , Spot
-	ImGui::Text("Light Type"); ImGui::SameLine(150);
+	ImGui::Text("Light Type"); SAME;
 	const char* arrLightType[] = { "Directional", "Point", "Spot" };
 
 	if (ImGui::BeginCombo("##Light2DType", arrLightType[Info.LightType], 0))
@@ -39,11 +39,11 @@ void Light2DUI::Render_Tick()
 	}
 
 	// Light Color
-	ImGui::Text("Light Color"); ImGui::SameLine(150);
+	ImGui::Text("Light Color"); SAME;
 	ImGui::ColorEdit3("##Light2D Color", (float*)&Info.Light.vDiffuse, 0);
 
 	// Light Ambient
-	ImGui::Text("Light Ambient"); ImGui::SameLine(150);
+	ImGui::Text("Light Ambient"); SAME;
 	ImGui::ColorEdit3("##Light2D Ambient", (float*)&Info.Light.vAmbient, 0);
 
 	// Range : Point or Spot Light
@@ -51,7 +51,7 @@ void Light2DUI::Render_Tick()
 	float fRange = Info.Range;
 	ImGui::BeginDisabled(IsDirLight);
 
-	ImGui::Text("Light Range"); ImGui::SameLine(150);
+	ImGui::Text("Light Range"); SAME;
 	if (ImGui::DragFloat("##Light Range", &fRange))
 	{
 		pLight2D->SetRange(fRange);
@@ -64,7 +64,7 @@ void Light2DUI::Render_Tick()
 	float fAngle = Info.Angle;
 	ImGui::BeginDisabled(!IsSpotLight);
 
-	ImGui::Text("Spot Light Angle"); ImGui::SameLine(150);
+	ImGui::Text("Spot Light Angle"); SAME;
 	if (ImGui::DragFloat("##Spot Light Angle", &fAngle))
 	{
 		pLight2D->SetRange(fAngle);

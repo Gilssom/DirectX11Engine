@@ -38,6 +38,12 @@ using std::make_pair;
 using std::string;
 using std::wstring;
 
+
+// File System
+#include <filesystem>
+using namespace std::filesystem;
+
+
 #include "define.h"
 #include "enum.h"
 #include "struct.h"

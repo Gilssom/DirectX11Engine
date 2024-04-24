@@ -30,15 +30,15 @@ void Collider2DUI::Render_Tick()
 		ScaleDragSpeed = 0.01f;
 	}
 
-	ImGui::Text("Offset Position"); ImGui::SameLine();
+	ImGui::Text("Offset Position"); SAME;
 	if (ImGui::DragFloat3("##Collider2DOffsetPos", vOffsetPos, ScaleDragSpeed))
 		pCollider->SetOffset(vOffsetPos);
 
-	ImGui::Text("Scale          "); ImGui::SameLine();
+	ImGui::Text("Scale          "); SAME;
 	if (ImGui::DragFloat3("##Collider2DScale", vScale, ScaleDragSpeed))
 		pCollider->SetScale(vScale);
 
-	ImGui::Text("Is Absolute    "); ImGui::SameLine();
+	ImGui::Text("Is Absolute    "); SAME;
 	if (ImGui::Checkbox("##Collider2DAbsolute", &bAbsolute))
 	{
 		pCollider->SetAbsolute(bAbsolute);

@@ -9,6 +9,7 @@
 #include "CCollider2D.h"
 
 CTaskManager::CTaskManager()
+	: m_ObjectEvent(false)
 {
 
 }
@@ -21,6 +22,8 @@ CTaskManager::~CTaskManager()
 void CTaskManager::Tick()
 {
 	ClearDeadObject();
+
+	ClearEvent();
 
 	for (size_t i = 0; i < m_vecTasks.size(); i++)
 	{
@@ -59,6 +62,8 @@ void CTaskManager::ExecuteTask(tTask& task)
 			{
 				pSpawnObj->Begin();
 			}
+
+			m_ObjectEvent = true;
 		}
 		break;
 
@@ -72,6 +77,8 @@ void CTaskManager::ExecuteTask(tTask& task)
 				pObject->m_Dead = true;
 				m_vecDead.push_back(pObject);
 			}
+
+			m_ObjectEvent = true;
 		}
 		break;
 
@@ -101,6 +108,8 @@ void CTaskManager::ExecuteTask(tTask& task)
 
 			CLevelManager::GetInst()->ChangeLevel(pNextLevel);
 			pNextLevel->ChangeState(NextLevelState);
+
+			m_ObjectEvent = true;
 		}
 		break;
 	}

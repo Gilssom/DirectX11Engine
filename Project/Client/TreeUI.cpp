@@ -11,15 +11,32 @@ TreeNode::~TreeNode()
 
 void TreeNode::Render_Tick()
 {
+	string name = m_Name;
+
 	UINT iFlag = 0;
 
+	// Frame 설정
 	if (m_bFrame)
 		iFlag |= ImGuiTreeNodeFlags_Framed;
 
+	// File Name 설정
+	if (m_Owner->m_bShowFileName)
+	{
+		char buffer[256] = {};
+		_splitpath_s(name.c_str(), 0, 0, 0, 0, buffer, 256, 0, 0);
+		name = buffer;
+	}
+
+	// Arrow 설정
 	if (m_vecChildNode.empty())
+	{
 		iFlag |= ImGuiTreeNodeFlags_Leaf;
 
-	if (ImGui::TreeNodeEx(m_Name.c_str(), iFlag))
+		if(m_bFrame)
+			name = "   " + name;
+	}
+
+	if (ImGui::TreeNodeEx(name.c_str(), iFlag))
 	{
 		for (size_t i = 0; i < m_vecChildNode.size(); i++)
 		{
@@ -36,10 +53,11 @@ void TreeNode::Render_Tick()
 // ===========
 //   Tree UI
 // ===========
-TreeUI::TreeUI()
-	: EditorUI("", "##Tree")
+TreeUI::TreeUI(const string& name)
+	: EditorUI(name, "##Tree")
 	, m_RootNode(nullptr)
 	, m_bShowRoot(false)
+	, m_bShowFileName(false)
 {
 
 }
@@ -55,6 +73,9 @@ TreeUI::~TreeUI()
 TreeNode* TreeUI::AddTreeNode(TreeNode* parent, const string& nodeName, DWORD_PTR dwData)
 {
 	TreeNode* pNewNode = new TreeNode(nodeName, dwData);
+
+	// Node 의 Owner 가 Tree 임을 설정
+	pNewNode->m_Owner = this;
 
 	// Parent Node 를 지정하지 않으면, Root Node 로 추가하겠다는 의미
 	if (parent == nullptr)
@@ -74,6 +95,10 @@ TreeNode* TreeUI::AddTreeNode(TreeNode* parent, const string& nodeName, DWORD_PT
 
 void TreeUI::Render_Tick()
 {
+	// Tree 에 Node 가 하나도 없는 경우
+	if (m_RootNode == nullptr)
+		return;
+
 	if (m_bShowRoot)
 	{
 		m_RootNode->Render_Tick();

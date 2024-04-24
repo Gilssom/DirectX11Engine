@@ -3,6 +3,8 @@
 #include "ImGui\\\imgui.h"
 #include "CImGuiManager.h"
 
+#define SAME ImGui::SameLine(130)
+
 class EditorUI
 {
 private:

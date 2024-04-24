@@ -36,7 +36,7 @@ extern const char* ASSET_TYPE_STRING[(UINT)ASSET_TYPE::END]
 	"Mesh Data",
 	"Material",
 	"Texture",
-	"Sount",
+	"Sound",
 	"Graphics Shader",
 	"Compute Shader"
 };

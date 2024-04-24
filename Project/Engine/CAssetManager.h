@@ -15,8 +15,8 @@ private:
 
 public:
     void Init();
-
     void GetAssetNames(ASSET_TYPE type, _Out_ vector<string>& vecNames);
+    const map<wstring, Ptr<CAsset>>& GetAssets(ASSET_TYPE type) { return m_mapAsset[(UINT)type]; }
 
     // bindFlag : D3D11_BIND_FLAG
     Ptr<CTexture> CreateTexture(const wstring& strKey, UINT width, UINT height
