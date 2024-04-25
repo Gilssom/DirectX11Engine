@@ -36,7 +36,7 @@
 MeshRenderUI::MeshRenderUI()
 	: ComponentUI("MeshRender", "##MeshRenderUI", COMPONENT_TYPE::MESHRENDER)
 {
-	SetSize(ImVec2(0, 200));
+	SIZE;
 }
 
 MeshRenderUI::~MeshRenderUI()

@@ -133,6 +133,9 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*.ipch
+*.pch
+*.pdb
 
 # Chutzpah Test files
 _Chutzpah*

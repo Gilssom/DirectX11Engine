@@ -135,7 +135,7 @@ void CTestLevel::CreateTestLevel()
 
 
 	// Monster
-	/*CGameObject* pMonster = new CGameObject;
+	CGameObject* pMonster = new CGameObject;
 	pMonster->SetName(L"Monster");
 	pMonster->AddComponent(new CTransform);
 	pMonster->AddComponent(new CMeshRender);
@@ -152,12 +152,9 @@ void CTestLevel::CreateTestLevel()
 	pMonster->Collider2D()->SetOffset(Vec3(0.f, 0.f, 0.f));
 	pMonster->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
-	pMonster->GetRenderComponent()->GetMaterial()->SetTexParam(TEX_0, pTestTex);
-
-
 	// Player 와 Monster 를 부모-자식 관계로 연결
-	//pPlayer->AddChild(pMonster);
-	m_CurLevel->AddObject(1, pMonster, false);*/
+	pPlayer->AddChild(pMonster);
+	m_CurLevel->AddObject(1, pMonster, false);
 
 	//pPlayer->GetScript<CPlayerScript>()->SetTarget(pMonster);
 

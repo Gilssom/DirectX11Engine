@@ -4,7 +4,7 @@
 ParticleSystemUI::ParticleSystemUI()
 	: ComponentUI("ParticleSystem", "##ParticleSystemUI", COMPONENT_TYPE::PARTICLESYSTEM)
 {
-	SetSize(ImVec2(0, 200));
+	SIZE;
 }
 
 ParticleSystemUI::~ParticleSystemUI()

@@ -4,7 +4,7 @@
 TileMapUI::TileMapUI()
 	: ComponentUI("TileMap", "##TileMapUI", COMPONENT_TYPE::TILEMAP)
 {
-	SetSize(ImVec2(0, 200));
+	SIZE;
 }
 
 TileMapUI::~TileMapUI()
