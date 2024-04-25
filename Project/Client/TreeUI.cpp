@@ -19,6 +19,10 @@ void TreeNode::Render_Tick()
 	if (m_bFrame)
 		iFlag |= ImGuiTreeNodeFlags_Framed;
 
+	// Selected 설정
+	if (m_bSelected)
+		iFlag |= ImGuiTreeNodeFlags_Selected;
+
 	// File Name 설정
 	if (m_Owner->m_bShowFileName)
 	{
@@ -38,6 +42,15 @@ void TreeNode::Render_Tick()
 
 	if (ImGui::TreeNodeEx(name.c_str(), iFlag))
 	{
+		// 해당 Node 위에서 마우스 클릭 해제가 발생하면 해당 노드를 선택된 상태로 만든다.
+		if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+		{
+			// Frame Node 는 제외
+			if(!m_bFrame)
+				m_Owner->SetSelectedNode(this);
+		}
+
+		// 자식 Node Render
 		for (size_t i = 0; i < m_vecChildNode.size(); i++)
 		{
 			m_vecChildNode[i]->Render_Tick();
@@ -58,6 +71,7 @@ TreeUI::TreeUI(const string& name)
 	, m_RootNode(nullptr)
 	, m_bShowRoot(false)
 	, m_bShowFileName(false)
+	, m_SelectedNode(nullptr)
 {
 
 }
@@ -110,6 +124,33 @@ void TreeUI::Render_Tick()
 		for (size_t i = 0; i < vecChildNode.size(); i++)
 		{
 			vecChildNode[i]->Render_Tick();
+		}
+	}
+}
+
+void TreeUI::SetSelectedNode(TreeNode* node)
+{
+	// 이전에 선택된 Node 가 있으면 해당 Node 는 해제
+	if (m_SelectedNode)
+		m_SelectedNode->m_bSelected = false;
+
+	m_SelectedNode = node;
+
+	// 새로 선택된 Node 로 Selected 재설정
+	if (m_SelectedNode)
+	{
+		m_SelectedNode->m_bSelected = true;
+
+		// 등록되어있는 Call Back 이나,
+		if (m_SelectedCallBack)
+		{
+			m_SelectedCallBack();
+		}
+
+		// Delegate 가 있으면 호출
+		if (m_SelectedInst && m_SelectedDelegate)
+		{
+			(m_SelectedInst->*m_SelectedDelegate)((DWORD_PTR)m_SelectedNode);
 		}
 	}
 }

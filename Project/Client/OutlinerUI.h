@@ -20,7 +20,7 @@ public:
 
 private:
 	void AddGameObject(TreeNode* node, CGameObject* object);
-
+	UINT SelectGameObject(DWORD_PTR data);
 
 public:
 	OutlinerUI();

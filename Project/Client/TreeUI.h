@@ -14,6 +14,7 @@ private:
 	DWORD_PTR			m_Data;
 
 	bool				m_bFrame;
+	bool				m_bSelected;
 
 public:
 	void SetName(const string& name) { m_Name = name; }
@@ -34,15 +35,19 @@ public:
 
 public:
 	TreeNode()
-		: m_ParentNode(nullptr)
+		: m_Owner(nullptr)
+		, m_ParentNode(nullptr)
 		, m_Data(0)
 		, m_bFrame(false)
+		, m_bSelected(false)
 	{}
 	TreeNode(const string& name, DWORD_PTR data)
-		: m_ParentNode(nullptr)
+		: m_Owner(nullptr)
+		, m_ParentNode(nullptr)
 		, m_Name(name)
 		, m_Data(data)
 		, m_bFrame(false)
+		, m_bSelected(false)
 	{}
 	~TreeNode();
 
@@ -53,16 +58,32 @@ public:
 class TreeUI : public EditorUI
 {
 private:
-	TreeNode*	m_RootNode;			// 최상위 Root Node
-	bool		m_bShowRoot;		// Root Node 를 보여줄지 안보여줄지
-	bool		m_bShowFileName;	// File 이름만 보여줄지 안보여줄지
+	TreeNode*		m_RootNode;			// 최상위 Root Node
+	TreeNode*		m_SelectedNode;		// 선택된 Node
+
+	bool			m_bShowRoot;		// Root Node 를 보여줄지 안보여줄지
+	bool			m_bShowFileName;	// File 이름만 보여줄지 안보여줄지
+
+	UI_CALLBACK		m_SelectedCallBack;
+
+	EditorUI*		m_SelectedInst;
+	UI_DELEGATE1	m_SelectedDelegate;
 
 
 public:
 	void ShowRoot(bool show) { m_bShowRoot = show; }
 	void ShowFileNameOnly(bool showFileName) { m_bShowFileName = showFileName; }
 	TreeNode* AddTreeNode(TreeNode* parent, const string& nodeName, DWORD_PTR dwData = 0);
+
+	void RegisterSelectCallBack(UI_CALLBACK callBack) { m_SelectedCallBack = callBack; }
+	void RegisterSelectDelegate(EditorUI* inst, UI_DELEGATE1 func) { m_SelectedInst = inst; m_SelectedDelegate = func; }
+
 	void Clear() { if (m_RootNode != nullptr) { delete m_RootNode; m_RootNode = nullptr; }}
+
+
+private:
+	void SetSelectedNode(TreeNode* node);
+
 
 public:
 	virtual void Render_Tick() override;

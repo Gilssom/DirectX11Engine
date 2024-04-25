@@ -3,11 +3,14 @@
 
 #include <Engine\\CRenderManager.h>
 #include <Engine\\CCamera.h>
+#include <Engine\\CLevelManager.h>
+#include <Engine\\CLevel.h>
+#include <Engine\\CLayer.h>
 
 CameraUI::CameraUI()
 	: ComponentUI("Camera", "##CameraUI", COMPONENT_TYPE::CAMERA)
 {
-    SIZE;
+    SIZE_SET(250);
 }
 
 CameraUI::~CameraUI()
@@ -165,4 +168,61 @@ void CameraUI::Render_Tick()
 
 	// Camera Layer Check
     ImGui::Text("Layer Check"); SAME;
+
+    UINT LayerCheck = pCam->GetLayerCheck();
+    CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+
+    if (pCurLevel == nullptr)
+        return;
+
+    bool CurLayerCheck[MAX_LAYER] = {};
+
+    for (size_t i = 0; i < MAX_LAYER; i++)
+    {
+        if (LayerCheck & (1 << i))
+            CurLayerCheck[i] = true;
+        else
+            CurLayerCheck[i] = false;
+    }
+
+    vector<string> vecLayerName;
+
+    for (size_t i = 0; i < MAX_LAYER; i++)
+    {
+        string curLayerName = ToString(pCurLevel->GetLayer(i)->GetName());
+        string strLayerName;
+        char buffer[256] = {};
+        sprintf_s(buffer, 256, "Layer Index %d : ", i);
+        strLayerName = buffer;
+
+        if (!curLayerName.empty())
+        {
+            strLayerName += curLayerName;
+            vecLayerName.push_back(strLayerName);
+        }
+        else
+        {
+            strLayerName += "null";
+            vecLayerName.push_back(strLayerName);
+        }
+    }
+
+    if (ImGui::Button("Layer Check"))
+        ImGui::OpenPopup("Layer Check Popup");
+
+    if (ImGui::BeginPopup("Layer Check Popup"))
+    {
+        for (size_t i = 0; i < vecLayerName.size(); i++)
+        {
+            if (ImGui::MenuItem(vecLayerName[i].c_str(), "", &CurLayerCheck[i]))
+            {
+                pCam->LayerCheck(i);
+            }
+        }
+
+        ImGui::Separator();
+        ImGui::Text("Select Show Layer List");
+
+        ImGui::EndPopup();
+    }
 }

@@ -126,7 +126,7 @@ void CTestLevel::CreateTestLevel()
 	pPlayer->Animator2D()->LoadAnimation(L"Animation\\IDLE_RIGHT.anim");
 	pPlayer->Animator2D()->Play(L"IDLE_RIGHT", true);
 
-	m_CurLevel->AddObject(0, pPlayer, false);
+	m_CurLevel->AddObject(1, pPlayer, false);
 
 	// Clone Test
 	/*pPlayer = pPlayer->Clone();

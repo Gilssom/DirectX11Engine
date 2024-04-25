@@ -13,6 +13,10 @@ public:
 	void RenewContent();
 
 
+private:
+	UINT SelectAsset(DWORD_PTR data);
+
+
 public:
 	virtual void Render_Tick() override;
 

@@ -16,6 +16,10 @@ private:
 	UINT				 m_IdxCount;
 	UINT*				 m_IdxSysMem;
 
+public:
+	UINT GetVertexCount() { return m_VtxCount; }
+	UINT GetIndexCount() { return m_IdxCount; }
+
 private:
 	void Binding();
 	virtual int Load(const wstring& _FilePath) override { return S_OK; }

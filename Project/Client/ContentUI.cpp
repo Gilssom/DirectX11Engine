@@ -2,6 +2,8 @@
 #include "ContentUI.h"
 
 #include <Engine\\CAssetManager.h>
+
+#include "Inspector.h"
 #include "TreeUI.h"
 
 ContentUI::ContentUI()
@@ -17,11 +19,19 @@ ContentUI::ContentUI()
 	// Node 항목의 File Name 만 보이게 설정
 	m_Tree->ShowFileNameOnly(true);
 
+	// 항목 선택 시 동작할 CallBack or Delegate 등록
+	m_Tree->RegisterSelectDelegate(this, (UI_DELEGATE1)&ContentUI::SelectAsset);
+
 	// 현재 Asset 상태들에 따라 Data Tree 설정
 	RenewContent();
 }
 
 ContentUI::~ContentUI()
+{
+
+}
+
+void ContentUI::Render_Tick()
 {
 
 }
@@ -50,7 +60,16 @@ void ContentUI::RenewContent()
 	}
 }
 
-void ContentUI::Render_Tick()
+UINT ContentUI::SelectAsset(DWORD_PTR data)
 {
+	TreeNode* pSelectedNode = (TreeNode*)data;
 
+	pSelectedNode->GetName();
+	Ptr<CAsset> pAsset = (CAsset*)pSelectedNode->GetData();
+
+	Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
+
+	pInspector->SetTargetAsset(pAsset);
+
+	return 0;
 }

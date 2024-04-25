@@ -23,11 +23,7 @@ public:
 	void AddItem(const vector<string>& vecItem) { m_vecList.insert(m_vecList.end(), vecItem.begin(), vecItem.end()); }
 
 	void RegisterDoubleClickCallBack(UI_CALLBACK callBack) { m_CallBack = callBack; }
-	void RegisterDoubleClickDelegate(EditorUI* inst, UI_DELEGATE1 func)
-	{
-		m_Inst = inst;
-		m_Delegate = func;
-	}
+	void RegisterDoubleClickDelegate(EditorUI* inst, UI_DELEGATE1 func) { m_Inst = inst; m_Delegate = func; }
 
 public:
 	virtual void Render_Tick() override;

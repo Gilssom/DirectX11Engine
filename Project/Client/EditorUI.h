@@ -4,7 +4,9 @@
 #include "CImGuiManager.h"
 
 #define SAME ImGui::SameLine(130)
+#define SAME_SET(spacing) ImGui::SameLine(spacing)
 #define SIZE SetSize(ImVec2(0, 150))
+#define SIZE_SET(height) SetSize(ImVec2(0, height))
 
 class EditorUI
 {

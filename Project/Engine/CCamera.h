@@ -53,6 +53,7 @@ public:
 
 	void LayerCheck(int layerIdx);
 	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 모든 숫자에 1 을 넣는
+	const UINT GetLayerCheck() { return m_LayerCheck; }
 
 	void SortObject();
 
