@@ -62,6 +62,43 @@
   .\Project\Engine\tilemap.fx
   .\Project\Engine\value.fx
   10개 파일이 복사되었습니다.
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\compute.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\debug_shape.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\func.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\particle.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\particletick.fx(140,21-139): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\particletick.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\postprocess.fx(71,13-56): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\postprocess.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\func.fx(47,13-54): warning X3206: implicit truncation of vector type
+C:\Users\gil52\OneDrive\����\GitHub\DirectX11Engine\Project\Engine\std2d.fx(58,5-32): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\std2d.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\struct.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\tilemap.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\value.cso
   pch.cpp
   CAnim2D.cpp
 C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAnim2D.cpp(80,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -139,7 +176,6 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp
   컴파일하고 있습니다...
   CLevelManager.cpp
   CLight2D.cpp
-  CMaterial.cpp
   CMesh.cpp
   CMeshRender.cpp
   CParticleSystem.cpp
@@ -154,6 +190,7 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CRenderMana
   CScript.cpp
   CSetColorCS.cpp
   CShader.cpp
+  CMaterial.cpp
   CStructuredBuffer.cpp
   CTaskManager.cpp
   CTexture.cpp
@@ -178,7 +215,6 @@ C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CTileMap.cp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
   Engine.cpp
-  Temp.cpp
   extern.cpp
   func.cpp
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244: '인수': 'const wchar_t'에서 'const _Elem'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -209,5 +245,6 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
               _Size=unsigned __int64
           ]
   
+  Temp.cpp
   코드를 생성하고 있습니다...
   Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

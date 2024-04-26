@@ -16,6 +16,9 @@ ContentUI::ContentUI()
 	// Tree UI Root Node 보이지 않게 설정
 	m_Tree->ShowRoot(false);
 
+	// Tree UI 의 Drag 기능 On
+	m_Tree->UseDrag(true);
+
 	// Node 항목의 File Name 만 보이게 설정
 	m_Tree->ShowFileNameOnly(true);
 

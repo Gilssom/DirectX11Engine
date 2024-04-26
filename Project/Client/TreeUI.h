@@ -63,6 +63,8 @@ private:
 
 	bool			m_bShowRoot;		// Root Node 를 보여줄지 안보여줄지
 	bool			m_bShowFileName;	// File 이름만 보여줄지 안보여줄지
+	bool			m_bUseDrag;			// Drag
+	bool			m_bUseDrop;			// Drop
 
 	UI_CALLBACK		m_SelectedCallBack;
 
@@ -73,6 +75,10 @@ private:
 public:
 	void ShowRoot(bool show) { m_bShowRoot = show; }
 	void ShowFileNameOnly(bool showFileName) { m_bShowFileName = showFileName; }
+
+	void UseDrag(bool drag) { m_bUseDrag = drag; }
+	void UseDrop(bool drop) { m_bUseDrop = drop; }
+
 	TreeNode* AddTreeNode(TreeNode* parent, const string& nodeName, DWORD_PTR dwData = 0);
 
 	void RegisterSelectCallBack(UI_CALLBACK callBack) { m_SelectedCallBack = callBack; }

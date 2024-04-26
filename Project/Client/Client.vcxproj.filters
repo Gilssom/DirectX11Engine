@@ -263,9 +263,6 @@
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
-    </ClCompile>
     <ClCompile Include="ImGui\imgui_draw.cpp">
       <Filter>01. Manager\03. ImGuiManager\ImGui</Filter>
     </ClCompile>
@@ -355,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="TextureUI.cpp">
       <Filter>02. EditorUI\01. Inspector\AssetUI\04. TextureUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>01. Manager\03. ImGuiManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

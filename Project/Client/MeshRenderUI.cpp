@@ -8,31 +8,6 @@
 #include "inspector.h"
 #include "ListUI.h"
 
-/*void ChangeBySelectedMesh()
-{
-	// List UI 를 가져온다.
-	ListUI* pListUI = CImGuiManager::GetInst()->FindEditorUI<ListUI>("List");
-
-	// ImGui Manager 에서 Inspector 를 가져온다.
-	Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
-
-	// List UI 에서 더블클릭이 발생했을 때의 아이템의 문자열을 알아낸다.
-	// 문자열을 2Byte 로 전환
-	wstring strMeshKey = ToWString(pListUI->GetSelectedString());
-
-	// Asset Manager 에 접근해서 해당 이름의 Mesh 를 찾아낸다.
-	Ptr<CMesh> pMesh = CAssetManager::GetInst()->FindAsset<CMesh>(strMeshKey);
-
-	// Inspector 를 통해 Target Object 를 알아내고, Render Component 에 접근, 찾아낸 Mesh 를 적용시킨다.
-	CGameObject* pTargetObject = pInspector->GetTargetObject();
-
-	assert(pTargetObject != nullptr && pMesh != nullptr);
-
-	pTargetObject->GetRenderComponent()->SetMesh(pMesh);
-
-	pInspector->SetFocus();
-}*/
-
 MeshRenderUI::MeshRenderUI()
 	: ComponentUI("MeshRender", "##MeshRenderUI", COMPONENT_TYPE::MESHRENDER)
 {
@@ -60,6 +35,30 @@ void MeshRenderUI::Render_Tick()
 
 	ImGui::Text("Mesh      "); SAME;
 	ImGui::InputText("##MeshName", (char*)strMeshKey.c_str(), strMeshKey.capacity(), ImGuiInputTextFlags_ReadOnly); ImGui::SameLine();
+
+	if (ImGui::BeginDragDropTarget())
+	{
+		// Content 로부터 날라온 물체인지 체크
+		const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content");
+
+		// 만약 출발지가 올바른 물체라면
+		if (payload != nullptr)
+		{
+			// payload 에 저장된 Data 를 우리 방식으로 꺼내와야 한다.
+			DWORD_PTR dwData = 0;
+			memcpy(&dwData, payload->Data, payload->DataSize);
+
+			// 해당 물체의 Type 과 자신의 Type 을 비교
+			Ptr<CAsset> pAsset = (CAsset*)dwData;
+			if (pAsset->GetAssetType() == ASSET_TYPE::MESH)
+			{
+				pMeshRender->SetMesh((CMesh*)pAsset.Get());
+			}
+		}
+
+		ImGui::EndDragDropTarget();
+	}
+
 	if (ImGui::Button("##MeshButton", ImVec2(18, 18)))
 	{
 		// List UI 활성화
@@ -86,6 +85,30 @@ void MeshRenderUI::Render_Tick()
 
 	ImGui::Text("Material  "); SAME;
 	ImGui::InputText("##MaterialName", (char*)strMaterialKey.c_str(), strMaterialKey.capacity(), ImGuiInputTextFlags_ReadOnly); ImGui::SameLine();
+
+	if (ImGui::BeginDragDropTarget())
+	{
+		// Content 로부터 날라온 물체인지 체크
+		const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content");
+
+		// 만약 출발지가 올바른 물체라면
+		if (payload != nullptr)
+		{
+			// payload 에 저장된 Data 를 우리 방식으로 꺼내와야 한다.
+			DWORD_PTR dwData = 0;
+			memcpy(&dwData, payload->Data, payload->DataSize);
+
+			// 해당 물체의 Type 과 자신의 Type 을 비교
+			Ptr<CAsset> pAsset = (CAsset*)dwData;
+			if (pAsset->GetAssetType() == ASSET_TYPE::MATERIAL)
+			{
+				pMeshRender->SetMaterial((CMaterial*)pAsset.Get());
+			}
+		}
+
+		ImGui::EndDragDropTarget();
+	}
+
 	if (ImGui::Button("##MaterialButton", ImVec2(18, 18)))
 	{
 		// List UI 활성화

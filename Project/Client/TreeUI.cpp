@@ -13,7 +13,8 @@ void TreeNode::Render_Tick()
 {
 	string name = m_Name;
 
-	UINT iFlag = 0;
+	// 화살표를 누르거나, 더블클릭한 경우에만 자식 노드를 펼친다.
+	UINT iFlag = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
 
 	// Frame 설정
 	if (m_bFrame)
@@ -42,12 +43,32 @@ void TreeNode::Render_Tick()
 
 	if (ImGui::TreeNodeEx(name.c_str(), iFlag))
 	{
-		// 해당 Node 위에서 마우스 클릭 해제가 발생하면 해당 노드를 선택된 상태로 만든다.
-		if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+		// Node 의 소유자(Tree UI) 가 Drag 기능을 사용하기로 했다면 아래 구문 체크
+		if (m_Owner->m_bUseDrag)
 		{
-			// Frame Node 는 제외
-			if(!m_bFrame)
-				m_Owner->SetSelectedNode(this);
+			if (ImGui::BeginDragDropSource())
+			{
+				// 첫번째 인자 ID 는 Node 의 소유자(Tree UI) (ex Outliner, Content)
+				// 그 다음 전달하고자 하는 Data 의 시작 주소와 크기를 인자로
+				ImGui::SetDragDropPayload(m_Owner->GetParentUI()->GetName().c_str(), &m_Data, sizeof(DWORD_PTR));
+
+				// PayLoad 후, EndDragDrop 전에 사용된 Text 는 ToolTip 으로 적용된다.
+				ImGui::Text(m_Name.c_str());
+
+				ImGui::EndDragDropSource();
+			}
+		}
+
+		// 해당 Node 위에서 마우스 클릭 해제가 발생하면 해당 노드를 선택된 상태로 만든다.
+		if (ImGui::IsMouseReleased(ImGuiMouseButton_Left))
+		{
+			// 닫혀있는 부모 Tree 클릭 시 아래 함수 호출이 안됨
+			if (ImGui::IsItemHovered())
+			{
+				// Frame Node 는 제외
+				if (!m_bFrame)
+					m_Owner->SetSelectedNode(this);
+			}
 		}
 
 		// 자식 Node Render
@@ -72,6 +93,11 @@ TreeUI::TreeUI(const string& name)
 	, m_bShowRoot(false)
 	, m_bShowFileName(false)
 	, m_SelectedNode(nullptr)
+	, m_bUseDrag(false)
+	, m_bUseDrop(false)
+	, m_SelectedCallBack(nullptr)
+	, m_SelectedInst(nullptr)
+	, m_SelectedDelegate(nullptr)
 {
 
 }
