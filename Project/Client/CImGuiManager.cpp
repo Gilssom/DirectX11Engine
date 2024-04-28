@@ -54,8 +54,11 @@ int CImGuiManager::Init(HWND hwnd)
     //io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports; // FIXME-DPI: Experimental.
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsDark();
+    ImGui::StyleColorsDrakular();
     //ImGui::StyleColorsLight();
+
+    io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 18.f, NULL);
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -63,7 +66,9 @@ int CImGuiManager::Init(HWND hwnd)
     {
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+        //io.Fonts->Fonts[0];
     }
+
 
     // Setup Platform/Renderer backends
     if (!ImGui_ImplWin32_Init(m_hMainHwnd))
@@ -85,7 +90,7 @@ void CImGuiManager::Tick()
     ImGui::NewFrame();
 
     // Demo Window 활성화 비활성화
-    if (KEY_TAP(KEY::NUM9)) { m_bDemo ? m_bDemo = false : m_bDemo = true; }
+    if (KEY_TAP(KEY::F1)) { m_bDemo ? m_bDemo = false : m_bDemo = true; }
     if (m_bDemo) { ImGui::ShowDemoWindow(); }
 
     // Begin - End : Window 하나

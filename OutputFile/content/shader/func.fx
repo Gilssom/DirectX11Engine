@@ -51,7 +51,15 @@ float3 CalLight2D(int lightIdx, float3 vWorldPos)
     // Spot Light (과제 예정)
     else
     {
+        // Pixel World Space
+        float fDist = distance(info.WorldPos.xy, vWorldPos.xy);
         
+        float fRatio = 1.f;
+        
+        if (fDist < info.Range)
+        {
+            vLightPower = (info.Light.vDiffuse.rgb + info.Light.vAmbient.rgb) * fRatio;
+        }
     }
     
     return vLightPower;

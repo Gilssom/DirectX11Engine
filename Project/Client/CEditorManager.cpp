@@ -26,7 +26,7 @@ void CEditorManager::Init()
 	// Editor 용 Script 는 Script Project 에 있을 이유가 없다.
 	pEditorCam->AddComponent(new CEditorCameraScript);
 
-	pEditorCam->Camera()->LayerCheckAll();
+	pEditorCam->Camera()->LayerCheckAll(0xffffffff);
 	pEditorCam->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
 
 	CRenderManager::GetInst()->RegisterEditorCamera(pEditorCam->Camera());

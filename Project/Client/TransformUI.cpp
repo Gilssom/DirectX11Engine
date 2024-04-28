@@ -6,7 +6,7 @@
 TransformUI::TransformUI()
 	: ComponentUI("Transform", "##TransformUI", COMPONENT_TYPE::TRANSFORM)
 {
-	SIZE;
+	//SIZE_SET(1);
 }
 
 TransformUI::~TransformUI()

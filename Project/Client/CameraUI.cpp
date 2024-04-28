@@ -225,4 +225,25 @@ void CameraUI::Render_Tick()
 
         ImGui::EndPopup();
     }
+
+    SAME_SET(250);
+    if (ImGui::Button("Layer All Check"))
+    {
+        if(CurLayerCheck[0] == false)
+            pCam->LayerCheckAll(0xffffffff);
+        else
+            pCam->LayerCheckAll(0);
+    }
+
+    ImGui::SameLine();
+    ImGui::TextDisabled("(?)");
+    if (ImGui::BeginItemTooltip())
+    {
+        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+        ImGui::TextUnformatted("All Layer Check\n"
+            "If even one layer is Off, All set On.\n"
+            "If even all layer is On, All set Off.");
+        ImGui::PopTextWrapPos();
+        ImGui::EndTooltip();
+    }
 }

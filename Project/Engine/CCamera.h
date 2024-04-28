@@ -52,7 +52,7 @@ public:
 	float GetScale() { return m_Scale; }
 
 	void LayerCheck(int layerIdx);
-	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 모든 숫자에 1 을 넣는
+	void LayerCheckAll(UINT value) { m_LayerCheck = value; } // 모든 숫자에 1 을 넣는
 	const UINT GetLayerCheck() { return m_LayerCheck; }
 
 	void SortObject();

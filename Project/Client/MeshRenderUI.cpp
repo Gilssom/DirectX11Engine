@@ -34,7 +34,9 @@ void MeshRenderUI::Render_Tick()
 	}
 
 	ImGui::Text("Mesh      "); SAME;
+	ImGui::PushItemWidth(200.f);
 	ImGui::InputText("##MeshName", (char*)strMeshKey.c_str(), strMeshKey.capacity(), ImGuiInputTextFlags_ReadOnly); ImGui::SameLine();
+	ImGui::PopItemWidth();
 
 	if (ImGui::BeginDragDropTarget())
 	{
@@ -59,7 +61,7 @@ void MeshRenderUI::Render_Tick()
 		ImGui::EndDragDropTarget();
 	}
 
-	if (ImGui::Button("##MeshButton", ImVec2(18, 18)))
+	if (ImGui::Button("##MeshButton", ImVec2(24, 24)))
 	{
 		// List UI 활성화
 		ListUI* pListUI = CImGuiManager::GetInst()->FindEditorUI<ListUI>("List");
@@ -84,7 +86,9 @@ void MeshRenderUI::Render_Tick()
 	}
 
 	ImGui::Text("Material  "); SAME;
+	ImGui::PushItemWidth(200.f);
 	ImGui::InputText("##MaterialName", (char*)strMaterialKey.c_str(), strMaterialKey.capacity(), ImGuiInputTextFlags_ReadOnly); ImGui::SameLine();
+	ImGui::PopItemWidth();
 
 	if (ImGui::BeginDragDropTarget())
 	{
@@ -109,7 +113,7 @@ void MeshRenderUI::Render_Tick()
 		ImGui::EndDragDropTarget();
 	}
 
-	if (ImGui::Button("##MaterialButton", ImVec2(18, 18)))
+	if (ImGui::Button("##MaterialButton", ImVec2(24, 24)))
 	{
 		// List UI 활성화
 		ListUI* pListUI = CImGuiManager::GetInst()->FindEditorUI<ListUI>("List");

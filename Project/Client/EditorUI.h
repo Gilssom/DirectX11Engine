@@ -3,7 +3,7 @@
 #include "ImGui\\\imgui.h"
 #include "CImGuiManager.h"
 
-#define SAME ImGui::SameLine(130)
+#define SAME ImGui::SameLine(150)
 #define SAME_SET(spacing) ImGui::SameLine(spacing)
 #define SIZE SetSize(ImVec2(0, 150))
 #define SIZE_SET(height) SetSize(ImVec2(0, height))
@@ -22,6 +22,7 @@ private:
 	bool				m_Active;		// 활성화 - 비활성화 여부
 	bool				m_Seperate;		// 구분선 옵션
 	bool				m_Modal;
+	bool				m_IsComponent;
 
 public:
 	void SetName(const string& name) { m_Name = name; }
@@ -32,6 +33,7 @@ public:
 	void SetSeperate(bool seperate) { m_Seperate = seperate; }
 	bool SetActive(bool active);
 	void SetModal(bool modal) { m_Modal = modal; }
+	void SetComponentType(bool isComponent) { m_IsComponent = isComponent; }
 
 	EditorUI* GetParentUI() { return m_ParentUI; }
 	const vector<EditorUI*> GetChildUI() { return m_vecChildUI; }

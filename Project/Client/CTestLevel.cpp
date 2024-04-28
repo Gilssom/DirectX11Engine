@@ -41,7 +41,7 @@ void CTestLevel::CreateTestLevel()
 	pCamObject->AddComponent(new CCamera);
 	pCamObject->AddComponent(new CCameraMoveScript);
 
-	pCamObject->Camera()->LayerCheckAll();
+	pCamObject->Camera()->LayerCheckAll(0xffffffff);
 	pCamObject->Camera()->SetCameraPriority(0); // Main Camera Setting
 	pCamObject->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
 

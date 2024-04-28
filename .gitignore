@@ -438,3 +438,7 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudio
+.vs/DirectX11Engine/v17/ipch/c970843663e13be5.ipch
+Project/Client/x64/Debug/Client.pch
+Project/Engine/x64/Debug/Engine_d.pch
+Project/Scripts/x64/Debug/Scripts_d.pch

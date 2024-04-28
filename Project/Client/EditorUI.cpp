@@ -8,6 +8,7 @@ EditorUI::EditorUI(const string& name, const  string& id)
 	, m_Active(true)
 	, m_Seperate(false)
 	, m_Modal(false)
+	, m_IsComponent(false)
 {
 
 }
@@ -106,28 +107,45 @@ void EditorUI::Tick()
 		if (m_Seperate)
 		{
 			// 구분선 생성
-			ImGui::Separator();
+			//ImGui::Separator();
 		}
 
-		ImGui::BeginChild(fullname.c_str(), m_vChildSize);
+		
 
-		Render_Tick();
+		if (m_IsComponent)
+		{
+			if (ImGui::TreeNodeEx(fullname.c_str(), ImGuiTreeNodeFlags_Framed))
+			{
+				Render_Tick();
+
+				//ImGui::Separator();
+
+				for (size_t i = 0; i < m_vecChildUI.size(); i++)
+				{
+					m_vecChildUI[i]->Tick();
+				}
+
+				ImGui::TreePop();
+			}
+		}
+		else
+		{
+			ImGui::BeginChild(fullname.c_str(), m_vChildSize);
+
+			Render_Tick();
+
+			for (size_t i = 0; i < m_vecChildUI.size(); i++)
+			{
+				m_vecChildUI[i]->Tick();
+			}
+
+			ImGui::EndChild();
+		}
 
 		//ImGui::Separator();
 
 		// 자식의 자식 UI 의 Tick 을 돌려준다.
-		for (size_t i = 0; i < m_vecChildUI.size(); i++)
-		{
-			m_vecChildUI[i]->Tick();
-		}
-
-		/*if (ImGui::TreeNode(fullname.c_str()))
-		{
-			
-
-			ImGui::TreePop();
-		}*/
 				
-		ImGui::EndChild();
+		
 	}
 }

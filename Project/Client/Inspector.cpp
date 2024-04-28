@@ -103,6 +103,7 @@ void Inspector::CreateComponentUI()
 
 		m_arrComUI[i]->SetActive(false);
 		m_arrComUI[i]->SetSeperate(true);
+		m_arrComUI[i]->SetComponentType(true);
 		AddChildUI(m_arrComUI[i]);
 	}
 }
