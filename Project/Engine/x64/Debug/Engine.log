@@ -63,5 +63,7 @@
   .\Project\Engine\value.fx
   10개 파일이 복사되었습니다.
   CAssetMgr_Init.cpp
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAssetMgr_Init.cpp(132,20): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-  Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Engine\CAssetMgr_Init.cpp(132,20): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+  (소스 파일 '/CAssetMgr_Init.cpp'을(를) 컴파일하는 중)
+  
+  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

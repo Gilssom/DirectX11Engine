@@ -161,11 +161,68 @@ void CGameObject::AddComponent(CComponent* component)
 	component->m_Owner = this;
 }
 
+void CGameObject::DisconnectWithParent()
+{
+	if (m_Parent == nullptr)
+		return;
+
+	// 부모와 자식 간의 계층 구조 해제
+	vector<CGameObject*>::iterator iter = m_Parent->m_vecChild.begin();
+	for (; iter != m_Parent->m_vecChild.end(); ++iter)
+	{
+		if ((*iter) == this)
+		{
+			m_Parent->m_vecChild.erase(iter);
+			m_Parent = nullptr;
+			return;
+		}
+	}
+
+	// 자식 오브젝트는 부모를 지정했는데, 부모 오브젝트가 자식을 모르는 경우
+	assert(nullptr);
+}
+
+void CGameObject::RegisterAsParentObject()
+{
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+	CLayer* pCurLayer = pCurLevel->GetLayer(m_LayerIdx);
+	pCurLayer->AddObject(this, false);
+}
+
 void CGameObject::AddChild(CGameObject* object)
 {
+	// 입력으로 들어오는 오브젝트가 이미 다른 부모의 자식인 경우 계층 구조 해제
+	if (object->m_Parent)
+	{
+		object->DisconnectWithParent();
+	}
+	// 입력으로 들어오는 오브젝트가 최상위 부모 오브젝트이면서,
+	// Level 내의 소속이 되어 있는 경우, Layer 부모 관리 기능에서 제외
+	else if (object->m_LayerIdx != -1)
+	{
+		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+		CLayer* pCurLayer = pCurLevel->GetLayer(object->m_LayerIdx);
+		pCurLayer->DeRegisterParentObject(object);
+	}
+
 	// 받은 오브젝트를 "자식" 으로 설정 , 자식의 부모 오브젝트를 "자신" 으로 설정
 	object->m_Parent = this;
 	m_vecChild.push_back(object);
+}
+
+bool CGameObject::IsAncestor(CGameObject* object)
+{
+	CGameObject* pAncestor = m_Parent;
+
+	while (pAncestor)
+	{
+		if (pAncestor == object)
+			return true;
+
+		pAncestor = pAncestor->GetParent();
+	}
+
+	return false;
 }
 
 void CGameObject::Destroy()

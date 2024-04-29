@@ -110,8 +110,6 @@ void EditorUI::Tick()
 			//ImGui::Separator();
 		}
 
-		
-
 		if (m_IsComponent)
 		{
 			if (ImGui::TreeNodeEx(fullname.c_str(), ImGuiTreeNodeFlags_Framed))
@@ -140,12 +138,6 @@ void EditorUI::Tick()
 			}
 
 			ImGui::EndChild();
-		}
-
-		//ImGui::Separator();
-
-		// 자식의 자식 UI 의 Tick 을 돌려준다.
-				
-		
+		}		
 	}
 }

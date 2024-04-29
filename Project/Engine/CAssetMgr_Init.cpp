@@ -167,6 +167,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 	pShader->SetDSType(DS_TYPE::LESS);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
 
+	// Parameter Info
+	pShader->AddScalarParam("Paper Burn Intence", SCALAR_PARAM::FLOAT_0);
+
 	AddAsset<CGraphicShader>(L"Std2DShader", pShader);
 
 

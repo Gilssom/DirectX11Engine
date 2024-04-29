@@ -20,6 +20,12 @@ OutlinerUI::OutlinerUI()
 	// Tree UI Root Node 보이지 않게 설정
 	m_Tree->ShowRoot(false);
 
+	// Tree UI 의 Drag & Drop 기능 On
+	m_Tree->UseDragDrop(true);
+
+	// Drag & Drop 시 동작할 Delegate 등록
+	m_Tree->RegisterDragDropDelegate(this, (UI_DELEGATE2)&OutlinerUI::DragDropFunc);
+
 	// 항목 선택 시 동작할 CallBack or Delegate 등록
 	m_Tree->RegisterSelectDelegate(this, (UI_DELEGATE1)&OutlinerUI::SelectGameObject);
 
@@ -89,6 +95,47 @@ UINT OutlinerUI::SelectGameObject(DWORD_PTR data)
 	Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
 
 	pInspector->SetTargetObject(pSelectObject);
+
+	return 0;
+}
+
+// Tree 에서 Drag & Drop 이 발생하면 호출되는 함수(Delegate)
+UINT OutlinerUI::DragDropFunc(DWORD_PTR dragNode, DWORD_PTR dropNode)
+{
+	TreeNode* pDragNode = (TreeNode*)dragNode;
+	TreeNode* pDropNode = (TreeNode*)dropNode;
+
+	CGameObject* pDragObject = (CGameObject*)(pDragNode->GetData());
+	CGameObject* pDropObject = pDropNode ? (CGameObject*)pDropNode->GetData() : nullptr;
+
+	if (pDropObject)
+	{
+		// Drag Object 가 Drop Object 의 Parent 관계면 안된다.
+		if (pDropObject->IsAncestor(pDragObject) == false)
+		{
+			// Drag Object 가 Drop Object 의 자식으로 들어가야함
+			// 보통의 Add Event 는 Task Manager 를 통해서 다음 Frame 에 적용되도록 해야 하는데,
+			// 우리의 프레임워크 특성상, Editor - UI 는 게임의 한 프레임이 지난 이후 처리가 되기 때문에
+			// 굳이 Task 를 신경안쓰고 활용해도 무방하다. (사실상 지금이 Task Manager 단계)
+			pDropObject->AddChild(pDragObject);
+		}
+	}
+
+	// 드랍된 곳이 허공이면,
+	else
+	{
+		// 만약 Drag 한 Object 가 자식 오브젝트라면
+		if (pDragObject->GetParent() != nullptr)
+		{
+			// 부모로부터 나와서, 최상위 오브젝트가 되어야 한다.
+			pDragObject->DisconnectWithParent();
+			pDragObject->RegisterAsParentObject();
+		}
+	}
+
+	// Obejct 의 계층 구조(부모-자식) 가 변경이 되었기 때문에
+	// Outliner 의 Tree 를 재구성한다.
+	RenewGameObject();
 
 	return 0;
 }

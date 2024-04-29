@@ -48,6 +48,9 @@ void TreeNode::Render_Tick()
 		{
 			if (ImGui::BeginDragDropSource())
 			{
+				// Tree UI 에 본인이 Drag Node 임을 등록
+				m_Owner->SetDragNode(this);
+
 				// 첫번째 인자 ID 는 Node 의 소유자(Tree UI) (ex Outliner, Content)
 				// 그 다음 전달하고자 하는 Data 의 시작 주소와 크기를 인자로
 				ImGui::SetDragDropPayload(m_Owner->GetParentUI()->GetName().c_str(), &m_Data, sizeof(DWORD_PTR));
@@ -56,6 +59,25 @@ void TreeNode::Render_Tick()
 				ImGui::Text(m_Name.c_str());
 
 				ImGui::EndDragDropSource();
+			}
+		}
+
+		// Node 의 소유자(Tree UI) 가 Drop 기능도 같이 사용하기로 했다면 아래 구문 체크
+		if (m_Owner->m_bUseDrag && m_Owner->m_bUseDrop)
+		{
+			if (ImGui::BeginDragDropTarget())
+			{
+				// 자신의 Tree 로부터 날라온 물체인지 체크
+				const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(m_Owner->GetParentUI()->GetName().c_str());
+
+				// 만약 출발지가 올바른 물체라면
+				if (payload != nullptr)
+				{
+					// Tree UI 에 본인이 Drop Node 임을 등록
+					m_Owner->SetDropNode(this);
+				}
+
+				ImGui::EndDragDropTarget();
 			}
 		}
 
@@ -93,11 +115,15 @@ TreeUI::TreeUI(const string& name)
 	, m_bShowRoot(false)
 	, m_bShowFileName(false)
 	, m_SelectedNode(nullptr)
+	, m_DragNode(nullptr)
+	, m_DropNode(nullptr)
 	, m_bUseDrag(false)
 	, m_bUseDrop(false)
 	, m_SelectedCallBack(nullptr)
 	, m_SelectedInst(nullptr)
 	, m_SelectedDelegate(nullptr)
+	, m_DragDropInst(nullptr)
+	, m_DragDropDelegate(nullptr)
 {
 
 }
@@ -151,6 +177,19 @@ void TreeUI::Render_Tick()
 		{
 			vecChildNode[i]->Render_Tick();
 		}
+	}
+
+	if (m_DragNode && (m_DropNode || ImGui::IsMouseReleased(ImGuiMouseButton_Left)))
+	{
+		// 호출할 Instance 와 Delegate 가 존재해야함
+		if (m_DragDropInst && m_DragDropDelegate)
+		{
+			(m_DragDropInst->*m_DragDropDelegate)((DWORD_PTR)m_DragNode, (DWORD_PTR)m_DropNode);
+		}
+			
+
+		m_DragNode = nullptr;
+		m_DropNode = nullptr;
 	}
 }
 

@@ -43,10 +43,13 @@ public:
 	GET_COMPONENT(TileMap, TILEMAP);
 	GET_COMPONENT(ParticleSystem, PARTICLESYSTEM);
 
+	void DisconnectWithParent();
+	void RegisterAsParentObject();
 	void AddChild(CGameObject* object);
 	const vector<CGameObject*>& GetChildren() { return m_vecChild; }
 	CGameObject* GetParent() { return m_Parent; }
 	const vector<CScript*>& GetScripts() { return m_vecScripts; }
+	bool IsAncestor(CGameObject* object);
 
 	template<typename T>
 	T* GetScript();

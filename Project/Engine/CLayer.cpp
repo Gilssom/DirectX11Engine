@@ -86,3 +86,19 @@ void CLayer::AddObject(CGameObject* object, bool childMove)
 		}
 	}
 }
+
+void CLayer::DeRegisterParentObject(CGameObject* object)
+{
+	vector<CGameObject*>::iterator iter = m_vecParent.begin();
+
+	for (iter; iter != m_vecParent.end(); ++iter)
+	{
+		if ((*iter) == object)
+		{
+			m_vecParent.erase(iter);
+			return;
+		}
+	}
+
+	assert(nullptr);
+}

@@ -26,6 +26,8 @@ public:
 	const vector<CGameObject*>& GetParentObjects() { return m_vecParent; }
 	const vector<CGameObject*>& GetObjects() { return m_vecObjects; }
 
+	void DeRegisterParentObject(CGameObject* object);
+
 	CLONE_DISABLE(CLayer);
 
 public:

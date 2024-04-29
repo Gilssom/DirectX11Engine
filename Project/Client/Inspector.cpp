@@ -34,7 +34,7 @@ Inspector::~Inspector()
 
 void Inspector::Render_Tick()
 {
-	ImGui::Text("Inspector");
+	//ImGui::Text(m_TargetObject->GetName().c_str());
 }
 
 void Inspector::SetTargetObject(CGameObject* target)
