@@ -58,8 +58,8 @@ int CImGuiManager::Init(HWND hwnd)
     ImGui::StyleColorsDrakular();
     //ImGui::StyleColorsLight();
 
-    //io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
-    io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+   io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+   //io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -67,7 +67,6 @@ int CImGuiManager::Init(HWND hwnd)
     {
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-        //io.Fonts->Fonts[0];
     }
 
 

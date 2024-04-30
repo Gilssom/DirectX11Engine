@@ -78,7 +78,7 @@ void OutlinerUI::AddGameObject(TreeNode* node, CGameObject* object)
 	// 만약 해당 Object 가 자식 Object 를 보유하고 있다면
 	const vector<CGameObject*>& vecChildren = object->GetChildren();
 
-	// 자식 Object 를 부모 Object 의 정보로 만들어진 노드 미틍로 다시 추가 (재귀 형식)
+	// 자식 Object 를 부모 Object 의 정보로 만들어진 노드 밑으로 다시 추가 (재귀 형식)
 	for (size_t i = 0; i < vecChildren.size(); i++)
 	{
 		AddGameObject(pNewNode, vecChildren[i]);

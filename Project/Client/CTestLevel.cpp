@@ -30,6 +30,7 @@ void CTestLevel::CreateTestLevel()
 	m_CurLevel->GetLayer(0)->SetName(L"Default");
 	m_CurLevel->GetLayer(1)->SetName(L"Player");
 	m_CurLevel->GetLayer(2)->SetName(L"Monster");
+	m_CurLevel->GetLayer(3)->SetName(L"BackGround");
 
 	// 오브젝트에 컴포넌트 등록 후, 컴포넌트의 함수에 접근 후 세팅
 
@@ -66,7 +67,7 @@ void CTestLevel::CreateTestLevel()
 	//pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
 	//pLightObject->Light2D()->SetAmbient(Vec3(0.1f, 0.1f, 0.1f));
 
-	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLightObject->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
 	pLightObject->Light2D()->SetDiffuse(Vec3(1.f, 1.f, 1.f));
 	pLightObject->Light2D()->SetAmbient(Vec3(0.f, 0.f, 0.f));
 	pLightObject->Light2D()->SetRange(500.f);
@@ -161,7 +162,7 @@ void CTestLevel::CreateTestLevel()
 
 	// Back Ground Object
 	CGameObject* pBackGround = new CGameObject;
-	pBackGround->SetName(L"Back Ground");
+	pBackGround->SetName(L"BackGround_0");
 	pBackGround->AddComponent(new CTransform);
 	pBackGround->AddComponent(new CMeshRender);
 	pBackGround->AddComponent(new CBackGroundScript);
@@ -171,10 +172,39 @@ void CTestLevel::CreateTestLevel()
 
 	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
-	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard_Test.png", L"texture\\ElvenGard_Test.png"));
-	//pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
+	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_0.png", L"texture\\ElvenGard\\ElvenGard_BackGround_0.png"));
 
-	m_CurLevel->AddObject(0, pBackGround, false);
+	m_CurLevel->AddObject(3, pBackGround, false);
+
+	CGameObject* pBackGround1 = new CGameObject;
+	pBackGround1->SetName(L"BackGround_1");
+	pBackGround1->AddComponent(new CTransform);
+	pBackGround1->AddComponent(new CMeshRender);
+	pBackGround1->AddComponent(new CBackGroundScript);
+
+	pBackGround1->Transform()->SetRelativePos(Vec3(0.f, 0.f, 800.f));
+	pBackGround1->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
+
+	pBackGround1->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pBackGround1->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	pBackGround1->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_1.png", L"texture\\ElvenGard\\ElvenGard_BackGround_1.png"));
+
+	m_CurLevel->AddObject(3, pBackGround1, false);
+
+	CGameObject* pBackGround2 = new CGameObject;
+	pBackGround2->SetName(L"BackGround_2");
+	pBackGround2->AddComponent(new CTransform);
+	pBackGround2->AddComponent(new CMeshRender);
+	pBackGround2->AddComponent(new CBackGroundScript);
+
+	pBackGround2->Transform()->SetRelativePos(Vec3(0.f, 0.f, 90.f));
+	pBackGround2->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
+
+	pBackGround2->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pBackGround2->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	pBackGround2->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_2.png", L"texture\\ElvenGard\\ElvenGard_BackGround_2.png"));
+
+	m_CurLevel->AddObject(3, pBackGround2, false);
 
 
 	// Test Object

@@ -302,7 +302,7 @@ void CAssetManager::CreateDefaultMaterial()
 	// Back Ground Material
 	pMaterial = new CMaterial;
 	pMaterial->SetName(L"BackGroundMaterial");
-	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DShader"));
+	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DAlphaBlendShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// Tile Map Material
