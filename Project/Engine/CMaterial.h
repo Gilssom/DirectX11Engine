@@ -22,6 +22,9 @@ public:
 	void SetScalarParam(SCALAR_PARAM param, const T& value);
 	void SetTexParam(TEX_PARAM param, Ptr<CTexture> tex);
 
+	void* GetScalarParam(SCALAR_PARAM param);
+	Ptr<CTexture> GetTexParam(TEX_PARAM texParam) { return m_arrTex[texParam]; }
+
 	bool IsDynamic() { return m_bDynamic; }
 
 	Ptr<CMaterial> GetDynamicMaterial();

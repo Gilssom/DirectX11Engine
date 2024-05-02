@@ -8,6 +8,8 @@
 #include <Engine\\CKeyManager.h>
 #include <Engine\\CDevice.h>
 
+#include "ParamUI.h"
+
 #include "EditorUI.h"
 #include "Inspector.h"
 #include "ListUI.h"
@@ -58,8 +60,8 @@ int CImGuiManager::Init(HWND hwnd)
     ImGui::StyleColorsDrakular();
     //ImGui::StyleColorsLight();
 
-   io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
-   //io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+   //io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+   io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -88,6 +90,9 @@ void CImGuiManager::Tick()
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
+
+    // Parameter UI ID 초기화
+    ParamUI::ResetParamID();
 
     // Demo Window 활성화 비활성화
     if (KEY_TAP(KEY::F1)) { m_bDemo ? m_bDemo = false : m_bDemo = true; }

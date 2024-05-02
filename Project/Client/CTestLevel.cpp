@@ -207,6 +207,28 @@ void CTestLevel::CreateTestLevel()
 	m_CurLevel->AddObject(3, pBackGround2, false);
 
 
+	// Smith Fire Object
+	CGameObject* pSmithFireObject = new CGameObject;
+	pSmithFireObject->SetName(L"SmithFire");
+	pSmithFireObject->AddComponent(new CTransform);
+	pSmithFireObject->AddComponent(new CMeshRender);
+	pSmithFireObject->AddComponent(new CAnimator2D);
+
+	pSmithFireObject->Transform()->SetRelativePos(Vec3(-427.f, 70.2f, 89.f));
+	pSmithFireObject->Transform()->SetRelativeScale(Vec3(89.f, 175.f, 1.f));
+
+	pSmithFireObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pSmithFireObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
+
+	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\Smith_Fire.png", L"texture\\ElvenGard\\Smith_Fire.png");
+	//pSmithFireObject->Animator2D()->CreateAnimation(L"SMITHFIRE_ANIM", pAtlas, Vec2(0.f, 0.f), Vec2(64.f, 130.f), Vec2(64.f, 130.f), 8, 12);
+	//pSmithFireObject->Animator2D()->FindAnimation(L"SMITHFIRE_ANIM")->Save(L"Animation\\");
+
+	pSmithFireObject->Animator2D()->LoadAnimation(L"Animation\\SMITHFIRE_ANIM.anim");
+	pSmithFireObject->Animator2D()->Play(L"SMITHFIRE_ANIM", true);
+
+	m_CurLevel->AddObject(3, pSmithFireObject, false);
+
 	// Test Object
 	/*CGameObject* pTestObject = new CGameObject;
 	pTestObject->AddComponent(new CTransform);

@@ -13,6 +13,16 @@ AssetUI::~AssetUI()
 
 }
 
+void AssetUI::SetTarget(Ptr<CAsset> target)
+{
+	if (m_TargetAsset == target)
+		return;
+
+	m_TargetAsset = target;
+
+	TargetChanged();
+}
+
 void AssetUI::Render_Tick()
 {
 

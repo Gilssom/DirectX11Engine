@@ -10,10 +10,12 @@ private:
 
 
 public:
-	void SetTarget(Ptr<CAsset> target) { m_TargetAsset = target; }
+	void SetTarget(Ptr<CAsset> target);
 	Ptr<CAsset> GetTarget() { return m_TargetAsset; }
-
 	ASSET_TYPE GetAssetType() { return m_Type; }
+
+	// Asset UI 가 보여주고 있는 대상이 변경된 경우
+	virtual void TargetChanged() {};
 
 public:
 	virtual void Render_Tick() = 0;

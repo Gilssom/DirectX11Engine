@@ -101,6 +101,9 @@
     <Filter Include="02. EditorUI\01. Inspector\AssetUI\07. GraphicShaderUI">
       <UniqueIdentifier>{4d979f25-353b-46a3-90ba-eb487d5bcb48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. EditorUI\06. ParamUI">
+      <UniqueIdentifier>{2f0f2409-0544-48dc-b333-d9038d451a35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -229,6 +232,9 @@
     <ClInclude Include="TextureUI.h">
       <Filter>02. EditorUI\01. Inspector\AssetUI\04. TextureUI</Filter>
     </ClInclude>
+    <ClInclude Include="ParamUI.h">
+      <Filter>02. EditorUI\06. ParamUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -355,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="ImGui\imgui_demo.cpp">
       <Filter>01. Manager\03. ImGuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ParamUI.cpp">
+      <Filter>02. EditorUI\06. ParamUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
