@@ -1,20 +1,8 @@
 ﻿  ParamUI.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(13,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/ParamUI.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(18,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/ParamUI.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(29,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/ParamUI.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(45,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/ParamUI.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(64,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/ParamUI.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(85,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/ParamUI.cpp'을(를) 컴파일하는 중)
-  
-  Client.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\OutputFile\bin\Client.exe
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(13,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(18,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(29,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(45,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(64,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ParamUI.cpp(85,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Client.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\OutputFile\bin\Client.exe

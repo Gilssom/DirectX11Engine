@@ -99,10 +99,13 @@ void MaterialUI::Render_Tick()
 
 	// Shader 가 요청한 Texture Parameter 목록 확인
 	vector<tShaderTexParam> TexParam = pShader->GetTexParam();
+
+	if (!TexParam.empty())
+		ImGui::SeparatorText("Texture Parmeter");
 	for (size_t i = 0; i < TexParam.size(); i++)
 	{
 		// Parameter 의 Desc 의 최대 가로 길이를 계산한다.
-		ImVec2 vDescWidth = ImGui::CalcTextSize(ScalarParam[i].strDesc.c_str());
+		ImVec2 vDescWidth = ImGui::CalcTextSize(TexParam[i].strDesc.c_str());
 		if (m_ParamDescMaxWidth < vDescWidth.x)
 		{
 			m_ParamDescMaxWidth = vDescWidth.x;

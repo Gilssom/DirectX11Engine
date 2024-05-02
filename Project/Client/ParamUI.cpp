@@ -88,15 +88,13 @@ int ParamUI::Param_Texture(const string& strName, Ptr<CTexture> texture)
     sprintf_s(key, 255, "##DragTexture_%d", g_ParamUI_ID++);
 
     // Image Ãâ·Â
-    ImGui::SeparatorText("Texture");
-
     ImTextureID TexID = (nullptr == texture) ? nullptr : texture->GetSRV().Get();
     
-    ImGui::Image((ImTextureID)TexID
+    ImGui::Image( TexID
                 , ImVec2(150.f, 150.f)
                 , ImVec2(0.0f, 0.0f)
                 , ImVec2(1.0f, 1.0f)
                 , ImGui::GetStyleColorVec4(ImGuiCol_Text));
 
-    return 0;
+    return true;
 }

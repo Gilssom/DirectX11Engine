@@ -188,6 +188,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 	pShader->SetDSType(DS_TYPE::LESS);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
 
+	// Parameter Info
+	pShader->AddTexParam("Output", TEX_0);
+
 	AddAsset<CGraphicShader>(L"Std2DAlphaBlendShader", pShader);
 
 
