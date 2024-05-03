@@ -101,8 +101,11 @@
     <Filter Include="02. EditorUI\01. Inspector\AssetUI\07. GraphicShaderUI">
       <UniqueIdentifier>{4d979f25-353b-46a3-90ba-eb487d5bcb48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. EditorUI\06. ParamUI">
+    <Filter Include="02. EditorUI\07. ParamUI">
       <UniqueIdentifier>{2f0f2409-0544-48dc-b333-d9038d451a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\06. MenuUI">
+      <UniqueIdentifier>{f63eced0-ee99-4c48-ae2c-f43fdedcba16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +236,10 @@
       <Filter>02. EditorUI\01. Inspector\AssetUI\04. TextureUI</Filter>
     </ClInclude>
     <ClInclude Include="ParamUI.h">
-      <Filter>02. EditorUI\06. ParamUI</Filter>
+      <Filter>02. EditorUI\07. ParamUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>02. EditorUI\06. MenuUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -363,7 +369,10 @@
       <Filter>01. Manager\03. ImGuiManager</Filter>
     </ClCompile>
     <ClCompile Include="ParamUI.cpp">
-      <Filter>02. EditorUI\06. ParamUI</Filter>
+      <Filter>02. EditorUI\07. ParamUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp">
+      <Filter>02. EditorUI\06. MenuUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

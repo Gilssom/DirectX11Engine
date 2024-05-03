@@ -25,7 +25,7 @@ private:
 	int Save(const wstring& FilePath) override { return S_OK; }
 
 public:
-	CPrefab();
+	CPrefab(bool bEngine = false);
 	CPrefab(CGameObject* proto);
 	CPrefab(const CPrefab& other);
 	~CPrefab();

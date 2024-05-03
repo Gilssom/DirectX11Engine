@@ -3,8 +3,8 @@
 
 #include "CDevice.h"
 
-CTexture::CTexture()
-    : CAsset(ASSET_TYPE::TEXTURE)
+CTexture::CTexture(bool bEngine)
+    : CAsset(ASSET_TYPE::TEXTURE, bEngine)
 {
 }
 

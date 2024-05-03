@@ -36,7 +36,10 @@ ContentUI::~ContentUI()
 
 void ContentUI::Render_Tick()
 {
-
+	if (CAssetManager::GetInst()->IsAssetChanged())
+	{
+		RenewContent();
+	}
 }
 
 void ContentUI::RenewContent()

@@ -111,6 +111,11 @@ wstring ToWString(const string& str)
 
 void SaveWString(const wstring& str, FILE* file)
 {
+	// 중요** wstring 객체는 실질적으로 문자열을 저장하는 것이 아니라 주소를 저장하는 객체이다.
+	// 1. 포인터로 가르킨 Key 값의 주소, 
+	// 2. w_char 의 크기만큼, 
+	// 3. 문자열의 길이만큼 저장
+
 	size_t len = str.length();
 	fwrite(&len, sizeof(size_t), 1, file);
 	fwrite(str.c_str(), sizeof(wchar_t), len, file);

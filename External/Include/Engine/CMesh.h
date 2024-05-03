@@ -35,7 +35,7 @@ public:
 	CLONE_DISABLE(CMesh);
 
 public:
-	CMesh();
+	CMesh(bool bEngine = false);
 	~CMesh();
 };
 

@@ -4,15 +4,15 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 
-CPrefab::CPrefab()
-	: CAsset(ASSET_TYPE::PREFAB)
+CPrefab::CPrefab(bool bEngine)
+	: CAsset(ASSET_TYPE::PREFAB, bEngine)
 	, m_ProtoObject(nullptr)
 {
 
 }
 
 CPrefab::CPrefab(CGameObject* proto)
-	: CAsset(ASSET_TYPE::PREFAB)
+	: CAsset(ASSET_TYPE::PREFAB, false)
 	, m_ProtoObject(proto)
 {
 	m_ProtoObject->Transform()->SetRelativePos(0.f, 0.f, 0.f);

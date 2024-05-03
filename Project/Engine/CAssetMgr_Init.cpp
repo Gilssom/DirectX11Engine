@@ -33,7 +33,7 @@ void CAssetManager::CreateDefaultMesh()
 
 	UINT idx = 0;
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(&v, 1, &idx, 1);
 	AddAsset<CMesh>(L"PointMesh", pMesh);
 
@@ -72,7 +72,7 @@ void CAssetManager::CreateDefaultMesh()
 	// = 사각형 완성
 
 	// Rect Mesh 생성
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset<CMesh>(L"RectMesh", pMesh);
 	vecIdx.clear();
@@ -84,7 +84,7 @@ void CAssetManager::CreateDefaultMesh()
 	vecIdx.push_back(3);
 	vecIdx.push_back(0);
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset<CMesh>(L"RectMesh_Debug", pMesh);
 	vecVtx.clear();
@@ -123,7 +123,7 @@ void CAssetManager::CreateDefaultMesh()
 		vecIdx.push_back(i + 1);
 	}
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset<CMesh>(L"CircleMesh", pMesh);
 	vecIdx.clear();
@@ -134,7 +134,7 @@ void CAssetManager::CreateDefaultMesh()
 		vecIdx.push_back(i + 1);
 	}
 
-	pMesh = new CMesh;
+	pMesh = new CMesh(true);
 	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset<CMesh>(L"CircleMesh_Debug", pMesh);
 	vecVtx.clear();
@@ -151,9 +151,7 @@ void CAssetManager::CreateDefaultGraphicShader()
 {
 	// 경로 찾기 Manager 구현
 	wstring strPath = CPathManager::GetInst()->GetContentPath();
-
 	Ptr<CGraphicShader> pShader = nullptr;
-
 
 	// =======================
 	//	Std 2D Default Shader 
@@ -294,49 +292,49 @@ void CAssetManager::CreateDefaultMaterial()
 	Ptr<CMaterial> pMaterial = nullptr;
 
 	// Std 2D Material
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"Std2DMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// Std 2D Alpha Material
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"Std2DAlphaMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DAlphaBlendShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// Back Ground Material
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"BackGroundMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"Std2DAlphaBlendShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// Tile Map Material
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"TileMapMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"TileMapShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// Particle Render Material
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"ParticleMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"ParticleRenderShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// FilterMtrl
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"FilterMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"FilterShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// DistortionMtrl
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"DistortionMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"DistortionShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);
 
 	// Debug Shape Material
-	pMaterial = new CMaterial;
+	pMaterial = new CMaterial(true);
 	pMaterial->SetName(L"DebugShapeMaterial");
 	pMaterial->SetShader(FindAsset<CGraphicShader>(L"DebugShapeShader"));
 	AddAsset<CMaterial>(pMaterial->GetName(), pMaterial);

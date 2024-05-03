@@ -58,6 +58,7 @@ void CEngine::Progress()
 	// ====================
 	CTimeManager::GetInst()->Tick();
 	CKeyManager::GetInst()->Tick();
+	CAssetManager::GetInst()->Tick();
 
 
 	// Object Tick

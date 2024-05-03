@@ -75,7 +75,9 @@ void MeshRenderUI::Render_Tick()
 			vector<string> vecNames;
 			CAssetManager::GetInst()->GetAssetNames(ASSET_TYPE::MESH, vecNames);
 			pListUI->AddItem(vecNames);
-			pListUI->RegisterDoubleClickDelegate(this, (UI_DELEGATE1)&MeshRenderUI::SelectMesh);
+
+			UI_DELEGATE1 dele = (UI_DELEGATE1)&MeshRenderUI::SelectMesh;
+			pListUI->RegisterDoubleClickDelegate(this, dele);
 		}
 	}
 

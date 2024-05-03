@@ -7,15 +7,13 @@ class CMaterial : public CAsset
 {
 private:
 	Ptr<CGraphicShader>	m_Shader;
-
 	tMtrlConst			m_Const;
-
 	Ptr<CTexture>		m_arrTex[TEX_PARAM::END];
 
 	bool				m_bDynamic;
 
 public:
-	void SetShader(Ptr<CGraphicShader> shader) { m_Shader = shader; }
+	void SetShader(Ptr<CGraphicShader> shader);
 	Ptr<CGraphicShader> GetShader() { return m_Shader; }
 
 	template<typename T>
@@ -23,7 +21,7 @@ public:
 	void SetTexParam(TEX_PARAM param, Ptr<CTexture> tex);
 
 	void* GetScalarParam(SCALAR_PARAM param);
-	Ptr<CTexture> GetTexParam(TEX_PARAM texParam) { return m_arrTex[texParam]; }
+	Ptr<CTexture>& GetTexParam(TEX_PARAM texParam) { return m_arrTex[texParam]; }
 
 	bool IsDynamic() { return m_bDynamic; }
 
@@ -32,14 +30,14 @@ public:
 public:
 	void Binding();
 
-	virtual int Load(const wstring& FilePath) { return S_OK; }
-	virtual int Save(const wstring& FilePath) { return S_OK; }
+	virtual int Load(const wstring& FilePath);
+	virtual int Save(const wstring& FilePath);
 
 
 	CLONE(CMaterial);
 
 public:
-	CMaterial();
+	CMaterial(bool bEngine = false);
 	~CMaterial();
 };
 

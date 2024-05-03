@@ -11,12 +11,15 @@ class CAssetManager : public CSingleton<CAssetManager>
 private:
     // Asset 관리 > 8종류의 키값으로 관리
     map<wstring, Ptr<CAsset>>   m_mapAsset[(UINT)ASSET_TYPE::END];
-
+    bool                        m_AssetChanged;     // Asset 에 변경 사항이 생길 경우
 
 public:
     void Init();
+    void Tick() { m_AssetChanged = false; }
     void GetAssetNames(ASSET_TYPE type, _Out_ vector<string>& vecNames);
     const map<wstring, Ptr<CAsset>>& GetAssets(ASSET_TYPE type) { return m_mapAsset[(UINT)type]; }
+
+    bool IsAssetChanged() { return m_AssetChanged; }
 
     // bindFlag : D3D11_BIND_FLAG
     Ptr<CTexture> CreateTexture(const wstring& strKey, UINT width, UINT height
@@ -114,6 +117,8 @@ inline Ptr<T> CAssetManager::Load(const wstring& strKey, const wstring& strRelat
 
     AddAsset<T>(strKey, (T*)pAsset.Get());
 
+    m_AssetChanged = true;
+
     return (T*)pAsset.Get();
 }
 
@@ -149,4 +154,6 @@ inline void CAssetManager::AddAsset(const wstring& strKey, Ptr<T> pAsset)
 
     m_mapAsset[(UINT)type].insert(make_pair(strKey, pAsset.Get()));
     pAsset->m_Key = strKey;
+
+    m_AssetChanged = true;
 }

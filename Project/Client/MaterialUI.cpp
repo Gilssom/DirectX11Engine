@@ -37,6 +37,27 @@ void MaterialUI::Render_Tick()
 	ImGui::Text("Shader Name"); SAME_SET(110);
 	ImGui::InputText("##ShaderNameMaterialUI", (char*)strShaderName.c_str(), strShaderName.capacity(), ImGuiInputTextFlags_ReadOnly);
 
+	// Drag Drop
+	if (ImGui::BeginDragDropTarget())
+	{
+		const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Content");
+
+		if (nullptr != payload)
+		{
+			DWORD_PTR dwData = 0;
+			memcpy(&dwData, payload->Data, payload->DataSize);
+
+			Ptr<CAsset> pAsset = (CAsset*)dwData;
+			if (pAsset->GetAssetType() == ASSET_TYPE::GRAPHICS_SHADER)
+			{
+				Ptr<CGraphicShader> pShader = (CGraphicShader*)pAsset.Get();
+				pMaterial->SetShader(pShader);
+			}
+		}
+
+		ImGui::EndDragDropTarget();
+	}
+
 	// Shader 의 내부 수치까지 조절 가능하게 구현할 예정
 
 	// Material 이 참조하는 Shader 가 있다면
@@ -111,11 +132,37 @@ void MaterialUI::Render_Tick()
 			m_ParamDescMaxWidth = vDescWidth.x;
 		}
 
-		ParamUI::Param_Texture(TexParam[i].strDesc, pMaterial->GetTexParam(TexParam[i].Param));
+		// ListUI 가 더블클릭됐을때 호출 될 Delegate 등록
+		ParamUI::RegisterTextureDelegate(this, (UI_DELEGATE1)&MaterialUI::SelectTexture);
+
+		// 텍스쳐 파라미터 정보 출력
+		if (ParamUI::Param_Texture(TexParam[i].strDesc, pMaterial->GetTexParam(TexParam[i].Param)))
+		{
+			m_TargetParam = TexParam[i].Param;
+		}
+
+		ImGui::Text("");
 	}
 }
 
 void MaterialUI::TargetChanged()
 {
 	m_ParamDescMaxWidth = 0;
+}
+
+UINT MaterialUI::SelectTexture(DWORD_PTR selected)
+{
+	string* pStr = (string*)selected;
+
+	wstring strTexKey = ToWString(*pStr);
+
+	Ptr<CTexture> pTexture = CAssetManager::GetInst()->FindAsset<CTexture>(strTexKey);
+
+	Ptr<CMaterial> pMtrl = dynamic_cast<CMaterial*>(GetTarget().Get());
+
+	pMtrl->SetTexParam(m_TargetParam, pTexture);
+
+	SetFocus();
+
+	return 0;
 }

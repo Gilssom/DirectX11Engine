@@ -3,8 +3,8 @@
 
 #include "CDevice.h"
 
-CMesh::CMesh()
-	: CAsset(ASSET_TYPE::MESH)
+CMesh::CMesh(bool bEngine)
+	: CAsset(ASSET_TYPE::MESH, bEngine)
 	, m_VBdesc{}
 	, m_VtxCount(0)
 	, m_VtxSysMem(nullptr)

@@ -29,3 +29,12 @@ void CPathManager::Init()
 
 	wcscat_s(m_szContentPath, L"\\content\\");
 }
+
+const wstring CPathManager::GetRelativePath(const wstring& absolutePath)
+{
+	// m_szContentPath 길이 이후 부터 구하면 상대경로 추출이 가능
+	size_t len = wcslen(m_szContentPath);
+	wstring strRelativePath = absolutePath.substr(len, absolutePath.length() - len);
+
+	return strRelativePath;
+}

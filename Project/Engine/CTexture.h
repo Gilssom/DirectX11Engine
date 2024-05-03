@@ -53,7 +53,7 @@ public:
 
 
 public:
-	CTexture();
+	CTexture(bool bEngine = false);
 	~CTexture();
 
 	friend class CAssetManager;

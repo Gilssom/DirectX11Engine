@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "CAsset.h"
 
-
-CAsset::CAsset(ASSET_TYPE type)
+CAsset::CAsset(ASSET_TYPE type, bool bEngine)
 	: m_Type(type)
 	, m_RefCount(0)
+	, m_bEngine(false)
 {
 
 }
@@ -15,6 +15,7 @@ CAsset::CAsset(const CAsset& _Origin)
 	, m_RelativePath(_Origin.m_RelativePath)
 	, m_Type(_Origin.m_Type)
 	, m_RefCount(0)
+	, m_bEngine(false)
 {
 
 }

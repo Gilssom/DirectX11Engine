@@ -11,5 +11,5 @@ private:
 public:
     void Init();
     const wchar_t* GetContentPath() { return m_szContentPath; }
+    const wstring GetRelativePath(const wstring& absolutePath); // 절대경로 - 상대경로 추출
 };
-
