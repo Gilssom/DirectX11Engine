@@ -15,20 +15,21 @@ class CImGuiManager : public CSingleton<CImGuiManager>
 private:
     HWND                    m_hMainHwnd;
     map<string, EditorUI*>  m_mapUI;
-
     bool                    m_bDemo;
+    HANDLE                  m_hNotify;
 
 public:
     template<typename T>
     T* FindEditorUI(const string& strName);
-
+    
 public:
     int Init(HWND hwnd);
     void Tick();
 
 private:
     void CreateEditorUI();
-
+    void ObserveContent();
+    
 };
 
 template<typename T>

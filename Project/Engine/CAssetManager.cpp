@@ -2,6 +2,7 @@
 #include "CAssetManager.h"
 
 CAssetManager::CAssetManager()
+	: m_AssetChanged(false)
 {
 
 }

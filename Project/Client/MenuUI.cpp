@@ -220,5 +220,5 @@ wstring MenuUI::GetAssetDefaultName(wstring baseName)
             break;
     }
 
-    return wstring();
+    return szKey;
 }

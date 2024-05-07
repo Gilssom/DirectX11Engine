@@ -17,9 +17,10 @@
 #include "MenuUI.h"
 
 CImGuiManager::CImGuiManager()
-    : m_hMainHwnd(nullptr)
-    , m_mapUI{}
+    : m_mapUI{}
+    , m_hMainHwnd(nullptr)
     , m_bDemo(false)
+    , m_hNotify(nullptr)
 {
 
 }
@@ -81,6 +82,14 @@ int CImGuiManager::Init(HWND hwnd)
 
     CreateEditorUI();
 
+    // Content Folder 감시 기능
+    wstring strContentPath = CPathManager::GetInst()->GetContentPath();
+
+    // 변경점이 감지된 순간 알림 기능 객체 (파일 및 폴더 이름 변경, 파일 추가 및 삭제)
+    m_hNotify = FindFirstChangeNotification(strContentPath.c_str(), true
+            , FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME
+            | FILE_ACTION_ADDED | FILE_ACTION_REMOVED);
+
 	return S_OK;
 }
 
@@ -115,6 +124,9 @@ void CImGuiManager::Tick()
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
     }
+
+    // Content 변경 알림 확인
+    ObserveContent();
 }
 
 void CImGuiManager::CreateEditorUI()
@@ -140,4 +152,20 @@ void CImGuiManager::CreateEditorUI()
     pUI = new MenuUI;
     pUI->SetActive(true);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+}
+
+void CImGuiManager::ObserveContent()
+{
+    DWORD dwWaitStatus = WaitForSingleObject(m_hNotify, 0);
+
+    // 알림 활성화 체크 ( = WAIT_OBJECT_0 )
+    if (dwWaitStatus == WAIT_OBJECT_0)
+    {
+        // 만약 파일 및 폴더에 변경점이 생겼다면 재로딩 및 목록 갱신
+        ContentUI* pContentUI = FindEditorUI<ContentUI>("Content");
+        pContentUI->ReloadContent();
+        pContentUI->RenewContent();
+
+        FindNextChangeNotification(m_hNotify);
+    }
 }

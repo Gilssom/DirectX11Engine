@@ -4,7 +4,7 @@
 CAsset::CAsset(ASSET_TYPE type, bool bEngine)
 	: m_Type(type)
 	, m_RefCount(0)
-	, m_bEngine(false)
+	, m_bEngine(bEngine)
 {
 
 }

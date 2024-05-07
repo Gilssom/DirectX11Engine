@@ -21,6 +21,8 @@
 
 void CTestLevel::CreateTestLevel()
 {
+	CAssetManager::GetInst()->Load<CMaterial>(L"material\\Default Material 0.mtrl", L"material\\Default Material 0.mtrl");
+
 	// Prefab 제작 및 Asset Manager 에 등록
 	CreatePrefab();
 
@@ -272,7 +274,7 @@ void CTestLevel::CreateTestLevel()
 	//m_CurLevel->Init();
 
 	// Level Change System 을 이용해서 Level 을 전달해줄 것 (Task Manager)
-	ChangeLevel(m_CurLevel, LEVEL_STATE::PLAY);
+	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 }
 
 void CTestLevel::CreatePrefab()
