@@ -213,11 +213,16 @@ wstring MenuUI::GetAssetDefaultName(wstring baseName)
     int i = 0;
     while (true)
     {
+        wchar_t tempKey[255] = {};
         wcscpy_s(szKey, 255, baseName.c_str());
         swprintf_s(szKey, 255, szKey, i++);
+        wcscpy_s(tempKey, 255, szKey);
+        wcscat_s(tempKey, L".mtrl");
 
-        if (CAssetManager::GetInst()->FindAsset<CMaterial>(szKey) == nullptr)
+        if (CAssetManager::GetInst()->FindAsset<CMaterial>(tempKey) == nullptr)
+        {
             break;
+        }
     }
 
     return szKey;

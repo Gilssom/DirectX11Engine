@@ -27,6 +27,16 @@ void ChangeLevel(CLevel* nextLevel, LEVEL_STATE nextLevelState)
 	CTaskManager::GetInst()->AddTask(task);
 }
 
+// Asset 삭제 함수
+void DeleteAsset(Ptr<CAsset> asset)
+{
+	tTask task = {};
+	task.Type = TASK_TYPE::DELETE_ASSET;
+	task.dwParam_0 = (DWORD_PTR)asset.Get();
+
+	CTaskManager::GetInst()->AddTask(task);
+}
+
 // 오브젝트 유효성 체크
 bool IsValid(CGameObject*& object)
 {

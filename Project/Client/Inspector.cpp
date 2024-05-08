@@ -16,6 +16,7 @@
 #include "Light2DUI.h"
 #include "ParticleSystemUI.h"
 #include "TileMapUI.h"
+#include "ScriptUI.h"
 
 Inspector::Inspector()
 	: EditorUI("Inspector", "##Inspector")
@@ -55,6 +56,45 @@ void Inspector::SetTargetObject(CGameObject* target)
 			continue;
 
 		m_arrComUI[i]->SetTarget(m_TargetObject);
+	}
+
+	// 만약 Target Object 이 없다면 Script UI 전체 비활성화
+	if (m_TargetObject == nullptr)
+	{
+		for (size_t i = 0; i < m_vecScriptUI.size(); i++)
+		{
+			m_vecScriptUI[i]->SetActive(false);
+		}
+	}
+	else
+	{
+		// Object 가 Script 가 있는지 확인, 있으면 Script UI 활성화
+		const vector<CScript*>& vecScripts = m_TargetObject->GetScripts();
+
+		// Object Script 수 보다 Script UI 의 개수가 더 적다면, Script UI 를 추가로 생성
+		if (m_vecScriptUI.size() < vecScripts.size())
+		{
+			size_t iAddCount = vecScripts.size() - m_vecScriptUI.size();
+
+			for (size_t i = 0; i < iAddCount; i++)
+			{
+				// Script UI 추가 생성
+				ScriptUI* pScriptUI = nullptr;
+				pScriptUI = new ScriptUI;
+				pScriptUI->SetActive(false);
+				pScriptUI->SetSeperate(true);
+
+				m_vecScriptUI.push_back(pScriptUI);
+				AddChildUI(pScriptUI);
+			}
+		}
+
+		// 각 Script UI 에 각각의 Script 를 배정한다.
+		for (size_t i = 0; i < vecScripts.size(); i++)
+		{
+			m_vecScriptUI[i]->SetScript(vecScripts[i]);
+			m_vecScriptUI[i]->SetActive(true);
+		}
 	}
 }
 
@@ -106,6 +146,15 @@ void Inspector::CreateComponentUI()
 		m_arrComUI[i]->SetComponentType(true);
 		AddChildUI(m_arrComUI[i]);
 	}
+
+	// Script UI
+	ScriptUI* pScriptUI = nullptr;
+	pScriptUI = new ScriptUI;
+	pScriptUI->SetActive(false);
+	pScriptUI->SetSeperate(true);
+
+	m_vecScriptUI.push_back(pScriptUI);
+	AddChildUI(pScriptUI);
 }
 
 #include "MeshUI.h"

@@ -194,6 +194,9 @@ enum class TASK_TYPE
 	// Param_0 : Level Adress
 	// Param_1 : LEVEL_STATE
 	CHANGE_LEVEL,
+
+	// Param_0 : Asset Adress
+	DELETE_ASSET,
 };
 
 enum class SHADER_DOMAIN

@@ -109,6 +109,33 @@ void ContentUI::ReloadContent()
 
 	// Content 폴더내에 있는 Asset 의 상대경로 정보 삭제 (사용 끝)
 	m_vecContentName.clear();
+
+	// 로딩된 Asset 과 실제 파일 존재 여부를 체크
+	wstring strContent = CPathManager::GetInst()->GetContentPath();
+
+	for (UINT i = 0; i < (UINT)ASSET_TYPE::END; i++)
+	{
+		// Shader 의 경우는 제외
+		if ((UINT)ASSET_TYPE::GRAPHICS_SHADER == i || (UINT)ASSET_TYPE::COMPUTE_SHADER == i)
+		{
+			continue;
+		}
+
+		const map<wstring, Ptr<CAsset>>& mapAsset = CAssetManager::GetInst()->GetAssets((ASSET_TYPE)i);
+
+		for (const auto& pair : mapAsset)
+		{
+			// Engine 용 Asset 은 원본 파일이 존재하지 않는다.
+			if (pair.second->IsEngineAsset())
+				continue;
+
+			// 해당 파일이 존재하는지 체크
+			if (!exists(strContent + pair.second->GetRelativePath()))
+			{
+				DeleteAsset(pair.second);
+			}
+		}
+	}
 }
 
 void ContentUI::FindFileName(const wstring& strFolderPath)

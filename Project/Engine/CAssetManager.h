@@ -39,6 +39,8 @@ public:
     template<typename T>
     void AddAsset(const wstring& strKey, Ptr<T> pAsset);
 
+private:
+    void DeleteAsset(ASSET_TYPE type, const wstring& strKey);
 
 private:
     void CreateDefaultMesh();
@@ -46,6 +48,8 @@ private:
     void CreateDefaultMaterial();
     void CreateDefaultGraphicShader();
     void CreateDefaultComputeShader();
+
+    friend class CTaskManager;
 };
 
 // º¯¼ö ÅÛÇÃ¸´

@@ -67,7 +67,7 @@ public:
 		return *this;
 	}
 
-	T* operator->()
+	T* operator->() const
 	{
 		return m_Asset;
 	}

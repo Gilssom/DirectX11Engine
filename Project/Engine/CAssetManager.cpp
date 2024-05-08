@@ -56,3 +56,14 @@ void CAssetManager::GetAssetNames(ASSET_TYPE type, _Out_ vector<string>& vecName
 		vecNames.push_back(string(pair.first.begin(), pair.first.end()));
 	}
 }
+
+void CAssetManager::DeleteAsset(ASSET_TYPE type, const wstring& strKey)
+{
+	map<wstring, Ptr<CAsset>>::iterator iter = m_mapAsset[(UINT)type].find(strKey);
+
+	assert(iter != m_mapAsset[(UINT)type].end());
+
+	m_mapAsset[(UINT)type].erase(iter);
+
+	m_AssetChanged = true;
+}

@@ -8,6 +8,8 @@
 #include "CGameObject.h"
 #include "CCollider2D.h"
 
+#include "CAssetManager.h"
+
 CTaskManager::CTaskManager()
 	: m_ObjectEvent(false)
 {
@@ -110,6 +112,27 @@ void CTaskManager::ExecuteTask(tTask& task)
 			pNextLevel->ChangeState(NextLevelState);
 
 			m_ObjectEvent = true;
+		}
+		break;
+
+		// Param_0 : Asset Adress
+		case TASK_TYPE::DELETE_ASSET:
+		{
+			CAsset* pAsset = (CAsset*)task.dwParam_0;
+			int RefCount = pAsset->GetRefCount();
+
+			// 어디선가 해당 Asset 이 사용되고 있으면 확인용 Message
+			if (1 < RefCount)
+			{
+				int id = MessageBox(nullptr, L"해당 Asset이 다른곳에서 사용되고 있습니다.\n삭제를 하시겠습니까?"
+					, L"Asset 삭제 확인", MB_YESNO);
+
+				if (IDCANCEL == id)
+					break;
+			}
+
+			// OK 버튼을 누르면 삭제 진행
+			CAssetManager::GetInst()->DeleteAsset(pAsset->GetAssetType(), pAsset->GetKey());
 		}
 		break;
 	}

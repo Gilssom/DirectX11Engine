@@ -18,6 +18,9 @@ public:
 	ASSET_TYPE GetAssetType() { return m_Type; }
 	bool IsEngineAsset() { return m_bEngine; }
 
+	// 최소 "1" 이 Counting 되어 있음(최초 생성 Asset Manager 로 인해)
+	int GetRefCount() { return m_RefCount; }
+
 protected:
 	void SetRelativePath(const wstring& strPath) { m_RelativePath = strPath; }
 

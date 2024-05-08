@@ -47,7 +47,6 @@ using namespace std::filesystem;
 #include "define.h"
 #include "enum.h"
 #include "struct.h"
+#include "ptr.h"
 #include "func.h"
 #include "Singletone.h"
-
-#include "ptr.h"

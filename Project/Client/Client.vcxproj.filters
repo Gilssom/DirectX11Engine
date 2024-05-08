@@ -107,6 +107,9 @@
     <Filter Include="02. EditorUI\06. MenuUI">
       <UniqueIdentifier>{f63eced0-ee99-4c48-ae2c-f43fdedcba16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. EditorUI\01. Inspector\ComponentUI\09. ScriptUI">
+      <UniqueIdentifier>{b4d9247f-cbe5-420f-9a56-cf67129ad0ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -241,6 +244,9 @@
     <ClInclude Include="MenuUI.h">
       <Filter>02. EditorUI\06. MenuUI</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptUI.h">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\09. ScriptUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -373,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="MenuUI.cpp">
       <Filter>02. EditorUI\06. MenuUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptUI.cpp">
+      <Filter>02. EditorUI\01. Inspector\ComponentUI\09. ScriptUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
