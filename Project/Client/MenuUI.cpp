@@ -8,8 +8,10 @@
 #include <Engine\\CLayer.h>
 #include <Engine\\CGameObject.h>
 #include <Engine\\components.h>
+#include <Engine\\CScript.h>
 
 #include <Engine\\CPathManager.h>
+#include <Scripts\\CScriptManager.h>
 
 #include "CImGuiManager.h"
 #include "Inspector.h"
@@ -117,6 +119,8 @@ void MenuUI::GameObject()
             Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
             CGameObject* pTargetObj = pInspector->GetTargetObject();
 
+            ImGui::BeginDisabled(!pTargetObj);
+
             for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
             {
                 if (ImGui::MenuItem(COMPONENT_TYPE_STRING[i]))
@@ -165,10 +169,39 @@ void MenuUI::GameObject()
                     }
                 }
             }
+
+            ImGui::EndDisabled();
+
             pInspector->SetTargetObject(pTargetObj);
 
             ImGui::EndMenu();
+        }
 
+        if (ImGui::BeginMenu("Add Script"))
+        {
+            Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
+            CGameObject* pTargetObj = pInspector->GetTargetObject();
+
+            ImGui::BeginDisabled(!pTargetObj);
+
+            vector<string> vecScriptName;
+            CScriptManager::GetScriptsName(vecScriptName);
+
+            for (size_t i = 0; i < vecScriptName.size(); i++)
+            {
+                if (ImGui::MenuItem(vecScriptName[i].c_str()))
+                {
+                    CScript* pNewScript = CScriptManager::GetScript(vecScriptName[i]);
+                    pTargetObj->AddComponent(pNewScript);
+
+                    pInspector->SetTargetObject(pTargetObj);
+                    pInspector->SetFocus();
+                }
+            }
+
+            ImGui::EndDisabled();
+
+            ImGui::EndMenu();
         }
 
         ImGui::EndMenu();

@@ -4,7 +4,8 @@
 #include <Engine\CCamera.h>
 
 CCameraMoveScript::CCameraMoveScript()
-	: m_Speed(200.f)
+	: CScript(SCRIPT_TYPE::CAMERAMOVE)
+	, m_Speed(200.f)
 {
 
 }

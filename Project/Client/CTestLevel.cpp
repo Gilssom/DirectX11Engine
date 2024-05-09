@@ -21,8 +21,6 @@
 
 void CTestLevel::CreateTestLevel()
 {
-	CAssetManager::GetInst()->Load<CMaterial>(L"material\\Default Material 0.mtrl", L"material\\Default Material 0.mtrl");
-
 	// Prefab 제작 및 Asset Manager 에 등록
 	CreatePrefab();
 

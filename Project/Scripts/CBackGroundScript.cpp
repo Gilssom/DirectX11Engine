@@ -2,7 +2,8 @@
 #include "CBackGroundScript.h"
 
 CBackGroundScript::CBackGroundScript()
-	: m_Intence(0.f)
+	: CScript(SCRIPT_TYPE::BACKGROUND)
+	, m_Intence(0.f)
 {
 
 }

@@ -4,7 +4,8 @@
 #include <Engine\\CKeyManager.h>
 
 CEditorCameraScript::CEditorCameraScript()
-	: m_Speed(200.f)
+	: CScript(-1)
+	, m_Speed(200.f)
 {
 
 }

@@ -2,7 +2,8 @@
 #include "CMissileScript.h"
 
 CMissileScript::CMissileScript()
-	: m_Speed(500.f)
+	: CScript(SCRIPT_TYPE::MISSILE)
+	, m_Speed(500.f)
 {
 
 }

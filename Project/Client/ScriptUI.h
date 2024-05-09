@@ -15,10 +15,13 @@ private:
 	CScript* m_TargetScript;
 
 public:
-	void SetScript(CScript* script) { m_TargetScript = script; }
+	void SetScript(CScript* script);
 
 public:
 	virtual void Render_Tick() override;
+
+public:
+	void Render_ScriptName();
 
 public:
 	ScriptUI();

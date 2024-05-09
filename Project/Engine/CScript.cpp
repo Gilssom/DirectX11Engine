@@ -3,8 +3,10 @@
 
 #include "CTransform.h"
 
-CScript::CScript()
+
+CScript::CScript(UINT scriptType)
 	: CComponent(COMPONENT_TYPE::SCRIPT)
+	, m_ScriptType(scriptType)
 {
 }
 
