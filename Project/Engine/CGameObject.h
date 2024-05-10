@@ -57,6 +57,8 @@ public:
 	bool IsDead() { return m_Dead; }
 	void Destroy();
 
+	int GetLayerIdx() { return m_LayerIdx; }
+
 private:
 	void SetLayerIdx(int idx) { m_LayerIdx = idx; }
 

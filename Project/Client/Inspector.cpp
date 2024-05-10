@@ -83,6 +83,7 @@ void Inspector::SetTargetObject(CGameObject* target)
 				pScriptUI = new ScriptUI;
 				pScriptUI->SetActive(false);
 				pScriptUI->SetSeperate(true);
+				pScriptUI->SetComponentType(true);
 
 				m_vecScriptUI.push_back(pScriptUI);
 				AddChildUI(pScriptUI);
@@ -94,6 +95,15 @@ void Inspector::SetTargetObject(CGameObject* target)
 		{
 			m_vecScriptUI[i]->SetScript(vecScripts[i]);
 			m_vecScriptUI[i]->SetActive(true);
+		}
+
+		// 만약 Script 가 하나라도 없으면 전체 비활성화
+		if (vecScripts.size() == 0)
+		{
+			for (size_t i = 0; i < m_vecScriptUI.size(); i++)
+			{
+				m_vecScriptUI[i]->SetActive(false);
+			}
 		}
 	}
 }
@@ -148,13 +158,14 @@ void Inspector::CreateComponentUI()
 	}
 
 	// Script UI
-	ScriptUI* pScriptUI = nullptr;
+	/*ScriptUI* pScriptUI = nullptr;
 	pScriptUI = new ScriptUI;
 	pScriptUI->SetActive(false);
 	pScriptUI->SetSeperate(true);
+	pScriptUI->SetComponentType(true);
 
 	m_vecScriptUI.push_back(pScriptUI);
-	AddChildUI(pScriptUI);
+	AddChildUI(pScriptUI);*/
 }
 
 #include "MeshUI.h"

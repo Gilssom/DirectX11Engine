@@ -33,6 +33,9 @@
     <ClInclude Include="CScriptManager.h">
       <Filter>ScriptManager</Filter>
     </ClInclude>
+    <ClInclude Include="CTestScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="CScriptManager.cpp">
       <Filter>ScriptManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CTestScript.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

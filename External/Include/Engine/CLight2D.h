@@ -28,6 +28,9 @@ public:
 public:
 	virtual void FinalTick() override;
 
+	virtual void SaveToLevelFile(FILE* file) override;
+	virtual void LoadFromLevelFile(FILE* file) override;
+
 	CLONE(CLight2D);
 
 public:

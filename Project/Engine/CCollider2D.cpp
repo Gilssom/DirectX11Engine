@@ -151,3 +151,23 @@ void CCollider2D::EndOverlap(CCollider2D* otherCollider)
 		vecScripts[i]->EndOverlap(this, otherCollider->GetOwner(), otherCollider);
 	}
 }
+
+void CCollider2D::SaveToLevelFile(FILE* file)
+{
+	fwrite(&m_Offset, sizeof(Vec3), 1, file);
+	fwrite(&m_Scale, sizeof(Vec3), 1, file);
+	fwrite(&m_Rotation, sizeof(Vec3), 1, file);
+	fwrite(&m_Absolute, sizeof(bool), 1, file);
+	fwrite(&m_Active, sizeof(bool), 1, file);
+	fwrite(&m_SemiDeactive, sizeof(bool), 1, file);
+}
+
+void CCollider2D::LoadFromLevelFile(FILE* file)
+{
+	fread(&m_Offset, sizeof(Vec3), 1, file);
+	fread(&m_Scale, sizeof(Vec3), 1, file);
+	fread(&m_Rotation, sizeof(Vec3), 1, file);
+	fread(&m_Absolute, sizeof(bool), 1, file);
+	fread(&m_Active, sizeof(bool), 1, file);
+	fread(&m_SemiDeactive, sizeof(bool), 1, file);
+}

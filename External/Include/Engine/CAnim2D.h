@@ -44,6 +44,8 @@ public:
 	void Binding();
 	static void Clear();
 
+	void SaveToLevelFile(FILE* file);
+	void LoadFromLevelFile(FILE* file);
 
 	CLONE(CAnim2D);
 

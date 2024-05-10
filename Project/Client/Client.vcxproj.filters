@@ -110,6 +110,9 @@
     <Filter Include="02. EditorUI\01. Inspector\ComponentUI\09. ScriptUI">
       <UniqueIdentifier>{b4d9247f-cbe5-420f-9a56-cf67129ad0ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Manager\04. LevelSaveLoad">
+      <UniqueIdentifier>{98626deb-cc76-428e-a356-5f30ed4b0288}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -247,6 +250,9 @@
     <ClInclude Include="ScriptUI.h">
       <Filter>02. EditorUI\01. Inspector\ComponentUI\09. ScriptUI</Filter>
     </ClInclude>
+    <ClInclude Include="CLevelSaveLoad.h">
+      <Filter>01. Manager\04. LevelSaveLoad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -382,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="ScriptUI.cpp">
       <Filter>02. EditorUI\01. Inspector\ComponentUI\09. ScriptUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelSaveLoad.cpp">
+      <Filter>01. Manager\04. LevelSaveLoad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

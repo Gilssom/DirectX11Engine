@@ -20,7 +20,7 @@ void ScriptUI::SetScript(CScript* script)
 {
 	m_TargetScript = script;
 
-	string strScriptName = CScriptManager::GetScriptName(m_TargetScript);
+	string strScriptName = ToString(CScriptManager::GetScriptName(m_TargetScript));
 
 	SetName(strScriptName.c_str());
 }
@@ -32,7 +32,7 @@ void ScriptUI::Render_Tick()
 	// 담당한 Script 의 Property 정보를 확인
 	const vector<tScriptProperty>& vecProperty = m_TargetScript->GetScriptProperty();
 
-	ParamUI::SetDescWidth(120);
+	ParamUI::SetDescWidth(140);
 
 	for (size_t i = 0; i < vecProperty.size(); i++)
 	{
@@ -63,8 +63,8 @@ void ScriptUI::Render_ScriptName()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(2.f / 7.0f, 0.7f, 0.7f));
 	ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(2.f / 7.0f, 0.8f, 0.8f));
 
-	string strScriptName = CScriptManager::GetScriptName(m_TargetScript);
-	ImGui::Button(strScriptName.c_str());
+	wstring strScriptName = CScriptManager::GetScriptName(m_TargetScript);
+	ImGui::Button(ToString(strScriptName).c_str());
 
 	ImGui::PopStyleColor(3);
 	ImGui::PopID();

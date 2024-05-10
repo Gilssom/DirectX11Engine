@@ -72,6 +72,9 @@ private:
 	void Render_postprocess();
 
 public:
+	virtual void SaveToLevelFile(FILE* file) override;
+	virtual void LoadFromLevelFile(FILE* file) override;
+
 	CLONE(CCamera);
 
 public:

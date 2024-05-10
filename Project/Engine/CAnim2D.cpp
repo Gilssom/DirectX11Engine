@@ -177,3 +177,40 @@ void CAnim2D::Load(const wstring& relativeFolderPath)
 
 	fclose(pFile);
 }
+
+void CAnim2D::SaveToLevelFile(FILE* file)
+{
+	// 애니메이션의 이름 저장
+	SaveWString(GetName(), file);
+
+	// 프레임 개수와 정보 저장 (vector Container 의 특징)
+	size_t frameCount = m_vecFrame.size();
+	fwrite(&frameCount, sizeof(size_t), 1, file);
+	fwrite(m_vecFrame.data(), sizeof(tAnim2DFrame), m_vecFrame.size(), file);
+
+	// BackGround 크기 저장
+	fwrite(&m_BackGroundSize, sizeof(Vec2), 1, file);
+
+	// 참조하던 Atlas Texture 정보 저장
+	SaveAssetRef(m_AtlasTex, file);
+}
+
+void CAnim2D::LoadFromLevelFile(FILE* file)
+{
+	// 애니메이션의 이름 로드
+	wstring Name;
+	LoadWString(Name, file);
+	SetName(Name);
+
+	// 프레임 개수와 정보 로드 (vector Container 의 특징)
+	size_t frameCount = 0;
+	fread(&frameCount, sizeof(size_t), 1, file);
+	m_vecFrame.resize(frameCount); // resize 와 resurve 차이 파악
+	fread(m_vecFrame.data(), sizeof(tAnim2DFrame), m_vecFrame.size(), file);
+
+	// BackGround 크기 로드
+	fread(&m_BackGroundSize, sizeof(Vec2), 1, file);
+
+	// 참조하던 Atlas Texture 정보 로드
+	LoadAssetRef(m_AtlasTex, file);
+}

@@ -184,16 +184,17 @@ void MenuUI::GameObject()
 
             ImGui::BeginDisabled(!pTargetObj);
 
-            vector<string> vecScriptName;
-            CScriptManager::GetScriptsName(vecScriptName);
+            vector<wstring> vecScriptName;
+            CScriptManager::GetScriptInfo(vecScriptName);
 
             for (size_t i = 0; i < vecScriptName.size(); i++)
             {
-                if (ImGui::MenuItem(vecScriptName[i].c_str()))
+                string scriptName = ToString(vecScriptName[i]);
+
+                if (ImGui::MenuItem(scriptName.c_str()))
                 {
                     CScript* pNewScript = CScriptManager::GetScript(vecScriptName[i]);
                     pTargetObj->AddComponent(pNewScript);
-
                     pInspector->SetTargetObject(pTargetObj);
                     pInspector->SetFocus();
                 }

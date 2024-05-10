@@ -8,11 +8,11 @@
 #include <Engine\\CCollider2D.h>
 
 CPlayerScript::CPlayerScript()
-	: CScript(SCRIPT_TYPE::PLAYER)
+	: CScript(SCRIPT_TYPE::PLAYERSCRIPT)
 	, m_Speed(300.f)
 	, m_TargetMonster(nullptr)
 {
-	//AddScriptProperty(PROPERTY_TYPE::FLOAT, )
+	AddScriptProperty(PROPERTY_TYPE::FLOAT, "Speed", &m_Speed);
 }
 
 CPlayerScript::~CPlayerScript()

@@ -132,3 +132,19 @@ Vec3 CTransform::GetWorldRotation()
 {
 	return Vec3();
 }
+
+void CTransform::SaveToLevelFile(FILE* file)
+{
+	fwrite(&m_RelativePos, sizeof(Vec3), 1, file);
+	fwrite(&m_RelativeScale, sizeof(Vec3), 1, file);
+	fwrite(&m_RelativeRotation, sizeof(Vec3), 1, file);
+	fwrite(&m_Absolute, sizeof(bool), 1, file);
+}
+
+void CTransform::LoadFromLevelFile(FILE* file)
+{
+	fread(&m_RelativePos, sizeof(Vec3), 1, file);
+	fread(&m_RelativeScale, sizeof(Vec3), 1, file);
+	fread(&m_RelativeRotation, sizeof(Vec3), 1, file);
+	fread(&m_Absolute, sizeof(bool), 1, file);
+}

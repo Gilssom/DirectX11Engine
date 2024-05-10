@@ -38,7 +38,7 @@ void TreeNode::Render_Tick()
 		iFlag |= ImGuiTreeNodeFlags_Leaf;
 
 		if(m_bFrame)
-			name = "   " + name;
+			name = "       " + name;
 	}
 
 	if (ImGui::TreeNodeEx(name.c_str(), iFlag))

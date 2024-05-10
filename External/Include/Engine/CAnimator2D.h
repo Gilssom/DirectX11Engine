@@ -24,6 +24,8 @@ public:
 	virtual void FinalTick() override;
 	void Binding();
 
+	virtual void SaveToLevelFile(FILE* file) override;
+	virtual void LoadFromLevelFile(FILE* file) override;
 
 	CLONE(CAnimator2D);
 
