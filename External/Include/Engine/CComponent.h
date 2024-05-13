@@ -36,8 +36,8 @@ public:
 	GET_OTHER_COMPONENT(ParticleSystem);
 
 
-	virtual void SaveToLevelFile(FILE* file) {};
-	virtual void LoadFromLevelFile(FILE* file) {};
+	virtual void SaveToLevelFile(FILE* file) = 0;
+	virtual void LoadFromLevelFile(FILE* file) = 0;
 
 	// 반환 Type 재명시 (부모의 반환타입을 무조건 따라갈 필요 X)
 	virtual CComponent* Clone() = 0;

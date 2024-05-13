@@ -12,8 +12,8 @@ class CStructuredBuffer;
 class CTileMap : public CRenderComponent
 {
 private:
-    UINT                m_Row;               // Tile Row Size
-    UINT                m_Col;               // Tile Colum Size
+    UINT                m_Row;               // Tile Row Count
+    UINT                m_Col;               // Tile Colum Count
     Vec2                m_TileEachSize;      // 각 타일 1개의 크기 (인게임 내의 크기)
 
     Ptr<CTexture>       m_Atlas;             // Use Atlas Texture

@@ -25,7 +25,7 @@ private:
 
 public:
 	void SetParticleTexture(Ptr<CTexture> tex) { m_ParticleTex = tex; }
-
+	void SetMaxParticleCount(UINT max);
 
 private:
 	void CalculateSpawnCount();

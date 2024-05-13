@@ -36,5 +36,9 @@ private:
 	void CollisionBtwCollider2D(CCollider2D* leftCol, CCollider2D* rightCol);
 
 	bool IsCollision(CCollider2D* leftCol, CCollider2D* rightCol);
+
+public:
+	void SaveToLevelFile(FILE* file);
+	void LoadToLevelFile(FILE* file);
 };
 

@@ -13,6 +13,8 @@
 #include <Engine\\CPathManager.h>
 #include <Scripts\\CScriptManager.h>
 
+#include "CLevelSaveLoad.h"
+
 #include "CImGuiManager.h"
 #include "Inspector.h"
 #include "ContentUI.h"
@@ -65,12 +67,21 @@ void MenuUI::Level()
     {
         if (ImGui::MenuItem("Save Level"))
         {
-
+            CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+            if (pCurLevel != nullptr)
+            {
+                wstring strLevelPath = CPathManager::GetInst()->GetContentPath();
+                strLevelPath += L"Level\\test.lv";
+                CLevelSaveLoad::SaveLevel(pCurLevel, strLevelPath);
+            }
         }
 
         if (ImGui::MenuItem("Load Level"))
         {
-
+            wstring strLevelPath = CPathManager::GetInst()->GetContentPath();
+            strLevelPath += L"Level\\test.lv";
+            CLevel* pLoadedLevel = CLevelSaveLoad::LoadLevel(strLevelPath);
+            ChangeLevel(pLoadedLevel, LEVEL_STATE::STOP);
         }
 
         ImGui::Separator();

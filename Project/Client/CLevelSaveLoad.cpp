@@ -7,6 +7,9 @@
 #include <Engine\\CGameObject.h>
 #include <Engine\\components.h>
 #include <Engine\\CCollisionManager.h>
+#include <Engine\\CScript.h>
+
+#include <Scripts\\CScriptManager.h>
 
 void CLevelSaveLoad::SaveLevel(CLevel* level, const wstring& filePath)
 {
@@ -44,6 +47,9 @@ void CLevelSaveLoad::SaveLevel(CLevel* level, const wstring& filePath)
 		}
 	}
 
+	// 충돌체 정보 저장
+	CCollisionManager::GetInst()->SaveToLevelFile(pFile);
+
 	fclose(pFile);
 }
 
@@ -64,6 +70,9 @@ void CLevelSaveLoad::SaveGameObject(CGameObject* object, FILE* file)
 		COMPONENT_TYPE type = pComponent->GetComponentType();
 		fwrite(&type, sizeof(UINT), 1, file);
 
+		// Component Name
+		SaveWString(pComponent->GetName(), file);
+
 		// Component Type 에 따라 각자의 정보들을 저장
 		pComponent->SaveToLevelFile(file);
 	}
@@ -72,8 +81,32 @@ void CLevelSaveLoad::SaveGameObject(CGameObject* object, FILE* file)
 	fwrite(&end, sizeof(UINT), 1, file);
 
 	// Script
+	const vector<CScript*> vecScripts = object->GetScripts();
+	size_t scriptCount = vecScripts.size();
+
+	// Script 개수 정보
+	fwrite(&scriptCount, sizeof(size_t), 1, file);
+
+	// 모든 Script 정보 저장
+	for (size_t i = 0; i < vecScripts.size(); i++)
+	{
+		wstring scriptName = CScriptManager::GetScriptName(vecScripts[i]);
+		SaveWString(scriptName, file);
+		vecScripts[i]->SaveToLevelFile(file);
+	}
 
 	// Child Object
+	const vector<CGameObject*>& vecChild = object->GetChildren();
+
+	// 자식 오브젝트 개수 저장
+	size_t childCount = vecChild.size();
+	fwrite(&childCount, sizeof(size_t), 1, file);
+
+	// 자식 오브젝트 개수 만큼 재귀적으로 저장
+	for (size_t i = 0; i < childCount; i++)
+	{
+		SaveGameObject(vecChild[i], file);
+	}
 }
 
 CLevel* CLevelSaveLoad::LoadLevel(const wstring& filePath)
@@ -116,6 +149,8 @@ CLevel* CLevelSaveLoad::LoadLevel(const wstring& filePath)
 		}
 	}
 
+	// 충돌체 정보 로드
+	CCollisionManager::GetInst()->LoadToLevelFile(pFile);
 
 	fclose(pFile);
 
@@ -186,13 +221,40 @@ CGameObject* CLevelSaveLoad::LoadGameObject(FILE* file)
 			break;
 		}
 
+		// 저장된 Component Name 확인
+		LoadWString(Name, file);
+		pComponent->SetName(Name);
+
 		pObject->AddComponent(pComponent);
 		pComponent->LoadFromLevelFile(file);
 	}
 
 	// Script
+	// 저장된 Script 개수 확인
+	size_t scriptCount = 0;
+	fread(&scriptCount, sizeof(size_t), 1, file);
+
+	// 저장된 Script 개수만큼 저장된 모든 정보 확인
+	for (size_t i = 0; i < scriptCount; i++)
+	{
+		wstring scriptName;
+		LoadWString(scriptName, file);
+		CScript* pScript = CScriptManager::GetScript(scriptName);
+		pObject->AddComponent(pScript);
+		pScript->LoadFromLevelFile(file);
+	}
 
 	// Child Object
+	// 저장된 자식 오브젝트 개수 확인
+	size_t childCount = 0;
+	fread(&childCount, sizeof(size_t), 1, file);
+
+	// 확인된 자식 오브젝트 개수 만큼 로드(자식의 자식도 순차적으로 로드)
+	for (size_t i = 0; i < childCount; i++)
+	{
+		CGameObject* pChild = LoadGameObject(file);
+		pObject->AddChild(pChild);
+	}
 
 	return pObject;
 }

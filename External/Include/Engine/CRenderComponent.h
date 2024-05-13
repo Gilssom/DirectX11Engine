@@ -18,7 +18,6 @@ private:
 public:
 	virtual void Render() = 0;
 
-
 public:
 	void SetMesh(Ptr<CMesh> mesh) { m_Mesh = mesh; }
 	Ptr<CMesh> GetMesh() { return m_Mesh; }
@@ -29,6 +28,9 @@ public:
 	// 동적 재질을 생성할 수 있는 조건은 해당 Level 이 Play 상태이여야 한다.
 	Ptr<CMaterial> GetDynamicMaterial();
 	void RestoreMaterial();
+
+	virtual void SaveToLevelFile(FILE* file) override;
+	virtual void LoadFromLevelFile(FILE* file) override;
 
 public:
 	CRenderComponent(COMPONENT_TYPE type);

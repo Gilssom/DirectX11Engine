@@ -23,6 +23,9 @@ public:
 	virtual void EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider) override;
 
 public:
+	virtual void SaveToLevelFile(FILE* file) override;
+	virtual void LoadFromLevelFile(FILE* file) override;
+
 	CLONE(CPlayerScript);
 
 public:

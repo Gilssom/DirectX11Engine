@@ -72,3 +72,17 @@ void CRenderComponent::RestoreMaterial()
 	m_CurMaterial = m_SharedMaterial;
 	m_DynamicMaterial = nullptr;
 }
+
+void CRenderComponent::SaveToLevelFile(FILE* file)
+{
+	SaveAssetRef(m_Mesh, file);
+	SaveAssetRef(m_SharedMaterial, file);
+}
+
+void CRenderComponent::LoadFromLevelFile(FILE* file)
+{
+	LoadAssetRef(m_Mesh, file);
+	LoadAssetRef(m_SharedMaterial, file);
+
+	SetMaterial(m_SharedMaterial);
+}

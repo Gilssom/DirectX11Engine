@@ -112,3 +112,17 @@ void CPlayerScript::EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObj
 
 }
 #pragma endregion
+
+void CPlayerScript::SaveToLevelFile(FILE* file)
+{
+	fwrite(&m_Speed, sizeof(float), 1, file);
+	SaveAssetRef(m_ParticlePrefab, file);
+	SaveAssetRef(m_MissilePrefab, file);
+}
+
+void CPlayerScript::LoadFromLevelFile(FILE* file)
+{
+	fread(&m_Speed, sizeof(float), 1, file);
+	LoadAssetRef(m_ParticlePrefab, file);
+	LoadAssetRef(m_MissilePrefab, file);
+}

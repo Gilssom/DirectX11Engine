@@ -26,11 +26,15 @@ void CTestLevel::CreateTestLevel()
 
 	// Level
 	CLevel* m_CurLevel = nullptr;
+
 	m_CurLevel = new CLevel;
 	m_CurLevel->GetLayer(0)->SetName(L"Default");
 	m_CurLevel->GetLayer(1)->SetName(L"Player");
 	m_CurLevel->GetLayer(2)->SetName(L"Monster");
 	m_CurLevel->GetLayer(3)->SetName(L"BackGround");
+
+	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	return;
 
 	// 오브젝트에 컴포넌트 등록 후, 컴포넌트의 함수에 접근 후 세팅
 
@@ -272,7 +276,7 @@ void CTestLevel::CreateTestLevel()
 	//m_CurLevel->Init();
 
 	// Level Change System 을 이용해서 Level 을 전달해줄 것 (Task Manager)
-	ChangeLevel(m_CurLevel, LEVEL_STATE::PLAY);
+	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 }
 
 void CTestLevel::CreatePrefab()

@@ -10,6 +10,8 @@ CTileMap::CTileMap()
 	: CRenderComponent(COMPONENT_TYPE::TILEMAP)
 	, m_Row(1)
 	, m_Col(1)
+	, m_AtlasMaxRow(0)
+	, m_AtlasMaxCol(0)
 	, m_TileEachSize(Vec2(32.f, 32.f))
 {
 	SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
@@ -108,7 +110,9 @@ void CTileMap::SetTileEachSize(Vec2 size)
 void CTileMap::SetAtlasTexture(Ptr<CTexture> tex)
 {
 	m_Atlas = tex;
-	m_AtlasResolution = Vec2(m_Atlas->GetWidth(), m_Atlas->GetHeight());
+
+	if(m_Atlas != nullptr)
+		m_AtlasResolution = Vec2(m_Atlas->GetWidth(), m_Atlas->GetHeight());
 }
 
 void CTileMap::SetAtlasTileSize(Vec2 tileSize)
@@ -122,4 +126,51 @@ void CTileMap::SetAtlasTileSize(Vec2 tileSize)
 	// 아틀라스 텍스처에 타일이 몇행 몇열 존재하는지 확인
 	m_AtlasMaxCol = m_Atlas->GetWidth() / m_AtlasTileEachSize.x;
 	m_AtlasMaxRow = m_Atlas->GetHeight() / m_AtlasTileEachSize.y;
+}
+
+void CTileMap::SaveToLevelFile(FILE* file)
+{
+	CRenderComponent::SaveToLevelFile(file);
+
+	fwrite(&m_Row, sizeof(UINT), 1, file);
+	fwrite(&m_Col, sizeof(UINT), 1, file);
+	fwrite(&m_TileEachSize, sizeof(Vec2), 1, file);
+
+	SaveAssetRef(m_Atlas, file);
+
+	fwrite(&m_AtlasTileEachSize, sizeof(Vec2), 1, file);
+
+	size_t i = m_vecTileInfo.size();
+	fwrite(&i, sizeof(size_t), 1, file);
+
+	for (size_t i = 0; i < m_vecTileInfo.size(); i++)
+	{
+		fwrite(&m_vecTileInfo[i], sizeof(tTileInfo), 1, file);
+	}
+}
+
+void CTileMap::LoadFromLevelFile(FILE* file)
+{
+	CRenderComponent::LoadFromLevelFile(file);
+
+	fread(&m_Row, sizeof(UINT), 1, file);
+	fread(&m_Col, sizeof(UINT), 1, file);
+	fread(&m_TileEachSize, sizeof(Vec2), 1, file);
+	SetRowCol(m_Row, m_Col);
+
+	LoadAssetRef(m_Atlas, file);
+	SetAtlasTexture(m_Atlas);
+
+	fread(&m_AtlasTileEachSize, sizeof(Vec2), 1, file);
+	SetTileEachSize(m_AtlasTileEachSize);
+
+	size_t vecSize = 0;
+	fread(&vecSize, sizeof(size_t), 1, file);
+
+	for (size_t i = 0; i < vecSize; i++)
+	{
+		tTileInfo info = {};
+		fread(&info, sizeof(tTileInfo), 1, file);
+		m_vecTileInfo.push_back(info);
+	}
 }

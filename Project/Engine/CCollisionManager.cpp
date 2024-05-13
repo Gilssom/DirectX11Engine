@@ -261,3 +261,13 @@ bool CCollisionManager::IsCollision(CCollider2D* leftCol, CCollider2D* rightCol)
 
 	return true;
 }
+
+void CCollisionManager::SaveToLevelFile(FILE* file)
+{
+	fwrite(m_Matrix, sizeof(UINT), MAX_LAYER, file);
+}
+
+void CCollisionManager::LoadToLevelFile(FILE* file)
+{
+	fread(m_Matrix, sizeof(UINT), MAX_LAYER, file);
+}

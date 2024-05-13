@@ -105,25 +105,32 @@ inline Ptr<T> CAssetManager::Load(const wstring& strKey, const wstring& strRelat
         return (T*)pAsset.Get();
     }
 
-    wstring strFullPath = CPathManager::GetInst()->GetContentPath();
-    strFullPath += strRelativePath;
-
-    pAsset = new T;
-
-    if (FAILED(pAsset->Load(strFullPath)))
+    if constexpr (std::is_same_v<T, CComputeShader> || std::is_same_v<T, CGraphicShader>)
     {
-        MessageBox(nullptr, strFullPath.c_str(), L"에셋 로딩 실패", MB_OK);
         return nullptr;
     }
+    else
+    {
+        wstring strFullPath = CPathManager::GetInst()->GetContentPath();
+        strFullPath += strRelativePath;
 
-    // 본인 상대경로 세팅
-    pAsset->m_RelativePath = strRelativePath;
+        pAsset = new T;
 
-    AddAsset<T>(strKey, (T*)pAsset.Get());
+        if (FAILED(pAsset->Load(strFullPath)))
+        {
+            MessageBox(nullptr, strFullPath.c_str(), L"에셋 로딩 실패", MB_OK);
+            return nullptr;
+        }
 
-    m_AssetChanged = true;
+        // 본인 상대경로 세팅
+        pAsset->m_RelativePath = strRelativePath;
 
-    return (T*)pAsset.Get();
+        AddAsset<T>(strKey, (T*)pAsset.Get());
+
+        m_AssetChanged = true;
+
+        return (T*)pAsset.Get();
+    }
 }
 
 template<typename T>

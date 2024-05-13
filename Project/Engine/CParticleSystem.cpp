@@ -165,6 +165,16 @@ void CParticleSystem::Render()
 	m_ModuleBuffer->Clear_SRV();
 }
 
+void CParticleSystem::SetMaxParticleCount(UINT max)
+{
+	m_MaxParticle = max;
+
+	if (m_ParticleBuffer->GetElementCount() < m_MaxParticle)
+	{
+		m_ParticleBuffer->Create(sizeof(tParticle), m_MaxParticle, SB_TYPE::SRV_UAV, false);
+	}
+}
+
 void CParticleSystem::CalculateSpawnCount()
 {
 	m_Time += DT;
@@ -210,4 +220,31 @@ void CParticleSystem::CalculateSpawnCount()
 
 	// SpawnCount Buffer РќДо
 	m_SpawnCountBuffer->SetData(&count);
+}
+
+void CParticleSystem::SaveToLevelFile(FILE* file)
+{
+	CRenderComponent::SaveToLevelFile(file);
+
+	SaveAssetRef<CComputeShader>((CComputeShader*)m_TickCS.Get(), file);
+	SaveAssetRef(m_ParticleTex, file);
+
+	fwrite(&m_MaxParticle, sizeof(UINT), 1, file);
+	fwrite(&m_Module, sizeof(tParticleModule), 1, file);
+}
+
+void CParticleSystem::LoadFromLevelFile(FILE* file)
+{
+	CRenderComponent::LoadFromLevelFile(file);
+
+	Ptr<CComputeShader> pTickCs = m_TickCS.Get();
+	LoadAssetRef(pTickCs, file);
+	m_TickCS = (CParticleTickCS*)pTickCs.Get();
+
+	LoadAssetRef(m_ParticleTex, file);
+
+	fread(&m_MaxParticle, sizeof(UINT), 1, file);
+	SetMaxParticleCount(m_MaxParticle);
+
+	fread(&m_Module, sizeof(tParticleModule), 1, file);
 }
