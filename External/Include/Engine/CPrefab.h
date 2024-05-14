@@ -3,6 +3,9 @@
 
 class CGameObject;
 
+typedef void (*PREFAB_SAVE_FUNC)(CGameObject*, FILE*);
+typedef CGameObject* (*PREFAB_LOAD_FUNC)(FILE*);
+
 class CPrefab : public CAsset
 {
 	// Level Manager 에서 하드코딩으로 Object 를 생성 및 설정을 할 것이 아니라,
@@ -13,6 +16,14 @@ class CPrefab : public CAsset
 	// 얕은 복사로는 해결이 불가능 (복사 대상의 정보 전체를 복제를 해야함. 복사X )
 
 private:
+	static PREFAB_SAVE_FUNC SAVE_FUNC;
+	static PREFAB_LOAD_FUNC LOAD_FUNC;
+
+public:
+	static void SetPrefabSaveFunc(PREFAB_SAVE_FUNC func) { SAVE_FUNC = func; }
+	static void SetPrefabLoadFunc(PREFAB_LOAD_FUNC func) { LOAD_FUNC = func; }
+
+private:
 	CGameObject* m_ProtoObject;
 
 public:
@@ -21,8 +32,8 @@ public:
 	CLONE(CPrefab);
 
 private:
-	int Load(const wstring& FilePath) override { return S_OK; }
-	int Save(const wstring& FilePath) override { return S_OK; }
+	int Save(const wstring& FilePath) override;
+	int Load(const wstring& FilePath) override;
 
 public:
 	CPrefab(bool bEngine = false);

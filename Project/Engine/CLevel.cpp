@@ -78,6 +78,12 @@ void CLevel::ChangeState(LEVEL_STATE nextState)
 		Init();
 	}
 
+	// Stop 또는 Pause 에서 Play 로 전환될 때 Render Mode 를 Play Mode 로 변경
+	if ((m_State == LEVEL_STATE::STOP || m_State == LEVEL_STATE::PAUSE) && nextState == LEVEL_STATE::PLAY)
+	{
+		CRenderManager::GetInst()->ChangeRenderMode(RENDER_MODE::PLAY);
+	}
+
 	m_State = nextState;
 }
 

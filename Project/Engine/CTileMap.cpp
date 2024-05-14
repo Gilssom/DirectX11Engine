@@ -156,13 +156,10 @@ void CTileMap::LoadFromLevelFile(FILE* file)
 	fread(&m_Row, sizeof(UINT), 1, file);
 	fread(&m_Col, sizeof(UINT), 1, file);
 	fread(&m_TileEachSize, sizeof(Vec2), 1, file);
-	SetRowCol(m_Row, m_Col);
 
 	LoadAssetRef(m_Atlas, file);
-	SetAtlasTexture(m_Atlas);
 
 	fread(&m_AtlasTileEachSize, sizeof(Vec2), 1, file);
-	SetTileEachSize(m_AtlasTileEachSize);
 
 	size_t vecSize = 0;
 	fread(&vecSize, sizeof(size_t), 1, file);
@@ -173,4 +170,8 @@ void CTileMap::LoadFromLevelFile(FILE* file)
 		fread(&info, sizeof(tTileInfo), 1, file);
 		m_vecTileInfo.push_back(info);
 	}
+
+	SetAtlasTexture(m_Atlas);
+	SetTileEachSize(m_AtlasTileEachSize);
+	SetRowCol(m_Row, m_Col);
 }

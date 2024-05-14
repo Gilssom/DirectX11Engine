@@ -5,6 +5,7 @@ void SpawnObject(int layerIdx, CGameObject* object);
 
 class CLevel;
 void ChangeLevel(CLevel* nextLevel, LEVEL_STATE nextLevelState);
+void ChangeLevelState(LEVEL_STATE curLevelState);
 
 class CAsset;
 void DeleteAsset(Ptr<CAsset> asset);

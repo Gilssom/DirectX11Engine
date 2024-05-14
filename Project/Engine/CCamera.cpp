@@ -47,7 +47,8 @@ CCamera::~CCamera()
 
 void CCamera::Begin()
 {
-	
+	// Level 시작 시 Level 안의 Camera 들이 Render Manager 에 등록
+	CRenderManager::GetInst()->RegisterCamera(this, m_CamPriority);
 }
 
 void CCamera::FinalTick()
@@ -182,8 +183,7 @@ void CCamera::SetCameraPriority(int priority)
 	// 카메라 우선순위 설정
 	m_CamPriority = priority;
 
-	// Level 시작 시 Level 안의 Camera 들이 Render Manager 에 등록
-	CRenderManager::GetInst()->RegisterCamera(this, m_CamPriority);
+	//CRenderManager::GetInst()->RegisterCamera(this, m_CamPriority);
 }
 
 void CCamera::LayerCheck(int layerIdx)
@@ -269,5 +269,5 @@ void CCamera::LoadFromLevelFile(FILE* file)
 	fread(&m_Scale, sizeof(float), 1, file);
 	fread(&m_LayerCheck, sizeof(UINT), 1, file);
 
-	SetCameraPriority(m_CamPriority);
+	//SetCameraPriority(m_CamPriority);
 }

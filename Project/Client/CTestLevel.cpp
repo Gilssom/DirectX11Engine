@@ -33,8 +33,8 @@ void CTestLevel::CreateTestLevel()
 	m_CurLevel->GetLayer(2)->SetName(L"Monster");
 	m_CurLevel->GetLayer(3)->SetName(L"BackGround");
 
-	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
-	return;
+	//ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	//return;
 
 	// 오브젝트에 컴포넌트 등록 후, 컴포넌트의 함수에 접근 후 세팅
 
@@ -175,8 +175,8 @@ void CTestLevel::CreateTestLevel()
 	pBackGround->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
-	pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_0.png", L"texture\\ElvenGard\\ElvenGard_BackGround_0.png"));
+	//pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	//pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_0.png", L"texture\\ElvenGard\\ElvenGard_BackGround_0.png"));
 
 	m_CurLevel->AddObject(3, pBackGround, false);
 
@@ -190,8 +190,8 @@ void CTestLevel::CreateTestLevel()
 	pBackGround1->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround1->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pBackGround1->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
-	pBackGround1->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_1.png", L"texture\\ElvenGard\\ElvenGard_BackGround_1.png"));
+	//pBackGround1->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	//pBackGround1->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_1.png", L"texture\\ElvenGard\\ElvenGard_BackGround_1.png"));
 
 	m_CurLevel->AddObject(3, pBackGround1, false);
 
@@ -205,8 +205,8 @@ void CTestLevel::CreateTestLevel()
 	pBackGround2->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround2->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pBackGround2->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
-	pBackGround2->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_2.png", L"texture\\ElvenGard\\ElvenGard_BackGround_2.png"));
+	//pBackGround2->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	//pBackGround2->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_2.png", L"texture\\ElvenGard\\ElvenGard_BackGround_2.png"));
 
 	m_CurLevel->AddObject(3, pBackGround2, false);
 
@@ -232,6 +232,50 @@ void CTestLevel::CreateTestLevel()
 	pSmithFireObject->Animator2D()->Play(L"SMITHFIRE_ANIM", true);
 
 	m_CurLevel->AddObject(3, pSmithFireObject, false);
+
+	// Gate Portal Object
+	CGameObject* pGatePortalObject = new CGameObject;
+	pGatePortalObject->SetName(L"GatePortal");
+	pGatePortalObject->AddComponent(new CTransform);
+	pGatePortalObject->AddComponent(new CMeshRender);
+	pGatePortalObject->AddComponent(new CAnimator2D);
+
+	pGatePortalObject->Transform()->SetRelativePos(Vec3(-427.f, 70.2f, 89.f));
+	pGatePortalObject->Transform()->SetRelativeScale(Vec3(800.f, 600.f, 1.f));
+
+	pGatePortalObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pGatePortalObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
+
+	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\Gate_Portal.png", L"texture\\ElvenGard\\Gate_Portal.png");
+	//pGatePortalObject->Animator2D()->CreateAnimation(L"GATE_PORTAL", pAtlas, Vec2(0.f, 0.f), Vec2(400.f, 300.f), Vec2(400.f, 300.f), 29, 12);
+	//pGatePortalObject->Animator2D()->FindAnimation(L"GATE_PORTAL")->Save(L"Animation\\");
+
+	pGatePortalObject->Animator2D()->LoadAnimation(L"Animation\\GATE_PORTAL.anim");
+	pGatePortalObject->Animator2D()->Play(L"GATE_PORTAL", true);
+
+	m_CurLevel->AddObject(3, pGatePortalObject, false);
+
+	// Linus Object
+	CGameObject* pLinus = new CGameObject;
+	pLinus->SetName(L"Linus");
+	pLinus->AddComponent(new CTransform);
+	pLinus->AddComponent(new CMeshRender);
+	pLinus->AddComponent(new CAnimator2D);
+
+	pLinus->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	pLinus->Transform()->SetRelativeScale(Vec3(800.f, 600.f, 1.f));
+
+	pLinus->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pLinus->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
+
+	//Ptr<CTexture> pAtlas2 = CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\npc_linus.png", L"texture\\ElvenGard\\npc_linus.png");
+	//pLinus->Animator2D()->CreateAnimation(L"LINUS", pAtlas2, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 12, 10);
+	//pLinus->Animator2D()->FindAnimation(L"LINUS")->Save(L"Animation\\");
+
+	pLinus->Animator2D()->LoadAnimation(L"Animation\\LINUS.anim");
+	pLinus->Animator2D()->Play(L"LINUS", true);
+
+	m_CurLevel->AddObject(3, pLinus, false);
 
 	// Test Object
 	/*CGameObject* pTestObject = new CGameObject;

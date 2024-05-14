@@ -31,6 +31,7 @@ private:
 
 public:
 	void RegisterCamera(CCamera* camera, int priority);
+	void ClearRegisterCamera() { m_vecCam.clear(); }
 	void RegisterEditorCamera(CCamera* editorCam) { m_EditorCam = editorCam; }
 
 	vector<CCamera*>& GetRegisteredCamera() { return m_vecCam; }

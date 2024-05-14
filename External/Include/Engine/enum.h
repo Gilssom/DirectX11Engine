@@ -195,6 +195,9 @@ enum class TASK_TYPE
 	// Param_1 : LEVEL_STATE
 	CHANGE_LEVEL,
 
+	// Param_0 : LEVEL_STATE
+	CHANGE_LEVEL_STATE,
+
 	// Param_0 : Asset Adress
 	DELETE_ASSET,
 };

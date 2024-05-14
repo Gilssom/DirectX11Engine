@@ -4,6 +4,9 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 
+PREFAB_SAVE_FUNC CPrefab::SAVE_FUNC = nullptr;
+PREFAB_LOAD_FUNC CPrefab::LOAD_FUNC = nullptr;
+
 CPrefab::CPrefab(bool bEngine)
 	: CAsset(ASSET_TYPE::PREFAB, bEngine)
 	, m_ProtoObject(nullptr)
@@ -35,4 +38,29 @@ CPrefab::~CPrefab()
 CGameObject* CPrefab::Instantiate()
 {
 	return m_ProtoObject->Clone();
+}
+
+int CPrefab::Save(const wstring& FilePath)
+{
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, FilePath.c_str(), L"wb");
+
+	SAVE_FUNC(m_ProtoObject, pFile);
+
+	fclose(pFile);
+
+	return S_OK;
+}
+
+int CPrefab::Load(const wstring& FilePath)
+{
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, FilePath.c_str(), L"rb");
+	assert(pFile);
+
+	m_ProtoObject = LOAD_FUNC(pFile);
+
+	fclose(pFile);
+
+	return S_OK;
 }

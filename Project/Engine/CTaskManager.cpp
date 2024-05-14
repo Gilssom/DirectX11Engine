@@ -9,6 +9,7 @@
 #include "CCollider2D.h"
 
 #include "CAssetManager.h"
+#include "CRenderManager.h"
 
 CTaskManager::CTaskManager()
 	: m_ObjectEvent(false)
@@ -108,10 +109,23 @@ void CTaskManager::ExecuteTask(tTask& task)
 			CLevel* pNextLevel = (CLevel*)task.dwParam_0;
 			LEVEL_STATE NextLevelState = (LEVEL_STATE)task.dwParam_1;
 
+			// Level 이 변경될 때 마다 이전 Level 에 있던 Camera 등록 목록을 초기화
+			CRenderManager::GetInst()->ClearRegisterCamera();
+
 			CLevelManager::GetInst()->ChangeLevel(pNextLevel);
 			pNextLevel->ChangeState(NextLevelState);
 
 			m_ObjectEvent = true;
+		}
+		break;
+
+		// Param_0 : LEVEL_STATE
+		case TASK_TYPE::CHANGE_LEVEL_STATE:
+		{
+			CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+			LEVEL_STATE NextLevelState = (LEVEL_STATE)task.dwParam_0;
+
+			pCurLevel->ChangeState(NextLevelState);
 		}
 		break;
 

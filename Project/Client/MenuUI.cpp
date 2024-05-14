@@ -2,15 +2,14 @@
 #include "MenuUI.h"
 
 #include <Engine\\CEngine.h>
-
 #include <Engine\\CLevelManager.h>
 #include <Engine\\CLevel.h>
 #include <Engine\\CLayer.h>
 #include <Engine\\CGameObject.h>
 #include <Engine\\components.h>
 #include <Engine\\CScript.h>
-
 #include <Engine\\CPathManager.h>
+
 #include <Scripts\\CScriptManager.h>
 
 #include "CLevelSaveLoad.h"
@@ -86,20 +85,51 @@ void MenuUI::Level()
 
         ImGui::Separator();
 
+        CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+        bool IsCurLevel = pCurLevel;
+        bool IsPlayState = pCurLevel->GetState() == LEVEL_STATE::PLAY;
+        bool IsPauseState = pCurLevel->GetState() == LEVEL_STATE::PAUSE;
+        bool IsStopState = pCurLevel->GetState() == LEVEL_STATE::STOP;
+
+        // Play
+        ImGui::BeginDisabled(IsPlayState);
         if (ImGui::MenuItem("Play"))
         {
+            ChangeLevelState(LEVEL_STATE::PLAY);
 
+            if (IsStopState)
+            {
+                CLevel* pLevel = CLevelManager::GetInst()->GetCurrentLevel();
+                wstring LevelPath = CPathManager::GetInst()->GetContentPath();
+                LevelPath += L"Level\\temp.lv";
+                CLevelSaveLoad::SaveLevel(pLevel, LevelPath);
+            }
         }
+        ImGui::EndDisabled();
 
+        // Pause
+        ImGui::BeginDisabled(!IsPlayState);
         if (ImGui::MenuItem("Pause"))
         {
-
+            ChangeLevelState(LEVEL_STATE::PAUSE);
         }
+        ImGui::EndDisabled();
 
+        // Stop
+        ImGui::BeginDisabled(IsStopState);
         if (ImGui::MenuItem("Stop"))
         {
+            wstring LevelPath = CPathManager::GetInst()->GetContentPath();
+            LevelPath += L"Level\\temp.lv";
+            CLevel* pNextLevel = CLevelSaveLoad::LoadLevel(LevelPath);
 
+            ChangeLevel(pNextLevel, LEVEL_STATE::STOP);
+
+            // Inspector Target Object Clear
+            Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
+            pInspector->SetTargetObject(nullptr);
         }
+        ImGui::EndDisabled();
 
         ImGui::EndMenu();
     }

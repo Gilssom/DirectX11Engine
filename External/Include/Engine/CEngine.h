@@ -15,6 +15,6 @@ private:
 
 public:
 	HWND GetMainWnd() { return m_hMainHwnd; }
-	int Init(HWND hwnd, Vec2 resolution);
+	int Init(HWND hwnd, Vec2 resolution, PREFAB_SAVE_FUNC save, PREFAB_LOAD_FUNC load);
 	void Progress();
 };

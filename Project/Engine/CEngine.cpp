@@ -23,7 +23,7 @@ CEngine::~CEngine()
 
 }
 
-int CEngine::Init(HWND hwnd, Vec2 resolution)
+int CEngine::Init(HWND hwnd, Vec2 resolution, PREFAB_SAVE_FUNC save, PREFAB_LOAD_FUNC load)
 {
 	m_hMainHwnd = hwnd;
 	m_Resolution = resolution;
@@ -47,6 +47,10 @@ int CEngine::Init(HWND hwnd, Vec2 resolution)
 	CAssetManager::GetInst()->Init();
 	CRenderManager::GetInst()->Init();
 	CLevelManager::GetInst()->Init();
+
+	// Prefab Save & Load 함수 설정
+	CPrefab::SetPrefabSaveFunc(save);
+	CPrefab::SetPrefabLoadFunc(load);
 
 	return S_OK;
 }

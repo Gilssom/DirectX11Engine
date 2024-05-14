@@ -34,6 +34,7 @@
 #include "CEditorManager.h"
 #include "CImGuiManager.h"
 #include "ImGui\\imgui.h"
+#include "CLevelSaveLoad.h"
 
 
 #define MAX_LOADSTRING 100
@@ -74,7 +75,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UpdateWindow(hWnd);
 
     // CEngine 초기화
-    if (FAILED(CEngine::GetInst()->Init(hWnd, Vec2{1280, 768})))
+    if (FAILED(CEngine::GetInst()->Init(hWnd, Vec2(1280, 768)
+        , (PREFAB_SAVE_FUNC)&CLevelSaveLoad::SaveGameObject
+        , (PREFAB_LOAD_FUNC)&CLevelSaveLoad::LoadGameObject)))
     {
         MessageBox(nullptr, L"엔진 초기화 실패", L"엔진 초기화 실패", MB_OK);
         return 0;
@@ -84,15 +87,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Editor 초기화
     CEditorManager::GetInst()->Init();
 
-    // 임시 Level 생성
-    CTestLevel::CreateTestLevel();
-
     // ImGui 초기화
     if (FAILED(CImGuiManager::GetInst()->Init(hWnd)))
     {
         MessageBox(nullptr, L"ImGui 초기화 실패", L"ImGui 초기화 실패", MB_OK);
         return 0;
     }
+
+    // 임시 Level 생성
+    CTestLevel::CreateTestLevel();
 #endif
 
 

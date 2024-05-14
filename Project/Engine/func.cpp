@@ -27,6 +27,16 @@ void ChangeLevel(CLevel* nextLevel, LEVEL_STATE nextLevelState)
 	CTaskManager::GetInst()->AddTask(task);
 }
 
+// Level 상태 변경 함수
+void ChangeLevelState(LEVEL_STATE curLevelState)
+{
+	tTask task = {};
+	task.Type = TASK_TYPE::CHANGE_LEVEL_STATE;
+	task.dwParam_0 = (DWORD_PTR)curLevelState;
+
+	CTaskManager::GetInst()->AddTask(task);
+}
+
 // Asset 삭제 함수
 void DeleteAsset(Ptr<CAsset> asset)
 {
