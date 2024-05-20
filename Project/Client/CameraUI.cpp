@@ -60,43 +60,25 @@ void CameraUI::Render_Tick()
     {
         // 카메라 우선순위 값을 변경했다면
         int CurPriority = pCam->GetCameraPriority();
-        vecCam[CurPriority] = nullptr;
-        pCam->SetCameraPriority(iPriority);
-    }
 
-    vector<string> vecCamName;
+        // 변경하려는 카메라 우선순위 값이랑 동일한 카메라가 해당 Level 안에 있는지 확인 후 진행한다.
+        CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+        vector<CGameObject*> vecCamObject;
+        pCurLevel->FindObjectByComponent(COMPONENT_TYPE::CAMERA, vecCamObject);
 
-    for (size_t i = 0; i < vecCam.size(); i++)
-    {
-        char buffer[256] = {};
-        sprintf_s(buffer, 256, "Priority %d : ", i);
-        string Name = buffer;
-
-        if (vecCam[i] == nullptr)
-            vecCamName.push_back(Name + "null");
-        else
-            vecCamName.push_back(Name + ToString(vecCam[i]->GetOwner()->GetName()));
-    }
-
-    string strCurCamName;
-    char buffer[256] = {};
-    sprintf_s(buffer, 256, "Priority %d : ", iPriority);
-    strCurCamName = buffer;
-    strCurCamName += ToString(pCam->GetOwner()->GetName());
-
-    ImGui::Text(""); SAME;
-    if (ImGui::BeginCombo("##RegisteredCamera", strCurCamName.c_str(), 0))
-    {
-        for (size_t i = 0; i < vecCamName.size(); i++)
+        // 동일한 우선순위를 가지고 있는 다른 카메라가 있다면
+        // 변경하려는 카메라의 우선순위 값을 먼저 주고,
+        for (size_t i = 0; i < vecCamObject.size(); i++)
         {
-            const bool is_selected = strCurCamName == vecCamName[i];
-            if (ImGui::Selectable(vecCamName[i].c_str(), is_selected))
+            if (vecCamObject[i]->Camera()->GetCameraPriority() == iPriority)
             {
-                int a = 0;
+                vecCamObject[i]->Camera()->SetCameraPriority(CurPriority);
+                break;
             }
         }
 
-        ImGui::EndCombo();
+        // 현재 카메라는 새로운 우선순위로 변경
+        pCam->SetCameraPriority(iPriority);
     }
 
 

@@ -170,7 +170,7 @@ int CDevice::CreateView()
 
 	// Swap Chain 의 텍스처를 렌더타겟으로 지정하고, 
 	// 새로 만든 DepthStencil 용 텍스처를 깊이 저장용 텍스처로 지정한다.
-	m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get()); // 깊이 텍스쳐는 무조건 하나밖에 쓸수 없기 때문에 이중포인터로 안넘긴다.
+	//m_Context->OMSetRenderTargets(1, m_RTTex->GetRTV().GetAddressOf(), m_DSTex->GetDSV().Get()); // 깊이 텍스쳐는 무조건 하나밖에 쓸수 없기 때문에 이중포인터로 안넘긴다.
 	
 	// 여기서 DepthStencil View 란?
 	// Api 에서 더블 버퍼링 시스템으로 화면에 텍스처를 그려주는 방법이 있었다.

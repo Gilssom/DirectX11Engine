@@ -6,10 +6,14 @@ class TreeUI;
 class TreeNode
 {
 private:
+	static	UINT	g_ID;
+
+private:
 	TreeUI*				m_Owner;
 	TreeNode*			m_ParentNode;
 	vector<TreeNode*>	m_vecChildNode;
 	string				m_Name;
+	string				m_ID;
 
 	DWORD_PTR			m_Data;
 
@@ -40,7 +44,14 @@ public:
 		, m_Data(0)
 		, m_bFrame(false)
 		, m_bSelected(false)
-	{}
+	{
+		// 모든 노드들은 고유한 ID 를 존재해야 한다.
+		char buffer[50] = {};
+
+		_itoa_s(g_ID++, buffer, 10);
+		m_ID = buffer;
+	}
+
 	TreeNode(const string& name, DWORD_PTR data)
 		: m_Owner(nullptr)
 		, m_ParentNode(nullptr)
@@ -48,7 +59,13 @@ public:
 		, m_Data(data)
 		, m_bFrame(false)
 		, m_bSelected(false)
-	{}
+	{
+		char buffer[50] = {};
+
+		_itoa_s(g_ID++, buffer, 10);
+		m_ID = buffer;
+	}
+
 	~TreeNode();
 
 	friend class TreeUI;

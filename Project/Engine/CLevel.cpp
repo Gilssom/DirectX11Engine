@@ -104,3 +104,53 @@ CGameObject* CLevel::FindObjectByName(const wstring& name)
 
 	return nullptr;
 }
+
+void CLevel::FindObjectByName(const wstring& name, vector<CGameObject*>& vecObject)
+{
+	for (size_t i = 0; i < MAX_LAYER; i++)
+	{
+		const vector<CGameObject*>& vecObjects = m_arrLayer[i]->GetObjects();
+
+		for (size_t j = 0; j < vecObjects.size(); j++)
+		{
+			if (vecObjects[j]->GetName() == name)
+			{
+				vecObject.push_back(vecObjects[j]);
+			}
+		}
+	}
+}
+
+CGameObject* CLevel::FindObjectByComponent(COMPONENT_TYPE type, const wstring& name)
+{
+	for (size_t i = 0; i < MAX_LAYER; i++)
+	{
+		const vector<CGameObject*>& vecObjects = m_arrLayer[i]->GetObjects();
+
+		for (size_t j = 0; j < vecObjects.size(); j++)
+		{
+			if (vecObjects[j]->GetComponent(type))
+			{
+				return vecObjects[j];
+			}
+		}
+	}
+
+	return nullptr;
+}
+
+void CLevel::FindObjectByComponent(COMPONENT_TYPE type, vector<CGameObject*>& vecObject)
+{
+	for (size_t i = 0; i < MAX_LAYER; i++)
+	{
+		const vector<CGameObject*>& vecObjects = m_arrLayer[i]->GetObjects();
+
+		for (size_t j = 0; j < vecObjects.size(); j++)
+		{
+			if (vecObjects[j]->GetComponent(type))
+			{
+				vecObject.push_back(vecObject[j]);
+			}
+		}
+	}
+}

@@ -4,6 +4,8 @@
 // ===========
 //  Tree Node
 // ===========
+UINT TreeNode::g_ID = 0;
+
 TreeNode::~TreeNode()
 {
 	Safe_Del_Vector(m_vecChildNode);
@@ -11,7 +13,19 @@ TreeNode::~TreeNode()
 
 void TreeNode::Render_Tick()
 {
-	string name = m_Name;
+	// Tree Node 의 출력 이름 설정
+	string name;
+
+	if (m_Name.empty())
+	{
+		name = string("None") + "##" + m_ID;
+	}
+	else
+	{
+		// 같은 이름을 가진 Node 도 고유한 ID 가 있기 때문에 Tree 에 존재할 수 있게 된다.
+		name = m_Name + "##" + m_ID;
+	}
+
 
 	// 화살표를 누르거나, 더블클릭한 경우에만 자식 노드를 펼친다.
 	UINT iFlag = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;

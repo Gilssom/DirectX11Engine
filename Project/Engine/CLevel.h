@@ -20,7 +20,18 @@ public:
 	void AddObject(UINT layerIdx, CGameObject* object, bool childMove = false);
 	CLayer* GetLayer(int layerIdx) { return m_arrLayer[layerIdx]; }
 	LEVEL_STATE GetState() { return m_State; }
+
+	// 특정 이름을 가진 GameObject 를 검색(제일 먼저 검출된 Object 반환)
 	CGameObject* FindObjectByName(const wstring& name);
+
+	// 특정 이름을 가진 GameObject 를 모두 검색
+	void FindObjectByName(const wstring& name, vector<CGameObject*>& vecObject );
+
+	// 특정 Component 를 가진 GameObject 를 검색(제일 먼저 검출된 Object 반환)
+	CGameObject* FindObjectByComponent(COMPONENT_TYPE type, const wstring& name);
+
+	// 특정 Component 를 가진 GameObject 를 모두 검색
+	void FindObjectByComponent(COMPONENT_TYPE type, vector<CGameObject*>& vecObject);
 
 private:
 	void ChangeState(LEVEL_STATE nextState);

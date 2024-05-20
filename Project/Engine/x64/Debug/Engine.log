@@ -62,5 +62,7 @@
   .\Project\Engine\tilemap.fx
   .\Project\Engine\value.fx
   10개 파일이 복사되었습니다.
-  CCollider2D.cpp
-  Engine.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib
+  CDevice.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(122,44): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(123,45): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

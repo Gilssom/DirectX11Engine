@@ -22,8 +22,8 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::Begin()
 {
-	m_ParticlePrefab = CAssetManager::GetInst()->FindAsset<CPrefab>(L"ParticlePrefab");
-	m_MissilePrefab = CAssetManager::GetInst()->FindAsset<CPrefab>(L"MissilePrefab");
+	m_ParticlePrefab = CAssetManager::GetInst()->FindAsset<CPrefab>(L"Prefab\\ParticlePrefab.pref");
+	m_MissilePrefab = CAssetManager::GetInst()->FindAsset<CPrefab>(L"Prefab\\Missile.pref");
 }
 
 void CPlayerScript::Tick()
@@ -77,7 +77,7 @@ void CPlayerScript::Tick()
 
 	//	//vCurPos.z += DT * m_Speed;
 	//}
-	if (KEY_TAP(KEY::SPACE))
+	if (KEY_TAP(KEY::ALT))
 	{
 		// Collider 활성화 - 비활성화 구현 완료
 		//if (Collider2D()->IsActive())

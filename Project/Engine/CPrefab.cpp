@@ -32,7 +32,8 @@ CPrefab::CPrefab(const CPrefab& other)
 
 CPrefab::~CPrefab()
 {
-	delete m_ProtoObject;
+	if(m_ProtoObject != nullptr)
+		delete m_ProtoObject;
 }
 
 CGameObject* CPrefab::Instantiate()
@@ -56,7 +57,10 @@ int CPrefab::Load(const wstring& FilePath)
 {
 	FILE* pFile = nullptr;
 	_wfopen_s(&pFile, FilePath.c_str(), L"rb");
-	assert(pFile);
+
+	if (pFile == nullptr)
+		return E_FAIL;
+	//assert(pFile);
 
 	m_ProtoObject = LOAD_FUNC(pFile);
 

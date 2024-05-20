@@ -27,14 +27,14 @@ void CTestLevel::CreateTestLevel()
 	CreatePrefab();
 
 #pragma region Empty Level
-	//CLevel* m_CurLevel = nullptr;
-	//m_CurLevel = new CLevel;
-	//m_CurLevel->GetLayer(0)->SetName(L"Default");
-	//m_CurLevel->GetLayer(1)->SetName(L"Player");
-	//m_CurLevel->GetLayer(2)->SetName(L"Monster");
-	//m_CurLevel->GetLayer(3)->SetName(L"BackGround");
-
-	//ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	//CLevel* m_NewLevel = nullptr;
+	//m_NewLevel = new CLevel;
+	//m_NewLevel->GetLayer(0)->SetName(L"Default");
+	//m_NewLevel->GetLayer(1)->SetName(L"Player");
+	//m_NewLevel->GetLayer(2)->SetName(L"Monster");
+	//m_NewLevel->GetLayer(3)->SetName(L"BackGround");
+	//
+	//ChangeLevel(m_NewLevel, LEVEL_STATE::STOP);
 	//return;
 #pragma endregion
 
@@ -308,8 +308,11 @@ void CTestLevel::CreatePrefab()
 	pParticleObject->Transform()->SetRelativePos(Vec3(-675.f, 0.f, 500.f));
 	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\SmokeParticleTest.png", L"texture\\particle\\SmokeParticleTest.png"));
 
-	CAssetManager::GetInst()->AddAsset<CPrefab>(L"ParticlePrefab", new CPrefab(pParticleObject));
+	Ptr<CPrefab> prefab = new CPrefab(pParticleObject);
+	CAssetManager::GetInst()->AddAsset<CPrefab>(L"ParticlePrefab", prefab);
 
+	wstring filePath = CPathManager::GetInst()->GetContentPath();
+	prefab->Save(filePath + L"Prefab\\Particle.pref");
 
 	// Missile Prefab
 	CGameObject* pNewObj = new CGameObject;
@@ -321,5 +324,7 @@ void CTestLevel::CreatePrefab()
 	pNewObj->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pNewObj->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
 
-	CAssetManager::GetInst()->AddAsset<CPrefab>(L"MissilePrefab", new CPrefab(pNewObj));
+	prefab = new CPrefab(pNewObj);
+	CAssetManager::GetInst()->AddAsset<CPrefab>(L"MissilePrefab", prefab);
+	prefab->Save(filePath + L"Prefab\\Missile.pref");
 }

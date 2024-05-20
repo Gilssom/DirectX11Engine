@@ -29,11 +29,11 @@ private:
 public:
 	CGameObject* Instantiate();
 
-	CLONE(CPrefab);
+public:
+	virtual int Save(const wstring& FilePath) override;
+	virtual int Load(const wstring& FilePath) override;
 
-private:
-	int Save(const wstring& FilePath) override;
-	int Load(const wstring& FilePath) override;
+	CLONE(CPrefab);
 
 public:
 	CPrefab(bool bEngine = false);

@@ -86,53 +86,72 @@ void CKeyManager::Init()
 
 void CKeyManager::Tick()
 {
-	for (size_t i = 0; i < m_VecKey.size(); ++i)
-	{
-        // Key 가 눌렸다.
-        if (GetAsyncKeyState(g_KeyValue[i]) & 0x8001)
+    if (GetFocus() == nullptr)
+    {
+        for (size_t i = 0; i < m_VecKey.size(); i++)
         {
-            // 이전에 안눌려있었다.
-            if (!m_VecKey[i].PrevPressed)
+            if (KEY_STATE::TAP == m_VecKey[i].State || KEY_STATE::PRESSED == m_VecKey[i].State)
             {
-                // 처음 누른 상태
-                m_VecKey[i].State = KEY_STATE::TAP;
-            }
-            else
-            {
-                // 계속 누르고 있는 상태
-                m_VecKey[i].State = KEY_STATE::PRESSED;
-            }
-
-            m_VecKey[i].PrevPressed = true;
-        }
-
-        else
-        {
-            // 해당 Key 가 안눌려있다.
-            if (m_VecKey[i].PrevPressed)
-            {
-                // 이전 Frame 에서는 눌려있었다. = 뗀 상태
                 m_VecKey[i].State = KEY_STATE::RELEASED;
             }
-            else
+            else if (KEY_STATE::RELEASED == m_VecKey[i].State)
             {
-                // 이전에도 안눌려 있었고 지금도 안눌려있다.
                 m_VecKey[i].State = KEY_STATE::NONE;
             }
 
             m_VecKey[i].PrevPressed = false;
         }
-	}
+    }
+    else
+    {
+        for (size_t i = 0; i < m_VecKey.size(); ++i)
+        {
+            // Key 가 눌렸다.
+            if (GetAsyncKeyState(g_KeyValue[i]) & 0x8001)
+            {
+                // 이전에 안눌려있었다.
+                if (!m_VecKey[i].PrevPressed)
+                {
+                    // 처음 누른 상태
+                    m_VecKey[i].State = KEY_STATE::TAP;
+                }
+                else
+                {
+                    // 계속 누르고 있는 상태
+                    m_VecKey[i].State = KEY_STATE::PRESSED;
+                }
 
-    // 마우스 좌표 갱신
-    m_PrevMousePos = m_CurMousePos;
+                m_VecKey[i].PrevPressed = true;
+            }
 
-    POINT ptMouse = {};
-    GetCursorPos(&ptMouse);
-    ScreenToClient(CEngine::GetInst()->GetMainWnd(), &ptMouse);
-    m_CurMousePos = Vec2((float)ptMouse.x, (float)ptMouse.y);
+            else
+            {
+                // 해당 Key 가 안눌려있다.
+                if (m_VecKey[i].PrevPressed)
+                {
+                    // 이전 Frame 에서는 눌려있었다. = 뗀 상태
+                    m_VecKey[i].State = KEY_STATE::RELEASED;
+                }
+                else
+                {
+                    // 이전에도 안눌려 있었고 지금도 안눌려있다.
+                    m_VecKey[i].State = KEY_STATE::NONE;
+                }
 
-    m_DragDir = m_CurMousePos - m_PrevMousePos; // 마우스의 이동량 = 방향 정보
-    m_DragDir.y *= -1.f;
-    m_DragDir.Normalize();
+                m_VecKey[i].PrevPressed = false;
+            }
+        }
+
+        // 마우스 좌표 갱신
+        m_PrevMousePos = m_CurMousePos;
+
+        POINT ptMouse = {};
+        GetCursorPos(&ptMouse);
+        ScreenToClient(CEngine::GetInst()->GetMainWnd(), &ptMouse);
+        m_CurMousePos = Vec2((float)ptMouse.x, (float)ptMouse.y);
+
+        m_DragDir = m_CurMousePos - m_PrevMousePos; // 마우스의 이동량 = 방향 정보
+        m_DragDir.y *= -1.f;
+        m_DragDir.Normalize();
+    }
 }
