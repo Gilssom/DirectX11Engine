@@ -48,6 +48,7 @@ public:
 
 	void SetAbsolute(bool absolute) { m_Absolute = absolute; }
 	bool IsAbsolute() { return m_Absolute; }
+	void SetTurn() { m_RelativeScale.x *= -1.f; }
 
 	virtual void SaveToLevelFile(FILE* file) override;
 	virtual void LoadFromLevelFile(FILE* file) override;

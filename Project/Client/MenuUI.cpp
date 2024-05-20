@@ -66,21 +66,60 @@ void MenuUI::Level()
     {
         if (ImGui::MenuItem("Save Level"))
         {
-            CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
-            if (pCurLevel != nullptr)
+            wchar_t Buff[255] = {};
+
+            OPENFILENAME ofn = {};
+            ofn.lStructSize = sizeof(ofn);
+            ofn.hwndOwner = nullptr;
+            ofn.lpstrFile = Buff;        // 결과 출력
+            ofn.lpstrFile[0] = '\0';
+            ofn.nMaxFile = 255;
+            ofn.lpstrFilter = L"Level\0*.lv\0All\0*.*";
+            ofn.nFilterIndex = 0;
+            ofn.lpstrFileTitle = NULL;
+            ofn.nMaxFileTitle = 0;
+
+            // 탐색창 초기 위치 지정
+            wstring strInitPath = CPathManager::GetInst()->GetContentPath();
+            ofn.lpstrInitialDir = strInitPath.c_str();
+            ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+            if (GetSaveFileName(&ofn))
             {
-                wstring strLevelPath = CPathManager::GetInst()->GetContentPath();
-                strLevelPath += L"Level\\test.lv";
-                CLevelSaveLoad::SaveLevel(pCurLevel, strLevelPath);
-            }
+                CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+                if (pCurLevel != nullptr)
+                {
+                    CLevelSaveLoad::SaveLevel(pCurLevel, Buff);
+                }
+            }    
         }
 
         if (ImGui::MenuItem("Load Level"))
         {
-            wstring strLevelPath = CPathManager::GetInst()->GetContentPath();
-            strLevelPath += L"Level\\test.lv";
-            CLevel* pLoadedLevel = CLevelSaveLoad::LoadLevel(strLevelPath);
-            ChangeLevel(pLoadedLevel, LEVEL_STATE::STOP);
+            wchar_t Buff[255] = {};
+
+            OPENFILENAME ofn = {};
+
+            ofn.lStructSize = sizeof(ofn);
+            ofn.hwndOwner = nullptr;
+            ofn.lpstrFile = Buff;
+            ofn.lpstrFile[0] = '\0';
+            ofn.nMaxFile = 255;
+            ofn.lpstrFilter = L"Level\0*.lv\0All\0*.*";
+            ofn.nFilterIndex = 0;
+            ofn.lpstrFileTitle = NULL;
+            ofn.nMaxFileTitle = 0;
+
+            // 탐색창 초기 위치 지정
+            wstring strInitPath = CPathManager::GetInst()->GetContentPath();
+            ofn.lpstrInitialDir = strInitPath.c_str();
+            ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+            if (GetOpenFileName(&ofn))
+            {
+                CLevel* pLoadedLevel = CLevelSaveLoad::LoadLevel(Buff);
+                ChangeLevel(pLoadedLevel, LEVEL_STATE::STOP);
+            }            
         }
 
         ImGui::Separator();

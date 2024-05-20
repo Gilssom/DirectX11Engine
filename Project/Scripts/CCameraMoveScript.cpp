@@ -2,12 +2,16 @@
 #include "CCameraMoveScript.h"
 
 #include <Engine\CCamera.h>
+#include <Engine\CLevelManager.h>
+#include <Engine\CLevel.h>
 
 CCameraMoveScript::CCameraMoveScript()
 	: CScript(SCRIPT_TYPE::CAMERAMOVESCRIPT)
+	, m_TargetObject(nullptr)
 	, m_Speed(200.f)
 {
-
+	AddScriptProperty(PROPERTY_TYPE::GAMEOBJECT, "Target Object", &m_TargetObject);
+	AddScriptProperty(PROPERTY_TYPE::FLOAT, "Speed", &m_Speed);
 }
 
 CCameraMoveScript::~CCameraMoveScript()
@@ -29,6 +33,10 @@ void CCameraMoveScript::Tick()
 			Transform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
 		}
 	}
+
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+	if(pCurLevel != nullptr)
+		m_TargetObject = pCurLevel->FindObjectByName(L"Player");
 
 	if (Camera()->GetProjType() == PROJ_TYPE::PERSPECTIVE)
 		MoveByPerspective();
@@ -85,6 +93,14 @@ void CCameraMoveScript::MoveByPerspective()
 
 void CCameraMoveScript::MoveByOrthographic()
 {
+	if (m_TargetObject)
+	{
+		Vec3 vObjectPos = m_TargetObject->Transform()->GetRelativePos();
+		vObjectPos.y += 120.f;
+		GetOwner()->Transform()->SetRelativePos(Vec3(vObjectPos.x, vObjectPos.y, 0.f));
+		return;
+	}
+
 	// Shift 속도 배율
 	float speed = m_Speed;
 	if (KEY_PRESSED(KEY::LSHIFT))

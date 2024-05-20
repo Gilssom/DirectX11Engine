@@ -19,38 +19,47 @@
 #include <Engine\\CStructuredBuffer.h>
 #include <Engine\\CPrefab.h>
 
+#include "CLevelSaveLoad.h"
+
 void CTestLevel::CreateTestLevel()
 {
 	// Prefab 제작 및 Asset Manager 에 등록
 	CreatePrefab();
 
-	// Level
-	CLevel* m_CurLevel = nullptr;
-
-	m_CurLevel = new CLevel;
-	m_CurLevel->GetLayer(0)->SetName(L"Default");
-	m_CurLevel->GetLayer(1)->SetName(L"Player");
-	m_CurLevel->GetLayer(2)->SetName(L"Monster");
-	m_CurLevel->GetLayer(3)->SetName(L"BackGround");
+#pragma region Empty Level
+	//CLevel* m_CurLevel = nullptr;
+	//m_CurLevel = new CLevel;
+	//m_CurLevel->GetLayer(0)->SetName(L"Default");
+	//m_CurLevel->GetLayer(1)->SetName(L"Player");
+	//m_CurLevel->GetLayer(2)->SetName(L"Monster");
+	//m_CurLevel->GetLayer(3)->SetName(L"BackGround");
 
 	//ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 	//return;
+#pragma endregion
+
+#pragma region Object Add (No Animation Tool)
+	// Level
+	wstring testPath = CPathManager::GetInst()->GetContentPath();
+	testPath += L"Level\\ElvenGard_0.lv";
+	CLevel* m_CurLevel = CLevelSaveLoad::LoadLevel(testPath);
+	//m_CurLevel->GetLayer(4)->SetName(L"Portal");
+
+	// Level 의 Collision Setting
+	//CCollisionManager::GetInst()->LayerCheck(1, 1);
+	//CCollisionManager::GetInst()->LayerCheck(1, 2);
+	//CCollisionManager::GetInst()->LayerCheck(1, 4);
+
+	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	return;
+#pragma endregion
+
+	
 
 	// 오브젝트에 컴포넌트 등록 후, 컴포넌트의 함수에 접근 후 세팅
 
 
-	// Camera
-	CGameObject* pCamObject = new CGameObject;
-	pCamObject->SetName(L"Main Camera");
-	pCamObject->AddComponent(new CTransform);
-	pCamObject->AddComponent(new CCamera);
-	pCamObject->AddComponent(new CCameraMoveScript);
-
-	pCamObject->Camera()->LayerCheckAll(0xffffffff);
-	pCamObject->Camera()->SetCameraPriority(0); // Main Camera Setting
-	pCamObject->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
-
-	m_CurLevel->AddObject(0, pCamObject);
+	
 
 	// Clone Test
 	//CGameObject* pCamClone = pCamObject->Clone();
@@ -103,36 +112,6 @@ void CTestLevel::CreateTestLevel()
 	//pTileMapObj->Transform()->SetRelativePos(Vec3(200.f, 100.f, 1.f));
 	//m_CurLevel->AddObject(0, pTileMapObj);
 
-	// Player
-	CGameObject* pPlayer = new CGameObject;
-	pPlayer->SetName(L"Player");
-	pPlayer->AddComponent(new CTransform);
-	pPlayer->AddComponent(new CMeshRender);
-	pPlayer->AddComponent(new CCollider2D);
-	pPlayer->AddComponent(new CAnimator2D);
-	pPlayer->AddComponent(new CPlayerScript);
-
-	pPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
-	pPlayer->Transform()->SetRelativeScale(400.f, 400.f, 0.2f);
-
-	pPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
-	//pPlayer->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->FindAsset<CTexture>(L"texture\\Character.png"));
-
-	pPlayer->Collider2D()->SetAbsolute(false);
-	pPlayer->Collider2D()->SetOffset(Vec3(0.f, 0.f, 1.f));
-	pPlayer->Collider2D()->SetScale(Vec3(0.5f, 0.5f, 1.f));
-
-	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Idle_Test2.png", L"texture\\Idle_Test2.png");
-	//pPlayer->Animator2D()->CreateAnimation(L"MOVE_DOWN", pAtlas, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(240.f, 260.f), 10, 16);
-	//pPlayer->Animator2D()->CreateAnimation(L"IDLE_RIGHT", pAtlas, Vec2(0.f, 0.f), Vec2(139.f, 141.f), Vec2(278.f, 282.f), 4, 3);
-	//pPlayer->Animator2D()->FindAnimation(L"IDLE_RIGHT")->Save(L"Animation\\");
-
-	pPlayer->Animator2D()->LoadAnimation(L"Animation\\IDLE_RIGHT.anim");
-	pPlayer->Animator2D()->Play(L"IDLE_RIGHT", true);
-
-	m_CurLevel->AddObject(1, pPlayer, false);
-
 	// Clone Test
 	/*pPlayer = pPlayer->Clone();
 	pPlayer->Transform()->SetRelativePos(Vec3(100.f, 0.f, 100.f));
@@ -158,7 +137,7 @@ void CTestLevel::CreateTestLevel()
 	pMonster->Collider2D()->SetScale(Vec3(1.f, 1.f, 1.f));
 
 	// Player 와 Monster 를 부모-자식 관계로 연결
-	pPlayer->AddChild(pMonster);
+	//pPlayer->AddChild(pMonster);
 	m_CurLevel->AddObject(1, pMonster, false);
 
 	//pPlayer->GetScript<CPlayerScript>()->SetTarget(pMonster);
@@ -175,7 +154,7 @@ void CTestLevel::CreateTestLevel()
 	pBackGround->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	//pBackGround->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"ElvenGard_BackGround_0"));
 	//pBackGround->MeshRender()->GetMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_0.png", L"texture\\ElvenGard\\ElvenGard_BackGround_0.png"));
 
 	m_CurLevel->AddObject(3, pBackGround, false);
@@ -190,7 +169,7 @@ void CTestLevel::CreateTestLevel()
 	pBackGround1->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround1->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pBackGround1->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	//pBackGround1->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"ElvenGard_BackGround_1"));
 	//pBackGround1->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_1.png", L"texture\\ElvenGard\\ElvenGard_BackGround_1.png"));
 
 	m_CurLevel->AddObject(3, pBackGround1, false);
@@ -205,7 +184,7 @@ void CTestLevel::CreateTestLevel()
 	pBackGround2->Transform()->SetRelativeScale(Vec3(2688.f * 1.37f, 560.f * 1.37f, 1.f));
 
 	pBackGround2->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pBackGround2->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"BackGroundMaterial"));
+	//pBackGround2->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"ElvenGard_BackGround_2"));
 	//pBackGround2->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_BackGround_2.png", L"texture\\ElvenGard\\ElvenGard_BackGround_2.png"));
 
 	m_CurLevel->AddObject(3, pBackGround2, false);
@@ -264,6 +243,7 @@ void CTestLevel::CreateTestLevel()
 
 	pLinus->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	pLinus->Transform()->SetRelativeScale(Vec3(800.f, 600.f, 1.f));
+	//pLinus->Transform()->SetTurn();
 
 	pLinus->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pLinus->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
@@ -310,11 +290,6 @@ void CTestLevel::CreateTestLevel()
 	pFilterObject->MeshRender()->GetMaterial()->SetTexParam(TEX_1, CAssetManager::GetInst()->Load<CTexture>(L"texture\\noise\\noise_03.jpg", L"texture\\noise\\noise_03.jpg"));
 
 	m_CurLevel->AddObject(0, pFilterObject, false);
-
-
-	// Level 의 Collision Setting
-	CCollisionManager::GetInst()->LayerCheck(1, 1);
-	CCollisionManager::GetInst()->LayerCheck(1, 2);
 
 	// 레벨 시작
 	//m_CurLevel->Init();

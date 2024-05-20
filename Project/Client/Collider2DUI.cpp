@@ -2,6 +2,9 @@
 #include "Collider2DUI.h"
 
 #include <Engine\\CCollider2D.h>
+#include <Engine\CLevelManager.h>
+#include <Engine\CLevel.h>
+#include <Engine\CLayer.h>
 
 Collider2DUI::Collider2DUI()
 	: ComponentUI("Collider2D", "##Collider2DUI", COMPONENT_TYPE::COLLIDER2D)
@@ -23,6 +26,7 @@ void Collider2DUI::Render_Tick()
 	Vec3 vOffsetPos = pCollider->GetOffset();
 	Vec3 vScale = pCollider->GetScale();
 	bool bAbsolute = pCollider->IsAbsolute();
+	int  iLayer = GetTarget()->GetLayerIdx();
 
 	float ScaleDragSpeed = 1.f;
 	if (!bAbsolute)
@@ -42,5 +46,53 @@ void Collider2DUI::Render_Tick()
 	if (ImGui::Checkbox("##Collider2DAbsolute", &bAbsolute))
 	{
 		pCollider->SetAbsolute(bAbsolute);
+	}
+
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+
+	if (pCurLevel == nullptr)
+		return;
+
+	vector<string> vecLayerName;
+
+	for (size_t i = 0; i < MAX_LAYER; i++)
+	{
+		string curLayerName = ToString(pCurLevel->GetLayer(i)->GetName());
+		string strLayerName;
+		char buffer[256] = {};
+		sprintf_s(buffer, 256, "Layer Index %d : ", i);
+		strLayerName = buffer;
+
+		if (!curLayerName.empty())
+		{
+			strLayerName += curLayerName;
+			vecLayerName.push_back(strLayerName);
+		}
+		else
+		{
+			strLayerName += "null";
+			vecLayerName.push_back(strLayerName);
+		}
+	}
+
+	string strCurLayerName;
+	char buffer[256] = {};
+	sprintf_s(buffer, 256, "Layer Index %d : ", iLayer);
+	strCurLayerName = buffer;
+	strCurLayerName += ToString(pCurLevel->GetLayer(iLayer)->GetName());
+
+	ImGui::Text("Layer          "); SAME;
+	if (ImGui::BeginCombo("##LayerSelect", strCurLayerName.c_str(), 0))
+	{
+		for (size_t i = 0; i < MAX_LAYER; i++)
+		{
+			const bool is_selected = iLayer == i;
+			if (ImGui::Selectable(vecLayerName[i].c_str(), is_selected))
+			{
+				GetTarget()->ChangeLayerIdx(i);
+			}
+		}
+
+		ImGui::EndCombo();
 	}
 }

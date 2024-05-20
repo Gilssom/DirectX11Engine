@@ -52,6 +52,9 @@ void ScriptUI::Render_Tick()
 			break;
 		case PROPERTY_TYPE::TEXTURE:
 			break;
+		case PROPERTY_TYPE::GAMEOBJECT:
+			ParamUI::Param_GameObject(vecProperty[i].Desc, (CGameObject*&)vecProperty[i].pData);
+			break;
 		}
 	}
 }

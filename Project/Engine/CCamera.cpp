@@ -182,8 +182,6 @@ void CCamera::SetCameraPriority(int priority)
 {
 	// 카메라 우선순위 설정
 	m_CamPriority = priority;
-
-	//CRenderManager::GetInst()->RegisterCamera(this, m_CamPriority);
 }
 
 void CCamera::LayerCheck(int layerIdx)

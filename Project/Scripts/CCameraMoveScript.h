@@ -4,8 +4,8 @@
 class CCameraMoveScript : public CScript
 {
 private:
-	float m_Speed;
-
+	CGameObject*	m_TargetObject;
+	float			m_Speed;
 
 public:
 	virtual void Tick() override;
@@ -13,6 +13,9 @@ public:
 private:
 	void MoveByPerspective();
 	void MoveByOrthographic();
+
+public:
+	void SetTargetObject(CGameObject* targetObject) { m_TargetObject = targetObject; }
 
 public:
 	CLONE(CCameraMoveScript);

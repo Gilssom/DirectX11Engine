@@ -173,6 +173,24 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	AddAsset<CGraphicShader>(L"Std2DShader", pShader);
 
+	// =======================
+	//	Std 2D Alpha Shader 
+	// =======================
+	pShader = new CGraphicShader;
+	pShader->CreateVertexShader(strPath + L"shader\\std2d.fx", "VS_Std2D");
+	pShader->CreatePixelShader(strPath + L"shader\\std2d.fx", "PS_Std2D");
+
+	pShader->SetRSType(RS_TYPE::CULL_NONE); // 2D 에서는 전면 후면 개념이 딱히 필요 없기 때문에 None
+	pShader->SetBSType(BS_TYPE::ALPHA_BLEND);
+	pShader->SetDSType(DS_TYPE::LESS);
+	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
+
+	// Parameter Info
+	pShader->AddScalarParam("Test Parameter", SCALAR_PARAM::INT_0);
+	pShader->AddTexParam("Output", TEX_0);
+
+	AddAsset<CGraphicShader>(L"Std2DAlphaShader", pShader);
+
 
 	// ===========================
 	//	Std 2D Alpha Blend Shader
@@ -234,6 +252,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
 
+	pShader->AddTexParam("Copy Render Target", TEX_0);
+	pShader->AddTexParam("Noise Texture", TEX_1);
+
 	AddAsset<CGraphicShader>(L"FilterShader", pShader);
 
 
@@ -246,6 +267,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	pShader->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_POSTPROCESS);
+
+	pShader->AddTexParam("Copy Render Target", TEX_0);
+	pShader->AddTexParam("Noise Texture", TEX_1);
 
 	AddAsset<CGraphicShader>(L"DistortionShader", pShader);
 

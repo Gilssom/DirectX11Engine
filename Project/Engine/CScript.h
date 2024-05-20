@@ -16,6 +16,7 @@ enum class PROPERTY_TYPE
 	VEC3,
 	VEC4,
 	TEXTURE,
+	GAMEOBJECT,
 };
 
 // 외부에 노출시키고 싶은 변수 설정

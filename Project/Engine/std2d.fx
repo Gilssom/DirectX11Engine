@@ -124,6 +124,9 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
     // 각 정점이 Color 값을 들고 있기 때문에
     // 가중치 보간 개념이 들어가 픽셀 마다의 색상 값을 정해준다. ( Rasterize Stage )
     
+    //if (vColor.r == 0.f && vColor.g == 0.f && vColor.b == 0.f)
+    //    vColor.a = 0.f;
+    
     if(vColor.a == 0.f)
         discard;
     

@@ -27,4 +27,5 @@ public:
 	static int Param_DragMat(const string& strName, Matrix* pInOut, float speed = 1.f);
 
 	static int Param_Texture(const string& strName, Ptr<CTexture>& texture);
+	static int Param_GameObject(const string& strName, CGameObject*& object);
 };

@@ -5,6 +5,7 @@
 #include "CImGuiManager.h"
 
 #include "ListUI.h"
+#include <Engine\CGameObject.h>
 
 UINT    ParamUI::g_ParamUI_ID = 0;
 int     ParamUI::g_DescWidth = 0;
@@ -163,4 +164,42 @@ int ParamUI::Param_Texture(const string& strName, Ptr<CTexture>& texture)
                 , BorderColor);
 
     return btnClicked;
+}
+
+int ParamUI::Param_GameObject(const string& strName, CGameObject*& object)
+{
+    // Parmeter Name
+    ImGui::Text(strName.c_str()); ImGui::SameLine(g_DescWidth);
+
+    char key[255] = {};
+    sprintf_s(key, 255, "##InputGameObject_%d", g_ParamUI_ID++);
+
+    // GameObject Name
+    string strObjectName = "null";
+    //if (object != nullptr)
+    //    strObjectName = ToString(object->GetName());
+    //else
+    //    strObjectName = "null";
+
+    ImGui::SetNextItemWidth(200);
+    ImGui::InputText(key, (char*)strObjectName.c_str(), strObjectName.capacity(), ImGuiInputTextFlags_ReadOnly);
+
+    // Drag Drop
+    if (ImGui::BeginDragDropTarget())
+    {
+        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Outliner");
+
+        if (nullptr != payload)
+        {
+            DWORD_PTR dwData = 0;
+            memcpy(&dwData, payload->Data, payload->DataSize);
+
+            CGameObject* pObject = (CGameObject*)dwData;
+            object = pObject;
+        }
+
+        ImGui::EndDragDropTarget();
+    }
+
+    return 0;
 }

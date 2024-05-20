@@ -58,6 +58,7 @@ public:
 	void Destroy();
 
 	int GetLayerIdx() { return m_LayerIdx; }
+	void ChangeLayerIdx(int changeLayer) { m_LayerIdx = changeLayer; }
 
 private:
 	void SetLayerIdx(int idx) { m_LayerIdx = idx; }

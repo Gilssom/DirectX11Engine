@@ -99,6 +99,14 @@ void CPlayerScript::Tick()
 #pragma region Collision Contents Script
 void CPlayerScript::BeginOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
 {
+	//wstring testPath = CPathManager::GetInst()->GetContentPath();
+	//testPath += L"Level\\ElvenGard_0.lv";
+	//CLevel* m_CurLevel = CLevelSaveLoad::LoadLevel(testPath);
+
+	//CLevel* m_NextLevel = LoadLevel();
+	//m_NextLevel = new CLevel;
+
+	//ChangeLevel(m_NextLevel, LEVEL_STATE::PLAY);
 	//otherObject->Destroy();
 }
 
