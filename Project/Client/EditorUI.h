@@ -19,9 +19,12 @@ private:
 
 	ImVec2				m_vChildSize;	// 자식 UI Size
 
+	bool				m_Menu;			// 개별 Menu 가 필요한지
 	bool				m_Active;		// 활성화 - 비활성화 여부
 	bool				m_Seperate;		// 구분선 옵션
 	bool				m_Modal;
+	bool				m_Move;			// UI 창을 움직일 것인지
+
 	bool				m_IsComponent;
 
 public:
@@ -34,6 +37,8 @@ public:
 	bool SetActive(bool active);
 	void SetModal(bool modal) { m_Modal = modal; }
 	void SetComponentType(bool isComponent) { m_IsComponent = isComponent; }
+	void SetMenu(bool menu) { m_Menu = menu; }
+	void SetUIMove(bool move) { m_Move = move; }
 
 	EditorUI* GetParentUI() { return m_ParentUI; }
 	const vector<EditorUI*> GetChildUI() { return m_vecChildUI; }

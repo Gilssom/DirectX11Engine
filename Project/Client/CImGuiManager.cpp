@@ -16,6 +16,11 @@
 #include "OutlinerUI.h"
 #include "MenuUI.h"
 
+#include "TileMapEditor.h"
+#include "TileView.h"
+#include "TileMapDetail.h"
+#include "AtlasView.h"
+
 CImGuiManager::CImGuiManager()
     : m_mapUI{}
     , m_hMainHwnd(nullptr)
@@ -61,8 +66,8 @@ int CImGuiManager::Init(HWND hwnd)
     ImGui::StyleColorsDrakular();
     //ImGui::StyleColorsLight();
 
-    io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
-    //io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+    //io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+    io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -151,6 +156,27 @@ void CImGuiManager::CreateEditorUI()
 
     pUI = new MenuUI;
     pUI->SetActive(true);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new TileView;
+    pUI->SetActive(false);
+    pUI->SetUIMove(false);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new AtlasView;
+    pUI->SetActive(false);
+    pUI->SetUIMove(false);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new TileMapDetail;
+    pUI->SetActive(false);
+    pUI->SetUIMove(false);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new TileMapEditor;
+    pUI->SetActive(true);
+    pUI->SetMenu(true);
+    pUI->SetUIMove(true);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
 }
 

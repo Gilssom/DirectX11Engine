@@ -9,6 +9,8 @@ EditorUI::EditorUI(const string& name, const  string& id)
 	, m_Seperate(false)
 	, m_Modal(false)
 	, m_IsComponent(false)
+	, m_Menu(false)
+	, m_Move(true)
 {
 
 }
@@ -49,6 +51,15 @@ void EditorUI::Tick()
 
 	string fullname = m_Name + m_ID; // Inspector##Inspector
 
+	// 개별 Flag 설정 (비트 연산)
+	UINT flag = 0;
+
+	if (m_Menu)
+		flag |= ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar;
+
+	if (!m_Move)
+		flag |= ImGuiWindowFlags_::ImGuiWindowFlags_NoMove;
+
 	// 자신이 "독립적인 UI" 혹은 "부모 UI" 라면 (최상위 UI 객체)
 	if (IsRootUI())
 	{
@@ -64,7 +75,7 @@ void EditorUI::Tick()
 		// Modal Less
 		if (!m_Modal)
 		{
-			ImGui::Begin(fullname.c_str(), &bActive);
+			ImGui::Begin(fullname.c_str(), &bActive, flag);
 			SetActive(bActive);
 
 			Render_Tick();
@@ -81,7 +92,7 @@ void EditorUI::Tick()
 		else
 		{
 			ImGui::OpenPopup(fullname.c_str());
-			if (ImGui::BeginPopupModal(fullname.c_str(), &bActive))
+			if (ImGui::BeginPopupModal(fullname.c_str(), &bActive, flag))
 			{
 				SetActive(bActive);
 

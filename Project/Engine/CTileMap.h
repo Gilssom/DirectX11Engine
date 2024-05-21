@@ -31,6 +31,15 @@ public:
     void SetAtlasTileSize(Vec2 tileSize);
     void SetTileEachSize(Vec2 size);
 
+    UINT GetRow() { return m_Row; }
+    UINT GetCol() { return m_Col; }
+    Vec2 GetTileSize() { return m_TileEachSize; }
+
+    Ptr<CTexture> GetAtlas() { return m_Atlas; }
+    UINT GetAtlasMaxRow() { return m_AtlasMaxRow; }
+    UINT GetAtlasMaxCol() { return m_AtlasMaxCol; }
+    Vec2 GetAtlasTileSize() { return m_AtlasTileEachSize; }
+
 public:
     virtual void Begin() override;
     virtual void FinalTick() override;

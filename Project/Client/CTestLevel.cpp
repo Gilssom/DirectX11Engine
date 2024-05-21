@@ -50,6 +50,20 @@ void CTestLevel::CreateTestLevel()
 	//CCollisionManager::GetInst()->LayerCheck(1, 2);
 	//CCollisionManager::GetInst()->LayerCheck(1, 4);
 
+	// TileMap Object
+	CGameObject* pTileMapObj = new CGameObject;
+	pTileMapObj->SetName(L"TileMap");
+	pTileMapObj->AddComponent(new CTransform);
+	pTileMapObj->AddComponent(new CTileMap);
+
+	pTileMapObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+
+	pTileMapObj->TileMap()->SetAtlasTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\TILE.bmp", L"texture\\TILE.bmp"));
+	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
+	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
+	pTileMapObj->TileMap()->SetRowCol(4, 4);
+	m_CurLevel->AddObject(0, pTileMapObj);
+
 	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 	return;
 #pragma endregion
@@ -93,19 +107,7 @@ void CTestLevel::CreateTestLevel()
 	//m_CurLevel->AddObject(0, pLightObject);
 
 
-	// TileMap Object
-	/*CGameObject* pTileMapObj = new CGameObject;
-	pTileMapObj->SetName(L"TileMap");
-	pTileMapObj->AddComponent(new CTransform);
-	pTileMapObj->AddComponent(new CTileMap);
-
-	pTileMapObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
-
-	pTileMapObj->TileMap()->SetAtlasTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\TILE.bmp", L"texture\\TILE.bmp"));
-	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
-	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
-	pTileMapObj->TileMap()->SetRowCol(4, 4);
-	m_CurLevel->AddObject(0, pTileMapObj);*/
+	
 
 	// Clone Test
 	//pTileMapObj = pTileMapObj->Clone();

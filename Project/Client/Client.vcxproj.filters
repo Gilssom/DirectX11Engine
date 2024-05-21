@@ -113,6 +113,21 @@
     <Filter Include="01. Manager\04. LevelSaveLoad">
       <UniqueIdentifier>{98626deb-cc76-428e-a356-5f30ed4b0288}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. EditorUI\08. TileMapEditor">
+      <UniqueIdentifier>{cd008570-bc64-4c51-bbb4-c4e46d2c85b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\08. TileMapEditor\TileMapSubUI">
+      <UniqueIdentifier>{c5625fad-b5d1-41aa-81d8-fc7488ceb634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\08. TileMapEditor\TileMapSubUI\03. Detail">
+      <UniqueIdentifier>{c133eee4-08b2-4418-b9ed-a4813fdfadba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\08. TileMapEditor\TileMapSubUI\01. TileView">
+      <UniqueIdentifier>{de87da58-18d6-4268-977b-7676d2a58ff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\08. TileMapEditor\TileMapSubUI\02. AtlasView">
+      <UniqueIdentifier>{778df5b9-64d5-45a6-90f1-e81ed42c3e01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -253,6 +268,21 @@
     <ClInclude Include="CLevelSaveLoad.h">
       <Filter>01. Manager\04. LevelSaveLoad</Filter>
     </ClInclude>
+    <ClInclude Include="TileMapEditor.h">
+      <Filter>02. EditorUI\08. TileMapEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="TileView.h">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI\01. TileView</Filter>
+    </ClInclude>
+    <ClInclude Include="AtlasView.h">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI\02. AtlasView</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapDetail.h">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI\03. Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapSubUI.h">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -391,6 +421,21 @@
     </ClCompile>
     <ClCompile Include="CLevelSaveLoad.cpp">
       <Filter>01. Manager\04. LevelSaveLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapEditor.cpp">
+      <Filter>02. EditorUI\08. TileMapEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TileView.cpp">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI\01. TileView</Filter>
+    </ClCompile>
+    <ClCompile Include="AtlasView.cpp">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI\02. AtlasView</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapDetail.cpp">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI\03. Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapSubUI.cpp">
+      <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

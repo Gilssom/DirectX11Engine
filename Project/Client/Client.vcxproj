@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Animator2DUI.h" />
     <ClInclude Include="AssetUI.h" />
+    <ClInclude Include="AtlasView.h" />
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="CEditorCameraScript.h" />
     <ClInclude Include="CEditorManager.h" />
@@ -186,13 +187,18 @@
     <ClInclude Include="SoundUI.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TextureUI.h" />
+    <ClInclude Include="TileMapDetail.h" />
+    <ClInclude Include="TileMapEditor.h" />
+    <ClInclude Include="TileMapSubUI.h" />
     <ClInclude Include="TileMapUI.h" />
+    <ClInclude Include="TileView.h" />
     <ClInclude Include="TransformUI.h" />
     <ClInclude Include="TreeUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator2DUI.cpp" />
     <ClCompile Include="AssetUI.cpp" />
+    <ClCompile Include="AtlasView.cpp" />
     <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="CEditorCameraScript.cpp" />
     <ClCompile Include="CEditorManager.cpp" />
@@ -233,7 +239,11 @@
     <ClCompile Include="ScriptUI.cpp" />
     <ClCompile Include="SoundUI.cpp" />
     <ClCompile Include="TextureUI.cpp" />
+    <ClCompile Include="TileMapDetail.cpp" />
+    <ClCompile Include="TileMapEditor.cpp" />
+    <ClCompile Include="TileMapSubUI.cpp" />
     <ClCompile Include="TileMapUI.cpp" />
+    <ClCompile Include="TileView.cpp" />
     <ClCompile Include="TransformUI.cpp" />
     <ClCompile Include="TreeUI.cpp" />
   </ItemGroup>
