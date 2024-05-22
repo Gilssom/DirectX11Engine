@@ -43,6 +43,8 @@ private:
 	virtual int Load(const wstring& FilePath) override;
 	virtual int Save(const wstring& FilePath) override;
 
+
+public:
 	// bindFlag : D3D11_BIND_FLAG
 	int Create(UINT width, UINT height, DXGI_FORMAT pixelFormat, UINT bindFlag, D3D11_USAGE usage);
 	int Create(ComPtr<ID3D11Texture2D> tex2D);

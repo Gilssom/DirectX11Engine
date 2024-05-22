@@ -89,8 +89,10 @@ void TileMapDetail::Render_Tick()
 
 	ImGui::Text("Atlas Tile Size"); SAME_SET(130);
 	ImGui::SetNextItemWidth(150);
-	ImGui::InputFloat2("##AtlasTileEachSize", TileSize);
-
+	if (ImGui::InputFloat2("##AtlasTileEachSize", TileSize))
+	{
+		pTileMap->SetAtlasTileSize(Vec2(TileSize[0], TileSize[1]));
+	}
 
 	// Read Only Information
 	// Atlas Max Row - Col

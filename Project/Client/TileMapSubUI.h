@@ -11,7 +11,7 @@ private:
 	CTileMap*			m_TileMap;
 
 public:
-	void SetTileMap(CTileMap* tileMap) { m_TileMap = tileMap; }
+	void SetTileMap(CTileMap* tileMap);
 	CTileMap* GetTileMap() { return m_TileMap; }
 
 	TileMapEditor* GetOwner() { return m_Owner; }

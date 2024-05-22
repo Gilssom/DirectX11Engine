@@ -16,6 +16,21 @@ TileMapSubUI::~TileMapSubUI()
 
 }
 
+void TileMapSubUI::SetTileMap(CTileMap* tileMap)
+{
+	if (m_TileMap)
+	{
+		m_TileMap->SetCapture(false);
+	}
+
+	m_TileMap = tileMap;
+
+	if (m_TileMap)
+	{
+		m_TileMap->SetCapture(true);
+	}
+}
+
 TileView* TileMapSubUI::GetTileView()
 {
 	return (TileView*)m_Owner->GetSubUI(TILEVIEW);

@@ -5,6 +5,9 @@
 #include "components.h"
 
 #include "CStructuredBuffer.h"
+#include "CTexture.h"
+
+#include "CDevice.h"
 
 CTileMap::CTileMap()
 	: CRenderComponent(COMPONENT_TYPE::TILEMAP)
@@ -13,6 +16,7 @@ CTileMap::CTileMap()
 	, m_AtlasMaxRow(0)
 	, m_AtlasMaxCol(0)
 	, m_TileEachSize(Vec2(32.f, 32.f))
+	, m_CaptureTexMaxResolution(Vec2(2048, 2048))
 {
 	SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"TileMapMaterial"));
@@ -69,6 +73,7 @@ void CTileMap::Render()
 	GetMaterial()->SetScalarParam(INT_0, m_AtlasMaxRow);
 	GetMaterial()->SetScalarParam(INT_1, m_AtlasMaxCol);
 	GetMaterial()->SetScalarParam(INT_2, 0);
+	GetMaterial()->SetScalarParam(INT_3, 0); // Capture Mode 여부
 	GetMaterial()->Binding();
 
 	// Tile Info Binding
@@ -81,6 +86,110 @@ void CTileMap::Render()
 
 	// Mesh Binding 및 Rendering
 	GetMesh()->Render();
+
+	// Editor 용 Capture Image Rendering
+	if (m_EditorCapture)
+	{
+		CaptureRender();
+	}
+}
+
+void CTileMap::CaptureRender()
+{
+	// 1. 현재 타일의 상황을 캡쳐할 Texture(그림을 그릴 목적지, Render Target) 를 선체크,
+	CheckCaptureTexture();
+
+	// 2. Render Target 이 일시적으로 교체되어야 한다.
+	// 기존에 세팅되어있던 Target 이 누군지 먼저 알아낸다.
+	ComPtr<ID3D11RenderTargetView> pRTV = nullptr;
+	ComPtr<ID3D11DepthStencilView> pDSV = nullptr;
+	CONTEXT->OMGetRenderTargets(1, pRTV.GetAddressOf(), pDSV.GetAddressOf());
+
+	// 2-2. Capture Texture 로 Render Target 을 변경한다.
+	CONTEXT->OMSetRenderTargets(1, m_CaptureTex->GetRTV().GetAddressOf(), nullptr);
+
+	// View Port 설정
+	// Texture 크기 영역을 설정한다.
+	D3D11_VIEWPORT viewPort = {};
+	viewPort.TopLeftX = 0;
+	viewPort.TopLeftY = 0;
+	viewPort.Width = (float)m_CaptureTex->GetWidth();
+	viewPort.Height = (float)m_CaptureTex->GetHeight();
+	viewPort.MinDepth = 0;
+	viewPort.MaxDepth = 1;
+
+	// ViewPort 정보 세팅
+	CONTEXT->RSSetViewports(1, &viewPort);
+
+	// 3. Tile 을 교체된 Render Target 에 Rendering 을 한다.
+	// 좌표변환 같은 과정이 필요 없다.
+	GetMaterial()->SetScalarParam(INT_3, 1); // Capture Mode 체크
+	GetMaterial()->Binding();
+	GetMesh()->Render();
+
+
+	// 4. Rendering 이 끝난 후에는 Reder Target 을 원상 복구 시켜야 한다.
+	CONTEXT->OMSetRenderTargets(1, pRTV.GetAddressOf(), pDSV.Get());
+
+	// View Port 재설정
+	// 윈도우 화면에 보여질 영역을 설정한다.
+	viewPort.TopLeftX = 0;
+	viewPort.TopLeftY = 0;
+	viewPort.Width = (float)CDevice::GetInst()->GetRenderResolution().x;
+	viewPort.Height = (float)CDevice::GetInst()->GetRenderResolution().y;
+	viewPort.MinDepth = 0;
+	viewPort.MaxDepth = 1;
+
+	// ViewPort 정보 재세팅
+	CONTEXT->RSSetViewports(1, &viewPort);
+}
+
+void CTileMap::CheckCaptureTexture()
+{
+	// 1. Texture 가 존재하는지 확인 (없으면 생성)
+	if (m_CaptureTex == nullptr)
+	{
+		Vec2 vResolution = Vec2(m_Col * m_TileEachSize.x, m_Row * m_TileEachSize.y);
+
+		// 해상도 제한
+		if (vResolution.x > m_CaptureTexMaxResolution.x)
+			vResolution.x = m_CaptureTexMaxResolution.x;
+
+		if (vResolution.y > m_CaptureTexMaxResolution.y)
+			vResolution.y = m_CaptureTexMaxResolution.y;
+
+		// Texture 새로 생성
+		m_CaptureTex = new CTexture(true);
+
+		// Render Target - SRV
+		m_CaptureTex->Create((UINT)vResolution.x, (UINT)vResolution.y
+			, DXGI_FORMAT_R8G8B8A8_UNORM
+			, D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE, D3D11_USAGE_DEFAULT);
+	}
+	else
+	{
+		// Capture Texture 가 생성되어 있지만, 예상되는 해상도 보다 작은 경우 새로 생성.
+		Vec2 vResolution = Vec2(m_Col * m_TileEachSize.x, m_Row * m_TileEachSize.y);
+
+		// 해상도 제한
+		if (vResolution.x > m_CaptureTexMaxResolution.x)
+			vResolution.x = m_CaptureTexMaxResolution.x;
+
+		if (vResolution.y > m_CaptureTexMaxResolution.y)
+			vResolution.y = m_CaptureTexMaxResolution.y;
+
+		// Tile Map 의 행과 열이 늘어남
+		if (m_CaptureTex->GetWidth() < vResolution.x || m_CaptureTex->GetHeight() < vResolution.y)
+		{
+			// Texture 새로 생성
+			m_CaptureTex = new CTexture(true);
+
+			// Render Target - SRV
+			m_CaptureTex->Create((UINT)vResolution.x, (UINT)vResolution.y
+				, DXGI_FORMAT_R8G8B8A8_UNORM
+				, D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE, D3D11_USAGE_DEFAULT);
+		}
+	}
 }
 
 void CTileMap::SetRowCol(UINT row, UINT col)

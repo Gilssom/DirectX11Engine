@@ -48,6 +48,7 @@ void AtlasView::Render_Tick()
 
 	ImGui::InputInt("Image Index", &m_ImageIndex, 0, ImGuiInputTextFlags_ReadOnly);
 
+	// ¸¶¿ì½º ÈÙ·Î ÁÜÀÎ ÁÜ¾Æ¿ô
 	if (ImGui::GetIO().MouseWheel > 0.f)
 	{
 		m_AtlasScale += 0.1f;

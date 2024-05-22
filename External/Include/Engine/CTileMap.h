@@ -25,11 +25,16 @@ private:
     vector<tTileInfo>   m_vecTileInfo;
     CStructuredBuffer*  m_TileBuffer;        // 깊은 복사의 대상 (구조화 버퍼)
 
+    Ptr<CTexture>       m_CaptureTex;
+    Vec2                m_CaptureTexMaxResolution;
+    bool                m_EditorCapture;     // Editor 전용 Image 전달 여부
+
 public:
     void SetRowCol(UINT row, UINT col);
     void SetAtlasTexture(Ptr<CTexture> tex);
     void SetAtlasTileSize(Vec2 tileSize);
     void SetTileEachSize(Vec2 size);
+    void SetCapture(bool capture) { m_EditorCapture = capture; }
 
     UINT GetRow() { return m_Row; }
     UINT GetCol() { return m_Col; }
@@ -39,12 +44,18 @@ public:
     UINT GetAtlasMaxRow() { return m_AtlasMaxRow; }
     UINT GetAtlasMaxCol() { return m_AtlasMaxCol; }
     Vec2 GetAtlasTileSize() { return m_AtlasTileEachSize; }
+    Ptr<CTexture> GetCaptureTexture() { return m_CaptureTex; }
 
 public:
     virtual void Begin() override;
     virtual void FinalTick() override;
     virtual void Render() override;
 
+private:
+    void CaptureRender();
+    void CheckCaptureTexture();
+
+public:
     virtual void SaveToLevelFile(FILE* file) override;
     virtual void LoadFromLevelFile(FILE* file) override;
 

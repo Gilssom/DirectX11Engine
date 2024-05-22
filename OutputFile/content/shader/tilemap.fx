@@ -24,12 +24,15 @@ struct VS_OUT
 // =================================
 //  Tile Map Shader
 //  Parameter
-    #define AtlasMaxRow         g_int_0
-    #define AtlasMaxCol         g_int_1
-    #define TileImageIndex      g_int_2
-    #define AtlasResolution     g_vec2_0
-    #define AtlasTileSize       g_vec2_1
-    #define TileColRow          g_vec2_2
+#define AtlasMaxRow         g_int_0
+#define AtlasMaxCol         g_int_1
+#define TileImageIndex      g_int_2
+#define AtlasResolution     g_vec2_0
+#define AtlasTileSize       g_vec2_1
+#define TileColRow          g_vec2_2
+
+#define IsCaptureMode       g_int_3
+
 StructuredBuffer<tTileInfo> g_TileInfo : register(t20);
 // ==================================
 
@@ -37,9 +40,16 @@ VS_OUT VS_TileMap(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
     
-    _in.vLocalPos.xy += float2(0.5f, -0.5f);
-
-    output.vPosition = mul(float4(_in.vLocalPos, 1.f), g_matWVP);
+    if (IsCaptureMode)
+    {
+        output.vPosition = float4(float3(_in.vLocalPos * 2.f), 1.f);
+    }
+    else
+    {
+        _in.vLocalPos.xy += float2(0.5f, -0.5f);
+        output.vPosition = mul(float4(_in.vLocalPos, 1.f), g_matWVP);
+    }  
+    
     output.vUV = _in.vUV;
     
     return output;
