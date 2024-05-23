@@ -1,14 +1,1 @@
-﻿  TileView.cpp
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\TileView.cpp(31,20): warning C4244: '초기화 중': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/TileView.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\TileView.cpp(96,20): warning C4244: '초기화 중': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (소스 파일 '/TileView.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\TileView.cpp(106,52): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-  (소스 파일 '/TileView.cpp'을(를) 컴파일하는 중)
-  
-C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\Project\Client\TileView.cpp(107,52): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-  (소스 파일 '/TileView.cpp'을(를) 컴파일하는 중)
-  
-  Client.vcxproj -> C:\Users\gil52\OneDrive\문서\GitHub\DirectX11Engine\OutputFile\bin\Client.exe
+﻿  Client.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\OutputFile\bin\Client.exe
