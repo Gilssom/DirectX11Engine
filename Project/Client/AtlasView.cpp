@@ -96,8 +96,8 @@ void AtlasView::MouseCheck()
 	Vec2 AtlasTileSize = pTileMap->GetAtlasTileSize();
 	AtlasTileSize *= Ratio;
 
-	int Col = (int)vOffsetMousePos.x / (int)AtlasTileSize.x;
-	int Row = (int)vOffsetMousePos.y / (int)AtlasTileSize.y;
+	int Col = (int)(vOffsetMousePos.x / (int)AtlasTileSize.x);
+	int Row = (int)(vOffsetMousePos.y / (int)AtlasTileSize.y);
 
 	// Atlas Texture 의 외부를 클릭하며 아무일도 안 일어나게 설정
 	if (vOffsetMousePos.x < 0.f || pTileMap->GetAtlasMaxCol() <= Col

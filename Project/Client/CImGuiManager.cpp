@@ -174,7 +174,7 @@ void CImGuiManager::CreateEditorUI()
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
 
     pUI = new TileMapEditor;
-    pUI->SetActive(true);
+    pUI->SetActive(false);
     pUI->SetMenu(true);
     pUI->SetUIMove(true);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));

@@ -20,6 +20,8 @@
 #define DT CTimeManager::GetInst()->GetDeltaTime()
 #define DT_Engine CTimeManager::GetInst()->GetDeltaTime_Engine()
 
+#define FMOD_System CSoundManager::GetInst()->GetFMODSystem()
+
 #define MAX_LAYER 32
 
 

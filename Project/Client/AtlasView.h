@@ -11,6 +11,9 @@ private:
 	int		m_ImageIndex;
 
 public:
+	int GetImageIndex() { return m_ImageIndex; }
+
+public:
 	virtual void Render_Tick() override;
 
 private:

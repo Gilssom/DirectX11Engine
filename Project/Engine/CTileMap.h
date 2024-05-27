@@ -35,6 +35,7 @@ public:
     void SetAtlasTileSize(Vec2 tileSize);
     void SetTileEachSize(Vec2 size);
     void SetCapture(bool capture) { m_EditorCapture = capture; }
+    void SetImageIndex(int row, int col, int imageIndex);
 
     UINT GetRow() { return m_Row; }
     UINT GetCol() { return m_Col; }

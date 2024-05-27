@@ -93,6 +93,10 @@ ASSET_TYPE GetAssetType()
     {
         return ASSET_TYPE::PREFAB;
     }
+    if constexpr (std::is_same_v<T, CSound>)
+    {
+        return ASSET_TYPE ::SOUND;
+    }
 }
 
 template<typename T>

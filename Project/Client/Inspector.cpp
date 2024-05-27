@@ -37,7 +37,7 @@ Inspector::~Inspector()
 
 void Inspector::Render_Tick()
 {
-	if (m_TargetObject == nullptr)
+	/*if (m_TargetObject == nullptr)
 	{
 		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
 
@@ -52,7 +52,7 @@ void Inspector::Render_Tick()
 		TileMapEditor* pEditor = CImGuiManager::GetInst()->FindEditorUI<TileMapEditor>("TileMapEditor");
 		pEditor->SetTileMap(pCurTileMap->TileMap());
 		pEditor->SetActive(true);
-	}
+	}*/
 }
 
 void Inspector::SetTargetObject(CGameObject* target)

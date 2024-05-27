@@ -1,11 +1,15 @@
 #include "pch.h"
 #include "TileView.h"
 
+#include "AtlasView.h"
+
 TileView::TileView()
 	: TileMapSubUI("Tile View", "##TileView")
 	, m_DefaultSize(500.f)
 	, m_CaptureScale(1.f)
 	, m_ImageRectMin {}
+	, m_SelectedCol(0)
+	, m_SelectedRow(0)
 {
 
 }
@@ -62,6 +66,9 @@ void TileView::Render_Tick()
 		SetUIMove(false);
 		MouseCheck();
 	}
+
+	int RowCol[2] = { m_SelectedRow, m_SelectedCol };
+	ImGui::InputInt2("Selected Row Col", RowCol, 0);
 }
 
 void TileView::Deactivate()
@@ -99,15 +106,23 @@ void TileView::MouseCheck()
 
 	Vec2 TileEachSize = pTileMap->GetTileSize() * Ratio;
 
-	int Col = (int)vOffsetMousePos.x / (int)TileEachSize.x;
-	int Row = (int)vOffsetMousePos.y / (int)TileEachSize.y;
-
+	m_SelectedCol = (int)(vOffsetMousePos.x / TileEachSize.x);
+	m_SelectedRow = (int)(vOffsetMousePos.y / TileEachSize.y);
+	
 	// Atlas Texture 의 외부를 클릭하며 아무일도 안 일어나게 설정
-	if (vOffsetMousePos.x < 0.f || pTileMap->GetCol() <= Col
-		|| vOffsetMousePos.y < 0.f || pTileMap->GetRow() <= Row)
+	if (vOffsetMousePos.x < 0.f || pTileMap->GetCol() <= m_SelectedCol
+		|| vOffsetMousePos.y < 0.f || pTileMap->GetRow() <= m_SelectedRow)
 	{
 		return;
 	}
 
 	// 이후 해당 Tile 교체 및 제작
+	int imageIndex = GetAtlasView()->GetImageIndex();
+
+	if (imageIndex == -1)
+	{
+		return;
+	}
+
+	pTileMap->SetImageIndex(m_SelectedRow, m_SelectedCol, imageIndex);
 }

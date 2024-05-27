@@ -10,6 +10,9 @@ private:
 	float	m_DefaultSize;
 	float	m_CaptureScale;
 
+	int		m_SelectedRow;
+	int		m_SelectedCol;
+
 	Vec2	m_ImageRectMin;
 
 public:

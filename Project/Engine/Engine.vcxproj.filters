@@ -134,6 +134,15 @@
     <ClCompile Include="CPrefab.cpp">
       <Filter>08. Asset\Prefab</Filter>
     </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>08. Asset\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoundManager.cpp">
+      <Filter>04. Manager\10. SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CFontManager.cpp">
+      <Filter>04. Manager\11. FontManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Temp.h" />
@@ -289,6 +298,15 @@
     </ClInclude>
     <ClInclude Include="CPrefab.h">
       <Filter>08. Asset\Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>08. Asset\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="CSoundManager.h">
+      <Filter>04. Manager\10. SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CFontManager.h">
+      <Filter>04. Manager\11. FontManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -459,6 +477,12 @@
     </Filter>
     <Filter Include="07. Component\Rendering\02 .TileMap">
       <UniqueIdentifier>{9890abc6-5e7a-4df4-b757-d38ad15da98a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\10. SoundManager">
+      <UniqueIdentifier>{b04bb53b-22f7-47be-8024-78eab9dc4685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\11. FontManager">
+      <UniqueIdentifier>{69e02712-4b3e-4bdc-9948-c6b4f2b1f269}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

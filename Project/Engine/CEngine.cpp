@@ -11,6 +11,8 @@
 #include "CDbgRenderManager.h"
 #include "CCollisionManager.h"
 #include "CTaskManager.h"
+#include "CSoundManager.h"
+#include "CFontManager.h"
 
 CEngine::CEngine()
 	: m_hMainHwnd(nullptr)
@@ -33,6 +35,9 @@ int CEngine::Init(HWND hwnd, Vec2 resolution, PREFAB_SAVE_FUNC save, PREFAB_LOAD
 	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
 	SetWindowPos(m_hMainHwnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);
 
+	// SoundMgr 초기화
+	CSoundManager::GetInst()->Init();
+
 	// DircetX11
 	if (FAILED(CDevice::GetInst()->Init(m_hMainHwnd, m_Resolution)))
 	{
@@ -47,6 +52,7 @@ int CEngine::Init(HWND hwnd, Vec2 resolution, PREFAB_SAVE_FUNC save, PREFAB_LOAD
 	CAssetManager::GetInst()->Init();
 	CRenderManager::GetInst()->Init();
 	CLevelManager::GetInst()->Init();
+	CFontManager::GetInst()->Init();
 
 	// Prefab Save & Load 함수 설정
 	CPrefab::SetPrefabSaveFunc(save);
@@ -62,6 +68,7 @@ void CEngine::Progress()
 	// ====================
 	CTimeManager::GetInst()->Tick();
 	CKeyManager::GetInst()->Tick();
+	CSoundManager::GetInst()->Tick();
 	CAssetManager::GetInst()->Tick();
 
 

@@ -100,7 +100,7 @@ void ContentUI::ReloadContent()
 			CAssetManager::GetInst()->Load<CTexture>(m_vecContentName[i], m_vecContentName[i]);
 			break;
 		case ASSET_TYPE::SOUND:
-			//CAssetManager::GetInst()->Load<CSound>(m_vecContentName[i], m_vecContentName[i]); _¹Ì±¸Çö
+			CAssetManager::GetInst()->Load<CSound>(m_vecContentName[i], m_vecContentName[i]);
 			break;
 		case ASSET_TYPE::END:
 			break;

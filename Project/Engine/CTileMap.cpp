@@ -216,6 +216,15 @@ void CTileMap::SetTileEachSize(Vec2 size)
 	Transform()->SetRelativeScale(Vec3(m_TileEachSize.x * m_Col, m_TileEachSize.y * m_Row, 1.f));
 }
 
+void CTileMap::SetImageIndex(int row, int col, int imageIndex)
+{
+	if (row < 0 || m_Row <= row || col < 0 || m_Col <= col)
+		return;
+
+	int index = row * m_Col + col;
+	m_vecTileInfo[index].ImageIndex = imageIndex;
+}
+
 void CTileMap::SetAtlasTexture(Ptr<CTexture> tex)
 {
 	m_Atlas = tex;

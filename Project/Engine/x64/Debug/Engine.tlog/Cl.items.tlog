@@ -13,6 +13,7 @@ C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CDbgRenderManager.
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CDevice.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CEngine.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CEngine.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CEntity.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CEntity.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CFontManager.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CFontManager.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CGameObject.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CGameObject.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CGraphicShader.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CGraphicShader.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CKeyManager.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CKeyManager.obj
@@ -32,6 +33,8 @@ C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CScript.cpp;C:\Use
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CSetColorCS.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CSetColorCS.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CShader.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CShader.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CMaterial.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CMaterial.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CSound.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CSound.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CSoundManager.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CSoundManager.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CStructuredBuffer.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CStructuredBuffer.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTaskManager.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTaskManager.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTexture.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\x64\Debug\CTexture.obj
