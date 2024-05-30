@@ -35,6 +35,9 @@ public:
 
 public:
 	void Create(Ptr<CTexture> atlasTex, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps);
+	void Create(Ptr<CTexture> atlasTex, vector<tAnim2DFrame>& animFrames, int frameCount);
+
+	void SetAnimator(CAnimator2D* animator) { m_Animator = animator; }
 
 	void Save(const wstring& relativeFolderPath);
 	void Load(const wstring& relativeFolderPath);

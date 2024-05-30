@@ -16,7 +16,7 @@ private:
 	class TileMapSubUI*		m_Sub[3];
 	bool					m_PrevActive[3];
 
-	CTileMap*		m_TileMap;
+	CTileMap*				m_TileMap;
 
 public:
 	void SetTileMap(CTileMap* tileMapComponent);

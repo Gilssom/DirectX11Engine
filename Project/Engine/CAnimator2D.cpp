@@ -79,6 +79,14 @@ CAnim2D* CAnimator2D::FindAnimation(const wstring& animName)
 	return iter->second;
 }
 
+CAnim2D* CAnimator2D::FindAnimFile(const wstring& strRelativePath)
+{
+	CAnim2D* pAnim = new CAnim2D;
+	pAnim->Load(strRelativePath);
+
+	return pAnim;
+}
+
 void CAnimator2D::LoadAnimation(const wstring& strRelativePath)
 {
 	CAnim2D* pAnim = new CAnim2D;

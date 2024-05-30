@@ -67,6 +67,23 @@ void CTestLevel::CreateTestLevel()
 	pTileMapObj->TileMap()->SetRowCol(20, 20);
 	m_CurLevel->AddObject(0, pTileMapObj);
 
+	CGameObject* pTestObject = new CGameObject;
+	pTestObject->SetName(L"TestObject");
+	pTestObject->AddComponent(new CTransform);
+	pTestObject->AddComponent(new CMeshRender);
+	pTestObject->AddComponent(new CAnimator2D);
+
+	pTestObject->Transform()->SetRelativePos(Vec3(-427.f, 70.2f, 89.f));
+	pTestObject->Transform()->SetRelativeScale(Vec3(89.f, 175.f, 1.f));
+
+	pTestObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pTestObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+
+	pTestObject->Animator2D()->LoadAnimation(L"Animation\\Test.anim");
+	pTestObject->Animator2D()->Play(L"Test", true);
+
+	m_CurLevel->AddObject(3, pTestObject, false);
+
 	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 	return;
 #pragma endregion

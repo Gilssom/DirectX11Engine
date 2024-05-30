@@ -61,6 +61,31 @@ void CAnim2D::Create(Ptr<CTexture> atlasTex, Vec2 leftTopPixelPos, Vec2 vSlicePi
 	}
 }
 
+void CAnim2D::Create(Ptr<CTexture> atlasTex, vector<tAnim2DFrame>& animFrames, int frameCount)
+{
+	assert(atlasTex.Get());
+
+	m_AtlasTex = atlasTex;
+
+	m_BackGroundSize.x = 150.f / m_AtlasTex->GetWidth();
+	m_BackGroundSize.y = 150.f / m_AtlasTex->GetHeight();
+
+	for (int i = 0; i < frameCount; i++)
+	{
+		tAnim2DFrame frame = {};
+
+		frame.LeftTop.x = animFrames[i].LeftTop.x / m_AtlasTex->GetWidth();
+		frame.LeftTop.y = animFrames[i].LeftTop.y / m_AtlasTex->GetHeight();
+
+		frame.Duration = 1.f / animFrames[i].Duration;
+
+		frame.SliceSize.x = animFrames[i].SliceSize.x / m_AtlasTex->GetWidth();
+		frame.SliceSize.y = animFrames[i].SliceSize.y / m_AtlasTex->GetHeight();
+
+		m_vecFrame.push_back(frame);
+	}
+}
+
 void CAnim2D::FinalTick()
 {
 	if (m_Finish)

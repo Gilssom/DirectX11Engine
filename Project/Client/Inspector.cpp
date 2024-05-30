@@ -19,6 +19,7 @@
 #include "ScriptUI.h"
 
 #include "TileMapEditor.h"
+#include "AnimationEditor.h"
 
 Inspector::Inspector()
 	: EditorUI("Inspector", "##Inspector")
@@ -37,22 +38,22 @@ Inspector::~Inspector()
 
 void Inspector::Render_Tick()
 {
-	/*if (m_TargetObject == nullptr)
+	if (m_TargetObject == nullptr)
 	{
 		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
 
 		if (pCurLevel == nullptr)
 			return;
 
-		CGameObject* pCurTileMap = pCurLevel->FindObjectByName(L"TileMap");
+		//CGameObject* pCurTileMap = pCurLevel->FindObjectByName(L"Anima");
 
-		if (!pCurTileMap)
-			return;
+		//if (!pCurTileMap)
+			//return;
 
-		TileMapEditor* pEditor = CImGuiManager::GetInst()->FindEditorUI<TileMapEditor>("TileMapEditor");
-		pEditor->SetTileMap(pCurTileMap->TileMap());
-		pEditor->SetActive(true);
-	}*/
+		//AnimationEditor* pEditor = CImGuiManager::GetInst()->FindEditorUI<AnimationEditor>("AnimationEditor");
+		//pEditor->SetTileMap(pCurTileMap->TileMap());
+		//pEditor->SetActive(true);
+	}
 }
 
 void Inspector::SetTargetObject(CGameObject* target)

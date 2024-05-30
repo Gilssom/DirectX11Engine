@@ -21,6 +21,11 @@
 #include "TileMapDetail.h"
 #include "AtlasView.h"
 
+#include "AnimationEditor.h"
+#include "SpriteView.h"
+#include "AnimPreView.h"
+#include "AnimDetail.h"
+
 CImGuiManager::CImGuiManager()
     : m_mapUI{}
     , m_hMainHwnd(nullptr)
@@ -158,6 +163,10 @@ void CImGuiManager::CreateEditorUI()
     pUI->SetActive(true);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
 
+
+// =================
+//  Tile Map Editor
+// =================
     pUI = new TileView;
     pUI->SetActive(false);
     pUI->SetUIMove(false);
@@ -177,6 +186,30 @@ void CImGuiManager::CreateEditorUI()
     pUI->SetActive(false);
     pUI->SetMenu(true);
     pUI->SetUIMove(true);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+// ==================
+//  Animation Editor
+// ==================
+    pUI = new SpriteView;
+    pUI->SetActive(false);
+    pUI->SetUIMove(false);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new AnimPreView;
+    pUI->SetActive(false);
+    pUI->SetUIMove(false);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new AnimDetail;
+    pUI->SetActive(false);
+    pUI->SetUIMove(false);
+    m_mapUI.insert(make_pair(pUI->GetName(), pUI));
+
+    pUI = new AnimationEditor;
+    pUI->SetActive(false);
+    pUI->SetMenu(true);
+    pUI->SetUIMove(false);
     m_mapUI.insert(make_pair(pUI->GetName(), pUI));
 }
 

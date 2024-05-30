@@ -80,7 +80,7 @@ void MenuUI::Level()
             ofn.nMaxFileTitle = 0;
 
             // 탐색창 초기 위치 지정
-            wstring strInitPath = CPathManager::GetInst()->GetContentPath();
+            wstring strInitPath = CPathManager::GetInst()->GetContentPath() + wstring(L"Level\\");
             ofn.lpstrInitialDir = strInitPath.c_str();
             ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
@@ -111,7 +111,7 @@ void MenuUI::Level()
             ofn.nMaxFileTitle = 0;
 
             // 탐색창 초기 위치 지정
-            wstring strInitPath = CPathManager::GetInst()->GetContentPath();
+            wstring strInitPath = CPathManager::GetInst()->GetContentPath() + wstring(L"Level\\");;
             ofn.lpstrInitialDir = strInitPath.c_str();
             ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 

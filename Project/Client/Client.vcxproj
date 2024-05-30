@@ -144,9 +144,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animator2DUI.h" />
+    <ClInclude Include="AnimDetail.h" />
+    <ClInclude Include="AnimPreView.h" />
+    <ClInclude Include="AnimSubUI.h" />
     <ClInclude Include="AssetUI.h" />
     <ClInclude Include="AtlasView.h" />
     <ClInclude Include="CameraUI.h" />
+    <ClInclude Include="AnimationEditor.h" />
     <ClInclude Include="CEditorCameraScript.h" />
     <ClInclude Include="CEditorManager.h" />
     <ClInclude Include="CGameObjectEx.h" />
@@ -185,6 +189,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScriptUI.h" />
     <ClInclude Include="SoundUI.h" />
+    <ClInclude Include="SpriteView.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TextureUI.h" />
     <ClInclude Include="TileMapDetail.h" />
@@ -197,9 +202,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator2DUI.cpp" />
+    <ClCompile Include="AnimDetail.cpp" />
+    <ClCompile Include="AnimPreView.cpp" />
+    <ClCompile Include="AnimSubUI.cpp" />
     <ClCompile Include="AssetUI.cpp" />
     <ClCompile Include="AtlasView.cpp" />
     <ClCompile Include="CameraUI.cpp" />
+    <ClCompile Include="AnimationEditor.cpp" />
     <ClCompile Include="CEditorCameraScript.cpp" />
     <ClCompile Include="CEditorManager.cpp" />
     <ClCompile Include="CGameObjectEx.cpp" />
@@ -238,6 +247,7 @@
     <ClCompile Include="PrefabUI.cpp" />
     <ClCompile Include="ScriptUI.cpp" />
     <ClCompile Include="SoundUI.cpp" />
+    <ClCompile Include="SpriteView.cpp" />
     <ClCompile Include="TextureUI.cpp" />
     <ClCompile Include="TileMapDetail.cpp" />
     <ClCompile Include="TileMapEditor.cpp" />

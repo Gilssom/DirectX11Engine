@@ -128,6 +128,21 @@
     <Filter Include="02. EditorUI\08. TileMapEditor\TileMapSubUI\02. AtlasView">
       <UniqueIdentifier>{778df5b9-64d5-45a6-90f1-e81ed42c3e01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. EditorUI\09. AnimationEditor">
+      <UniqueIdentifier>{d875a71b-e9a3-45ce-9a09-59d773a353e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\09. AnimationEditor\AnimationSubUI">
+      <UniqueIdentifier>{7d6b224b-8914-49d8-a771-9463f68cfdb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\09. AnimationEditor\AnimationSubUI\01. SpriteView">
+      <UniqueIdentifier>{e65b1f84-db29-4dca-9e37-a7f6abf1c776}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\09. AnimationEditor\AnimationSubUI\02. AnimPreView">
+      <UniqueIdentifier>{e9a5c68d-5574-44c3-a6c2-7996cca55080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. EditorUI\09. AnimationEditor\AnimationSubUI\03. Detail">
+      <UniqueIdentifier>{ff6515d9-b141-4251-811c-cc8075241e63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -283,6 +298,21 @@
     <ClInclude Include="TileMapSubUI.h">
       <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationEditor.h">
+      <Filter>02. EditorUI\09. AnimationEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimSubUI.h">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteView.h">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI\01. SpriteView</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimPreView.h">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI\02. AnimPreView</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimDetail.h">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI\03. Detail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -436,6 +466,21 @@
     </ClCompile>
     <ClCompile Include="TileMapSubUI.cpp">
       <Filter>02. EditorUI\08. TileMapEditor\TileMapSubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationEditor.cpp">
+      <Filter>02. EditorUI\09. AnimationEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimSubUI.cpp">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteView.cpp">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI\01. SpriteView</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimPreView.cpp">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI\02. AnimPreView</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimDetail.cpp">
+      <Filter>02. EditorUI\09. AnimationEditor\AnimationSubUI\03. Detail</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

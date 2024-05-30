@@ -1,7 +1,11 @@
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\Animator2DUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\Animator2DUI.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\AnimDetail.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\AnimDetail.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\AnimPreView.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\AnimPreView.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\AnimSubUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\AnimSubUI.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\AssetUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\AssetUI.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\AtlasView.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\AtlasView.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\CameraUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\CameraUI.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\AnimationEditor.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\AnimationEditor.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\CEditorCameraScript.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\CEditorCameraScript.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\CEditorManager.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\CEditorManager.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\CGameObjectEx.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\CGameObjectEx.obj
@@ -37,6 +41,7 @@ C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\pch.cpp;C:\Users\u
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\PrefabUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\PrefabUI.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\ScriptUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\ScriptUI.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\SoundUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\SoundUI.obj
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\SpriteView.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\SpriteView.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\TextureUI.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\TextureUI.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\TileMapDetail.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\TileMapDetail.obj
 C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\TileMapEditor.cpp;C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Client\x64\Debug\TileMapEditor.obj
