@@ -38,7 +38,7 @@ void CTestLevel::CreateTestLevel()
 	//return;
 #pragma endregion
 
-#pragma region Object Add (No Animation Tool)
+#pragma region Object Add
 	// Level
 	wstring testPath = CPathManager::GetInst()->GetContentPath();
 	testPath += L"Level\\ElvenGard_0.lv";
@@ -50,39 +50,58 @@ void CTestLevel::CreateTestLevel()
 	//CCollisionManager::GetInst()->LayerCheck(1, 2);
 	//CCollisionManager::GetInst()->LayerCheck(1, 4);
 
+	// Test Bgm Play
 	Ptr<CSound> pTestBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
 	pTestBgm->Play(0, 0.3f, true);
 
 	// TileMap Object
-	CGameObject* pTileMapObj = new CGameObject;
-	pTileMapObj->SetName(L"TileMap");
-	pTileMapObj->AddComponent(new CTransform);
-	pTileMapObj->AddComponent(new CTileMap);
+	//CGameObject* pTileMapObj = new CGameObject;
+	//pTileMapObj->SetName(L"TileMap");
+	//pTileMapObj->AddComponent(new CTransform);
+	//pTileMapObj->AddComponent(new CTileMap);
+	
+	//pTileMapObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	
+	//pTileMapObj->TileMap()->SetAtlasTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\TILE.bmp", L"texture\\TILE.bmp"));
+	//pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
+	//pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
+	//pTileMapObj->TileMap()->SetRowCol(20, 20);
+	//m_CurLevel->AddObject(0, pTileMapObj);
 
-	pTileMapObj->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	//CGameObject* pTestObject = new CGameObject;
+	//pTestObject->SetName(L"TestObject");
+	//pTestObject->AddComponent(new CTransform);
+	//pTestObject->AddComponent(new CMeshRender);
+	//pTestObject->AddComponent(new CAnimator2D);
+	
+	//pTestObject->Transform()->SetRelativePos(Vec3(-427.f, 70.2f, 89.f));
+	//pTestObject->Transform()->SetRelativeScale(Vec3(89.f, 175.f, 1.f));
+	
+	//pTestObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pTestObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	
+	//pTestObject->Animator2D()->LoadAnimation(L"Animation\\Test.anim");
+	//pTestObject->Animator2D()->Play(L"Test", true);
+	
+	//m_CurLevel->AddObject(3, pTestObject, false);
 
-	pTileMapObj->TileMap()->SetAtlasTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\TILE.bmp", L"texture\\TILE.bmp"));
-	pTileMapObj->TileMap()->SetAtlasTileSize(Vec2(64.f, 64.f));
-	pTileMapObj->TileMap()->SetTileEachSize(Vec2(64.f, 64.f));
-	pTileMapObj->TileMap()->SetRowCol(20, 20);
-	m_CurLevel->AddObject(0, pTileMapObj);
+	CGameObject* pTestPlayer = new CGameObject;
 
-	CGameObject* pTestObject = new CGameObject;
-	pTestObject->SetName(L"TestObject");
-	pTestObject->AddComponent(new CTransform);
-	pTestObject->AddComponent(new CMeshRender);
-	pTestObject->AddComponent(new CAnimator2D);
+	pTestPlayer->SetName(L"TestPlayer");
+	pTestPlayer->AddComponent(new CTransform);
+	pTestPlayer->AddComponent(new CMeshRender);
+	pTestPlayer->AddComponent(new CAnimator2D);
 
-	pTestObject->Transform()->SetRelativePos(Vec3(-427.f, 70.2f, 89.f));
-	pTestObject->Transform()->SetRelativeScale(Vec3(89.f, 175.f, 1.f));
+	pTestPlayer->Transform()->SetRelativePos(Vec3(92.f, 0.f, 100.f));
+	pTestPlayer->Transform()->SetRelativeScale(Vec3(800.f, 600.f, 1.f));
 
-	pTestObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pTestObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	pTestPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pTestPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
 
-	pTestObject->Animator2D()->LoadAnimation(L"Animation\\Test.anim");
-	pTestObject->Animator2D()->Play(L"Test", true);
+	pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Tau_Idle.anim");
+	pTestPlayer->Animator2D()->Play(L"Tau_Idle", true);
 
-	m_CurLevel->AddObject(3, pTestObject, false);
+	m_CurLevel->AddObject(3, pTestPlayer, false);
 
 	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 	return;
