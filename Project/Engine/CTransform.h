@@ -17,6 +17,9 @@ private:
 	// 부모와의 절대적인 좌표 값을 가질 것인지
 	bool	m_Absolute;
 
+	// 방향
+	bool	m_IsLeft;
+	bool	m_IsRight;
 
 public:
 	virtual void FinalTick() override;
@@ -48,7 +51,9 @@ public:
 
 	void SetAbsolute(bool absolute) { m_Absolute = absolute; }
 	bool IsAbsolute() { return m_Absolute; }
-	void SetTurn() { m_RelativeScale.x *= -1.f; }
+
+	void SetLeft(bool isLeft) { m_IsLeft = isLeft; }
+	void SetRight(bool isRight) { m_IsRight = isRight; }
 
 	virtual void SaveToLevelFile(FILE* file) override;
 	virtual void LoadFromLevelFile(FILE* file) override;

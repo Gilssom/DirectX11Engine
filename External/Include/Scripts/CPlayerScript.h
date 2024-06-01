@@ -11,8 +11,13 @@ private:
 	Ptr<CPrefab>	m_ParticlePrefab;
 	Ptr<CPrefab>	m_MissilePrefab;
 
+	bool			m_MoveLeft;
+	bool			m_MoveRight;
+
 public:
 	void SetTarget(CGameObject* target) { m_TargetMonster = target; }
+	bool GetMoveLeft() { return m_MoveLeft; }
+	bool GetMoveRight() { return m_MoveRight; }
 
 public:
 	virtual void Begin() override;

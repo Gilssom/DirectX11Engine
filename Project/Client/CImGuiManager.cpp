@@ -44,6 +44,9 @@ CImGuiManager::~CImGuiManager()
 
     // Delete UI
     Safe_Del_Map(m_mapUI);
+
+    // Delete Font
+    delete[] cstr;
 }
 
 int CImGuiManager::Init(HWND hwnd)
@@ -71,8 +74,14 @@ int CImGuiManager::Init(HWND hwnd)
     ImGui::StyleColorsDrakular();
     //ImGui::StyleColorsLight();
 
-    io.Fonts->AddFontFromFileTTF("C:\\Users\\user\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
-    //io.Fonts->AddFontFromFileTTF("C:\\Users\\gil52\\AppData\\Local\\Microsoft\\Windows\\Fonts\\Roboto-Regular.ttf", 16.f, NULL);
+    // ImGui Font 상대경로 설정
+    wstring strFontPath = CPathManager::GetInst()->GetContentPath();
+    strFontPath += L"Fonts\\Roboto-Regular.ttf";
+    size_t len = strFontPath.length();
+    size_t convertedChars = 0;
+    cstr = new char[len + 1];
+    wcstombs_s(&convertedChars, cstr, len + 1, strFontPath.c_str(), len);
+    io.Fonts->AddFontFromFileTTF(cstr, 16.f, NULL);
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();

@@ -98,8 +98,8 @@ void CTestLevel::CreateTestLevel()
 	pTestPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
 	pTestPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
 
-	pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Tau_Idle.anim");
-	pTestPlayer->Animator2D()->Play(L"Tau_Idle", true);
+	pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Tau_Move.anim");
+	pTestPlayer->Animator2D()->Play(L"Tau_Move", true);
 
 	m_CurLevel->AddObject(3, pTestPlayer, false);
 

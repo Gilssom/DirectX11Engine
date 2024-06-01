@@ -1,9 +1,15 @@
 #include "pch.h"
 #include "CCameraMoveScript.h"
 
-#include <Engine\CCamera.h>
-#include <Engine\CLevelManager.h>
-#include <Engine\CLevel.h>
+#include <Engine\\CCamera.h>
+#include <Engine\CGameObject.h>
+
+#include <Engine\\CLevelManager.h>
+#include <Engine\\CLevel.h>
+				 
+#include <Engine\\CDevice.h>
+
+#include "CPlayerScript.h"
 
 CCameraMoveScript::CCameraMoveScript()
 	: CScript(SCRIPT_TYPE::CAMERAMOVESCRIPT)
@@ -96,57 +102,52 @@ void CCameraMoveScript::MoveByOrthographic()
 	if (m_TargetObject)
 	{
 		Vec3 vObjectPos = m_TargetObject->Transform()->GetRelativePos();
-		vObjectPos.y += 120.f;
-		GetOwner()->Transform()->SetRelativePos(Vec3(vObjectPos.x, vObjectPos.y, 0.f));
-		return;
-	}
+		CPlayerScript* pPlayerScript = m_TargetObject->GetScript<CPlayerScript>();
 
-	// Shift 속도 배율
-	float speed = m_Speed;
-	if (KEY_PRESSED(KEY::LSHIFT))
-	{
-		speed *= 4.f;
-	}
+		// 1. 해당 레벨의 배경 Object Scael 을 가져온다.
+		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+		CGameObject* pBackGround_0 = pCurLevel->FindObjectByName(L"BackGround_0");
+		CGameObject* pBackGround_1 = pCurLevel->FindObjectByName(L"BackGround_1");
+		float halfX = pBackGround_1->Transform()->GetRelativeScale().x / 2;
+		float halfY = pBackGround_1->Transform()->GetRelativeScale().y / 2;
 
-	// 키 입력에 따른 위치 이동
-	Vec3 vCurPos = GetOwner()->Transform()->GetRelativePos();
+		// 2. 현재 카메라 렌더링 해상도
+		Vec2 vRenderResol = CDevice::GetInst()->GetRenderResolution();
 
-	if (KEY_PRESSED(KEY::UP))
-	{
-		vCurPos.y += speed * DT;
-	}
-	if (KEY_PRESSED(KEY::DOWN))
-	{
-		vCurPos.y -= speed * DT;
-	}
-	if (KEY_PRESSED(KEY::LEFT))
-	{
-		vCurPos.x -= speed * DT;
-	}
-	if (KEY_PRESSED(KEY::RIGHT))
-	{
-		vCurPos.x += speed * DT;
-	}
+		// 3. 카메라 이동 범위 계산
+		float minX = (vRenderResol.x / 2.0f) - halfX;
+		float maxX = halfX - (vRenderResol.x / 2.0f);
+		float minY = (vRenderResol.y / 2.0f) - halfY;
+		float maxY = halfY - (vRenderResol.y / 2.0f);
 
-	if (KEY_PRESSED(KEY::NUM1))
-	{
-		float scale = Camera()->GetScale();
-		scale -= DT; 
+		// 4. 최소값이 최대값보다 크지 않도록 보장
+		if (minX > maxX) 
+			std::swap(minX, maxX);
 
-		if (scale < 0.01f)
+		if (minY > maxY) 
+			std::swap(minY, maxY);
+
+		// 5. 카메라 위치 제한
+		float newX = Custom_Clamp(vObjectPos.x, minX, maxX);
+		float newY = Custom_Clamp(vObjectPos.y, minY, maxY);
+
+		// 6. 카메라의 이동에 따른 뒷배경 좌표 변화
+		Vec3 vBackOriginPos = pBackGround_0->Transform()->GetRelativePos();
+
+		if (pPlayerScript->GetMoveLeft())
 		{
-			scale = 0.01f;
+			Vec3 vNewBackPos = vBackOriginPos + Vec3(10.f * DT, 0.f, 0.f);
+			pBackGround_0->Transform()->SetRelativePos(vNewBackPos);
 		}
 
-		Camera()->SetScale(scale);
+		if (pPlayerScript->GetMoveRight())
+		{
+			Vec3 vNewBackPos = vBackOriginPos + Vec3(-10.f * DT, 0.f, 0.f);
+			pBackGround_0->Transform()->SetRelativePos(vNewBackPos);
+		}
+			
+		// 카메라 위치 최종 세팅
+		GetOwner()->Transform()->SetRelativePos(Vec3(newX, newY, 0.f));
+		return;
 	}
-
-	if (KEY_PRESSED(KEY::NUM2))
-	{
-		float scale = Camera()->GetScale();
-		scale += DT;
-		Camera()->SetScale(scale);
-	}
-
-	GetOwner()->Transform()->SetRelativePos(vCurPos);
 }

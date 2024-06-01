@@ -8,6 +8,8 @@ CTransform::CTransform()
 	: CComponent(COMPONENT_TYPE::TRANSFORM)
 	, m_RelativeScale(Vec3(1.f, 1.f, 1.f))
 	, m_Absolute(false)
+	, m_IsRight(true)
+	, m_IsLeft(false)
 {
 
 }
@@ -25,8 +27,12 @@ void CTransform::FinalTick()
 
 	// 4차원 행렬 사용
 	// 회전 각도와 크기, 이동을 한꺼번에 하기 위해 행렬을 3개 만들어 놓고 미리 곱연산을 해버린다.
-	// GameObject 를 양쪽으로 뒤집기 위해선 x 에 음수(좌측), 양수(우측) 값 넣으면 됨.
-	Matrix matScale = XMMatrixScaling(m_RelativeScale.x, m_RelativeScale.y, m_RelativeScale.z); // 행렬 계산 함수 지원
+	Matrix matScale;
+
+	if(m_IsRight)
+		matScale = XMMatrixScaling(m_RelativeScale.x, m_RelativeScale.y, m_RelativeScale.z); // 행렬 계산 함수 지원
+	else if(m_IsLeft)
+		matScale = XMMatrixScaling(-m_RelativeScale.x, m_RelativeScale.y, m_RelativeScale.z); // 행렬 계산 함수 지원
 
 	Matrix matRot =  XMMatrixRotationX(m_RelativeRotation.x);
 		   matRot *= XMMatrixRotationY(m_RelativeRotation.y);

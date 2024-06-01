@@ -11,6 +11,8 @@ CPlayerScript::CPlayerScript()
 	: CScript(SCRIPT_TYPE::PLAYERSCRIPT)
 	, m_Speed(300.f)
 	, m_TargetMonster(nullptr)
+	, m_MoveLeft(false)
+	, m_MoveRight(false)
 {
 	AddScriptProperty(PROPERTY_TYPE::FLOAT, "Speed", &m_Speed);
 }
@@ -61,14 +63,37 @@ void CPlayerScript::Tick()
 	{
 		vCurPos.y -= DT * m_Speed;
 	}
+
+	// GameObject 를 양쪽으로 뒤집기 위해선 Relative Scale x 에 음수(좌측), 양수(우측) 값 넣으면 됨.
+	if (KEY_TAP(KEY::A))
+	{
+		//Transform()->SetRelativePos(Transform()->GetRelativePos() + Vec3(-90.f, 0.f, 0.f));
+	}
 	if (KEY_PRESSED(KEY::A))
 	{
+		m_MoveLeft = true;
+		Transform()->SetLeft(true);
+		Transform()->SetRight(false);
 		vCurPos.x -= DT * m_Speed;
+	}
+	if(KEY_RELEASED(KEY::A))
+		m_MoveLeft = false;
+
+	if (KEY_TAP(KEY::D))
+	{
+		//Transform()->SetRelativePos(Transform()->GetRelativePos() + Vec3(90.f, 0.f, 0.f));
 	}
 	if (KEY_PRESSED(KEY::D))
 	{
+		m_MoveRight = true;
+		Transform()->SetRight(true);
+		Transform()->SetLeft(false);
 		vCurPos.x += DT * m_Speed;
 	}
+	if (KEY_RELEASED(KEY::D))
+		m_MoveRight = false;
+
+
 	//if (KEY_PRESSED(KEY::Z))
 	//{
 	//	Vec3 vRot = GetOwner()->Transform()->GetRelativeRotation();

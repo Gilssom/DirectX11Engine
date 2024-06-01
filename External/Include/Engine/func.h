@@ -97,3 +97,18 @@ void Safe_Del_Map(map<T1, T2>& map)
 
 	map.clear();
 }
+
+template <typename T>
+T Custom_Clamp(T value, T min, T max) 
+{
+	if (min > max) 
+		std::swap(min, max);
+
+	if (value < min) 
+		return min;
+
+	if (value > max) 
+		return max;
+
+	return value;
+}
