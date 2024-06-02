@@ -17,6 +17,8 @@ private:
 public:
 	void SetTargetObject(CGameObject* targetObject) { m_TargetObject = targetObject; }
 
+	void SetTurnCameraPos(bool isLeft);
+
 public:
 	CLONE(CCameraMoveScript);
 

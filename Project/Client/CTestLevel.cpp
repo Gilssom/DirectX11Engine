@@ -24,7 +24,7 @@
 void CTestLevel::CreateTestLevel()
 {
 	// Prefab 제작 및 Asset Manager 에 등록
-	CreatePrefab();
+	//CreatePrefab();
 
 #pragma region Empty Level
 	//CLevel* m_NewLevel = nullptr;
@@ -45,10 +45,22 @@ void CTestLevel::CreateTestLevel()
 	CLevel* m_CurLevel = CLevelSaveLoad::LoadLevel(testPath);
 	//m_CurLevel->GetLayer(4)->SetName(L"Portal");
 
+	// Layer 설정
+	m_CurLevel->GetLayer(0)->SetName(L"Default");
+	m_CurLevel->GetLayer(1)->SetName(L"BackGround");
+	m_CurLevel->GetLayer(2)->SetName(L"Back Object");
+	m_CurLevel->GetLayer(3)->SetName(L"Monster");
+	m_CurLevel->GetLayer(4)->SetName(L"Player");
+	m_CurLevel->GetLayer(5)->SetName(L"Player Attack");
+	m_CurLevel->GetLayer(6)->SetName(L"Front Object");
+	m_CurLevel->GetLayer(7)->SetName(L"Gate Portal");
+
 	// Level 의 Collision Setting
-	//CCollisionManager::GetInst()->LayerCheck(1, 1);
-	//CCollisionManager::GetInst()->LayerCheck(1, 2);
-	//CCollisionManager::GetInst()->LayerCheck(1, 4);
+	CCollisionManager::GetInst()->LayerCheck(4, 3);
+	CCollisionManager::GetInst()->LayerCheck(4, 6);
+	CCollisionManager::GetInst()->LayerCheck(4, 7);
+
+	CCollisionManager::GetInst()->LayerCheck(5, 3);
 
 	// Test Bgm Play
 	Ptr<CSound> pTestBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
@@ -68,41 +80,28 @@ void CTestLevel::CreateTestLevel()
 	//pTileMapObj->TileMap()->SetRowCol(20, 20);
 	//m_CurLevel->AddObject(0, pTileMapObj);
 
-	//CGameObject* pTestObject = new CGameObject;
-	//pTestObject->SetName(L"TestObject");
-	//pTestObject->AddComponent(new CTransform);
-	//pTestObject->AddComponent(new CMeshRender);
-	//pTestObject->AddComponent(new CAnimator2D);
+	//CGameObject* pTestPlayer = new CGameObject;
+	//
+	//pTestPlayer->SetName(L"TestPlayer");
+	//pTestPlayer->AddComponent(new CTransform);
+	//pTestPlayer->AddComponent(new CMeshRender);
+	//pTestPlayer->AddComponent(new CAnimator2D);
+	//
+	//pTestPlayer->Transform()->SetRelativePos(Vec3(92.f, 0.f, 100.f));
+	//pTestPlayer->Transform()->SetRelativeScale(Vec3(339.f, 257.f, 1.f));
+	//
+	//pTestPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pTestPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
+	//
+	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Priest_Idle2.png", L"texture\\Sprite\\Priest_Idle2.png");
+	//pTestPlayer->Animator2D()->CreateAnimation(L"Priest_Idle2", pAtlas, Vec2(0.f, 0.f), Vec2(339.f, 257.f), Vec2(339.f, 257.f), 4, 6);
+	//pTestPlayer->Animator2D()->FindAnimation(L"Priest_Idle2")->Save(L"Animation\\");
 	
-	//pTestObject->Transform()->SetRelativePos(Vec3(-427.f, 70.2f, 89.f));
-	//pTestObject->Transform()->SetRelativeScale(Vec3(89.f, 175.f, 1.f));
+	//pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Priest_Idle2.anim");
+	//pTestPlayer->Animator2D()->Play(L"Priest_Idle2", true);
 	
-	//pTestObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pTestObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	//m_CurLevel->AddObject(3, pTestPlayer, false);
 	
-	//pTestObject->Animator2D()->LoadAnimation(L"Animation\\Test.anim");
-	//pTestObject->Animator2D()->Play(L"Test", true);
-	
-	//m_CurLevel->AddObject(3, pTestObject, false);
-
-	CGameObject* pTestPlayer = new CGameObject;
-
-	pTestPlayer->SetName(L"TestPlayer");
-	pTestPlayer->AddComponent(new CTransform);
-	pTestPlayer->AddComponent(new CMeshRender);
-	pTestPlayer->AddComponent(new CAnimator2D);
-
-	pTestPlayer->Transform()->SetRelativePos(Vec3(92.f, 0.f, 100.f));
-	pTestPlayer->Transform()->SetRelativeScale(Vec3(800.f, 600.f, 1.f));
-
-	pTestPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pTestPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
-
-	pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Tau_Move.anim");
-	pTestPlayer->Animator2D()->Play(L"Tau_Move", true);
-
-	m_CurLevel->AddObject(3, pTestPlayer, false);
-
 	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 	return;
 #pragma endregion

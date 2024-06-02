@@ -1,15 +1,16 @@
 #include "pch.h"
 #include "CPlayerScript.h"
 
-#include "CMissileScript.h"
 #include <Engine\\CLevelManager.h>
 #include <Engine\\CLevel.h>
 
 #include <Engine\\CCollider2D.h>
 
+#include "CCameraMoveScript.h"
+
 CPlayerScript::CPlayerScript()
 	: CScript(SCRIPT_TYPE::PLAYERSCRIPT)
-	, m_Speed(300.f)
+	, m_Speed(250.f)
 	, m_TargetMonster(nullptr)
 	, m_MoveLeft(false)
 	, m_MoveRight(false)
@@ -52,22 +53,28 @@ void CPlayerScript::Tick()
 		GetRenderComponent()->RestoreMaterial();
 	}
 
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+
 	// 키 입력에 따른 위치 이동
 	Vec3 vCurPos = GetOwner()->Transform()->GetRelativePos();
 
 	if (KEY_PRESSED(KEY::W))
 	{
-		vCurPos.y += DT * m_Speed;
+		vCurPos.y += DT * m_Speed * 0.5f;
 	}
 	if (KEY_PRESSED(KEY::S))
 	{
-		vCurPos.y -= DT * m_Speed;
+		vCurPos.y -= DT * m_Speed * 0.5f;
 	}
 
 	// GameObject 를 양쪽으로 뒤집기 위해선 Relative Scale x 에 음수(좌측), 양수(우측) 값 넣으면 됨.
 	if (KEY_TAP(KEY::A))
 	{
-		//Transform()->SetRelativePos(Transform()->GetRelativePos() + Vec3(-90.f, 0.f, 0.f));
+		if (!Transform()->GetLeft())
+		{
+			vCurPos += Vec3(-90.f, 0.f, 0.f);
+			GetOwner()->Transform()->SetRelativePos(vCurPos);
+		}
 	}
 	if (KEY_PRESSED(KEY::A))
 	{
@@ -81,7 +88,11 @@ void CPlayerScript::Tick()
 
 	if (KEY_TAP(KEY::D))
 	{
-		//Transform()->SetRelativePos(Transform()->GetRelativePos() + Vec3(90.f, 0.f, 0.f));
+		if (!Transform()->GetRight())
+		{
+			vCurPos += Vec3(90.f, 0.f, 0.f);
+			GetOwner()->Transform()->SetRelativePos(vCurPos);
+		}
 	}
 	if (KEY_PRESSED(KEY::D))
 	{

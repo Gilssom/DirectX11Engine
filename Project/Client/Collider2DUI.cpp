@@ -23,6 +23,19 @@ void Collider2DUI::Render_Tick()
 	CCollider2D* pCollider = GetTarget()->Collider2D();
 	assert(pCollider);
 
+	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+
+	if (pCurLevel == nullptr)
+		return;
+
+	// 임시삭제
+	if (ImGui::Button("Destroy Object##GameObject"))
+	{
+		CLayer* pLayer = pCurLevel->GetLayer(GetTarget()->GetLayerIdx());
+		pLayer->DeRegisterParentObject(GetTarget());
+		return;
+	}
+
 	Vec3 vOffsetPos = pCollider->GetOffset();
 	Vec3 vScale = pCollider->GetScale();
 	bool bAbsolute = pCollider->IsAbsolute();
@@ -47,11 +60,6 @@ void Collider2DUI::Render_Tick()
 	{
 		pCollider->SetAbsolute(bAbsolute);
 	}
-
-	CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
-
-	if (pCurLevel == nullptr)
-		return;
 
 	vector<string> vecLayerName;
 
@@ -81,6 +89,8 @@ void Collider2DUI::Render_Tick()
 	strCurLayerName = buffer;
 	strCurLayerName += ToString(pCurLevel->GetLayer(iLayer)->GetName());
 
+	CLayer* pCurLayer = pCurLevel->GetLayer(GetTarget()->GetLayerIdx());
+
 	ImGui::Text("Layer          "); SAME;
 	if (ImGui::BeginCombo("##LayerSelect", strCurLayerName.c_str(), 0))
 	{
@@ -89,7 +99,11 @@ void Collider2DUI::Render_Tick()
 			const bool is_selected = iLayer == i;
 			if (ImGui::Selectable(vecLayerName[i].c_str(), is_selected))
 			{
+				pCurLayer->DeRegisterParentObject(GetTarget());
+
 				GetTarget()->ChangeLayerIdx(i);
+				CLayer* pNewLayer = pCurLevel->GetLayer(i);
+				pNewLayer->AddObject(GetTarget(), true);
 			}
 		}
 

@@ -3,6 +3,7 @@
 
 #include <Engine\\CCamera.h>
 #include <Engine\CGameObject.h>
+#include <Engine\CTransform.h>
 
 #include <Engine\\CLevelManager.h>
 #include <Engine\\CLevel.h>
@@ -146,8 +147,23 @@ void CCameraMoveScript::MoveByOrthographic()
 			pBackGround_0->Transform()->SetRelativePos(vNewBackPos);
 		}
 			
+		// 7. 플레이어가 바라보는 방향에 따라 위치 조정
+		if (pPlayerScript->Transform()->GetLeft())
+		{
+			newX += 45.f;
+		}
+		else if (pPlayerScript->Transform()->GetRight())
+		{
+			newX += -45.f;
+		}
+
 		// 카메라 위치 최종 세팅
 		GetOwner()->Transform()->SetRelativePos(Vec3(newX, newY, 0.f));
 		return;
 	}
+}
+
+void CCameraMoveScript::SetTurnCameraPos(bool isLeft)
+{
+	
 }

@@ -95,6 +95,10 @@ void CLevelSaveLoad::SaveGameObject(CGameObject* object, FILE* file)
 		vecScripts[i]->SaveToLevelFile(file);
 	}
 
+	// Layer Index 저장
+	//size_t curIndex = object->GetLayerIdx();
+	//fwrite(&curIndex, sizeof(size_t), 1, file);
+
 	// Child Object
 	const vector<CGameObject*>& vecChild = object->GetChildren();
 
@@ -243,6 +247,11 @@ CGameObject* CLevelSaveLoad::LoadGameObject(FILE* file)
 		pObject->AddComponent(pScript);
 		pScript->LoadFromLevelFile(file);
 	}
+
+	// Layer Index 
+	//size_t curIndex = 0;
+	//fread(&curIndex, sizeof(size_t), 1, file);
+	//pObject->ChangeLayerIdx(curIndex);
 
 	// Child Object
 	// 저장된 자식 오브젝트 개수 확인

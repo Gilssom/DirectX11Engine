@@ -55,6 +55,9 @@ public:
 	void SetLeft(bool isLeft) { m_IsLeft = isLeft; }
 	void SetRight(bool isRight) { m_IsRight = isRight; }
 
+	bool GetLeft() { return m_IsLeft; }
+	bool GetRight() { return m_IsRight; }
+
 	virtual void SaveToLevelFile(FILE* file) override;
 	virtual void LoadFromLevelFile(FILE* file) override;
 
