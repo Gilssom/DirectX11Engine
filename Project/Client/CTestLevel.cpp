@@ -54,6 +54,7 @@ void CTestLevel::CreateTestLevel()
 	m_CurLevel->GetLayer(5)->SetName(L"Player Attack");
 	m_CurLevel->GetLayer(6)->SetName(L"Front Object");
 	m_CurLevel->GetLayer(7)->SetName(L"Gate Portal");
+	m_CurLevel->GetLayer(9)->SetName(L"Wall");
 
 	// Level ÀÇ Collision Setting
 	CCollisionManager::GetInst()->LayerCheck(4, 3);
@@ -62,6 +63,7 @@ void CTestLevel::CreateTestLevel()
 
 	CCollisionManager::GetInst()->LayerCheck(5, 3);
 
+	CCollisionManager::GetInst()->LayerCheck(9, 4);
 	// Test Bgm Play
 	Ptr<CSound> pTestBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
 	pTestBgm->Play(0, 0.3f, true);
@@ -80,27 +82,16 @@ void CTestLevel::CreateTestLevel()
 	//pTileMapObj->TileMap()->SetRowCol(20, 20);
 	//m_CurLevel->AddObject(0, pTileMapObj);
 
-	//CGameObject* pTestPlayer = new CGameObject;
-	//
-	//pTestPlayer->SetName(L"TestPlayer");
-	//pTestPlayer->AddComponent(new CTransform);
-	//pTestPlayer->AddComponent(new CMeshRender);
-	//pTestPlayer->AddComponent(new CAnimator2D);
-	//
-	//pTestPlayer->Transform()->SetRelativePos(Vec3(92.f, 0.f, 100.f));
-	//pTestPlayer->Transform()->SetRelativeScale(Vec3(339.f, 257.f, 1.f));
-	//
-	//pTestPlayer->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pTestPlayer->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
-	//
-	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Priest_Idle2.png", L"texture\\Sprite\\Priest_Idle2.png");
-	//pTestPlayer->Animator2D()->CreateAnimation(L"Priest_Idle2", pAtlas, Vec2(0.f, 0.f), Vec2(339.f, 257.f), Vec2(339.f, 257.f), 4, 6);
-	//pTestPlayer->Animator2D()->FindAnimation(L"Priest_Idle2")->Save(L"Animation\\");
+	/*CGameObject* pTestPlayer = new CGameObject;
 	
-	//pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Priest_Idle2.anim");
-	//pTestPlayer->Animator2D()->Play(L"Priest_Idle2", true);
+	pTestPlayer->SetName(L"West_Wall");
+	pTestPlayer->AddComponent(new CTransform);
+	pTestPlayer->AddComponent(new CCollider2D);
 	
-	//m_CurLevel->AddObject(3, pTestPlayer, false);
+	pTestPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 120.f));
+	pTestPlayer->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	
+	m_CurLevel->AddObject(9, pTestPlayer, false);*/
 	
 	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
 	return;

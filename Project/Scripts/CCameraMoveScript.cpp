@@ -135,13 +135,13 @@ void CCameraMoveScript::MoveByOrthographic()
 		// 6. 카메라의 이동에 따른 뒷배경 좌표 변화
 		Vec3 vBackOriginPos = pBackGround_0->Transform()->GetRelativePos();
 
-		if (pPlayerScript->GetMoveLeft())
+		if (pPlayerScript->GetMoveLeft() && pPlayerScript->GetMove())
 		{
 			Vec3 vNewBackPos = vBackOriginPos + Vec3(10.f * DT, 0.f, 0.f);
 			pBackGround_0->Transform()->SetRelativePos(vNewBackPos);
 		}
 
-		if (pPlayerScript->GetMoveRight())
+		if (pPlayerScript->GetMoveRight() && pPlayerScript->GetMove())
 		{
 			Vec3 vNewBackPos = vBackOriginPos + Vec3(-10.f * DT, 0.f, 0.f);
 			pBackGround_0->Transform()->SetRelativePos(vNewBackPos);

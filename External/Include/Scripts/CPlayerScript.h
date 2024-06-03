@@ -14,10 +14,13 @@ private:
 	bool			m_MoveLeft;
 	bool			m_MoveRight;
 
+	bool			m_CanMoveLeft, m_CanMoveRight, m_CanMoveUp, m_CanMoveDown;
+
 public:
 	void SetTarget(CGameObject* target) { m_TargetMonster = target; }
 	bool GetMoveLeft() { return m_MoveLeft; }
 	bool GetMoveRight() { return m_MoveRight; }
+	bool GetMove() { if (m_CanMoveLeft && m_CanMoveRight && m_CanMoveUp && m_CanMoveDown) return true; else return false; }
 
 public:
 	virtual void Begin() override;

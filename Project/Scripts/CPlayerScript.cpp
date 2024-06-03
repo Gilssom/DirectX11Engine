@@ -14,6 +14,10 @@ CPlayerScript::CPlayerScript()
 	, m_TargetMonster(nullptr)
 	, m_MoveLeft(false)
 	, m_MoveRight(false)
+	, m_CanMoveLeft(true)
+	, m_CanMoveRight(true)
+	, m_CanMoveUp(true)
+	, m_CanMoveDown(true)
 {
 	AddScriptProperty(PROPERTY_TYPE::FLOAT, "Speed", &m_Speed);
 }
@@ -60,10 +64,16 @@ void CPlayerScript::Tick()
 
 	if (KEY_PRESSED(KEY::W))
 	{
+		if (!m_CanMoveUp)
+			return;
+
 		vCurPos.y += DT * m_Speed * 0.5f;
 	}
 	if (KEY_PRESSED(KEY::S))
 	{
+		if (!m_CanMoveDown)
+			return;
+
 		vCurPos.y -= DT * m_Speed * 0.5f;
 	}
 
@@ -78,6 +88,9 @@ void CPlayerScript::Tick()
 	}
 	if (KEY_PRESSED(KEY::A))
 	{
+		if (!m_CanMoveLeft)
+			return;
+
 		m_MoveLeft = true;
 		Transform()->SetLeft(true);
 		Transform()->SetRight(false);
@@ -96,6 +109,9 @@ void CPlayerScript::Tick()
 	}
 	if (KEY_PRESSED(KEY::D))
 	{
+		if (!m_CanMoveRight)
+			return;
+
 		m_MoveRight = true;
 		Transform()->SetRight(true);
 		Transform()->SetLeft(false);
@@ -135,15 +151,17 @@ void CPlayerScript::Tick()
 #pragma region Collision Contents Script
 void CPlayerScript::BeginOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
 {
-	//wstring testPath = CPathManager::GetInst()->GetContentPath();
-	//testPath += L"Level\\ElvenGard_0.lv";
-	//CLevel* m_CurLevel = CLevelSaveLoad::LoadLevel(testPath);
+	if (otherObject->GetName() == L"East_Wall")
+		m_CanMoveRight = false;
 
-	//CLevel* m_NextLevel = LoadLevel();
-	//m_NextLevel = new CLevel;
+	if (otherObject->GetName() == L"West_Wall")
+		m_CanMoveLeft = false;
 
-	//ChangeLevel(m_NextLevel, LEVEL_STATE::PLAY);
-	//otherObject->Destroy();
+	if (otherObject->GetName() == L"North_Wall")
+		m_CanMoveUp = false;
+
+	if (otherObject->GetName() == L"South_Wall")
+		m_CanMoveDown = false;
 }
 
 void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
@@ -153,7 +171,17 @@ void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject
 
 void CPlayerScript::EndOverlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)
 {
+	if (otherObject->GetName() == L"East_Wall")
+		m_CanMoveRight = true;
 
+	if (otherObject->GetName() == L"West_Wall")
+		m_CanMoveLeft = true;
+
+	if (otherObject->GetName() == L"North_Wall")
+		m_CanMoveUp = true;
+
+	if (otherObject->GetName() == L"South_Wall")
+		m_CanMoveDown = true;
 }
 #pragma endregion
 
