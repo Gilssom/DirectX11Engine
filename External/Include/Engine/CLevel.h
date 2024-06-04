@@ -9,6 +9,8 @@ class CLevel : public CEntity
 private:
 	CLayer*			m_arrLayer[MAX_LAYER];
 	LEVEL_STATE		m_State;
+	
+	CLevel*			m_NextLevel;
 
 public:
 	void Init();
@@ -32,6 +34,10 @@ public:
 
 	// 특정 Component 를 가진 GameObject 를 모두 검색
 	void FindObjectByComponent(COMPONENT_TYPE type, vector<CGameObject*>& vecObject);
+
+	// 현재 Level 의 다음 Level 이 어느곳인지 저장 및 반환
+	void SetNextLevel(CLevel* nextLevel) { m_NextLevel = nextLevel; }
+	CLevel* GetNextLevel() { return m_NextLevel; }
 
 private:
 	void ChangeState(LEVEL_STATE nextState);

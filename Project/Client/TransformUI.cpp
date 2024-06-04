@@ -18,6 +18,25 @@ void TransformUI::Render_Tick()
 	// Title 출력
 	Render_Title();
 
+	if (GetTarget() == nullptr)
+		return;
+
+	ImGui::SeparatorText("Object Name Change");
+	char buffer[256];
+	string name = ToString(GetTarget()->GetName());
+	strncpy_s(buffer, name.c_str(), sizeof(buffer));
+	buffer[sizeof(buffer) - 1] = '\0';
+
+	ImGui::Text("Object Name"); SAME;
+	if (ImGui::InputText("##Object Name", buffer, sizeof(buffer)))
+	{
+		wstring newName = ToWString(buffer);
+		GetTarget()->ChangeName(newName);
+	}
+
+	ImGui::Text("");
+
+	ImGui::SeparatorText("Object Transform");
 	// 해당 UI에 출력할 정보 입력
 	// Vector3 에 Vector 의 포인터를 넘겨주는 operator 가 구현이 되어 있음
 	Vec3 vPos = GetTarget()->Transform()->GetRelativePos();

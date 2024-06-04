@@ -7,6 +7,8 @@
 #include "CPlayerScript.h"
 #include "CTestScript.h"
 
+int CScriptManager::m_LevelCount = 0;
+
 void CScriptManager::GetScriptInfo(vector<wstring>& vec)
 {
 	vec.push_back(L"CBackGroundScript");

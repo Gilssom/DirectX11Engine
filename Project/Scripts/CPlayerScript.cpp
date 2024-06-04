@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CPlayerScript.h"
 
+#include "..\Client\CLevelSaveLoad.h"
 #include <Engine\\CLevelManager.h>
 #include <Engine\\CLevel.h>
 
@@ -162,6 +163,25 @@ void CPlayerScript::BeginOverlap(CCollider2D* ownerCollider, CGameObject* otherO
 
 	if (otherObject->GetName() == L"South_Wall")
 		m_CanMoveDown = false;
+
+	if (otherObject->GetName() == L"GatePortal")
+	{
+		wstring testPath2 = CPathManager::GetInst()->GetContentPath();
+
+		if (CScriptManager::m_LevelCount == 0)
+			testPath2 += L"Level\\ElvenGard_1.lv";
+		if (CScriptManager::m_LevelCount == 1)
+			testPath2 += L"Level\\MirkWood_0.lv";
+		if (CScriptManager::m_LevelCount == 2)
+			testPath2 += L"Level\\MirkWood_1.lv";
+		if (CScriptManager::m_LevelCount == 3)
+			testPath2 += L"Level\\MirkWood_2.lv";
+
+		CLevel* pNextLevel = CLevelSaveLoad::LoadLevel(testPath2);
+		CScriptManager::m_LevelCount++;
+
+		ChangeLevel(pNextLevel, LEVEL_STATE::PLAY);
+	}
 }
 
 void CPlayerScript::Overlap(CCollider2D* ownerCollider, CGameObject* otherObject, CCollider2D* otehrCollider)

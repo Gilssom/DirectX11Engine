@@ -8,6 +8,7 @@
 CLevel::CLevel()
 	: m_arrLayer{}
 	, m_State(LEVEL_STATE::STOP)
+	, m_NextLevel(nullptr)
 {
 	for (UINT i = 0; i < MAX_LAYER; i++)
 	{
@@ -19,6 +20,7 @@ CLevel::CLevel()
 CLevel::~CLevel()
 {
 	Safe_Del_Array(m_arrLayer);
+	delete m_NextLevel;
 }
 
 void CLevel::Init()
@@ -149,7 +151,7 @@ void CLevel::FindObjectByComponent(COMPONENT_TYPE type, vector<CGameObject*>& ve
 		{
 			if (vecObjects[j]->GetComponent(type))
 			{
-				vecObject.push_back(vecObject[j]);
+				vecObject.push_back(vecObjects[j]);
 			}
 		}
 	}

@@ -6,7 +6,6 @@ class CLevel;
 class CLevelManager : public CSingleton<CLevelManager>
 {
 	SINGLE(CLevelManager)
-
 private:
 	CLevel* m_CurLevel;
 

@@ -150,16 +150,32 @@ void CCameraMoveScript::MoveByOrthographic()
 		// 7. 플레이어가 바라보는 방향에 따라 위치 조정
 		if (pPlayerScript->Transform()->GetLeft())
 		{
-			newX += 45.f;
+			if (newX + 45.f >= maxX + 45.f)
+				newX += 0.f;
+
+			if (newX - maxX > 45.f)
+				newX += (newX - maxX) - 45.f;
+
+			else if (newX - 45.f <= maxX)
+				newX += 45.f;
 		}
 		else if (pPlayerScript->Transform()->GetRight())
 		{
-			newX += -45.f;
+			if (newX - 45.f <= minX - 45.f)
+				newX += 0.f;
+				
+			if(newX - minX < 45.f)
+				newX += -(newX - minX) + 45.f;
+			
+			else if(newX - 45.f >= minX)
+				newX += -45.f;
 		}
+
+		if (newX < minX + 45.f || newX > maxX - 45.f)
+			return;
 
 		// 카메라 위치 최종 세팅
 		GetOwner()->Transform()->SetRelativePos(Vec3(newX, newY, 0.f));
-		return;
 	}
 }
 

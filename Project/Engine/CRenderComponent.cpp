@@ -38,6 +38,11 @@ CRenderComponent::~CRenderComponent()
 
 void CRenderComponent::SetMaterial(Ptr<CMaterial> material)
 {
+	if (material == nullptr)
+	{
+		m_CurMaterial = m_SharedMaterial = material;
+		return;
+	}
 	// 동적 재질을 세팅받을 수 없다.
 	assert(!material->IsDynamic());
 

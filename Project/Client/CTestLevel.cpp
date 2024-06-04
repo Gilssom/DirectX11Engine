@@ -27,15 +27,74 @@ void CTestLevel::CreateTestLevel()
 	//CreatePrefab();
 
 #pragma region Empty Level
+	wstring testPath2 = CPathManager::GetInst()->GetContentPath();
+	testPath2 += L"Level\\ElvenGard_0.lv";
+	CLevel* m_NewLevel = CLevelSaveLoad::LoadLevel(testPath2);
+
+	//testPath2 = CPathManager::GetInst()->GetContentPath();
+	//testPath2 += L"Level\\ElvenGard_1.lv";
+	//CLevel* m_NextLevel = CLevelSaveLoad::LoadLevel(testPath2);
+	//m_NewLevel->SetNextLevel(m_NextLevel);
+
 	//CLevel* m_NewLevel = nullptr;
 	//m_NewLevel = new CLevel;
+	
+	// Test Bgm Play
+	Ptr<CSound> pNewBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
+	pNewBgm->Play(0, 0.3f, true);
+
+	// Layer 설정
 	//m_NewLevel->GetLayer(0)->SetName(L"Default");
-	//m_NewLevel->GetLayer(1)->SetName(L"Player");
-	//m_NewLevel->GetLayer(2)->SetName(L"Monster");
-	//m_NewLevel->GetLayer(3)->SetName(L"BackGround");
+	//m_NewLevel->GetLayer(1)->SetName(L"BackGround");
+	//m_NewLevel->GetLayer(2)->SetName(L"Back Object");
+	//m_NewLevel->GetLayer(3)->SetName(L"Monster");
+	//m_NewLevel->GetLayer(4)->SetName(L"Player");
+	//m_NewLevel->GetLayer(5)->SetName(L"Player Attack");
+	//m_NewLevel->GetLayer(6)->SetName(L"Front Object");
+	//m_NewLevel->GetLayer(7)->SetName(L"Gate Portal");
+	//m_NewLevel->GetLayer(9)->SetName(L"Wall");
 	//
-	//ChangeLevel(m_NewLevel, LEVEL_STATE::STOP);
-	//return;
+	//// Level 의 Collision Setting
+	//CCollisionManager::GetInst()->LayerCheck(4, 3);
+	//CCollisionManager::GetInst()->LayerCheck(4, 6);
+	//CCollisionManager::GetInst()->LayerCheck(4, 7);
+	//
+	//CCollisionManager::GetInst()->LayerCheck(5, 3);
+	//
+	//CCollisionManager::GetInst()->LayerCheck(9, 4);
+
+	//CGameObject* pBackGround1T = new CGameObject;
+	//pBackGround1T->SetName(L"BackGround_1");
+	//pBackGround1T->AddComponent(new CTransform);
+	//pBackGround1T->AddComponent(new CMeshRender);
+	//			
+	//pBackGround1T->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pBackGround1T->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"material\\ElvenGard_2_BackGround_1.mtrl"));
+	//pBackGround1T->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_2_BackGround_1.png", L"texture\\ElvenGard\\ElvenGard_2_BackGround_1.png"));
+	//
+	//m_NewLevel->AddObject(3, pBackGround1T, false);
+
+	//CGameObject* pTestPlayer = new CGameObject;
+	//
+	//pTestPlayer->SetName(L"Machine");
+	//pTestPlayer->AddComponent(new CTransform);
+	//pTestPlayer->AddComponent(new CCollider2D);
+	//pTestPlayer->AddComponent(new CAnimator2D);
+	//
+	//pTestPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 120.f));
+	//pTestPlayer->Transform()->SetRelativeScale(Vec3(500.f, 500.f, 1.f));
+	//
+	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\Machine.png", L"texture\\ElvenGard\\Machine.png");
+	//pTestPlayer->Animator2D()->CreateAnimation(L"Machine", pAtlas, Vec2(0.f, 0.f), Vec2(500.f, 500.f), Vec2(500.f, 500.f), 8, 12);
+	//pTestPlayer->Animator2D()->FindAnimation(L"Machine")->Save(L"Animation\\");
+	//
+	//pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Machine.anim");
+	//pTestPlayer->Animator2D()->Play(L"Machine", true);
+	//
+	//m_NewLevel->AddObject(9, pTestPlayer, false);
+
+	ChangeLevel(m_NewLevel, LEVEL_STATE::STOP);
+	return;
 #pragma endregion
 
 #pragma region Object Add
@@ -43,7 +102,6 @@ void CTestLevel::CreateTestLevel()
 	wstring testPath = CPathManager::GetInst()->GetContentPath();
 	testPath += L"Level\\ElvenGard_0.lv";
 	CLevel* m_CurLevel = CLevelSaveLoad::LoadLevel(testPath);
-	//m_CurLevel->GetLayer(4)->SetName(L"Portal");
 
 	// Layer 설정
 	m_CurLevel->GetLayer(0)->SetName(L"Default");
