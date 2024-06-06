@@ -1,9 +1,10 @@
 ﻿  .\Project\Scripts\CBackGroundScript.h
   .\Project\Scripts\CCameraMoveScript.h
+  .\Project\Scripts\CLightOnScript.h
   .\Project\Scripts\CMissileScript.h
   .\Project\Scripts\CPlayerScript.h
   .\Project\Scripts\CScriptManager.h
   .\Project\Scripts\CTestScript.h
-  6개 파일이 복사되었습니다.
+  7개 파일이 복사되었습니다.
   CPlayerScript.cpp
   Scripts.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Scripts\Scripts_d.lib

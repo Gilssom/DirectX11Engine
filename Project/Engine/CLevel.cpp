@@ -4,11 +4,13 @@
 #include "CLayer.h"
 #include "CGameObject.h"
 #include "CRenderManager.h"
+#include "CLevelManager.h"
 
 CLevel::CLevel()
 	: m_arrLayer{}
 	, m_State(LEVEL_STATE::STOP)
-	, m_NextLevel(nullptr)
+	, m_BGM(nullptr)
+	, m_FightLevel(false)
 {
 	for (UINT i = 0; i < MAX_LAYER; i++)
 	{
@@ -20,7 +22,6 @@ CLevel::CLevel()
 CLevel::~CLevel()
 {
 	Safe_Del_Array(m_arrLayer);
-	delete m_NextLevel;
 }
 
 void CLevel::Init()
@@ -65,7 +66,12 @@ void CLevel::ChangeState(LEVEL_STATE nextState)
 {
 	// Level 이 Stop 이나 Pause 상태로 전환되면 Editor Mode 로 전환
 	if (nextState == LEVEL_STATE::STOP || nextState == LEVEL_STATE::PAUSE)
+	{
 		CRenderManager::GetInst()->ChangeRenderMode(RENDER_MODE::EDITOR);
+
+		if(m_BGM)
+			m_BGM->Stop();
+	}
 
 	// 동일한 상태로의 전환이 발생한 경우 return
 	if (m_State == nextState)
@@ -78,6 +84,11 @@ void CLevel::ChangeState(LEVEL_STATE nextState)
 	if (m_State == LEVEL_STATE::STOP && nextState == LEVEL_STATE::PLAY)
 	{
 		Init();
+
+		LevelInfo info = CLevelManager::GetInst()->GetCurLevel();
+
+		if (m_BGM && info.bgm != L"")
+			m_BGM->Play(0, 0.3f, true);
 	}
 
 	// Stop 또는 Pause 에서 Play 로 전환될 때 Render Mode 를 Play Mode 로 변경

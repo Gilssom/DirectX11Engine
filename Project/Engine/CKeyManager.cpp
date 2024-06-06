@@ -9,7 +9,7 @@ UINT g_KeyValue[(UINT)KEY::KEY_END]
     'W', 'S', 'A', 'D',
     'Z', 'X', 'C', 'V',
 
-    'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+    'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'F',
 
     '0',
     '1',

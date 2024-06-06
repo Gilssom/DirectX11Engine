@@ -167,9 +167,11 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	// Parameter Info
 	pShader->AddScalarParam("Test Parameter", SCALAR_PARAM::INT_0);
+	pShader->AddScalarParam("Change Event", SCALAR_PARAM::INT_1);
 	pShader->AddScalarParam("Paper Burn Intence", SCALAR_PARAM::FLOAT_0);
 	pShader->AddTexParam("Output", TEX_0);
-	pShader->AddTexParam("PaperBurn Noise", TEX_1);
+	pShader->AddTexParam("Spare Texture", TEX_1);
+	pShader->AddTexParam("PaperBurn Noise", TEX_2);
 
 	AddAsset<CGraphicShader>(L"Std2DShader", pShader);
 
@@ -187,7 +189,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 
 	// Parameter Info
 	pShader->AddScalarParam("Test Parameter", SCALAR_PARAM::INT_0);
+	pShader->AddScalarParam("Change Event", SCALAR_PARAM::INT_1);
 	pShader->AddTexParam("Output", TEX_0);
+	pShader->AddTexParam("Spare Texture", TEX_1);
 
 	AddAsset<CGraphicShader>(L"Std2DAlphaShader", pShader);
 
@@ -205,7 +209,9 @@ void CAssetManager::CreateDefaultGraphicShader()
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
 
 	// Parameter Info
+	pShader->AddScalarParam("Change Event", SCALAR_PARAM::INT_1);
 	pShader->AddTexParam("Output", TEX_0);
+	pShader->AddTexParam("Spare Texture", TEX_1);
 
 	AddAsset<CGraphicShader>(L"Std2DAlphaBlendShader", pShader);
 

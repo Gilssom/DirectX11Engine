@@ -17,7 +17,7 @@ void SpawnObject(int layerIdx, CGameObject* object)
 }
 
 // Level 변경 함수
-void ChangeLevel(CLevel* nextLevel, LEVEL_STATE nextLevelState)
+void ChangeLevelRegister(CLevel* nextLevel, LEVEL_STATE nextLevelState)
 {
 	tTask task = {};
 	task.Type = TASK_TYPE::CHANGE_LEVEL;

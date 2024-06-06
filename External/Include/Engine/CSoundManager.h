@@ -16,10 +16,14 @@ class CSoundManager : public CSingleton<CSoundManager>
     SINGLE(CSoundManager);
 
 private:
-    FMOD::System* m_pFMODSystem;  // FMOD 관리자 클래스
+    FMOD::System*   m_pFMODSystem;  // FMOD 관리자 클래스
+    //Ptr<CSound>     m_CurSound;
 
 public:
     FMOD::System* GetFMODSystem() { return m_pFMODSystem; }
+
+   // void SetCurSound(Ptr<CSound> curSound) { m_CurSound = curSound; }
+   // Ptr<CSound> GetCurSound() { return m_CurSound; }
 
 public:
     void Init();

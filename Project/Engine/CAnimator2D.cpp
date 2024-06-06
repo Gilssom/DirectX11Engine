@@ -97,6 +97,9 @@ void CAnimator2D::LoadAnimation(const wstring& strRelativePath)
 
 void CAnimator2D::Play(const wstring& strAnimName, bool repeat)
 {
+	if(m_CurAnim != nullptr)
+		m_CurAnim->Reset();
+
 	m_CurAnim = FindAnimation(strAnimName);
 	m_Repeat = repeat;
 }

@@ -7,6 +7,7 @@ enum SCRIPT_TYPE
 {
 	BACKGROUNDSCRIPT,
 	CAMERAMOVESCRIPT,
+	LIGHTONSCRIPT,
 	MISSILESCRIPT,
 	PLAYERSCRIPT,
 	TESTSCRIPT,
@@ -23,7 +24,4 @@ public:
 	static CScript* GetScript(const wstring& strScriptName);
 	static CScript* GetScript(UINT scriptType);
 	static const wchar_t* GetScriptName(CScript* pScript);
-
-public:
-	static int m_LevelCount;
 };

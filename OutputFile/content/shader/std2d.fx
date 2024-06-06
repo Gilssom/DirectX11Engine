@@ -87,7 +87,9 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
     else
     {
         // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
-        if (g_btex_0)
+        if (g_int_1)
+            vColor = g_tex_1.Sample(g_sam_0, _in.vUV);
+        else if (g_btex_0)
             vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
         else
             vColor = float4(1.f, 0.f, 1.f, 1.f);
@@ -103,9 +105,9 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
     vColor.rgb *= vLightPower;
     
     // Noise Test
-    if(g_btex_1)
+    if(g_btex_2)
     {
-        float4 vNoise = g_tex_1.Sample(g_sam_0, _in.vUV);
+        float4 vNoise = g_tex_2.Sample(g_sam_0, _in.vUV);
         
         float fIntence = g_float_0 + vNoise.r;
         
@@ -160,7 +162,11 @@ float4 PS_Std2D_AB(VS_OUT _in) : SV_Target // 반환 타입
     else
     {
         // 샘플링 ( 각 픽셀마다의 색상을 가져와야함 )
-        vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
+        
+        if(g_int_1)
+            vColor = g_tex_1.Sample(g_sam_0, _in.vUV);
+        else      
+            vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
     }
     
     // Global Data 에 들어있는 광원의 개수 가져와서 반복문 돌리기

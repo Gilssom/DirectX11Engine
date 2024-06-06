@@ -29,9 +29,13 @@ private:
 
 	Ptr<CTexture>			m_AtlasTex;	// Texture Á¤º¸
 
+	std::function<void()>	m_EndCallBack;
+
 public:
 	bool IsFinish() { return m_Finish; }
 	void Reset() { m_CurIdx = 0; m_Time = 0.f; m_Finish = false; }
+
+	void SetEndCallBack(std::function<void()> callback) { m_EndCallBack = callback; }
 
 public:
 	void Create(Ptr<CTexture> atlasTex, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps);

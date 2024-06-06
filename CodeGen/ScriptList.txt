@@ -1,5 +1,6 @@
 CBackGroundScript
 CCameraMoveScript
+CLightOnScript
 CMissileScript
 CPlayerScript
 CTestScript

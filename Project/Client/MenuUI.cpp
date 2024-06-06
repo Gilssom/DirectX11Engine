@@ -118,13 +118,14 @@ void MenuUI::Level()
             if (GetOpenFileName(&ofn))
             {
                 CLevel* pLoadedLevel = CLevelSaveLoad::LoadLevel(Buff);
-                ChangeLevel(pLoadedLevel, LEVEL_STATE::STOP);
+                ChangeLevelRegister(pLoadedLevel, LEVEL_STATE::STOP);
             }            
         }
 
         ImGui::Separator();
 
         CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
+        CSound* pCurBgm = pCurLevel->GetBGM();
         bool IsCurLevel = pCurLevel;
         bool IsPlayState = pCurLevel->GetState() == LEVEL_STATE::PLAY;
         bool IsPauseState = pCurLevel->GetState() == LEVEL_STATE::PAUSE;
@@ -139,6 +140,7 @@ void MenuUI::Level()
             if (IsStopState)
             {
                 CLevel* pLevel = CLevelManager::GetInst()->GetCurrentLevel();
+                pLevel->SetBGM(pCurBgm);
                 wstring LevelPath = CPathManager::GetInst()->GetContentPath();
                 LevelPath += L"Level\\temp.lv";
                 CLevelSaveLoad::SaveLevel(pLevel, LevelPath);
@@ -161,8 +163,9 @@ void MenuUI::Level()
             wstring LevelPath = CPathManager::GetInst()->GetContentPath();
             LevelPath += L"Level\\temp.lv";
             CLevel* pNextLevel = CLevelSaveLoad::LoadLevel(LevelPath);
+            pNextLevel->SetBGM(pCurBgm);
 
-            ChangeLevel(pNextLevel, LEVEL_STATE::STOP);
+            ChangeLevelRegister(pNextLevel, LEVEL_STATE::STOP);
 
             // Inspector Target Object Clear
             Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");

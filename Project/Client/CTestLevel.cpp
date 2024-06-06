@@ -42,19 +42,20 @@ void CTestLevel::CreateTestLevel()
 	// Test Bgm Play
 	Ptr<CSound> pNewBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
 	pNewBgm->Play(0, 0.3f, true);
+	m_NewLevel->SetBGM(pNewBgm.Get());
 
 	// Layer 설정
-	//m_NewLevel->GetLayer(0)->SetName(L"Default");
-	//m_NewLevel->GetLayer(1)->SetName(L"BackGround");
-	//m_NewLevel->GetLayer(2)->SetName(L"Back Object");
-	//m_NewLevel->GetLayer(3)->SetName(L"Monster");
-	//m_NewLevel->GetLayer(4)->SetName(L"Player");
-	//m_NewLevel->GetLayer(5)->SetName(L"Player Attack");
-	//m_NewLevel->GetLayer(6)->SetName(L"Front Object");
-	//m_NewLevel->GetLayer(7)->SetName(L"Gate Portal");
-	//m_NewLevel->GetLayer(9)->SetName(L"Wall");
-	//
-	//// Level 의 Collision Setting
+	m_NewLevel->GetLayer(0)->SetName(L"Default");
+	m_NewLevel->GetLayer(1)->SetName(L"BackGround");
+	m_NewLevel->GetLayer(2)->SetName(L"Back Object");
+	m_NewLevel->GetLayer(3)->SetName(L"Monster");
+	m_NewLevel->GetLayer(4)->SetName(L"Player");
+	m_NewLevel->GetLayer(5)->SetName(L"Player Attack");
+	m_NewLevel->GetLayer(6)->SetName(L"Front Object");
+	m_NewLevel->GetLayer(7)->SetName(L"Gate Portal");
+	m_NewLevel->GetLayer(9)->SetName(L"Wall");
+	
+	// Level 의 Collision Setting
 	//CCollisionManager::GetInst()->LayerCheck(4, 3);
 	//CCollisionManager::GetInst()->LayerCheck(4, 6);
 	//CCollisionManager::GetInst()->LayerCheck(4, 7);
@@ -93,7 +94,7 @@ void CTestLevel::CreateTestLevel()
 	//
 	//m_NewLevel->AddObject(9, pTestPlayer, false);
 
-	ChangeLevel(m_NewLevel, LEVEL_STATE::STOP);
+	ChangeLevelRegister(m_NewLevel, LEVEL_STATE::STOP);
 	return;
 #pragma endregion
 
@@ -151,7 +152,7 @@ void CTestLevel::CreateTestLevel()
 	
 	m_CurLevel->AddObject(9, pTestPlayer, false);*/
 	
-	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	ChangeLevelRegister(m_CurLevel, LEVEL_STATE::STOP);
 	return;
 #pragma endregion
 
@@ -384,7 +385,7 @@ void CTestLevel::CreateTestLevel()
 	//m_CurLevel->Init();
 
 	// Level Change System 을 이용해서 Level 을 전달해줄 것 (Task Manager)
-	ChangeLevel(m_CurLevel, LEVEL_STATE::STOP);
+	ChangeLevelRegister(m_CurLevel, LEVEL_STATE::STOP);
 }
 
 void CTestLevel::CreatePrefab()

@@ -33,7 +33,7 @@ CAnim2D::CAnim2D(const CAnim2D& other)
 
 CAnim2D::~CAnim2D()
 {
-
+	
 }
 
 void CAnim2D::Create(Ptr<CTexture> atlasTex, Vec2 leftTopPixelPos, Vec2 vSlicePixelSize, Vec2 backGroundSize, int frameCount, UINT fps)
@@ -104,6 +104,9 @@ void CAnim2D::FinalTick()
 		{
 			m_CurIdx = m_vecFrame.size() - 1;
 			m_Finish = true;
+
+			if (m_EndCallBack)
+				m_EndCallBack();
 		}
 	}
 }

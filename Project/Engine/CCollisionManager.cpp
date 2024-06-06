@@ -52,17 +52,20 @@ void CCollisionManager::LayerCheck(UINT layerLeftIndex, UINT layerRightIndex)
 	// 비트 연산자
 	UINT CheckBit = (1 << Col);
 
-	// 만약 해당 비트에 값이 있다면 ( Check Box On , Off 기능 )
-	if (m_Matrix[Row] & CheckBit)
-	{
-		// 비트 빼기
-		m_Matrix[Row] &= ~CheckBit;
-	}
-	else
-	{
-		// 비트 더하기
-		m_Matrix[Row] |= CheckBit;
-	}
+	// 비트 더하기
+	m_Matrix[Row] |= CheckBit;
+
+	//// 만약 해당 비트에 값이 있다면 ( Check Box On , Off 기능 )
+	//if (m_Matrix[Row] & CheckBit)
+	//{
+	//	// 비트 빼기
+	//	m_Matrix[Row] &= ~CheckBit;
+	//}
+	//else
+	//{
+	//	// 비트 더하기
+	//	m_Matrix[Row] |= CheckBit;
+	//}
 }
 
 void CCollisionManager::CollisionBtwLayer(UINT left, UINT right)

@@ -1,14 +1,26 @@
 #include "pch.h"
 #include "CLevelManager.h"
 #include "CAssetManager.h"
+#include "CCollisionManager.h"
 
 #include "CLevel.h"
 #include "CLayer.h"
 
+#include "..\Client\CLevelSaveLoad.h"
+
 CLevelManager::CLevelManager()
 	: m_CurLevel(nullptr)
+	, m_CurSound(nullptr)
+	, m_Levels{}
+	, m_CurrentLevelIndex(0)
 {
-
+	// 현재 존재하는 모든 레벨 관리
+	wstring path = CPathManager::GetInst()->GetContentPath();
+	m_Levels.push_back({ L"ElvenGard_0", path + L"Level\\ElvenGard_0.lv", L"Sound\\elven_guard_old.wav", false });
+	m_Levels.push_back({ L"ElvenGard_1", path + L"Level\\ElvenGard_1.lv", L"" , false });
+	m_Levels.push_back({ L"MirkWood_0",	 path + L"Level\\MirkWood_0.lv",  L"Sound\\mirkwood.ogg", true });
+	m_Levels.push_back({ L"MirkWood_1",	 path + L"Level\\MirkWood_1.lv",  L"" , true });
+	m_Levels.push_back({ L"MirkWood_2",	 path + L"Level\\MirkWood_2.lv",  L"Sound\\mirkwood_boss.ogg" , true });
 }
 
 CLevelManager::~CLevelManager()
@@ -50,4 +62,57 @@ void CLevelManager::ChangeLevel(CLevel* nextLevel)
 	}
 
 	m_CurLevel = nextLevel;
+}
+
+LevelInfo CLevelManager::GetNextLevel()
+{
+	if (m_CurrentLevelIndex < m_Levels.size())
+	{
+		return m_Levels[++m_CurrentLevelIndex];
+	}
+
+	return { L"", L"", L"" };
+}
+
+void CLevelManager::ChangeNextLevel()
+{
+	LevelInfo nextLevel = GetNextLevel();
+	m_CurSound = m_CurLevel->GetBGM();
+
+	if (!nextLevel.path.empty())
+	{
+		CLevel* pNextLevel = CLevelSaveLoad::LoadLevel(nextLevel.path);
+
+		if (nextLevel.bgm != L"")
+		{
+			m_CurSound->Stop();
+			m_CurSound = nullptr;
+
+			m_CurSound = CAssetManager::GetInst()->FindAsset<CSound>(nextLevel.bgm).Get();
+			m_CurSound->Play(0, 0.3f, true);
+		}
+
+		pNextLevel->SetBGM(m_CurSound);
+		pNextLevel->SetFightLevel(nextLevel.isFight);
+
+		pNextLevel->GetLayer(0)->SetName(L"Default");
+		pNextLevel->GetLayer(1)->SetName(L"BackGround");
+		pNextLevel->GetLayer(2)->SetName(L"Back Object");
+		pNextLevel->GetLayer(3)->SetName(L"Monster");
+		pNextLevel->GetLayer(4)->SetName(L"Player");
+		pNextLevel->GetLayer(5)->SetName(L"Player Attack");
+		pNextLevel->GetLayer(6)->SetName(L"Front Object");
+		pNextLevel->GetLayer(7)->SetName(L"Gate Portal");
+		pNextLevel->GetLayer(9)->SetName(L"Wall");
+
+		CCollisionManager::GetInst()->LayerCheck(4, 3);
+		CCollisionManager::GetInst()->LayerCheck(4, 6);
+		CCollisionManager::GetInst()->LayerCheck(4, 7);
+		
+		CCollisionManager::GetInst()->LayerCheck(5, 3);
+		
+		CCollisionManager::GetInst()->LayerCheck(9, 4);
+
+		ChangeLevelRegister(pNextLevel, LEVEL_STATE::PLAY);
+	}
 }

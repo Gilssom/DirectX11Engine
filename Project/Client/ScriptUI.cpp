@@ -49,6 +49,7 @@ void ScriptUI::Render_Tick()
 		case PROPERTY_TYPE::VEC3:
 			break;
 		case PROPERTY_TYPE::VEC4:
+			ParamUI::Param_DragVec4(vecProperty[i].Desc, (Vec4*)vecProperty[i].pData, 1);
 			break;
 		case PROPERTY_TYPE::TEXTURE:
 			break;
