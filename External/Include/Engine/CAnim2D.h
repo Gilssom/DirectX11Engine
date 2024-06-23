@@ -18,23 +18,28 @@ class CAnimator2D;
 class CAnim2D : public CEntity
 {
 private:
-	CAnimator2D*			m_Animator; // 본인을 소유하고있는 Animator
-	vector<tAnim2DFrame>	m_vecFrame; // 프레임 간격으로 Animation 관리
-	Vec2					m_BackGroundSize;
+	CAnimator2D*					m_Animator; // 본인을 소유하고있는 Animator
+	vector<tAnim2DFrame>			m_vecFrame; // 프레임 간격으로 Animation 관리
+	Vec2							m_BackGroundSize;
 
-	int						m_CurIdx;	// 재생되고 있는 Index
-	bool					m_Finish;	// 애니메이션 종료
+	int								m_CurIdx;	// 재생되고 있는 Index
+	bool							m_Finish;	// 애니메이션 종료
 
-	float					m_Time;
+	float							m_Time;
 
-	Ptr<CTexture>			m_AtlasTex;	// Texture 정보
+	Ptr<CTexture>					m_AtlasTex;	// Texture 정보
 
-	std::function<void()>	m_EndCallBack;
+	std::function<void()>			m_StartCallBack;
+	std::function<void()>			m_EventCallBack;
+	std::function<void()>			m_EndCallBack;
 
 public:
 	bool IsFinish() { return m_Finish; }
 	void Reset() { m_CurIdx = 0; m_Time = 0.f; m_Finish = false; }
+	int GetCurIndex() { return m_CurIdx; }
 
+	void SetStartCallBack(std::function<void()> callback) { m_StartCallBack = callback; }
+	void SetEventCallBack(std::function<void()> callback) { m_EventCallBack = callback; }
 	void SetEndCallBack(std::function<void()> callback) { m_EndCallBack = callback; }
 
 public:

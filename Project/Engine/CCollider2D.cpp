@@ -6,6 +6,8 @@
 
 #include "CTaskManager.h"
 
+bool CCollider2D::m_IsShow(true);
+
 CCollider2D::CCollider2D()
 	: CComponent(COMPONENT_TYPE::COLLIDER2D)
 	, m_Scale(Vec3(1.f, 1.f, 1.f))
@@ -109,6 +111,9 @@ void CCollider2D::FinalTick()
 		// 오브젝트의 월드 행렬을 최종적으로 곱함 ( 상대적인 것은 유지하면서 같이 움직임 )
 		m_matColWorld = m_matColWorld * matObjScaleInv * Transform()->GetWorldMat();
 	}
+
+	if (!m_IsShow)
+		return;
 
 	if (m_OverlapCount == 0)
 		DrawDebugRect(m_matColWorld, Vec4(0.f, 1.f, 0.f, 1.f), 0.f);

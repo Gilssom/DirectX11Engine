@@ -17,7 +17,6 @@ private:
     map<string, EditorUI*>  m_mapUI;
     bool                    m_bDemo;
     HANDLE                  m_hNotify;
-    char*                   cstr;
 
 public:
     template<typename T>

@@ -26,6 +26,8 @@
 #include "AnimPreView.h"
 #include "AnimDetail.h"
 
+#include <Scripts\CUIManager.h>
+
 CImGuiManager::CImGuiManager()
     : m_mapUI{}
     , m_hMainHwnd(nullptr)
@@ -44,9 +46,6 @@ CImGuiManager::~CImGuiManager()
 
     // Delete UI
     Safe_Del_Map(m_mapUI);
-
-    // Delete Font
-    delete[] cstr;
 }
 
 int CImGuiManager::Init(HWND hwnd)
@@ -74,14 +73,31 @@ int CImGuiManager::Init(HWND hwnd)
     ImGui::StyleColorsDrakular();
     //ImGui::StyleColorsLight();
 
-    // ImGui Font 상대경로 설정
-    wstring strFontPath = CPathManager::GetInst()->GetContentPath();
-    strFontPath += L"Fonts\\Roboto-Regular.ttf";
-    size_t len = strFontPath.length();
-    size_t convertedChars = 0;
-    cstr = new char[len + 1];
-    wcstombs_s(&convertedChars, cstr, len + 1, strFontPath.c_str(), len);
-    io.Fonts->AddFontFromFileTTF(cstr, 16.f, NULL);
+    struct FontInfo
+    {
+        const wchar_t* path;
+        float size;
+    };
+
+    FontInfo fonts[] =
+    {
+        {L"Fonts\\Roboto-Regular.ttf", 16.f},
+        {L"Fonts\\NanumSquareNeoOTF-cBd.otf", 16.f}
+    };
+
+    for (const auto& font : fonts)
+    {
+        // ImGui Font 상대경로 설정
+        wstring strFontPath = CPathManager::GetInst()->GetContentPath();
+        strFontPath += font.path;
+        size_t len = strFontPath.length();
+        size_t convertedChars = 0;
+        char* cstr = new char[len + 1];
+        wcstombs_s(&convertedChars, cstr, len + 1, strFontPath.c_str(), len);
+        io.Fonts->AddFontFromFileTTF(cstr, font.size, NULL);
+        delete[] cstr;
+    }
+
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -101,6 +117,8 @@ int CImGuiManager::Init(HWND hwnd)
 
     CreateEditorUI();
 
+    CUIManager::GetInst()->Init();
+
     // Content Folder 감시 기능
     wstring strContentPath = CPathManager::GetInst()->GetContentPath();
 
@@ -118,6 +136,8 @@ void CImGuiManager::Tick()
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
+
+    CUIManager::GetInst()->Tick();
 
     // Parameter UI ID 초기화
     ParamUI::ResetParamID();

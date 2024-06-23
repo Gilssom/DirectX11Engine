@@ -6,6 +6,9 @@
 #include "CLevel.h"
 #include "CLayer.h"
 
+#include "CGameObject.h"
+#include "CLight2D.h"
+
 #include "..\Client\CLevelSaveLoad.h"
 
 CLevelManager::CLevelManager()
@@ -92,6 +95,7 @@ void CLevelManager::ChangeNextLevel()
 			m_CurSound->Play(0, 0.3f, true);
 		}
 
+		pNextLevel->SetName(nextLevel.name);
 		pNextLevel->SetBGM(m_CurSound);
 		pNextLevel->SetFightLevel(nextLevel.isFight);
 
@@ -105,14 +109,41 @@ void CLevelManager::ChangeNextLevel()
 		pNextLevel->GetLayer(7)->SetName(L"Gate Portal");
 		pNextLevel->GetLayer(9)->SetName(L"Wall");
 
+		CCollisionManager::GetInst()->LayerCheck(2, 4);
+
 		CCollisionManager::GetInst()->LayerCheck(4, 3);
 		CCollisionManager::GetInst()->LayerCheck(4, 6);
 		CCollisionManager::GetInst()->LayerCheck(4, 7);
 		
 		CCollisionManager::GetInst()->LayerCheck(5, 3);
 		
+		CCollisionManager::GetInst()->LayerCheck(9, 3);
 		CCollisionManager::GetInst()->LayerCheck(9, 4);
 
 		ChangeLevelRegister(pNextLevel, LEVEL_STATE::PLAY);
 	}
+}
+
+void CLevelManager::ChangeBgm(Ptr<CSound> sound)
+{
+	if (m_CurSound != nullptr)
+	{
+		m_CurSound->Stop();
+		m_CurSound = nullptr;
+	}
+
+	m_CurSound = sound.Get();
+	m_CurSound->Play(1, 0.3f, true);
+}
+
+void CLevelManager::GameEndEvent(Ptr<CSound> sound, int repeat)
+{
+	m_CurSound->Stop();
+	m_CurSound = nullptr;
+
+	m_CurSound = sound.Get();
+	m_CurSound->Play(repeat, 0.3f, true);
+
+	CGameObject* pLightObject = m_CurLevel->FindObjectByName(L"Directional Light");
+	pLightObject->Light2D()->SetDiffuse(Vec3(0.3f, 0.3f, 0.3f));
 }

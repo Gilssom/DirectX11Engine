@@ -92,7 +92,12 @@ void CAnimator2D::LoadAnimation(const wstring& strRelativePath)
 	CAnim2D* pAnim = new CAnim2D;
 	pAnim->Load(strRelativePath);
 
-	m_mapAnim.insert(make_pair(pAnim->GetName(), pAnim));
+	auto it = m_mapAnim.find(pAnim->GetName());
+
+	if (it == m_mapAnim.end())
+		m_mapAnim.insert(make_pair(pAnim->GetName(), pAnim));
+	else
+		delete pAnim;
 }
 
 void CAnimator2D::Play(const wstring& strAnimName, bool repeat)

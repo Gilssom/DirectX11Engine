@@ -1,6 +1,14 @@
 CBackGroundScript
+CBossScript
 CCameraMoveScript
+CDamageScript
+CGateScript
+CGoblinScript
 CLightOnScript
 CMissileScript
+CNpcScript
+CObjectScript
 CPlayerScript
+CPlayerSkillScript
+CTauScript
 CTestScript

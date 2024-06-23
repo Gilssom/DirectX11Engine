@@ -133,7 +133,7 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target // 반환 타입
         discard;
     
     if(g_int_0)
-        vColor.r *= 1.5f;
+        vColor.r = 0.8f; 
     
     return vColor;
 }
@@ -169,6 +169,14 @@ float4 PS_Std2D_AB(VS_OUT _in) : SV_Target // 반환 타입
             vColor = g_tex_0.Sample(g_sam_0, _in.vUV);
     }
     
+    if (g_float_1)
+    {
+        if (vColor.r <= 0.01f && vColor.g <= 0.01f && vColor.b <= 0.01f)
+            vColor.a = 0.f;
+        else
+            vColor.a = g_float_1;
+    }
+    
     // Global Data 에 들어있는 광원의 개수 가져와서 반복문 돌리기
     float3 vLightPower = 0.f;
     for (int i = 0; i < Light2DCount; i++)
@@ -178,8 +186,8 @@ float4 PS_Std2D_AB(VS_OUT _in) : SV_Target // 반환 타입
     
     vColor.rgb *= vLightPower;
     
-    if(vColor.r == 0.f && vColor.g == 0.f && vColor.b == 0.f)
-        vColor.a = 0.f;
+    if (g_int_0)
+        vColor.r = 0.8f;
     
     // 보간 개념이 들어간 Color
     // 각 정점이 Color 값을 들고 있기 때문에

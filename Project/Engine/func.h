@@ -25,6 +25,11 @@ wstring ToWString(const string& str);
 void SaveWString(const wstring& str, FILE* file);
 void LoadWString(wstring& str, FILE* file);
 
+int GetRandomInt(int min, int max);
+float GetRandomFloat(float min, float max);
+
+void PlaySoundEffect(const wstring& soundPath, float volume = 0.3f);
+
 template<typename T>
 class Ptr;
 

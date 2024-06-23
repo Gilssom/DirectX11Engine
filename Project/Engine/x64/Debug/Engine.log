@@ -65,12 +65,21 @@
   .\Project\Engine\tilemap.fx
   .\Project\Engine\value.fx
   10개 파일이 복사되었습니다.
-  CAnim2D.cpp
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CAnim2D.cpp(105,33): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  CAnimator2D.cpp
-  CDevice.cpp
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(122,44): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CDevice.cpp(123,45): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  CMeshRender.cpp
+  CCollider2D.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+  CCollisionManager.cpp
+  CGameObject.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+  CScript.cpp
+  CTaskManager.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+  CTileMap.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(41,60): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(81,61): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(83,65): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(221,23): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(221,50): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(245,38): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Engine\CTileMap.cpp(246,39): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
   Engine.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Engine\Engine_d.lib

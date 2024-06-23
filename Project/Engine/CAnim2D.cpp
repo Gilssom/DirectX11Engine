@@ -96,8 +96,14 @@ void CAnim2D::FinalTick()
 	// 애니메이션 재생 시간을 넘어서면 다음으로 넘겨준다.
 	if (m_vecFrame[m_CurIdx].Duration < m_Time)
 	{
+		if(m_CurIdx == 0 && m_StartCallBack)
+			m_StartCallBack();
+
 		m_Time = m_Time - m_vecFrame[m_CurIdx].Duration;
 		++m_CurIdx;
+
+		if (m_EventCallBack)
+			m_EventCallBack();
 
 		// 최대 애니메이션을 넘어서면 Finish
 		if ((int)m_vecFrame.size() <= m_CurIdx)

@@ -5,6 +5,10 @@
 
 #include "CGameObject.h"
 
+#include <random>
+
+std::mt19937 randomValue(std::random_device{}());
+
 // 오브젝트 생성 함수
 void SpawnObject(int layerIdx, CGameObject* object)
 {
@@ -151,4 +155,24 @@ void LoadWString(wstring& str, FILE* file)
 	str.resize(len);
 
 	fread((wchar_t*)str.c_str(), sizeof(wchar_t), len, file);
+}
+
+int GetRandomInt(int min, int max)
+{
+	std::uniform_int_distribution<int> dist(min, max);
+
+	return dist(randomValue);
+}
+
+float GetRandomFloat(float min, float max)
+{
+	std::uniform_real_distribution<float> dist(min, max);
+
+	return dist(randomValue);
+}
+
+void PlaySoundEffect(const wstring& soundPath, float volume)
+{
+	Ptr<CSound> pNewBgm = CAssetManager::GetInst()->FindAsset<CSound>(soundPath);
+	pNewBgm->Play(1, volume, true);
 }

@@ -4,6 +4,8 @@
 class CCollider2D : public CComponent
 {
 private:
+	static bool		m_IsShow;
+
 	Vec3	m_Offset;		// Offset 위치
 	Vec3	m_FinalPos;		// 충돌체의 최종 위치 ( Object Position + Collider Offset )
 
@@ -18,6 +20,10 @@ private:
 
 	bool	m_Active;		// 충돌체의 활성화 여부
 	bool	m_SemiDeactive; // 비활성화 예정 상태
+
+
+public:
+	static void SetShow() { m_IsShow = !m_IsShow; }
 
 public:
 	void SetOffset(Vec3 offset) { m_Offset = offset; }

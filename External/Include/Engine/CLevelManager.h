@@ -25,8 +25,11 @@ public:
 	CLevel* GetCurrentLevel() { return m_CurLevel; }
 	LevelInfo GetNextLevel();
 	LevelInfo GetCurLevel() { return m_Levels[m_CurrentLevelIndex]; }
+
 	void Reset() { m_CurrentLevelIndex = 0; }
 	void ChangeNextLevel();
+	void ChangeBgm(Ptr<CSound> sound);
+	void GameEndEvent(Ptr<CSound> sound, int repeat);
 
 public:
 	void Init();

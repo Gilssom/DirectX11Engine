@@ -194,7 +194,21 @@ void MenuUI::GameObject()
 
         if (ImGui::MenuItem("Register As Prefab"))
         {
+            Inspector* pInspector = CImGuiManager::GetInst()->FindEditorUI<Inspector>("Inspector");
+            CGameObject* pTargetObj = pInspector->GetTargetObject();
+            wstring filePath = CPathManager::GetInst()->GetContentPath();
 
+            //ImGui::BeginDisabled(!pTargetObj);
+
+            Ptr<CPrefab> prefab = new CPrefab(pTargetObj);
+            CAssetManager::GetInst()->AddAsset<CPrefab>(pTargetObj->GetName(), prefab);
+            prefab->Save(filePath + L"Prefab\\" + pTargetObj->GetName() + L".pref");
+
+            //ImGui::EndDisabled();
+
+            //pInspector->SetTargetObject(pTargetObj);
+
+            //ImGui::EndMenu();
         }
 
         if (ImGui::BeginMenu("Add Component"))

@@ -14,6 +14,8 @@
 #include "CSoundManager.h"
 #include "CFontManager.h"
 
+#include <Scripts\CSkillManager.h>
+
 CEngine::CEngine()
 	: m_hMainHwnd(nullptr)
 	, m_Resolution{}
@@ -58,6 +60,8 @@ int CEngine::Init(HWND hwnd, Vec2 resolution, PREFAB_SAVE_FUNC save, PREFAB_LOAD
 	CPrefab::SetPrefabSaveFunc(save);
 	CPrefab::SetPrefabLoadFunc(load);
 
+	CSkillManager::Instance().Init();
+
 	return S_OK;
 }
 
@@ -70,7 +74,7 @@ void CEngine::Progress()
 	CKeyManager::GetInst()->Tick();
 	CSoundManager::GetInst()->Tick();
 	CAssetManager::GetInst()->Tick();
-
+	CSkillManager::Instance().Tick();
 
 	// Object Tick
 	CLevelManager::GetInst()->Tick();
@@ -82,6 +86,7 @@ void CEngine::Progress()
 	// ====================
 	CRenderManager::GetInst()->Render();
 	CDbgRenderManager::GetInst()->Render();
+
 
 
 	// Task Execute

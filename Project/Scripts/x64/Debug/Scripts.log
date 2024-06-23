@@ -1,10 +1,153 @@
 ﻿  .\Project\Scripts\CBackGroundScript.h
+  .\Project\Scripts\CBossScript.h
   .\Project\Scripts\CCameraMoveScript.h
+  .\Project\Scripts\CDamageScript.h
+  .\Project\Scripts\CGateScript.h
+  .\Project\Scripts\CGoblinScript.h
   .\Project\Scripts\CLightOnScript.h
   .\Project\Scripts\CMissileScript.h
+  .\Project\Scripts\CMonsterScript.h
+  .\Project\Scripts\CNpcScript.h
+  .\Project\Scripts\CObjectScript.h
   .\Project\Scripts\CPlayerScript.h
+  .\Project\Scripts\CPlayerSkillScript.h
   .\Project\Scripts\CScriptManager.h
+  .\Project\Scripts\CSkillManager.h
+  .\Project\Scripts\CTauScript.h
   .\Project\Scripts\CTestScript.h
-  7개 파일이 복사되었습니다.
+  .\Project\Scripts\CUIManager.h
+  .\Project\Scripts\UIButton.h
+  .\Project\Scripts\UIDamage.h
+  .\Project\Scripts\UIElement.h
+  .\Project\Scripts\UIHpBar.h
+  .\Project\Scripts\UILobby.h
+  .\Project\Scripts\UIMiniMap.h
+  .\Project\Scripts\UIMonsterHp.h
+  .\Project\Scripts\UIMpBar.h
+  .\Project\Scripts\UIResult.h
+  .\Project\Scripts\UISkill.h
+  .\Project\Scripts\UIStatus.h
+  29개 파일이 복사되었습니다.
+  CBackGroundScript.cpp
+  CBossScript.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\External\Include\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xutility(254,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2104,18): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,int&,const ImVec2&,double>(_Ty &,int &,const ImVec2 &,double &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=UIDamage
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2779,46): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<UIDamage>::_Ref_count_obj2<int&,const ImVec2&,_Ty>(int &,const ImVec2 &,_Ty &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\CUIManager.h(34,83): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<UIDamage> std::make_shared<UIDamage,int&,const ImVec2&,double>(int &,const ImVec2 &,double &&)'에 대한 참조를 확인하세요.
+  CCameraMoveScript.cpp
+  CDamageScript.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\External\Include\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+  CGateScript.cpp
+  CGoblinScript.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\External\Include\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+  CLightOnScript.cpp
+  CMissileScript.cpp
+  CMonsterScript.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xutility(254,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2104,18): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,int&,const ImVec2&,double>(_Ty &,int &,const ImVec2 &,double &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=UIDamage
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2779,46): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<UIDamage>::_Ref_count_obj2<int&,const ImVec2&,_Ty>(int &,const ImVec2 &,_Ty &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\CUIManager.h(34,83): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<UIDamage> std::make_shared<UIDamage,int&,const ImVec2&,double>(int &,const ImVec2 &,double &&)'에 대한 참조를 확인하세요.
+  CNpcScript.cpp
+  CObjectScript.cpp
   CPlayerScript.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xutility(254,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2104,18): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,int&,const ImVec2&,double>(_Ty &,int &,const ImVec2 &,double &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=UIDamage
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2779,46): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<UIDamage>::_Ref_count_obj2<int&,const ImVec2&,_Ty>(int &,const ImVec2 &,_Ty &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\CUIManager.h(34,83): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<UIDamage> std::make_shared<UIDamage,int&,const ImVec2&,double>(int &,const ImVec2 &,double &&)'에 대한 참조를 확인하세요.
+  CPlayerSkillScript.cpp
+  CScriptManager.cpp
+  CSkillManager.cpp
+  CTauScript.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\External\Include\Engine\CTaskManager.h(1,1): warning C4828: 파일에 0x4c1 오프셋에서 시작하는 문자가 포함되어 있습니다. 이 문자는 현재 원본 문자 집합에서 잘못된 문자입니다(코드 페이지 949).
+  CTestScript.cpp
+  UIHpBar.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xutility(254,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2104,18): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,int&,const ImVec2&,double>(_Ty &,int &,const ImVec2 &,double &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=UIDamage
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2779,46): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<UIDamage>::_Ref_count_obj2<int&,const ImVec2&,_Ty>(int &,const ImVec2 &,_Ty &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\CUIManager.h(34,83): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<UIDamage> std::make_shared<UIDamage,int&,const ImVec2&,double>(int &,const ImVec2 &,double &&)'에 대한 참조를 확인하세요.
+  UIMonsterHp.cpp
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\UIMonsterHp.cpp(135,23): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xutility(254,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2104,18): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,int&,const ImVec2&,double>(_Ty &,int &,const ImVec2 &,double &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=UIDamage
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2779,46): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<UIDamage>::_Ref_count_obj2<int&,const ImVec2&,_Ty>(int &,const ImVec2 &,_Ty &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\CUIManager.h(34,83): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<UIDamage> std::make_shared<UIDamage,int&,const ImVec2&,double>(int &,const ImVec2 &,double &&)'에 대한 참조를 확인하세요.
+  UIMpBar.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\xutility(254,82): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=double
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2104,18): message : 컴파일되는 함수 템플릿 인스턴스화 'void std::_Construct_in_place<_Ty,int&,const ImVec2&,double>(_Ty &,int &,const ImVec2 &,double &&) noexcept(false)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=UIDamage
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\memory(2779,46): message : 컴파일되는 함수 템플릿 인스턴스화 'std::_Ref_count_obj2<UIDamage>::_Ref_count_obj2<int&,const ImVec2&,_Ty>(int &,const ImVec2 &,_Ty &&)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\user\Documents\GitHub\DirectX11Engine\Project\Scripts\CUIManager.h(34,83): message : 컴파일되는 함수 템플릿 인스턴스화 'std::shared_ptr<UIDamage> std::make_shared<UIDamage,int&,const ImVec2&,double>(int &,const ImVec2 &,double &&)'에 대한 참조를 확인하세요.
+  코드를 생성하고 있습니다...
   Scripts.vcxproj -> C:\Users\user\Documents\GitHub\DirectX11Engine\External\Library\Scripts\Scripts_d.lib

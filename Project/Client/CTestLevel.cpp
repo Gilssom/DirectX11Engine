@@ -30,17 +30,10 @@ void CTestLevel::CreateTestLevel()
 	wstring testPath2 = CPathManager::GetInst()->GetContentPath();
 	testPath2 += L"Level\\ElvenGard_0.lv";
 	CLevel* m_NewLevel = CLevelSaveLoad::LoadLevel(testPath2);
-
-	//testPath2 = CPathManager::GetInst()->GetContentPath();
-	//testPath2 += L"Level\\ElvenGard_1.lv";
-	//CLevel* m_NextLevel = CLevelSaveLoad::LoadLevel(testPath2);
-	//m_NewLevel->SetNextLevel(m_NextLevel);
-
-	//CLevel* m_NewLevel = nullptr;
-	//m_NewLevel = new CLevel;
 	
 	// Test Bgm Play
-	Ptr<CSound> pNewBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
+	//Ptr<CSound> pNewBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\elven_guard_old.wav");
+	Ptr<CSound> pNewBgm = CAssetManager::GetInst()->FindAsset<CSound>(L"Sound\\character_stage.ogg");
 	pNewBgm->Play(0, 0.3f, true);
 	m_NewLevel->SetBGM(pNewBgm.Get());
 
@@ -54,47 +47,59 @@ void CTestLevel::CreateTestLevel()
 	m_NewLevel->GetLayer(6)->SetName(L"Front Object");
 	m_NewLevel->GetLayer(7)->SetName(L"Gate Portal");
 	m_NewLevel->GetLayer(9)->SetName(L"Wall");
-	
-	// Level ÀÇ Collision Setting
-	//CCollisionManager::GetInst()->LayerCheck(4, 3);
-	//CCollisionManager::GetInst()->LayerCheck(4, 6);
-	//CCollisionManager::GetInst()->LayerCheck(4, 7);
-	//
-	//CCollisionManager::GetInst()->LayerCheck(5, 3);
-	//
-	//CCollisionManager::GetInst()->LayerCheck(9, 4);
 
-	//CGameObject* pBackGround1T = new CGameObject;
-	//pBackGround1T->SetName(L"BackGround_1");
-	//pBackGround1T->AddComponent(new CTransform);
-	//pBackGround1T->AddComponent(new CMeshRender);
-	//			
-	//pBackGround1T->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	//pBackGround1T->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"material\\ElvenGard_2_BackGround_1.mtrl"));
-	//pBackGround1T->MeshRender()->GetDynamicMaterial()->SetTexParam(TEX_0, CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\ElvenGard_2_BackGround_1.png", L"texture\\ElvenGard\\ElvenGard_2_BackGround_1.png"));
-	//
-	//m_NewLevel->AddObject(3, pBackGround1T, false);
+	ChangeLevelRegister(m_NewLevel, LEVEL_STATE::PLAY);
 
-	//CGameObject* pTestPlayer = new CGameObject;
-	//
-	//pTestPlayer->SetName(L"Machine");
-	//pTestPlayer->AddComponent(new CTransform);
-	//pTestPlayer->AddComponent(new CCollider2D);
-	//pTestPlayer->AddComponent(new CAnimator2D);
-	//
-	//pTestPlayer->Transform()->SetRelativePos(Vec3(0.f, 0.f, 120.f));
-	//pTestPlayer->Transform()->SetRelativeScale(Vec3(500.f, 500.f, 1.f));
-	//
-	//Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\ElvenGard\\Machine.png", L"texture\\ElvenGard\\Machine.png");
-	//pTestPlayer->Animator2D()->CreateAnimation(L"Machine", pAtlas, Vec2(0.f, 0.f), Vec2(500.f, 500.f), Vec2(500.f, 500.f), 8, 12);
-	//pTestPlayer->Animator2D()->FindAnimation(L"Machine")->Save(L"Animation\\");
-	//
-	//pTestPlayer->Animator2D()->LoadAnimation(L"Animation\\Machine.anim");
-	//pTestPlayer->Animator2D()->Play(L"Machine", true);
-	//
-	//m_NewLevel->AddObject(9, pTestPlayer, false);
+	/*for (int i = 0; i < 5; i++)
+	{
+		Ptr<CPrefab> pTest = CAssetManager::GetInst()->FindAsset<CPrefab>(L"Prefab\\Goblin_RealPos.pref");
+		CGameObject* pInst = pTest->Instantiate();
+		pInst->Transform()->SetRelativePos(pInst->Transform()->GetRelativePos());
+		SpawnObject(3, pInst);
+	}
 
-	ChangeLevelRegister(m_NewLevel, LEVEL_STATE::STOP);
+	Ptr<CPrefab> pTest = CAssetManager::GetInst()->FindAsset<CPrefab>(L"Prefab\\Tau_RealPos.pref");
+	CGameObject* pInst = pTest->Instantiate();
+	pInst->Transform()->SetRelativePos(pInst->Transform()->GetRelativePos());
+	SpawnObject(3, pInst);*/
+
+	/*CGameObject* pEffectObject = new CGameObject;
+	pEffectObject->AddComponent(new CAnimator2D);
+
+	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Idle.png", L"texture\\Effect\\Boss_Idle.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Idle", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 2, 4);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Idle")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Move.png", L"texture\\Effect\\Boss_Move.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Move", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 7, 6);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Move")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Attack_0.png", L"texture\\Effect\\Boss_Attack_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Attack_0", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 8, 8);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Attack_0")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Attack_1.png", L"texture\\Effect\\Boss_Attack_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Attack_1", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 7, 7);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Attack_1")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Skill.png", L"texture\\Effect\\Boss_Skill.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Skill", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 7, 7);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Skill")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Death.png", L"texture\\Effect\\Boss_Death.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Death", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 5, 5);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Death")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Attack_Effect.png", L"texture\\Effect\\Boss_Attack_Effect.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Attack_Effect", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 3, 6);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Attack_Effect")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Sprite\\Boss_Skill_Effect.png", L"texture\\Effect\\Boss_Skill_Effect.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Boss_Skill_Effect", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 6, 6);
+	pEffectObject->Animator2D()->FindAnimation(L"Boss_Skill_Effect")->Save(L"Animation\\");*/
+
+	/**/
+
 	return;
 #pragma endregion
 
@@ -116,6 +121,8 @@ void CTestLevel::CreateTestLevel()
 	m_CurLevel->GetLayer(9)->SetName(L"Wall");
 
 	// Level ÀÇ Collision Setting
+	CCollisionManager::GetInst()->LayerCheck(2, 4);
+
 	CCollisionManager::GetInst()->LayerCheck(4, 3);
 	CCollisionManager::GetInst()->LayerCheck(4, 6);
 	CCollisionManager::GetInst()->LayerCheck(4, 7);
@@ -152,6 +159,7 @@ void CTestLevel::CreateTestLevel()
 	
 	m_CurLevel->AddObject(9, pTestPlayer, false);*/
 	
+
 	ChangeLevelRegister(m_CurLevel, LEVEL_STATE::STOP);
 	return;
 #pragma endregion
@@ -390,31 +398,131 @@ void CTestLevel::CreateTestLevel()
 
 void CTestLevel::CreatePrefab()
 {
-	// Particle Prefab
-	CGameObject* pParticleObject = new CGameObject;
-	pParticleObject->SetName(L"Particle");
-	pParticleObject->AddComponent(new CTransform);
-	pParticleObject->AddComponent(new CParticleSystem);
-	pParticleObject->Transform()->SetRelativePos(Vec3(-675.f, 0.f, 500.f));
-	pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\SmokeParticleTest.png", L"texture\\particle\\SmokeParticleTest.png"));
+	//// Particle Prefab
+	//CGameObject* pParticleObject = new CGameObject;
+	//pParticleObject->SetName(L"Particle");
+	//pParticleObject->AddComponent(new CTransform);
+	//pParticleObject->AddComponent(new CParticleSystem);
+	//pParticleObject->Transform()->SetRelativePos(Vec3(-675.f, 0.f, 500.f));
+	//pParticleObject->ParticleSystem()->SetParticleTexture(CAssetManager::GetInst()->Load<CTexture>(L"texture\\particle\\SmokeParticleTest.png", L"texture\\particle\\SmokeParticleTest.png"));
 
-	Ptr<CPrefab> prefab = new CPrefab(pParticleObject);
-	CAssetManager::GetInst()->AddAsset<CPrefab>(L"ParticlePrefab", prefab);
+	//Ptr<CPrefab> prefab = new CPrefab(pParticleObject);
+	//CAssetManager::GetInst()->AddAsset<CPrefab>(L"ParticlePrefab", prefab);
 
 	wstring filePath = CPathManager::GetInst()->GetContentPath();
-	prefab->Save(filePath + L"Prefab\\Particle.pref");
+	//prefab->Save(filePath + L"Prefab\\Particle.pref");
 
-	// Missile Prefab
-	CGameObject* pNewObj = new CGameObject;
-	pNewObj->SetName(L"Missile");
-	pNewObj->AddComponent(new CTransform);
-	pNewObj->AddComponent(new CMeshRender);
-	pNewObj->AddComponent(new CMissileScript);
-	pNewObj->Transform()->SetRelativeScale(Vec3(40.f, 40.f, 40.f));
-	pNewObj->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
-	pNewObj->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
+	//// Missile Prefab
+	//CGameObject* pNewObj = new CGameObject;
+	//pNewObj->SetName(L"Missile");
+	//pNewObj->AddComponent(new CTransform);
+	//pNewObj->AddComponent(new CMeshRender);
+	//pNewObj->AddComponent(new CMissileScript);
+	//pNewObj->Transform()->SetRelativeScale(Vec3(40.f, 40.f, 40.f));
+	//pNewObj->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	//pNewObj->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DMaterial"));
 
-	prefab = new CPrefab(pNewObj);
-	CAssetManager::GetInst()->AddAsset<CPrefab>(L"MissilePrefab", prefab);
-	prefab->Save(filePath + L"Prefab\\Missile.pref");
+	//prefab = new CPrefab(pNewObj);
+	//CAssetManager::GetInst()->AddAsset<CPrefab>(L"MissilePrefab", prefab);
+	//prefab->Save(filePath + L"Prefab\\Missile.pref");
+
+	CGameObject* pEffectObject = new CGameObject;
+	pEffectObject->SetName(L"Attack_0");
+	pEffectObject->AddComponent(new CTransform);
+	pEffectObject->AddComponent(new CMeshRender);
+	pEffectObject->AddComponent(new CAnimator2D);
+	pEffectObject->Transform()->SetRelativeScale(800.f, 600.f, 1.f);
+	pEffectObject->MeshRender()->SetMesh(CAssetManager::GetInst()->FindAsset<CMesh>(L"RectMesh"));
+	pEffectObject->MeshRender()->SetMaterial(CAssetManager::GetInst()->FindAsset<CMaterial>(L"Std2DAlphaMaterial"));
+	
+	Ptr<CTexture> pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Attack_0.png", L"texture\\Effect\\Attack_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Attack_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 4, 6);
+	pEffectObject->Animator2D()->FindAnimation(L"Attack_0_eff")->Save(L"Animation\\");
+
+#pragma region Etc
+	/*
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Attack_1.png", L"texture\\Effect\\Attack_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Attack_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 5, 10);
+	pEffectObject->Animator2D()->FindAnimation(L"Attack_1_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Attack_2.png", L"texture\\Effect\\Attack_2.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Attack_2_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 5, 10);
+	pEffectObject->Animator2D()->FindAnimation(L"Attack_2_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\SaintWall_0.png", L"texture\\Effect\\SaintWall_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"SaintWall_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 9, 16);
+	pEffectObject->Animator2D()->FindAnimation(L"SaintWall_0_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\SaintWall_1.png", L"texture\\Effect\\SaintWall_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"SaintWall_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 8, 16);
+	pEffectObject->Animator2D()->FindAnimation(L"SaintWall_1_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\SaintWall_Hit_0.png", L"texture\\Effect\\SaintWall_Hit_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"SaintWall_Hit_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 4, 16);
+	pEffectObject->Animator2D()->FindAnimation(L"SaintWall_Hit_0_eff")->Save(L"Animation\\");
+
+	
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\SaintWall_Hit_1.png", L"texture\\Effect\\SaintWall_Hit_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"SaintWall_Hit_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 10, 16);
+	pEffectObject->Animator2D()->FindAnimation(L"SaintWall_Hit_1_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Repentence_0.png", L"texture\\Effect\\Repentence_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Repentence_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 7, 16);
+	pEffectObject->Animator2D()->FindAnimation(L"Repentence_0_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Repentence_1.png", L"texture\\Effect\\Repentence_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Repentence_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 19, 16);
+	pEffectObject->Animator2D()->FindAnimation(L"Repentence_1_eff")->Save(L"Animation\\");
+
+	
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\GrandCrossCrash_0.png", L"texture\\Effect\\GrandCrossCrash_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"GrandCrossCrash_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 9, 18);
+	pEffectObject->Animator2D()->FindAnimation(L"GrandCrossCrash_0_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\GrandCrossCrash_1.png", L"texture\\Effect\\GrandCrossCrash_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"GrandCrossCrash_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 18, 18);
+	pEffectObject->Animator2D()->FindAnimation(L"GrandCrossCrash_1_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\GrandCrossCrash_Ground.png", L"texture\\Effect\\GrandCrossCrash_Ground.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"GrandCrossCrash_Ground_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 12, 12);
+	pEffectObject->Animator2D()->FindAnimation(L"GrandCrossCrash_Ground_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Crusader_Buff.png", L"texture\\Effect\\Crusader_Buff.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Crusader_Buff_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 19, 12);
+	pEffectObject->Animator2D()->FindAnimation(L"Crusader_Buff_eff")->Save(L"Animation\\");
+	*/
+#pragma endregion
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Repentence_Hit_0.png", L"texture\\Effect\\Repentence_Hit_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Repentence_Hit_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 5, 14);
+	pEffectObject->Animator2D()->FindAnimation(L"Repentence_Hit_0_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\Repentence_Hit_1.png", L"texture\\Effect\\Repentence_Hit_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"Repentence_Hit_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 13, 14);
+	pEffectObject->Animator2D()->FindAnimation(L"Repentence_Hit_1_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\SaintWall_Hit_1.png", L"texture\\Effect\\SaintWall_Hit_1.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"SaintWall_Hit_1_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 10, 10);
+	pEffectObject->Animator2D()->FindAnimation(L"SaintWall_Hit_1_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\HolyFlash_0.png", L"texture\\Effect\\HolyFlash_0.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"HolyFlash_0_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 4, 12);
+	pEffectObject->Animator2D()->FindAnimation(L"HolyFlash_0_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\HolyFlash_Ball.png", L"texture\\Effect\\HolyFlash_Ball.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"HolyFlash_Ball_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 6, 12);
+	pEffectObject->Animator2D()->FindAnimation(L"HolyFlash_Ball_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\HolyFlash_Cast.png", L"texture\\Effect\\HolyFlash_Cast.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"HolyFlash_Cast_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 5, 12);
+	pEffectObject->Animator2D()->FindAnimation(L"HolyFlash_Cast_eff")->Save(L"Animation\\");
+
+	pAtlas = CAssetManager::GetInst()->Load<CTexture>(L"texture\\Effect\\HolyFlash_Hit.png", L"texture\\Effect\\HolyFlash_Hit.png");
+	pEffectObject->Animator2D()->CreateAnimation(L"HolyFlash_Hit_eff", pAtlas, Vec2(0.f, 0.f), Vec2(800.f, 600.f), Vec2(800.f, 600.f), 8, 12);
+	pEffectObject->Animator2D()->FindAnimation(L"HolyFlash_Hit_eff")->Save(L"Animation\\");
+
+	Ptr<CPrefab> prefab = new CPrefab(pEffectObject);
+	CAssetManager::GetInst()->AddAsset<CPrefab>(L"Attack_0_Prefab", prefab);
+	prefab->Save(filePath + L"Prefab\\Attack_0_Prefab.pref");
 }

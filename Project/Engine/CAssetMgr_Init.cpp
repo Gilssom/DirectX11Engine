@@ -209,7 +209,10 @@ void CAssetManager::CreateDefaultGraphicShader()
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
 
 	// Parameter Info
+	pShader->AddScalarParam("Test Parameter", SCALAR_PARAM::INT_0);
 	pShader->AddScalarParam("Change Event", SCALAR_PARAM::INT_1);
+	pShader->AddScalarParam("Alpha Check", SCALAR_PARAM::INT_2);
+	pShader->AddScalarParam("Alpha Down", SCALAR_PARAM::FLOAT_1);
 	pShader->AddTexParam("Output", TEX_0);
 	pShader->AddTexParam("Spare Texture", TEX_1);
 

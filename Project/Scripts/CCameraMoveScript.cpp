@@ -102,8 +102,12 @@ void CCameraMoveScript::MoveByOrthographic()
 {
 	if (m_TargetObject)
 	{
-		Vec3 vObjectPos = m_TargetObject->Transform()->GetRelativePos();
 		CPlayerScript* pPlayerScript = m_TargetObject->GetScript<CPlayerScript>();
+
+		if (pPlayerScript->GetOriginPos() == nullptr)
+			return;
+
+		Vec3 vObjectPos = pPlayerScript->GetOriginPos()->Transform()->GetRelativePos();
 
 		// 1. 해당 레벨의 배경 Object Scael 을 가져온다.
 		CLevel* pCurLevel = CLevelManager::GetInst()->GetCurrentLevel();
@@ -148,7 +152,8 @@ void CCameraMoveScript::MoveByOrthographic()
 		}
 			
 		// 7. 플레이어가 바라보는 방향에 따라 위치 조정
-		if (pPlayerScript->Transform()->GetLeft())
+		// Player Origin Pos 추가로 인해 조정 필요 X
+		/*if (pPlayerScript->Transform()->GetLeft())
 		{
 			if (newX + 45.f >= maxX + 45.f)
 				newX += 0.f;
@@ -172,14 +177,41 @@ void CCameraMoveScript::MoveByOrthographic()
 		}
 
 		if (newX < minX + 45.f || newX > maxX - 45.f)
-			return;
+			return;*/
 
 		// 카메라 위치 최종 세팅
 		GetOwner()->Transform()->SetRelativePos(Vec3(newX, newY, 0.f));
 	}
+
+	UpdateShake();
 }
 
-void CCameraMoveScript::SetTurnCameraPos(bool isLeft)
+void CCameraMoveScript::StartShake(float duration, float magnitude)
 {
-	
+	m_IsShaking = true;
+	m_ShakeDuration = duration;
+	m_ShakeTimer = 0;
+	m_ShakeMagnitude = magnitude;
+}
+
+void CCameraMoveScript::UpdateShake()
+{
+	Vec3 camPos = GetOwner()->Transform()->GetRelativePos();
+
+	if (m_IsShaking)
+	{
+		m_ShakeTimer += DT;
+
+		if (m_ShakeTimer > m_ShakeDuration)
+		{
+			m_IsShaking = false;
+		}
+		else
+		{
+			float offsetX = GetRandomFloat(-1.f, 1.f) * m_ShakeMagnitude;
+			float offsetY = GetRandomFloat(-1.f, 1.f) * m_ShakeMagnitude;
+			Vec3 shakePos = camPos + Vec3(offsetX, offsetY, 0);
+			GetOwner()->Transform()->SetRelativePos(shakePos);
+		}
+	}
 }

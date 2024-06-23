@@ -10,6 +10,21 @@
     <Filter Include="ScriptManager">
       <UniqueIdentifier>{d554e11f-cdc8-411b-af5f-04ee70569379}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{f8893301-eecd-450b-a6d1-2bedf7b55d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{aa328678-e1ee-44e6-abee-5d05d97facd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Player">
+      <UniqueIdentifier>{508fcb94-89d4-4f16-ac7b-15e0de441b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\InGame">
+      <UniqueIdentifier>{5c778c8c-4cad-4d4e-bd43-7cc04b766997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI\Monster">
+      <UniqueIdentifier>{3069a316-6172-4f99-a0f3-f44fdf43ac3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -39,6 +54,72 @@
     <ClInclude Include="CLightOnScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="CMonsterScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CGoblinScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CTauScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjectScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerSkillScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkillManager.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="CGateScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIManager.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UIHpBar.h">
+      <Filter>Contents\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UIStatus.h">
+      <Filter>Contents\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMiniMap.h">
+      <Filter>Contents\UI\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMpBar.h">
+      <Filter>Contents\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UISkill.h">
+      <Filter>Contents\UI\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UIMonsterHp.h">
+      <Filter>Contents\UI\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CNpcScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UIDamage.h">
+      <Filter>Contents\UI\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CDamageScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UIResult.h">
+      <Filter>Contents\UI\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="UILobby.h">
+      <Filter>Contents\UI\InGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -67,6 +148,72 @@
     </ClCompile>
     <ClCompile Include="CLightOnScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoblinScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CTauScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerSkillScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkillManager.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="CGateScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIManager.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="UIHpBar.cpp">
+      <Filter>Contents\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UIStatus.cpp">
+      <Filter>Contents\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMiniMap.cpp">
+      <Filter>Contents\UI\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMpBar.cpp">
+      <Filter>Contents\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UISkill.cpp">
+      <Filter>Contents\UI\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UIMonsterHp.cpp">
+      <Filter>Contents\UI\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CNpcScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="UIDamage.cpp">
+      <Filter>Contents\UI\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CDamageScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="UIResult.cpp">
+      <Filter>Contents\UI\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="UILobby.cpp">
+      <Filter>Contents\UI\InGame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,7 +10,7 @@
 
 #include <Engine//global.h>
 #include <Engine//CEngine.h>
-#include <Engine//CDevice.h>>
+#include <Engine//CDevice.h>
 #include <crtdbg.h>
 
 
@@ -35,6 +35,8 @@
 #include "CImGuiManager.h"
 #include "ImGui\\imgui.h"
 #include "CLevelSaveLoad.h"
+
+#include <Scripts\CUIManager.h>
 
 
 #define MAX_LOADSTRING 100
@@ -144,6 +146,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             // ImGui 실행
             CImGuiManager::GetInst()->Tick();
 #endif
+
 
             // Present (모든 Render 가 끝나고 Present 가 진행되어야 함)
             CDevice::GetInst()->Present();

@@ -7,6 +7,11 @@ private:
 	CGameObject*	m_TargetObject;
 	float			m_Speed;
 
+	bool			m_IsShaking;
+	float			m_ShakeDuration;
+	float			m_ShakeTimer;
+	float			m_ShakeMagnitude;
+
 public:
 	virtual void Tick() override;
 
@@ -17,7 +22,8 @@ private:
 public:
 	void SetTargetObject(CGameObject* targetObject) { m_TargetObject = targetObject; }
 
-	void SetTurnCameraPos(bool isLeft);
+	void StartShake(float duration, float magnitude);
+	void UpdateShake();
 
 public:
 	CLONE(CCameraMoveScript);
